@@ -11,7 +11,7 @@ class EventTests(TestCase):
         event = Event()
         self.assertIs(event.name, '')
         self.assertIs(event.mode, Event.YARDSTICK)
-        self.assertEquals(event.start_date, date.today())
-        self.assertEquals(event.end_date, date.today())
+        self.assertEqual(event.start_date, date.today())
+        self.assertEqual(event.end_date, date.today())
         self.assertIs(event.race_count, 1)
 
