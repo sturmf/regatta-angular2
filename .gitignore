@@ -1,5 +1,7 @@
 # Project own files
 *.rgs
+*.sqlite3
+pep8.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
