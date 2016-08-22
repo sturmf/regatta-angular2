@@ -24,9 +24,19 @@ This means especially using the following:
 
 # Running the program
 
-To run the program execute
+Initial setup of the environment
 
-    # FIXME cd regatta && python3 main.py
+    pyvenv env
+    source env/bin/activate
+    pip install -r regatta/requirements.txt
+    cd regatta && python manage.py migrate
+
+Now run the program with
+
+    cd regatta && python3 main.py
+
+
+# Make changes ready for delivery
 
 To run the style guide checks, coverage report and tests run
 
