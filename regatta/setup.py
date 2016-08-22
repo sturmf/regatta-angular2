@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 version = '0.0.1'
 # version=regatta.__version__,
-long_description = open('README.md', 'r').read()
+long_description = open('../README.md', 'r').read()
 
 setup(
     name='regatta',
