@@ -9,7 +9,7 @@ install:
   - travis_retry pip install coveralls
 
 script:
-  - (cd regatta && python setup.py test)
+  - cd regatta && python setup.py test
 
 after_success:
   - coveralls
