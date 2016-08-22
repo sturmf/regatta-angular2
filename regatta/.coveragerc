@@ -1,0 +1,6 @@
+[run]
+source = events
+
+[report]
+omit = */migrations/*
+
