@@ -13,7 +13,7 @@ before_script:
   - (cd regatta && python setup.py flake8)
 
 script:
-  - (cd regatta && python setup.py test)
+  - (cd regatta && coverage run setup.py test)
 
 after_success:
   - (cd regatta && coveralls)
