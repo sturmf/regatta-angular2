@@ -1,4 +1,4 @@
 python-targets:
   - 3
 ignore-paths:
-  - regatta/migrations
+  - regatta/events/migrations
