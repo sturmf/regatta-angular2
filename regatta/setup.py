@@ -21,6 +21,7 @@ setup(
     classifiers=[
         'Development Status :: 1 - Planning',
         'Environment :: Web Environment',
+        'Framework :: Django :: 1.10',
         'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
