@@ -6,4 +6,3 @@ from .models import SailingClub
 admin.site.register(Event)
 admin.site.register(Person)
 admin.site.register(SailingClub)
-

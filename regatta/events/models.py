@@ -1,13 +1,13 @@
 from datetime import date
 from django.db import models
 
+
 class Person(models.Model):
     first_name = models.CharField(max_length=200, blank=True)
     last_name = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
-
 
 
 class SailingClub(models.Model):
@@ -21,7 +21,7 @@ class SailingClub(models.Model):
 
 
 class Event(models.Model):
-      
+
     YARDSTICK = 1
     CLASS = 2
     MODE_CHOICES = (
