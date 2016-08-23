@@ -20,9 +20,7 @@ setup(
     platforms='any',
     classifiers=[
         'Development Status :: 1 - Planning',
-        'Environment :: X11 Applications :: Qt',
-        'Environment :: MacOS X',
-        'Environment :: Win32 (MS Windows)',
+        'Environment :: Web Environment',
         'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
