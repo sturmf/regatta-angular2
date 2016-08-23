@@ -38,15 +38,17 @@ Now run the program with
 
 # Make changes ready for delivery
 
-To run the style guide checks, coverage report and tests run
+To run the style guide checks and tests run
 
+    cd regatta 
     python3 setup.py flake8
     python3 setup.py test
 
 or
 
-    flake8 regatta
-    python manage.py test
+    cd regatta
+    flake8 events
+    python runtests.py
 
 
 # Contributions from non team members
