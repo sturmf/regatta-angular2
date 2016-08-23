@@ -7,9 +7,13 @@ python:
 install:
   - travis_retry pip install -r regatta/requirements.txt
   - travis_retry pip install coveralls
+  - travis_retry pip install flake8
+
+before_script:
+  - (cd regatta && python setup.py flake8)
 
 script:
-  - cd regatta && python setup.py test
+  - (cd regatta && python setup.py test)
 
 after_success:
-  - coveralls
+  - (cd regatta && coveralls)

@@ -13,10 +13,9 @@ setup(
     url='http://github.com/sturmf/regatta-angular/',
     description='A simple sailing race scoring program.',
     long_description=long_description,
-    test_suite='setuptest.setuptest.SetupTestSuite',
-    tests_require=['django-setuptest',],
+    setup_requires=['flake8'],
+    test_suite='runtests.runtests',
     packages=find_packages(),
-    #packages=['regatta', 'events'],
     platforms='any',
     classifiers=[
         'Development Status :: 1 - Planning',
