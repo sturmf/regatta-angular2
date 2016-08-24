@@ -34,11 +34,11 @@ class Event(models.Model):
     start_date = models.DateField(default=date.today, help_text='first day of the event')
     end_date = models.DateField(default=date.today, help_text='last day of the event')
     race_count = models.PositiveIntegerField(default=1, help_text='amount of races scheduled during the event')
-    organizer = models.ForeignKey(SailingClub, help_text='the sailing club that organizes the event')
-    race_committee = models.ForeignKey(Person, help_text='the person responsible for the execution of the event')
-    race_unrated_on = models.CharField(max_length=100, blank=True, help_text='describing after how many race one is unaccounted for')
-    umpire = models.ForeignKey(Person, help_text='the presiding judge')
-    assistants = models.ManyToManyField(Person, help_text='everybody else helping in the event')
+    organizer = models.ForeignKey(SailingClub, null=True, help_text='the sailing club that organizes the event')
+    race_committee = models.ForeignKey(Person, null=True, related_name='events_race_committee_in', help_text='the person responsible for the execution of the event')
+    race_unrated_on = models.CharField(max_length=100, blank=True, help_text='describing after how many race one is unaccounted for e.g. "4,7"')
+    umpire = models.ForeignKey(Person, null=True, related_name='events_umpire_in', help_text='the presiding judge')
+    assistants = models.ManyToManyField(Person, related_name='events_assisting_in', help_text='everybody else helping in the event')
 
     def __str__(self):
         return self.name
