@@ -39,7 +39,25 @@ class Event(models.Model):
                                        help_text='the person responsible for the execution of the event')
     race_unrated_on = models.CharField(max_length=100, blank=True, help_text='describing after how many race one is unaccounted for e.g. "4,7"')
     umpire = models.ForeignKey(Person, null=True, related_name='events_umpire_in', help_text='the presiding judge')
-    assistants = models.ManyToManyField(Person, related_name='events_assisting_in', help_text='everybody else helping in the event')
+    assistants = models.ManyToManyField(Person, blank=True, related_name='events_assisting_in', help_text='everybody else helping in the event')
 
     def __str__(self):
         return self.name
+
+
+class BoatType(models.Model):
+    name = models.CharField(max_length=200, blank=True, help_text='name of the boat type')
+    yardstick = models.PositiveIntegerField(default=0, help_text='official yardstick value')
+
+    def __str__(self):
+        return self.name
+
+
+class Entry(models.Model):
+    event = models.ForeignKey(Event, null=False, help_text='event this entry is part of')
+    helm = models.ForeignKey(Person, null=True, help_text='person steering')
+    crew = models.ManyToManyField(Person, blank=True, related_name='entries_crew_in', help_text='crew members')
+    boat_type = models.ForeignKey(BoatType, null=True, help_text='the boat type used by this entry')
+
+    def __str__(self):
+        return '%s on %s' % (self.helm, self.boat_type)
