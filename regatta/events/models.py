@@ -2,14 +2,6 @@ from datetime import date
 from django.db import models
 
 
-class Person(models.Model):
-    first_name = models.CharField(max_length=200, blank=True)
-    last_name = models.CharField(max_length=200, blank=True)
-
-    def __str__(self):
-        return '%s %s' % (self.first_name, self.last_name)
-
-
 class SailingClub(models.Model):
     name = models.CharField(max_length=200, blank=True, help_text='full name of the sailing club')
     abbreviation = models.CharField(max_length=20, blank=True, help_text='official abbreviation of the sailing club')
@@ -18,6 +10,15 @@ class SailingClub(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=200, blank=True)
+    last_name = models.CharField(max_length=200, blank=True)
+    sailing_club = models.ForeignKey(SailingClub, null=True, help_text='member of this sailing club')
+
+    def __str__(self):
+        return '%s %s, %s' % (self.first_name, self.last_name, self.sailing_club.abbreviation if self.sailing_club else '')
 
 
 class Event(models.Model):
@@ -61,3 +62,7 @@ class Entry(models.Model):
 
     def __str__(self):
         return '%s on %s' % (self.helm, self.boat_type)
+
+    def crew_names(self):
+        crew_names = [str(member) for member in self.crew.all()]
+        return ' / '.join(crew_names)

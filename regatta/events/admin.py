@@ -8,7 +8,7 @@ from .models import Entry
 
 class EntryAdmin(admin.ModelAdmin):
     model = Entry
-    list_display = ('event', 'helm', 'boat_type')
+    list_display = ('event', 'helm', 'crew_names', 'boat_type')
 
 
 admin.site.register(Event)
