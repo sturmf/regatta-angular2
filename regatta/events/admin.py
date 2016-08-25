@@ -4,6 +4,7 @@ from .models import Person
 from .models import SailingClub
 from .models import BoatType
 from .models import Entry
+from .models import Race
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -16,8 +17,13 @@ class EntryAdmin(admin.ModelAdmin):
     list_display = ('event', 'helm', 'crew_names', 'boat_type')
 
 
+class RaceAdmin(admin.ModelAdmin):
+    model = Race
+    list_display = ('event', 'number', 'start_time', 'end_time', 'sky_condition', 'wind_speed_min', 'wind_speed_max')
+
 admin.site.register(Event, EventAdmin)
 admin.site.register(Person)
 admin.site.register(SailingClub)
 admin.site.register(BoatType)
 admin.site.register(Entry, EntryAdmin)
+admin.site.register(Race, RaceAdmin)

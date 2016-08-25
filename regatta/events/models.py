@@ -23,15 +23,15 @@ class Person(models.Model):
 
 class Event(models.Model):
 
-    YARDSTICK = 1
-    CLASS = 2
+    MODE_YARDSTICK = 1
+    MODE_CLASS = 2
     MODE_CHOICES = (
-        (YARDSTICK, 'Yardstick'),
-        (CLASS, 'Class'),
+        (MODE_YARDSTICK, 'Yardstick'),
+        (MODE_CLASS, 'Class'),
     )
 
     name = models.CharField(max_length=200, blank=True, help_text='name of the event')
-    mode = models.IntegerField(choices=MODE_CHOICES, default=YARDSTICK, help_text='type of the event either Class or Yardstick')
+    mode = models.IntegerField(choices=MODE_CHOICES, default=MODE_YARDSTICK, help_text='type of the event either Class or Yardstick')
     start_date = models.DateField(default=date.today, help_text='first day of the event')
     end_date = models.DateField(default=date.today, help_text='last day of the event')
     race_count = models.PositiveIntegerField(default=1, help_text='amount of races scheduled during the event')
@@ -66,3 +66,31 @@ class Entry(models.Model):
     def crew_names(self):
         crew_names = [str(member) for member in self.crew.all()]
         return ' / '.join(crew_names)
+
+
+class Race(models.Model):
+
+    SKY_CONDITION_CLOUDY = 1
+    SKY_CONDITION_MOSTLY_CLOUDY = 2
+    SKY_CONDITION_PARTLY_SUNNY = 3
+    SKY_CONDITION_MOSTLY_SUNNY = 4
+    SKY_CONDITION_SUNNY = 5
+
+    SKY_CONDITION_CHOICES = (
+        (SKY_CONDITION_CLOUDY, 'cloudy'),
+        (SKY_CONDITION_MOSTLY_CLOUDY, 'mostly cloudy'),
+        (SKY_CONDITION_PARTLY_SUNNY, 'partly sunny'),
+        (SKY_CONDITION_MOSTLY_SUNNY, 'mostly sunny'),
+        (SKY_CONDITION_SUNNY, 'sunny'),
+    )
+
+    event = models.ForeignKey(Event, null=False, help_text='event this race is part of')
+    number = models.PositiveIntegerField(help_text='number of race in an event')
+    start_time = models.DateTimeField(help_text='start of the race')
+    end_time = models.DateTimeField(help_text='end of the race')
+    sky_condition = models.IntegerField(choices=SKY_CONDITION_CHOICES, help_text='weather during the race')
+    wind_speed_min = models.PositiveIntegerField(help_text='minimum wind speed during the race in beaufort')
+    wind_speed_max = models.PositiveIntegerField(help_text='maximum wind speed during the race in beaufort')
+
+    def __str__(self):
+        return 'race number %s of %s' % (self.number, self.event.name)
