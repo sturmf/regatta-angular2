@@ -91,6 +91,35 @@ class Race(models.Model):
     sky_condition = models.IntegerField(choices=SKY_CONDITION_CHOICES, help_text='weather during the race')
     wind_speed_min = models.PositiveIntegerField(help_text='minimum wind speed during the race in beaufort')
     wind_speed_max = models.PositiveIntegerField(help_text='maximum wind speed during the race in beaufort')
+    placements = models.ManyToManyField(Entry, through='RaceEntryRelationship')
+
+    class Meta:
+        unique_together = ("event", "number")
 
     def __str__(self):
         return 'race number %s of %s' % (self.number, self.event.name)
+
+
+class RaceEntryRelationship(models.Model):
+
+    RACE_STATUS_NONE = 1
+    RACE_STATUS_DNC = 2
+    RACE_STATUS_DNF = 3
+    RACE_STATUS_OCS = 4
+
+    RACE_STATUS_CHOICES = (
+        (RACE_STATUS_NONE, ''),
+        (RACE_STATUS_DNC, 'DNC'),
+        (RACE_STATUS_DNF, 'DNF'),
+        (RACE_STATUS_OCS, 'OCS'),
+    )
+
+    race = models.ForeignKey(Race)
+    entry = models.ForeignKey(Entry)
+    finish_position = models.PositiveIntegerField(blank=True, null=True, help_text='position in which the finish line was crossed')
+    finish_time = models.DateTimeField(blank=True, null=True, help_text='time the boat crossed the finish line')
+    calculated_time = models.DateTimeField(blank=True, null=True, help_text='the calculated time depending on the yardstick number')
+    status = models.IntegerField(choices=RACE_STATUS_CHOICES, default=RACE_STATUS_NONE, help_text='special race finishing status')
+
+    class Meta:
+        unique_together = ("race", "entry")
