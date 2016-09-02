@@ -17,8 +17,9 @@ class EntryAdmin(admin.ModelAdmin):
     list_display = ('event', 'helm', 'crew_names', 'boat_type')
 
 
-class PlacementInline(admin.TabularInline):
+class RaceEntryRelationshipInline(admin.TabularInline):
     model = Race.placements.through
+    verbose_name_plural = 'Placements'
     fields = ('entry', 'finish_position', 'finish_time', 'calculated_time', 'status')
     readonly_fields = ('calculated_time',)
 
@@ -27,7 +28,7 @@ class RaceAdmin(admin.ModelAdmin):
     model = Race
     list_display = ('event', 'number', 'start_time', 'end_time', 'sky_condition', 'wind_speed_min', 'wind_speed_max')
     inlines = [
-        PlacementInline,
+        RaceEntryRelationshipInline,
     ]
 
 admin.site.register(Event, EventAdmin)
