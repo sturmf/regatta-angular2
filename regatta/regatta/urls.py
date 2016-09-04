@@ -21,6 +21,7 @@ from events import views
 router = routers.DefaultRouter()
 router.register(r'events', views.EventViewSet)
 router.register(r'sailing_clubs', views.SailingClubViewSet)
+router.register(r'persons', views.PersonViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
