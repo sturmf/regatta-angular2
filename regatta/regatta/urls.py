@@ -25,6 +25,7 @@ router.register(r'events', views.EventViewSet)
 router.register(r'boat_types', views.BoatTypeViewSet)
 router.register(r'entries', views.EntryViewSet)
 router.register(r'races', views.RaceViewSet)
+router.register(r'placements', views.PlacementViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),

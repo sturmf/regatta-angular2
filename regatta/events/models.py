@@ -41,6 +41,7 @@ class Event(models.Model):
                                        help_text='the person responsible for the execution of the event')
     umpire = models.ForeignKey(Person, null=True, related_name='events_umpire_in', help_text='the presiding judge')
     assistants = models.ManyToManyField(Person, blank=True, related_name='events_assisting_in', help_text='everybody else helping in the event')
+    entries = models.ManyToManyField(Person, through='Entry')
 
     def __str__(self):
         return self.name
@@ -91,7 +92,7 @@ class Race(models.Model):
     sky_condition = models.IntegerField(choices=SKY_CONDITION_CHOICES, help_text='weather during the race')
     wind_speed_min = models.PositiveIntegerField(help_text='minimum wind speed during the race in beaufort')
     wind_speed_max = models.PositiveIntegerField(help_text='maximum wind speed during the race in beaufort')
-    placements = models.ManyToManyField(Entry, through='RaceEntryRelationship')
+    placements = models.ManyToManyField(Entry, through='Placement')
 
     class Meta:
         unique_together = ("event", "number")
@@ -100,7 +101,7 @@ class Race(models.Model):
         return 'race number %s of %s' % (self.number, self.event.name)
 
 
-class RaceEntryRelationship(models.Model):
+class Placement(models.Model):
 
     RACE_STATUS_NONE = 1
     RACE_STATUS_DNC = 2

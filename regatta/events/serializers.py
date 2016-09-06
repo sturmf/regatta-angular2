@@ -5,6 +5,7 @@ from .models import Event
 from .models import BoatType
 from .models import Entry
 from .models import Race
+from .models import Placement
 
 
 class SailingClubSerializer(serializers.HyperlinkedModelSerializer):
@@ -20,9 +21,12 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
+    entry_set = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='entry-detail')
+
     class Meta:
         model = Event
-        fields = ('url', 'name', 'mode', 'start_date', 'end_date', 'race_count', 'race_unrated_on', 'organizer', 'race_committee', 'umpire', 'assistants')
+        fields = ('url', 'name', 'mode', 'start_date', 'end_date', 'race_count', 'race_unrated_on',
+                  'organizer', 'race_committee', 'umpire', 'assistants', 'entry_set')  # what about races
 
 
 class BoatTypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -37,7 +41,15 @@ class EntrySerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'event', 'helm', 'crew', 'boat_type')
 
 
+class PlacementSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Placement
+        fields = ('url', 'race', 'entry', 'finish_position', 'finish_time', 'calculated_time', 'status')
+
+
 class RaceSerializer(serializers.HyperlinkedModelSerializer):
+    placement_set = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='placement-detail')
+
     class Meta:
         model = Race
-        fields = ('url', 'event', 'number', 'start_time', 'end_time', 'sky_condition', 'wind_speed_min', 'wind_speed_max', 'placements')
+        fields = ('url', 'event', 'number', 'start_time', 'end_time', 'sky_condition', 'wind_speed_min', 'wind_speed_max', 'placement_set')

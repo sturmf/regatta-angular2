@@ -5,12 +5,14 @@ from .models import Event
 from .models import BoatType
 from .models import Entry
 from .models import Race
+from .models import Placement
 from .serializers import SailingClubSerializer
 from .serializers import PersonSerializer
 from .serializers import EventSerializer
 from .serializers import BoatTypeSerializer
 from .serializers import EntrySerializer
 from .serializers import RaceSerializer
+from .serializers import PlacementSerializer
 
 
 class SailingClubViewSet(viewsets.ModelViewSet):
@@ -59,3 +61,11 @@ class RaceViewSet(viewsets.ModelViewSet):
     """
     queryset = Race.objects.all().order_by('event__name', 'number')
     serializer_class = RaceSerializer
+
+
+class PlacementViewSet(viewsets.ModelViewSet):
+    """
+        API endpoint that allows placements to be viewed or edited.
+        """
+    queryset = Placement.objects.all().order_by('race__event__name', 'race', 'finish_position')
+    serializer_class = PlacementSerializer
