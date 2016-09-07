@@ -22,11 +22,12 @@ class PersonSerializer(serializers.HyperlinkedModelSerializer):
 
 class EventSerializer(serializers.HyperlinkedModelSerializer):
     entry_set = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='entry-detail')
+    race_set = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='race-detail')
 
     class Meta:
         model = Event
         fields = ('url', 'name', 'mode', 'start_date', 'end_date', 'race_count', 'race_unrated_on',
-                  'organizer', 'race_committee', 'umpire', 'assistants', 'entry_set')  # what about races
+                  'organizer', 'race_committee', 'umpire', 'assistants', 'entry_set', 'race_set')
 
 
 class BoatTypeSerializer(serializers.HyperlinkedModelSerializer):
