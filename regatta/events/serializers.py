@@ -45,7 +45,8 @@ class EntrySerializer(serializers.HyperlinkedModelSerializer):
 class PlacementSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Placement
-        fields = ('url', 'race', 'entry', 'finish_position', 'finish_time', 'calculated_time', 'status')
+        fields = ('url', 'race', 'entry', 'finish_position', 'finish_time', 'status', 'calculated_time', 'calculated_place')
+        read_only_fields = ('calculated_time', 'calculated_place')
 
 
 class RaceSerializer(serializers.HyperlinkedModelSerializer):

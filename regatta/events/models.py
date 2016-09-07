@@ -120,6 +120,7 @@ class Placement(models.Model):
     finish_position = models.PositiveIntegerField(blank=True, null=True, help_text='position in which the finish line was crossed')
     finish_time = models.DateTimeField(blank=True, null=True, help_text='time the boat crossed the finish line')
     calculated_time = models.DateTimeField(blank=True, null=True, help_text='the calculated time depending on the yardstick number')
+    calculated_place = models.PositiveIntegerField(blank=True, null=True, help_text='calculated place')
     status = models.IntegerField(choices=RACE_STATUS_CHOICES, default=RACE_STATUS_NONE, help_text='special race finishing status')
 
     class Meta:

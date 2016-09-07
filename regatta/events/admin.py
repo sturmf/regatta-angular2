@@ -32,8 +32,8 @@ class EventAdmin(admin.ModelAdmin):
 
 class PlacementInline(admin.TabularInline):
     model = Race.placements.through
-    fields = ('entry', 'finish_position', 'finish_time', 'calculated_time', 'status')
-    readonly_fields = ('calculated_time',)
+    fields = ('entry', 'finish_position', 'finish_time', 'status', 'calculated_time', 'calculated_place')
+    readonly_fields = ('calculated_time', 'calculated_place')
     extra = 0
 
 
