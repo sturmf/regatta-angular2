@@ -2,6 +2,7 @@
 *.rgs
 *.sqlite3
 pep8.txt
+misc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
