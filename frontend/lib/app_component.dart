@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:angular2/core.dart';
 import 'package:angular2/platform/common.dart';
 import 'package:angular2/router.dart';
@@ -9,11 +11,12 @@ import 'event_service.dart';
   selector: 'my-app',
   template: '''
     <h1>My First Angular 2 App</h1>
-    <div *ngFor="let event of events">
+    <div *ngFor="let event of events" (click)="onSelect(event)">
       <div>
         <h4>{{event.name}}</h4>
       </div>
     </div>
+    Selected event
     ''',
   directives: const [
     ROUTER_DIRECTIVES
@@ -27,12 +30,22 @@ import 'event_service.dart';
 
 
 class AppComponent implements OnInit {
-  final EventService _eventService;
   List<Event> events;
+  Event selectedEvent;
 
+  final EventService _eventService;
+  
   AppComponent(this._eventService);
 
-  ngOnInit() async => events  = (await _eventService.getEvents());
+  Future<Null> getEvents() async {
+    events = await _eventService.getEvents();
+  }
+  ngOnInit() {
+    getEvents();
+  }
 
+  void onSelect(Event event) {
+    selectedEvent = event;
+  }
 }
 
