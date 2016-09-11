@@ -56,6 +56,13 @@ coverage.xml
 # Django stuff:
 *.log
 
+# Dart stuff
+packages
+.packages
+.pub
+*.lock
+
+# 
 # Sphinx documentation
 docs/_build/
 
