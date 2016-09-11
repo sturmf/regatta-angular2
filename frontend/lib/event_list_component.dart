@@ -16,9 +16,9 @@ class EventListComponent implements OnInit {
   List<Event> events;
 
   final EventService _eventService;
-  //final RouteParams _routeParams;
+  final Router _router;
 
-  EventListComponent(this._eventService) { //, this._routeParams) {
+  EventListComponent(this._eventService, this._router) {
     print('EventListComponent constructor');
   }
 
@@ -29,6 +29,11 @@ class EventListComponent implements OnInit {
   ngOnInit() async {
     print('Init called');
     getEvents();
+  }
+
+  gotoEvent(Event event) {
+    var link = ['EventDetail', {'id': event.id.toString()}];
+    _router.navigate(link);
   }
 
   goBack() {

@@ -10,7 +10,7 @@ import 'event.dart';
 @Injectable()
 class EventService {
 
-  static const _eventsUrl = 'http://localhost:8000/api/events'; // URL to web API
+  static const _eventsUrl = 'http://localhost:8000/api/events/'; // URL to web API
 
   final Client _http;
 
@@ -23,6 +23,16 @@ class EventService {
           .map((value) => new Event.fromJson(value))
           .toList();
       return events;
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future<Event> getEvent(int id) async {
+    try {
+      final response = await _http.get(_eventsUrl + id.toString());
+      final event = new Event.fromJson(JSON.decode(response.body));
+      return event;
     } catch (e) {
       throw _handleError(e);
     }
