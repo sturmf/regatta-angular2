@@ -1,1 +1,10 @@
-Event detail
+<div *ngIf="event != null">
+  <h2>{{event.name}} details!</h2>
+  <div>
+    <label>id: </label>{{event.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="event.name" placeholder="name" />
+  </div>
+  <button (click)="goBack()">Back</button>
+</div>
