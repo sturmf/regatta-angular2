@@ -17,6 +17,7 @@ import 'event_service.dart';
       </div>
     </div>
     Selected event
+    {{selectedEvent?.name}}
     ''',
   directives: const [
     ROUTER_DIRECTIVES
