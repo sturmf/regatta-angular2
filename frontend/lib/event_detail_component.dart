@@ -26,7 +26,7 @@ class EventDetailComponent implements OnInit {
     event = await (_eventService.getEvent(id));
   }
 
-  Future<Null> save() async {
+  Future<Null> onSubmit() async {
     await _eventService.update(event);
     goBack();
   }
