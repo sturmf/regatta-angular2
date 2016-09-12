@@ -10,7 +10,8 @@ import 'event.dart';
 @Injectable()
 class EventService {
 
-  static const _eventsUrl = 'http://localhost:8000/api/events/'; // URL to web API
+  static final _headers = {'Content-Type': 'application/json'};
+  static const _eventsUrl = 'http://localhost:8000/api/events'; // URL to web API
 
   final Client _http;
 
@@ -18,7 +19,7 @@ class EventService {
 
   Future<List<Event>> getEvents() async {
     try {
-      final response = await _http.get(_eventsUrl);
+      final response = await _http.get('$_eventsUrl/');
       final events = _extractData(response)
           .map((value) => new Event.fromJson(value))
           .toList();
@@ -30,9 +31,20 @@ class EventService {
 
   Future<Event> getEvent(int id) async {
     try {
-      final response = await _http.get(_eventsUrl + id.toString());
+      final response = await _http.get('$_eventsUrl/$id/');
       final event = new Event.fromJson(JSON.decode(response.body));
       return event;
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future<Event> update(Event event) async {
+    try {
+      var url = '$_eventsUrl/${event.id}/';
+      final response =
+          await _http.put(url, headers: _headers, body: JSON.encode(event));
+      return new Event.fromJson(JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
     }

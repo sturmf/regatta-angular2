@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:angular2/core.dart';
@@ -15,13 +16,19 @@ class EventDetailComponent implements OnInit {
   Event event;
 
   final EventService _eventService;
+  final Router _router;
   final RouteParams _routeParams;
 
-  EventDetailComponent(this._eventService, this._routeParams);
+  EventDetailComponent(this._eventService, this._router, this._routeParams);
 
   ngOnInit() async {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
+  }
+
+  Future<Null> save() async {
+    await _eventService.update(event);
+    goBack();
   }
 
   goBack() {
