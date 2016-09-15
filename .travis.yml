@@ -5,15 +5,15 @@ python:
   - "3.5"
 
 install:
-  - travis_retry pip install -r regatta/requirements.txt
+  - travis_retry pip install -r backend/requirements.txt
   - travis_retry pip install coveralls
   - travis_retry pip install flake8
 
 before_script:
-  - (cd regatta && python setup.py flake8)
+  - (cd backend && python setup.py flake8)
 
 script:
-  - (cd regatta && coverage run setup.py test)
+  - (cd backend && coverage run setup.py test)
 
 after_success:
-  - (cd regatta && coveralls)
+  - (cd backend && coveralls)

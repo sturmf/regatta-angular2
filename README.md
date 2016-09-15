@@ -22,33 +22,46 @@ This means especially using the following:
 * Documentation ([JIRA Confluence](https://www.atlassian.com/software/confluence)) [https://regatta.atlassian.net/wiki](https://regatta.atlassian.net/wiki)
 
 
-# Running the program
+# Running the Django backend program
 
 Initial setup of the environment
 
     pyvenv env
     source env/bin/activate
-    pip install -r regatta/requirements.txt
-    cd regatta && python manage.py migrate
+    pip install -r backend/requirements.txt
+    cd backend && python manage.py migrate
 
-Now run the program with
+Now run the Django app with
 
-    cd regatta && python3 main.py
+    cd backend && python3 main.py
+    # open a browser and point it to localhost:8000/api
 
 
 # Make changes ready for delivery
 
 To run the style guide checks and tests run
 
-    cd regatta 
+    cd backend 
     python3 setup.py flake8
     python3 setup.py test
 
 or
 
-    cd regatta
+    cd backend
     flake8 events
     python runtests.py
+
+
+# Running the Angular2 Dart frontend program
+
+Initial setup of the environment
+
+    cd frontend && pub get 
+
+Now run the Dart webserver with
+
+    cd frontend && pub serve
+    # open a browser and point it to localhost:8080
 
 
 # Contributions from non team members

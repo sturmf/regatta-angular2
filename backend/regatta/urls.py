@@ -19,8 +19,13 @@ from rest_framework import routers
 from events import views
 
 router = routers.DefaultRouter()
-router.register(r'events', views.EventViewSet)
 router.register(r'sailing_clubs', views.SailingClubViewSet)
+router.register(r'persons', views.PersonViewSet)
+router.register(r'events', views.EventViewSet)
+router.register(r'boat_types', views.BoatTypeViewSet)
+router.register(r'entries', views.EntryViewSet)
+router.register(r'races', views.RaceViewSet)
+router.register(r'placements', views.PlacementViewSet)
 
 urlpatterns = [
     url(r'^api/', include(router.urls)),
