@@ -19,11 +19,9 @@ class Event {
 
 
   factory Event.fromJson(Map<String, dynamic> event) =>
-    new Event(_toInt(event['id']), event['url'], event['name'], _toDateTime(event['start_date']));
+    new Event(_toInt(event['id']), event['url'], event['name'], DateTime.parse(event['start_date']));
 
   Map toJson() => {'id': id, 'url': url, 'name': name, 'start_date': startDate};
 }
 
 int _toInt(id) => id is int ? id : int.parse(id);
-
-DateTime _toDateTime(dateTime) => DateTime.parse(dateTime);
