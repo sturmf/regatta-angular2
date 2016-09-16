@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
+import 'package:intl/intl.dart';
 
 import 'event_service.dart';
 import 'event.dart';
@@ -29,6 +30,15 @@ class EventDetailComponent implements OnInit {
   Future<Null> onSubmit() async {
     await _eventService.update(event);
     goBack();
+  }
+
+  getStartDate() {
+    var formatter = new DateFormat('yyyy-MM-dd');
+    return formatter.format(event.startDate);
+  }
+
+  setStartDate(date) {
+    event.startDate = DateTime.parse(date);
   }
 
   goBack() {
