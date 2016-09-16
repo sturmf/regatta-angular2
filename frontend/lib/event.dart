@@ -1,10 +1,22 @@
+import 'package:intl/intl.dart';
+
 class Event {
   final int id;
   final String url;
   String name;
-  DateTime startDate;
+  DateTime _startDate;
 
-  Event(this.id, this.url, this.name, this.startDate);
+  Event(this.id, this.url, this.name, this._startDate);
+
+  String get startDate {
+    var formatter = new DateFormat('yyyy-MM-dd');
+    return formatter.format(_startDate);
+  }
+
+  void set startDate(String date) {
+    _startDate = DateTime.parse(date);
+  }
+
 
   factory Event.fromJson(Map<String, dynamic> event) =>
     new Event(_toInt(event['id']), event['url'], event['name'], _toDateTime(event['start_date']));

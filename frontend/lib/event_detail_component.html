@@ -11,15 +11,13 @@
     <div class="form-group">
       <label for="start_date">Start Date</label>
       <input type="date" class="form-control" required
-             [ngModel]="getStartDate()"
-             (ngModelChange)="setStartDate($event)"
+             [(ngModel)]="event.startDate"
              ngControl="start_date"
              #start_date="ngForm">
       <div [hidden]="start_date.valid" class="alert alert-danger">
         Start date is required
       </div>
     </div>
-      {{event.startDate}}
     <button type="submit" class="btn btn-default" [disabled]="!eventForm.form.valid">Submit</button>
     <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
   </form>

@@ -32,15 +32,6 @@ class EventDetailComponent implements OnInit {
     goBack();
   }
 
-  getStartDate() {
-    var formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(event.startDate);
-  }
-
-  setStartDate(date) {
-    event.startDate = DateTime.parse(date);
-  }
-
   goBack() {
     window.history.back();
   }
