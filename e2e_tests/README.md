@@ -1,4 +1,4 @@
-# Protractor End to End testing
+# Protractor End to End Testing
 
 ## References
 
@@ -13,7 +13,7 @@
 
 # Run
 
-This Protractor configuration assumes we serve the Angular frontend at http://localhost:8080/.
+This Protractor configuration assumes that we serve the Angular frontend at http://localhost:8080/.
 
 * webdriver-manager start
 * protractor conf.js
