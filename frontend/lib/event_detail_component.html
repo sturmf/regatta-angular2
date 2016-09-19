@@ -11,7 +11,7 @@
     <div class="form-group">
       <label for="start_date">Start Date</label>
       <input type="date" class="form-control" required
-             [(ngModel)]="event.startDate"
+             [(ngModel)]="event.startDateStr"
              ngControl="start_date"
              #start_date="ngForm">
       <div [hidden]="start_date.valid" class="alert alert-danger">

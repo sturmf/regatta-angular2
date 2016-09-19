@@ -4,24 +4,24 @@ class Event {
   final int id;
   final String url;
   String name;
-  DateTime _startDate;
+  DateTime startDate;
 
-  Event(this.id, this.url, this.name, this._startDate);
+  Event(this.id, this.url, this.name, this.startDate);
 
-  String get startDate {
+  String get startDateStr {
     var formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(_startDate);
+    return formatter.format(startDate);
   }
 
-  void set startDate(String date) {
-    _startDate = DateTime.parse(date);
+  void set startDateStr(String date) {
+    startDate = DateTime.parse(date);
   }
 
 
   factory Event.fromJson(Map<String, dynamic> event) =>
     new Event(_toInt(event['id']), event['url'], event['name'], DateTime.parse(event['start_date']));
 
-  Map toJson() => {'id': id, 'url': url, 'name': name, 'start_date': startDate};
+  Map toJson() => {'id': id, 'url': url, 'name': name, 'start_date': startDateStr};
 }
 
 int _toInt(id) => id is int ? id : int.parse(id);
