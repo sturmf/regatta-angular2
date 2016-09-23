@@ -11,7 +11,8 @@ install:
   - travis_retry pip install -r backend/requirements.txt
   - travis_retry pip install coveralls
   - travis_retry pip install flake8
-  - sudo apt-get install dart/stable
+  - sudo apt-get -qq update
+  - sudo apt-get install -y dart/stable
   - npm install -g protractor
   - webdriver-manager update
   - npm install -g jasmine-spec-reporter --save-dev
