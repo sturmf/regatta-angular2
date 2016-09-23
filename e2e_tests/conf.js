@@ -1,4 +1,4 @@
-var SpecReporter = require('/usr/local/lib/node_modules/jasmine-spec-reporter');
+var SpecReporter = require('jasmine-spec-reporter');
 
 exports.config = {
   capabilities: {
