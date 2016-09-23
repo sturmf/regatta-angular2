@@ -12,6 +12,7 @@ install:
   - travis_retry pip install coveralls
   - travis_retry pip install flake8
   - npm install -g dart-up
+  - dart-up --stable
   - npm install -g protractor
   - webdriver-manager update
   - npm install -g jasmine-spec-reporter --save-dev
