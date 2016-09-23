@@ -1,6 +1,9 @@
 var SpecReporter = require('/usr/local/lib/node_modules/jasmine-spec-reporter');
 
 exports.config = {
+  capabilities: {
+    'browserName': 'firefox'
+  },
   onPrepare: function() {
      // add jasmine spec reporter
      jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: 'none'}));

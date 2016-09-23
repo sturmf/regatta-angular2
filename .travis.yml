@@ -8,12 +8,22 @@ install:
   - travis_retry pip install -r backend/requirements.txt
   - travis_retry pip install coveralls
   - travis_retry pip install flake8
+  - npm install protractor
+  - webdriver-manager update
+  - npm install jasmine-spec-reporter --save-dev
+
 
 before_script:
   - (cd backend && python setup.py flake8)
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - (cd backend && python3 manage.py runserver)
+  - (cd fronten && pub serve)
+  - (cd e2e_tests && webdriver-manager start)
 
 script:
   - (cd backend && coverage run setup.py test)
+  - (cd e2e_tests && protractor conf.js)
 
 after_success:
   - (cd backend && coveralls)
