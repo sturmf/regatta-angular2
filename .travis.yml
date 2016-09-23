@@ -18,7 +18,7 @@ install:
   - sudo apt-get update
   - sudo apt-get install dart
   - (cd e2e_tests && npm install  protractor)
-  - webdriver-manager update
+  - (cd e2e_tests && node_modules/protractor/bin/webdriver-manager update)
   - (cd e2e_tests && npm install jasmine-spec-reporter --save-dev)
 
 
@@ -30,11 +30,11 @@ before_script:
   - (cd backend && python3 manage.py runserver > django-server.log 2>&1 &)
   - (cd frontend && /usr/lib/dart/bin/pub get)
   - (cd frontend && /usr/lib/dart/bin/pub serve > angular-server.log 2>&1 &)
-  - (cd e2e_tests && webdriver-manager start > webdriver.log 2>&1 &)
+  - (cd e2e_tests && node_modules/protractor/bin/webdriver-manager start > webdriver.log 2>&1 &)
 
 script:
   - (cd backend && coverage run setup.py test)
-  - (cd e2e_tests && protractor conf.js)
+  - (cd e2e_tests && node_modules/protractor/bin/protractor conf.js)
 
 after_success:
   - (cd backend && coveralls)
