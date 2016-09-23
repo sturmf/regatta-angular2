@@ -22,7 +22,7 @@ before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   - (cd backend && python3 manage.py runserver &)
-  - (cd fronten && pub serve &)
+  - (cd frontend && pub serve &)
   - (cd e2e_tests && webdriver-manager start &)
 
 script:
