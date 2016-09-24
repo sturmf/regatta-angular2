@@ -9,14 +9,16 @@ class Event {
   int race_count;
   String race_unrated_on;
   String organizer;
-  // race_committee
+  String race_committee;
   // umpire
   // assistants
   // entries
   // races
 
 
-  Event(this.id, this.url, this.name, this.startDate, this.endDate, this.race_count, this.race_unrated_on, this.organizer);
+  Event(this.id, this.url, this.name, this.startDate, this.endDate,
+      this.race_count, this.race_unrated_on, this.organizer,
+      this.race_committee);
 
   String get startDateStr {
     var formatter = new DateFormat('yyyy-MM-dd');
@@ -44,7 +46,8 @@ class Event {
         DateTime.parse(event['end_date']),
         _toInt(event['race_count']),
         event['race_unrated_on'],
-        event['organizer']
+        event['organizer'],
+        event['race_committee']
     );
 
   Map toJson() => {'id': id,
@@ -54,7 +57,8 @@ class Event {
     'end_date': endDateStr,
     'race_count': race_count,
     'race_unrated_on': race_unrated_on,
-    'organizer': organizer
+    'organizer': organizer,
+    'race_committee': race_committee
   };
 }
 

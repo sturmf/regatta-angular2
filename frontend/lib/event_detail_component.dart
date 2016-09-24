@@ -3,11 +3,11 @@ import 'dart:html';
 
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
-import 'package:intl/intl.dart';
 
 import 'event_service.dart';
 import 'event.dart';
 import 'sailing_club.dart';
+import 'person.dart';
 
 
 @Component(
@@ -18,6 +18,7 @@ import 'sailing_club.dart';
 class EventDetailComponent implements OnInit {
   Event event;
   List<SailingClub> sailing_clubs;
+  List<Person> persons;
 
   final EventService _eventService;
   final Router _router;
@@ -29,6 +30,7 @@ class EventDetailComponent implements OnInit {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
     sailing_clubs = await (_eventService.getSailingClubs());
+    persons = await (_eventService.getPersons());
   }
 
   Future<Null> onSubmit() async {

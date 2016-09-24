@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class SailingClub {
   final int id;
   final String url;

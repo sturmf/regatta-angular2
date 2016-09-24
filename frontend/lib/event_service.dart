@@ -6,16 +6,19 @@ import 'package:http/http.dart';
 
 import 'event.dart';
 import 'sailing_club.dart';
+import 'person.dart';
 
 
 @Injectable()
 class EventService {
 
   static final _headers = {'Content-Type': 'application/json'};
-  static const _eventsUrl = 'http://localhost:8000/api/events'; // URL to web API
-  static const _sailingClubsUrl = 'http://localhost:8000/api/sailing_clubs'; // URL to web API
-
   final Client _http;
+
+  // URLs to the web API
+  static const _eventsUrl = 'http://localhost:8000/api/events';
+  static const _sailingClubsUrl = 'http://localhost:8000/api/sailing_clubs';
+  static const _personsUrl = 'http://localhost:8000/api/persons';
 
   EventService(this._http);
 
@@ -46,6 +49,16 @@ class EventService {
       final response = await _http.get('$_sailingClubsUrl/');
       final sailing_clubs = JSON.decode(response.body)['results'].map((value) => new SailingClub.fromJson(value)).toList();
       return sailing_clubs;
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future<List<Person>> getPersons() async {
+    try {
+      final response = await _http.get('$_personsUrl/');
+      final persons = JSON.decode(response.body)['results'].map((value) => new Person.fromJson(value)).toList();
+      return persons;
     } catch (e) {
       throw _handleError(e);
     }
