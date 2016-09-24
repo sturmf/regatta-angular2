@@ -10,7 +10,7 @@ import 'event_detail_component.dart';
 @Component(
   selector: 'my-app',
   template: '''
-    <h1 align="center">Regatta</h1>
+    <h1 align="center">Fail this Test</h1>
     <router-outlet></router-outlet>
     ''',
   directives: const [
