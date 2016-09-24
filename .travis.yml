@@ -18,7 +18,7 @@ install:
   - sudo apt-get update
   - sudo apt-get install dart
   - (cd frontend && /usr/lib/dart/bin/pub get)
-  - (cd e2e_tests && npm install  protractor)
+  - (cd e2e_tests && npm install protractor)
   - (cd e2e_tests && node_modules/protractor/bin/webdriver-manager update)
   - (cd e2e_tests && npm install jasmine-spec-reporter --save-dev)
 
