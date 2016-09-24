@@ -49,6 +49,14 @@
             <input type="text" class="form-control" [(ngModel)]="event.race_unrated_on" ngControl="race_unrated_on" #name="ngForm">
         </div>
 
+        <div class="form-group">
+            <label for="organizer">Organizer</label>
+            <select class="form-control" gControl="organizerDropdown">
+                <option *ngFor="let sailing_club of sailing_clubs" [selected]="sailing_club.url == event.organizer"
+                        value="{{sailing_club.id}}">{{sailing_club.name}}</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-default" [disabled]="!eventForm.form.valid">Submit</button>
         <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
     </form>
