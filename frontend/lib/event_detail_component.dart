@@ -5,9 +5,9 @@ import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
 import 'event_service.dart';
-import 'event.dart';
-import 'sailing_club.dart';
-import 'person.dart';
+import 'models/event.dart';
+import 'models/sailing_club.dart';
+import 'models/person.dart';
 
 
 @Component(

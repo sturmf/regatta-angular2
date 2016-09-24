@@ -5,7 +5,7 @@ import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
 import 'event_service.dart';
-import 'event.dart';
+import 'models/event.dart';
 
 @Component(
   selector: 'my-event-list',
