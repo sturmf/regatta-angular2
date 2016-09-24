@@ -51,9 +51,8 @@
 
         <div class="form-group">
             <label for="organizer">Organizer</label>
-            <select class="form-control" gControl="organizerDropdown">
-                <option *ngFor="let sailing_club of sailing_clubs" [selected]="sailing_club.url == event.organizer"
-                        value="{{sailing_club.id}}">{{sailing_club.name}}</option>
+            <select class="form-control" [(ngModel)]="event.organizer">
+                <option *ngFor="let sailing_club of sailing_clubs" [value]="sailing_club.url">{{sailing_club.name}}</option>
             </select>
         </div>
 

@@ -53,7 +53,8 @@ class Event {
     'start_date': startDateStr,
     'end_date': endDateStr,
     'race_count': race_count,
-    'race_unrated_on': race_unrated_on
+    'race_unrated_on': race_unrated_on,
+    'organizer': organizer
   };
 }
 
