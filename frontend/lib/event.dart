@@ -1,5 +1,8 @@
 import 'package:intl/intl.dart';
 
+import 'person.dart';
+
+
 class Event {
   final int id;
   final String url;
@@ -11,14 +14,14 @@ class Event {
   String organizer;
   String race_committee;
   String umpire;
-  // assistants
+  List<String> assistants;
   // entries
   // races
 
 
   Event(this.id, this.url, this.name, this.startDate, this.endDate,
       this.race_count, this.race_unrated_on, this.organizer,
-      this.race_committee, this.umpire);
+      this.race_committee, this.umpire, this.assistants);
 
   String get startDateStr {
     var formatter = new DateFormat('yyyy-MM-dd');
@@ -48,7 +51,8 @@ class Event {
         event['race_unrated_on'],
         event['organizer'],
         event['race_committee'],
-        event['umpire']
+        event['umpire'],
+        event['assistants']
     );
 
   Map toJson() => {'id': id,
@@ -60,7 +64,8 @@ class Event {
     'race_unrated_on': race_unrated_on,
     'organizer': organizer,
     'race_committee': race_committee,
-    'umpire': umpire
+    'umpire': umpire,
+    'assistants': assistants
   };
 }
 
