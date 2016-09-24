@@ -17,18 +17,17 @@ install:
   - sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
   - sudo apt-get update
   - sudo apt-get install dart
+  - (cd frontend && /usr/lib/dart/bin/pub get)
   - (cd e2e_tests && npm install  protractor)
   - (cd e2e_tests && node_modules/protractor/bin/webdriver-manager update)
   - (cd e2e_tests && npm install jasmine-spec-reporter --save-dev)
 
-
 before_script:
-  - (cd backend && python3 manage.py migrate)
+  - (cd backend && python manage.py migrate)
   - (cd backend && python setup.py flake8)
+  - (cd backend && python manage.py runserver > django-server.log 2>&1 &)
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - (cd backend && python3 manage.py runserver > django-server.log 2>&1 &)
-  - (cd frontend && /usr/lib/dart/bin/pub get)
   - (cd frontend && /usr/lib/dart/bin/pub serve > angular-server.log 2>&1 &)
   - (cd e2e_tests && node_modules/protractor/bin/webdriver-manager start > webdriver.log 2>&1 &)
 

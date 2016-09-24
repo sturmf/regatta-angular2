@@ -97,3 +97,6 @@ atlassian-ide-plugin.xml
 # vim
 *.swp
 *.swo
+
+# Node
+node_modules
