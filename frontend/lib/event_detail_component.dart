@@ -47,6 +47,10 @@ class EventDetailComponent implements OnInit {
   deleteAssistant(assistant) {
     print("delete requested");
     event.assistants.remove(assistant);
+    // FIXME: the following is a workaround so that the
+    // EventAssistantsListComponent detects the changed assistants,
+    // the remove() alone does not trigger this
+    event.assistants = event.assistants.toList();
   }
 
 }

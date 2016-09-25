@@ -1,6 +1,5 @@
 import 'package:angular2/core.dart';
 
-import 'models/event.dart';
 import 'models/person.dart';
 
 
@@ -10,8 +9,8 @@ import 'models/person.dart';
   styleUrls: const ['event_assistants_list_component.css']
 )
 class EventAssistantsListComponent implements OnChanges {
-  @Input() Event event;
-  @Input() List<Person> persons;
+  @Input() List<String> selectedItems;
+  @Input() List<Person> persons; // FIXME: replace by generic interface
 
   @Output() final deleteRequest = new EventEmitter<String>();
 
@@ -20,10 +19,11 @@ class EventAssistantsListComponent implements OnChanges {
   EventAssistantsListComponent();
 
   ngOnChanges(changeRecord) {
-    // We have to make sure both event and persons are loaded
-    if (event != null && persons != null) {
+    // We have to make sure both selectedItems and persons are loaded
+    if (selectedItems != null && persons != null) {
+      assistants.clear();
       for (var person in persons) {
-        if (event.assistants.any((val) => val == person.url)) {
+        if (selectedItems.any((val) => val == person.url)) {
           assistants.add(person);
         }
       }
@@ -34,8 +34,6 @@ class EventAssistantsListComponent implements OnChanges {
   // addAssistant
 
   removeAssistant(assistant) {
-    // remove from event and from display list
     deleteRequest.emit(assistant.url);
-    assistants.remove(assistant); // FIXME: can we get this updated from the main model?
   }
 }
