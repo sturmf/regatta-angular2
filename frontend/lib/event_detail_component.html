@@ -73,6 +73,11 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label for="assistants">Assistants</label>
+            <my-event-assistants-list [event]="event" [persons]="persons" (deleteRequest)="deleteAssistant($event)"></my-event-assistants-list>
+        </div>
+
         <button type="submit" class="btn btn-default" [disabled]="!eventForm.form.valid">Submit</button>
         <button type="button" class="btn btn-default" (click)="goBack()">Back</button>
     </form>

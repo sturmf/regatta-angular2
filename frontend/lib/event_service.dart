@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:angular2/core.dart';
 import 'package:http/http.dart';
 
-import 'event.dart';
-import 'sailing_club.dart';
-import 'person.dart';
+import 'models/event.dart';
+import 'models/sailing_club.dart';
+import 'models/person.dart';
 
 
 @Injectable()
