@@ -6,6 +6,9 @@ import 'package:angular2/router.dart';
 
 import 'event_service.dart';
 import 'event.dart';
+import 'sailing_club.dart';
+import 'person.dart';
+
 
 @Component(
   selector: 'my-event-detail',
@@ -14,6 +17,8 @@ import 'event.dart';
 )
 class EventDetailComponent implements OnInit {
   Event event;
+  List<SailingClub> sailing_clubs;
+  List<Person> persons;
 
   final EventService _eventService;
   final Router _router;
@@ -24,6 +29,8 @@ class EventDetailComponent implements OnInit {
   ngOnInit() async {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
+    sailing_clubs = await (_eventService.getSailingClubs());
+    persons = await (_eventService.getPersons());
   }
 
   Future<Null> onSubmit() async {

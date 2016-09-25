@@ -126,7 +126,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'UNICODE_JSON': False
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
