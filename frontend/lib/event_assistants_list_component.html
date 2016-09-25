@@ -1,3 +1,9 @@
 <div>
-    <div *ngFor="let assistant of assistants">{{assistant.first_name}} {{assistant.last_name}}</div>
+    <div class="list-group">
+        <li class="list-group-item" *ngFor="let assistant of assistants">{{assistant.first_name}} {{assistant.last_name}}
+            <span class="pull-right">
+                <span class="glyphicon glyphicon-trash" (click)="removeAssistant(assistant)"></span>
+            </span>
+        </li>
+    </div>
 </div>

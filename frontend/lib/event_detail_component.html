@@ -75,7 +75,6 @@
 
         <div class="form-group">
             <label for="assistants">Assistants</label>
-            <div *ngFor="let assistant of event.assistants">{{assistant}}</div>
             <my-event-assistants-list [event]="event" [persons]="persons"></my-event-assistants-list>
         </div>
 

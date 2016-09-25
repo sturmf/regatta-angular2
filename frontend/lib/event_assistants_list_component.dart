@@ -35,5 +35,10 @@ class EventAssistantsListComponent implements OnChanges {
 
   // search
   // addAssistant
-  // removeAssistant
+
+  removeAssistant(assistant) {
+    // remove from event and from display list
+    event.assistants.remove(assistant.url);
+    assistants.remove(assistant);
+  }
 }
