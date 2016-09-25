@@ -44,4 +44,9 @@ class EventDetailComponent implements OnInit {
     window.history.back();
   }
 
+  deleteAssistant(assistant) {
+    print("delete requested");
+    event.assistants.remove(assistant);
+  }
+
 }
