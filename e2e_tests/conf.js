@@ -5,7 +5,6 @@ exports.config = {
     'browserName': 'firefox'
   },
   onPrepare: function() {
-     // add jasmine spec reporter
      jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: 'none'}));
   },
   framework: 'jasmine2',
