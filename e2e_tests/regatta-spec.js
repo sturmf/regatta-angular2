@@ -7,11 +7,11 @@ describe('The Regatta welcome view', function() {
   });
 
   xit('should show a list of all regattas.', function() {
-    expect('apple').toEqual('orange');
+    expect('apples').toEqual('oranges');
   });
 
   xit('should route to a regatta\'s details view.', function() {
-    expect('apple').toEqual('orange');
+    expect('apples').toEqual('oranges');
   });
 
 });
