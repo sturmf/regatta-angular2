@@ -1,4 +1,17 @@
 <div>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for assistants...">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="button">Add</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <br>
+
     <div class="list-group">
         <li class="list-group-item" *ngFor="let assistant of assistants">{{assistant.first_name}} {{assistant.last_name}}
             <span class="pull-right">
