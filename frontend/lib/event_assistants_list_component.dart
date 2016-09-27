@@ -15,6 +15,7 @@ class EventAssistantsListComponent implements OnChanges {
   @Output() final deleteRequest = new EventEmitter<String>();
 
   List<Person> assistants = new List();
+  List<Person> searchResults = new List();
 
   EventAssistantsListComponent();
 
@@ -30,7 +31,18 @@ class EventAssistantsListComponent implements OnChanges {
     }
   }
 
-  // search
+
+  search(String term) {
+    searchResults.clear();
+    if (term.length > 0) {
+      for (var person in persons) {
+        if (person.first_name.toUpperCase().contains(term.toUpperCase())) {
+          searchResults.add(person);
+        }
+      }
+    }
+  }
+
   // addAssistant
 
   removeAssistant(assistant) {

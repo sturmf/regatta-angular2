@@ -2,14 +2,22 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for assistants...">
-          <span class="input-group-btn">
-            <button class="btn btn-secondary" type="button">Add</button>
-          </span>
+          <div class="dropdown">
+            <div class="input-group">
+                <input #searchBox type="text" class="form-control" placeholder="Search for assistants..." (keyup)="search(searchBox.value)">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary" type="button">Add</button>
+                </span>
+            </div>
+            <ul class="dropdown-menu" [style.display]="searchResults.isNotEmpty ? 'block' : 'none'">
+                <li *ngFor="let person of searchResults" class="dropdown-item"><a href="#">{{person.first_name}} {{person.last_name}}</a></li>
+            </ul>
         </div>
       </div>
     </div>
+
+
+
     <br>
 
     <div class="list-group">
