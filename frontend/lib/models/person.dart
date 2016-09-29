@@ -1,3 +1,6 @@
+import 'package:dson/dson.dart';
+
+@serializable
 class Person {
   final int id;
   final String url;
@@ -7,6 +10,8 @@ class Person {
 
 
   Person(this.id, this.url, this.first_name, this.last_name, this.sailing_club);
+
+  String get full_name => first_name + ' ' + last_name;
 
   factory Person.fromJson(Map<String, dynamic> data) =>
     new Person(_toInt(data['id']),

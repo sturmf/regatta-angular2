@@ -9,6 +9,9 @@ dependencies:
   dart_to_js_script_rewriter: ^1.0.1
   http: ^0.11.0
   stream_transformers: ^0.3.0
+  ng_bootstrap: any
+  sass_transformer: any
+  reflectable: any
 transformers:
 - angular2:
     platform_directives:
@@ -19,4 +22,9 @@ transformers:
     resolved_identifiers:
       BrowserClient: 'package:http/browser_client.dart'
       Client: 'package:http/http.dart'
+- reflectable:
+    entry_points:
+      - web/main.dart
+    formatted: true
 - dart_to_js_script_rewriter
+- sass_transformer

@@ -44,7 +44,16 @@ class EventDetailComponent implements OnInit {
     window.history.back();
   }
 
-  deleteAssistant(assistant) {
+  addAssistant(person) {
+    print("add requested");
+    event.assistants.add(person);
+    // FIXME: the following is a workaround so that the
+    // EventAssistantsListComponent detects the changed assistants,
+    // the remove() alone does not trigger this
+    event.assistants = event.assistants.toList();
+  }
+
+   deleteAssistant(assistant) {
     print("delete requested");
     event.assistants.remove(assistant);
     // FIXME: the following is a workaround so that the
