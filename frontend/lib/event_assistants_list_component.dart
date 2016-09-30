@@ -26,7 +26,7 @@ class EventAssistantsListComponent implements OnChanges {
   // List of assistants, calculated from persons filtered by selectedAssistants
   List<Person> assistants = new List();
 
-  List<Person> persons2 = [new Person(1, 'url', 'f', 'l', 'sc'), new Person(2, 'url', 'd', 'f', 'sc')];
+  //List<Person> persons2 = [new Person(1, 'url', 'f', 'l', 'sc'), new Person(2, 'url', 'd', 'f', 'sc')];
 
   EventAssistantsListComponent();
 

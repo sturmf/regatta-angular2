@@ -2,7 +2,7 @@
     <pre>Model: {{selectedObj}}
 Selected Item: {{selectedItemObj}}</pre>
     <bs-typeahead [(ngModel)]="selectedObj"
-                  [source]="persons2"
+                  [source]="persons"
                   [(selectedItem)]="selectedItemObj"
                   (selectedItemChange)="addAssistant($event)"
                   optionField="full_name">
