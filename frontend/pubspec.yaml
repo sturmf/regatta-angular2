@@ -13,6 +13,8 @@ dependencies:
   sass_transformer: any
   reflectable: any
 transformers:
+- $dart2js:
+   environment: {hostname: ''}
 - angular2:
     platform_directives:
     - 'package:angular2/common.dart#COMMON_DIRECTIVES'

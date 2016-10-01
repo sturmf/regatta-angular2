@@ -15,10 +15,12 @@ class EventService {
   static final _headers = {'Content-Type': 'application/json'};
   final Client _http;
 
+  // Hostname in development mode points to Django port in production we set it to empty in pubspec.yml
+  static const hostname = const String.fromEnvironment('hostname', defaultValue: 'http://localhost:8000');
   // URLs to the web API
-  static const _eventsUrl = 'http://localhost:8000/api/events';
-  static const _sailingClubsUrl = 'http://localhost:8000/api/sailing_clubs';
-  static const _personsUrl = 'http://localhost:8000/api/persons';
+  static const _eventsUrl = hostname + '/api/events';
+  static const _sailingClubsUrl = hostname + '/api/sailing_clubs';
+  static const _personsUrl = hostname + '/api/persons';
 
   EventService(this._http);
 
