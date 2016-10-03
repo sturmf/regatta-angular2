@@ -33,8 +33,20 @@ Initial setup of the environment
 
 Now run the Django app with
 
-    cd backend && python3 main.py
+    cd backend && python3 manage.py runserver
     # open a browser and point it to localhost:8000/api
+
+
+# Running the Angular2 Dart frontend program
+
+Initial setup of the environment
+
+    cd frontend && pub get 
+
+Now run the Dart webserver with
+
+    cd frontend && pub serve
+    # open a browser and point it to localhost:8080
 
 
 # Make changes ready for delivery
@@ -50,18 +62,6 @@ or
     cd backend
     flake8 events
     python runtests.py
-
-
-# Running the Angular2 Dart frontend program
-
-Initial setup of the environment
-
-    cd frontend && pub get 
-
-Now run the Dart webserver with
-
-    cd frontend && pub serve
-    # open a browser and point it to localhost:8080
 
 
 # Contributions from non team members
