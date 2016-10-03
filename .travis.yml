@@ -1,3 +1,6 @@
+sudo: required
+dist: trusty
+
 language: python
 
 python:
@@ -8,12 +11,34 @@ install:
   - travis_retry pip install -r backend/requirements.txt
   - travis_retry pip install coveralls
   - travis_retry pip install flake8
+  - sudo apt-get update
+  - sudo apt-get install apt-transport-https
+  - sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
+  - sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
+  - sudo apt-get update
+  - sudo apt-get install dart
+  - (cd frontend && /usr/lib/dart/bin/pub get)
+  - (cd e2e_tests && npm install protractor)
+  - (cd e2e_tests && node_modules/protractor/bin/webdriver-manager update)
+  - (cd e2e_tests && npm install jasmine-spec-reporter --save-dev)
 
 before_script:
+  - (cd backend && python manage.py migrate)
   - (cd backend && python setup.py flake8)
+  - (cd backend && python manage.py runserver > django-server.log 2>&1 &)
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - (cd frontend && /usr/lib/dart/bin/pub serve > angular-server.log 2>&1 &)
+  - (cd e2e_tests && node_modules/protractor/bin/webdriver-manager start > webdriver.log 2>&1 &)
 
 script:
   - (cd backend && coverage run setup.py test)
+  - (cd e2e_tests && node_modules/protractor/bin/protractor conf.js)
 
 after_success:
   - (cd backend && coveralls)
+
+after_script:
+  - (cd backend && cat django-server.log)
+  - (cd frontend && cat angular-server.log)
+  - (cd e2e_tests && cat webdriver.log)
