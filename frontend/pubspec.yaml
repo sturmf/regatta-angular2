@@ -13,8 +13,6 @@ dependencies:
   sass_transformer: any
   reflectable: any
 transformers:
-- $dart2js:
-   environment: {hostname: 'http://localhost:8000'}
 - angular2:
     platform_directives:
     - 'package:angular2/common.dart#COMMON_DIRECTIVES'
@@ -28,5 +26,7 @@ transformers:
     entry_points:
       - web/main.dart
     formatted: true
+- $dart2js:
+   environment: {hostname: 'http://localhost:8000'}
 - dart_to_js_script_rewriter
 - sass_transformer
