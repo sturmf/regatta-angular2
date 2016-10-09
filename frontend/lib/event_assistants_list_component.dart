@@ -21,17 +21,13 @@ class EventAssistantsListComponent implements OnChanges {
   String selectedObj = ""; // The text in the assistant search field
   Person selectedItemObj; // The selected object from the assistant search
 
-  EventAssistantsListComponent get context => this;
-
   // List of assistants, calculated from persons filtered by selectedAssistants
   List<Person> assistants = new List();
-
-  //List<Person> persons2 = [new Person(1, 'url', 'f', 'l', 'sc'), new Person(2, 'url', 'd', 'f', 'sc')];
 
   EventAssistantsListComponent();
 
   ngOnChanges(changeRecord) {
-    // We have to make sure both selectedItems and persons are loaded
+    // We have to make sure both selectedAssistants and persons are loaded
     if (selectedAssistants != null && persons != null) {
       assistants.clear();
       for (var person in persons) {
