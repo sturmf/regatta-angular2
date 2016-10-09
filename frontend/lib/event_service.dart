@@ -12,7 +12,8 @@ import 'models/person.dart';
 @Injectable()
 class EventService {
 
-  static final _headers = {'Content-Type': 'application/json'};
+  static final _headersGet = {'Accept': 'application/json'};
+  static final _headersPost = {'Content-Type': 'application/json'};
   final Client _http;
 
   // Hostname in development mode points to Django port in production we set it to empty in pubspec.yml
@@ -26,7 +27,7 @@ class EventService {
 
   Future<List<Event>> getEvents() async {
     try {
-      final response = await _http.get('$_eventsUrl/');
+      final response = await _http.get('$_eventsUrl/', headers: _headersGet);
       final events = _extractData(response)
           .map((value) => new Event.fromJson(value))
           .toList();
@@ -38,7 +39,7 @@ class EventService {
 
   Future<Event> getEvent(int id) async {
     try {
-      final response = await _http.get('$_eventsUrl/$id/');
+      final response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
       final event = new Event.fromJson(JSON.decode(response.body));
       return event;
     } catch (e) {
@@ -48,7 +49,7 @@ class EventService {
 
   Future<List<SailingClub>> getSailingClubs() async {
     try {
-      final response = await _http.get('$_sailingClubsUrl/');
+      final response = await _http.get('$_sailingClubsUrl/', headers: _headersGet);
       final sailing_clubs = JSON.decode(response.body)['results'].map((value) => new SailingClub.fromJson(value)).toList();
       return sailing_clubs;
     } catch (e) {
@@ -58,7 +59,7 @@ class EventService {
 
   Future<List<Person>> getPersons() async {
     try {
-      final response = await _http.get('$_personsUrl/');
+      final response = await _http.get('$_personsUrl/', headers: _headersGet);
       final persons = JSON.decode(response.body)['results'].map((value) => new Person.fromJson(value)).toList();
       return persons;
     } catch (e) {
@@ -70,7 +71,7 @@ class EventService {
     try {
       var url = '$_eventsUrl/${event.id}/';
       final response =
-          await _http.put(url, headers: _headers, body: JSON.encode(event));
+          await _http.put(url, headers: _headersPost, body: JSON.encode(event));
       return new Event.fromJson(JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
