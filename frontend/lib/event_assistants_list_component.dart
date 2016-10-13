@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:ng_bootstrap/ng_bootstrap.dart';
 
@@ -11,9 +10,9 @@ import 'models/person.dart';
   styleUrls: const ['event_assistants_list_component.css'],
   directives: const [BsTypeAheadComponent]
 )
-class EventAssistantsListComponent implements OnChanges {
+class EventAssistantsListComponent /*implements OnChanges*/ {
   @Input() List<String> selectedAssistants; // List of Person.urls
-  @Input() List<Person> persons;
+  @Input() Function getPersons;
 
   @Output() final deleteRequest = new EventEmitter<String>();
   @Output() final addRequest = new EventEmitter<String>();
@@ -22,28 +21,16 @@ class EventAssistantsListComponent implements OnChanges {
   Person selectedItemObj; // The selected object from the assistant search
 
   // List of assistants, calculated from persons filtered by selectedAssistants
-  List<Person> assistants = new List();
+  Set<Person> assistants = new Set();
 
-  EventAssistantsListComponent();
-
-  ngOnChanges(changeRecord) {
-    // We have to make sure both selectedAssistants and persons are loaded
-    if (selectedAssistants != null && persons != null) {
-      assistants.clear();
-      for (var person in persons) {
-        if (selectedAssistants.any((val) => val == person.url)) {
-          assistants.add(person);
-        }
-      }
-    }
+  addAssistant(Person assistant) {
+    print('Selected value: ${assistant.url}');
+    addRequest.emit(assistant.url);
+    assistants.add(assistant);
   }
 
-  addAssistant(person) {
-    print('Selected value: ${person.url}');
-    addRequest.emit(person.url);
-  }
-
-  removeAssistant(assistant) {
+  removeAssistant(Person assistant) {
     deleteRequest.emit(assistant.url);
+    assistants.remove(assistant);
   }
 }

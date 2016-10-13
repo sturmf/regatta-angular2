@@ -57,16 +57,6 @@ class EventService {
     }
   }
 
-  Future<List<Person>> getPersons() async {
-    try {
-      final response = await _http.get('$_personsUrl/', headers: _headersGet);
-      final persons = JSON.decode(response.body)['results'].map((value) => new Person.fromJson(value)).toList();
-      return persons;
-    } catch (e) {
-      throw _handleError(e);
-    }
-  }
-
   Future<Event> update(Event event) async {
     try {
       var url = '$_eventsUrl/${event.id}/';

@@ -5,6 +5,7 @@ import 'package:angular2/router.dart';
 import 'event_service.dart';
 import 'event_list_component.dart';
 import 'event_detail_component.dart';
+import 'package:frontend/services/person_service.dart';
 
 
 @Component(
@@ -19,7 +20,8 @@ import 'event_detail_component.dart';
   providers: const [
     ROUTER_PROVIDERS,
     const Provider(LocationStrategy, useClass: HashLocationStrategy),
-    EventService
+    EventService,
+    PersonService
   ]
 )
 @RouteConfig(const [
@@ -27,6 +29,5 @@ import 'event_detail_component.dart';
   const Route(path: '/event/:id', name: 'EventDetail', component: EventDetailComponent)
 ])
 class AppComponent {
-  AppComponent();
 }
 

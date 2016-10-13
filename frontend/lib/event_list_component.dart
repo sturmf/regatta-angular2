@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:html';
+import 'dart:html' show window;
 
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
@@ -18,11 +18,9 @@ class EventListComponent implements OnInit {
   final EventService _eventService;
   final Router _router;
 
-  EventListComponent(this._eventService, this._router) {
-    print('EventListComponent constructor');
-  }
+  EventListComponent(this._eventService, this._router);
 
-  Future<Null> getEvents() async {
+  Future getEvents() async {
     events = await _eventService.getEvents();
   }
 

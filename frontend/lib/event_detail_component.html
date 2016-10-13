@@ -75,7 +75,7 @@
 
         <div class="form-group">
             <label for="assistants">Assistants</label>
-            <my-event-assistants-list [selectedAssistants]="event.assistants" [persons]="persons" (addRequest)="addAssistant($event)" (deleteRequest)="deleteAssistant($event)"></my-event-assistants-list>
+            <my-event-assistants-list [selectedAssistants]="event.assistants" [getPersons]="getPersons" (addRequest)="addAssistant($event)" (deleteRequest)="deleteAssistant($event)"></my-event-assistants-list>
         </div>
 
         <button type="submit" class="btn btn-default" [disabled]="!eventForm.form.valid">Submit</button>
