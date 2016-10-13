@@ -10,7 +10,7 @@ import 'models/person.dart';
   styleUrls: const ['event_assistants_list_component.css'],
   directives: const [BsTypeAheadComponent]
 )
-class EventAssistantsListComponent /*implements OnChanges*/ {
+class EventAssistantsListComponent implements OnInit {
   @Input() List<String> selectedAssistants; // List of Person.urls
   @Input() Function getPersons;
 
@@ -22,6 +22,15 @@ class EventAssistantsListComponent /*implements OnChanges*/ {
 
   // List of assistants, calculated from persons filtered by selectedAssistants
   Set<Person> assistants = new Set();
+
+  ngOnInit() async {
+    Iterable<Person> persons = await (getPersons(''));
+    for (var person in persons) {
+      if (selectedAssistants.any((val) => val == person.url)) {
+        assistants.add(person);
+      }
+    }
+  }
 
   addAssistant(Person assistant) {
     print('Selected value: ${assistant.url}');

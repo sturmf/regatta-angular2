@@ -54,7 +54,7 @@ class EventDetailComponent implements OnInit {
     // FIXME: the following is a workaround so that the
     // EventAssistantsListComponent detects the changed assistants,
     // the add() alone does not trigger this
-    event.assistants = event.assistants.toList();
+    // event.assistants = event.assistants.toList();
   }
 
   deleteAssistant(assistant) {
@@ -63,7 +63,7 @@ class EventDetailComponent implements OnInit {
     // FIXME: the following is a workaround so that the
     // EventAssistantsListComponent detects the changed assistants,
     // the remove() alone does not trigger this
-    event.assistants = event.assistants.toList();
+    // event.assistants = event.assistants.toList();
   }
 
 }
