@@ -5,10 +5,10 @@ import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
 import 'event_assistants_list_component.dart';
-import 'event_service.dart';
 import 'models/event.dart';
 import 'models/sailing_club.dart';
 import 'models/person.dart';
+import 'package:frontend/services/event_service.dart';
 import 'package:frontend/services/person_service.dart';
 
 

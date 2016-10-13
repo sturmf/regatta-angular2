@@ -4,7 +4,7 @@ import 'dart:html' show window;
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
-import 'event_service.dart';
+import 'package:frontend/services/event_service.dart';
 import 'models/event.dart';
 
 @Component(

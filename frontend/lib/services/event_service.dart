@@ -4,9 +4,8 @@ import 'dart:convert';
 import 'package:angular2/core.dart';
 import 'package:http/http.dart';
 
-import 'models/event.dart';
-import 'models/sailing_club.dart';
-import 'models/person.dart';
+import 'package:frontend/models/event.dart';
+import 'package:frontend/models/sailing_club.dart';
 
 
 @Injectable()
@@ -21,7 +20,6 @@ class EventService {
   // URLs to the web API
   static const _eventsUrl = hostname + '/api/events';
   static const _sailingClubsUrl = hostname + '/api/sailing_clubs';
-  static const _personsUrl = hostname + '/api/persons';
 
   EventService(this._http);
 
