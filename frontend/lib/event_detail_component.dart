@@ -23,7 +23,7 @@ class EventDetailComponent implements OnInit {
   List<SailingClub> sailing_clubs;
   List<Person> persons;
 
-  Future<List<Person>> getPersons(String query) async => _personService.getAll({'query': query});
+  Future<List<Person>> getPersons([String search='']) async => _personService.getAll(search != '' ? {'search': search} : null);
 
   final EventService _eventService;
   final PersonService _personService;

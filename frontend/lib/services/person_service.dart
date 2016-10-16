@@ -21,9 +21,9 @@ class PersonService {
 
   static const _personsUrl = hostname + '/api/persons';
 
-  Future<Iterable<Person>> getAll([Map<String, dynamic> query]) async {
+  Future<Iterable<Person>> getAll([Map<String, dynamic> search]) async {
     try {
-      final response = await _http.get('$_personsUrl/', headers: _headersGet);
+      final response = await _http.get('$_personsUrl/?${encodeMap(search)}', headers: _headersGet);
       final results = JSON.decode(response.body)['results'];
       final persons = fromMapList(results, Person);
       return persons;
@@ -37,4 +37,12 @@ class PersonService {
     return new Exception('Server error; cause: $e');
   }
 
+
+  String encodeMap(Map data) {
+    if (data == null)
+      return '';
+    return data.keys.map((k) {
+        return '${Uri.encodeComponent(k)}=${Uri.encodeComponent(data[k])}';
+    }).join('&');
+  }
 }
