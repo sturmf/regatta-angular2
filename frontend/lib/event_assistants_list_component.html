@@ -1,6 +1,4 @@
 <div>
-    <pre>Model: {{selectedObj}}
-Selected Item: {{selectedItemObj}}</pre>
     <bs-typeahead [(ngModel)]="selectedObj"
                   [source]="getPersons"
                   [(selectedItem)]="selectedItemObj"
