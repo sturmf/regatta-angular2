@@ -1,3 +1,4 @@
+from rest_framework import filters
 from rest_framework import viewsets
 from .models import SailingClub
 from .models import Person
@@ -21,14 +22,18 @@ class SailingClubViewSet(viewsets.ModelViewSet):
     """
     queryset = SailingClub.objects.all().order_by('name')
     serializer_class = SailingClubSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
 
 
 class PersonViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows persons to be viewed or edited.
     """
-    queryset = Person.objects.all().order_by('first_name')
+    queryset = Person.objects.all().order_by('first_name', 'last_name')
     serializer_class = PersonSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('first_name', 'last_name')
 
 
 class EventViewSet(viewsets.ModelViewSet):
