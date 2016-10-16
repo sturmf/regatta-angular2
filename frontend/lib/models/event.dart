@@ -14,7 +14,7 @@ class Event {
   String organizer;
   String race_committee;
   String umpire;
-  List<String> assistants;
+  Set<String> assistants;
   // entries
   // races
 
@@ -41,6 +41,7 @@ class Event {
     endDate = DateTime.parse(date);
   }
 
+  // FIXME: remove
   factory Event.fromJson(Map<String, dynamic> event) =>
     new Event(_toInt(event['id']),
         event['url'],
@@ -55,6 +56,7 @@ class Event {
         event['assistants']
     );
 
+  // FIXME: remove
   Map toJson() => {'id': id,
     'url': url,
     'name': name,
@@ -69,4 +71,5 @@ class Event {
   };
 }
 
+// FIXME: remove
 int _toInt(id) => id is int ? id : int.parse(id);
