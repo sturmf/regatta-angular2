@@ -36,7 +36,6 @@ class EventDetailComponent implements OnInit {
   ngOnInit() async {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
-    print(event.id);
     sailing_clubs = await (_eventService.getSailingClubs());
     persons = await (_personService.getAll());
   }

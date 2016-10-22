@@ -73,7 +73,7 @@ class EventService {
     try {
       var url = '$_eventsUrl/${event.id}/';
       final response =
-          await _http.put(url, headers: _headersPost, body: JSON.encode(event));
+          await _http.put(url, headers: _headersPost, body: toJson(event));
       return fromMap(JSON.decode(response.body), Event);
     } catch (e) {
       throw _handleError(e);
