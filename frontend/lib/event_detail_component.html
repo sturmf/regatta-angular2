@@ -13,25 +13,27 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="start_date">Start Date</label>
-                    <input type="date" class="form-control" required
+                    <bs-date-picker-popup [(ngModel)]="event.startDateStr"></bs-date-picker-popup>
+                    <!-- input type="date" class="form-control" required
                            [(ngModel)]="event.startDateStr"
                            ngControl="start_date"
                            #start_date="ngForm">
                     <div [hidden]="start_date.valid" class="alert alert-danger">
                         Start date is required
-                    </div>
+                    </div-->
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="end_date">End Date</label>
-                    <input type="date" class="form-control" required
+                    <bs-date-picker-popup [(ngModel)]="event.endDateStr"></bs-date-picker-popup>
+                    <!-- input type="date" class="form-control" required
                            [(ngModel)]="event.endDateStr"
                            ngControl="end_date"
                            #end_date="ngForm">
                     <div [hidden]="end_date.valid" class="alert alert-danger">
                         End date is required
-                    </div>
+                    </div-->
                 </div>
             </div>
         </div>

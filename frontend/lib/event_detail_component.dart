@@ -3,6 +3,7 @@ import 'dart:html' show window;
 
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
+import 'package:ng_bootstrap/ng_bootstrap.dart';
 
 import 'event_assistants_list_component.dart';
 import 'models/event.dart';
@@ -16,7 +17,7 @@ import 'package:frontend/services/person_service.dart';
     selector: 'my-event-detail',
     templateUrl: 'event_detail_component.html',
     styleUrls: const ['event_detail_component.css'],
-    directives: const [EventAssistantsListComponent]
+    directives: const [BS_DIRECTIVES, EventAssistantsListComponent]
 )
 class EventDetailComponent implements OnInit {
   Event event;
