@@ -53,8 +53,7 @@ class EventService {
   Future<Event> getEvent(int id) async {
     try {
       final response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
-      final event = new Event.fromJson(JSON.decode(response.body));
-      return event;
+      return fromMap(JSON.decode(response.body), Event);
     } catch (e) {
       throw _handleError(e);
     }

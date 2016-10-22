@@ -7,7 +7,9 @@ class Event {
   final int id;
   final String url;
   String name;
+  @SerializedName("start_date")
   DateTime startDate;
+  @SerializedName("end_date")
   DateTime endDate;
   int race_count;
   String race_unrated_on;
@@ -20,9 +22,9 @@ class Event {
   // races
 
 
-  Event({this.id, this.url, this.name, this.startDate, this.endDate,
+  Event(this.id, this.url, [this.name, this.startDate, this.endDate,
   this.race_count, this.race_unrated_on, this.organizer,
-  this.race_committee, this.umpire, this.assistants});
+  this.race_committee, this.umpire, this.assistants]);
 
   String get startDateStr {
     var formatter = new DateFormat('yyyy-MM-dd');
