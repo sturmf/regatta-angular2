@@ -27,8 +27,7 @@ class Event {
   this.race_committee, this.umpire, this.assistants]);
 
   String get startDateStr {
-    var formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(startDate);
+    return startDate.toIso8601String();
   }
 
   void set startDateStr(String date) {
@@ -36,8 +35,7 @@ class Event {
   }
 
   String get endDateStr {
-    var formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(endDate);
+    return endDate.toIso8601String();
   }
 
   void set endDateStr(String date) {

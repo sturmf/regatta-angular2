@@ -40,10 +40,6 @@ class EventService {
       final results = JSON.decode(response.body)['results'];
       final events = fromMapList(results, Event);
       print(events[0].startDate);
-      /*
-      final events = _extractData(response)
-          .map((value) => new Event.fromJson(value))
-          .toList();*/
       return events;
     } catch (e) {
       throw _handleError(e);
@@ -53,7 +49,11 @@ class EventService {
   Future<Event> getEvent(int id) async {
     try {
       final response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
-      return fromMap(JSON.decode(response.body), Event);
+      Event e = fromMap(JSON.decode(response.body), Event);
+      print(e.name);
+      print(e.startDate);
+      print(e.startDateStr);
+      return e;
     } catch (e) {
       throw _handleError(e);
     }
