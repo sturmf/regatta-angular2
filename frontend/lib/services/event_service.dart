@@ -1,11 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:angular2/core.dart';
-import 'package:http/http.dart';
-
+import 'package:dson/dson.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
+import 'package:http/http.dart';
 
 
 @Injectable()
@@ -29,7 +28,7 @@ class EventService {
     try {
       final response =
           await _http.post('$_eventsUrl/', headers: _headersPost, body: JSON.encode({'name': name}));
-      return new Event.fromJson(JSON.decode(response.body));
+      return fromMap(JSON.decode(response.body), Event);
     } catch (e) {
       throw _handleError(e);
     }
@@ -38,9 +37,13 @@ class EventService {
   Future<List<Event>> getEvents() async {
     try {
       final response = await _http.get('$_eventsUrl/', headers: _headersGet);
+      final results = JSON.decode(response.body)['results'];
+      final events = fromMapList(results, Event);
+      print(events[0].startDate);
+      /*
       final events = _extractData(response)
           .map((value) => new Event.fromJson(value))
-          .toList();
+          .toList();*/
       return events;
     } catch (e) {
       throw _handleError(e);
@@ -72,7 +75,7 @@ class EventService {
       var url = '$_eventsUrl/${event.id}/';
       final response =
           await _http.put(url, headers: _headersPost, body: JSON.encode(event));
-      return new Event.fromJson(JSON.decode(response.body));
+      return fromMap(JSON.decode(response.body), Event);
     } catch (e) {
       throw _handleError(e);
     }

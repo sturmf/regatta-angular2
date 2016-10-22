@@ -1,5 +1,6 @@
 import 'package:dson/dson.dart';
 
+
 @serializable
 class Person {
   final int id;
