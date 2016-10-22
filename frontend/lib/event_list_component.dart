@@ -29,6 +29,11 @@ class EventListComponent implements OnInit {
     getEvents();
   }
 
+  Future<Null> addEvent(String name) async {
+    print('EventListComponent.addEvent() has been called with name=$name');
+    _eventService.addEvent(name);
+  }
+
   gotoEvent(Event event) {
     var link = ['EventDetail', {'id': event.id.toString()}];
     _router.navigate(link);

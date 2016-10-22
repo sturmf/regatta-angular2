@@ -1,4 +1,12 @@
 <h2>Available events</h2>
+<div class="input-group">
+  <input #regattaName type="text" class="form-control" placeholder="New Regatta Event...">
+  <span class="input-group-btn">
+    <button class="btn btn-secondary" type="button" (click)="addEvent(regattaName.value)">
+      Add
+    </button>
+  </span>
+</div>
 <div *ngFor="let event of events" (click)="gotoEvent(event)">
   <div>
     <h4>{{event.name}}</h4>
