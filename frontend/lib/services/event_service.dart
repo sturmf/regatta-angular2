@@ -27,17 +27,13 @@ class EventService {
   Future<Event> addEvent(String name) async {
     print('EventService.addEvent() has been called with name=$name');
     try {
-      Event event = new Event(name);
-      var url = '$_eventsUrl/';
       final response =
-          await _http.post(url, headers: _headers, body: JSON.encode({'name': name}));
+          await _http.post('$_eventsUrl/', headers: _headersPost, body: JSON.encode({'name': name}));
       return new Event.fromJson(JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
     }
   }
-
-
 
   Future<List<Event>> getEvents() async {
     try {

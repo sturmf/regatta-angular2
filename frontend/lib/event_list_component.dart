@@ -31,7 +31,8 @@ class EventListComponent implements OnInit {
 
   Future<Null> addEvent(String name) async {
     print('EventListComponent.addEvent() has been called with name=$name');
-    _eventService.addEvent(name);
+    Event event = await _eventService.addEvent(name);
+    events.add(event);
   }
 
   gotoEvent(Event event) {

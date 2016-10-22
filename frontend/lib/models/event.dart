@@ -19,9 +19,9 @@ class Event {
   // races
 
 
-  Event(this.id, this.url, this.name, this.startDate, this.endDate,
+  Event({this.id: -1, this.url: null, this.name, this.startDate, this.endDate,
       this.race_count, this.race_unrated_on, this.organizer,
-      this.race_committee, this.umpire, this.assistants);
+      this.race_committee, this.umpire, this.assistants});
 
   String get startDateStr {
     var formatter = new DateFormat('yyyy-MM-dd');
@@ -43,17 +43,17 @@ class Event {
 
   // FIXME: remove
   factory Event.fromJson(Map<String, dynamic> event) =>
-    new Event(_toInt(event['id']),
-        event['url'],
-        event['name'],
-        DateTime.parse(event['start_date']),
-        DateTime.parse(event['end_date']),
-        _toInt(event['race_count']),
-        event['race_unrated_on'],
-        event['organizer'],
-        event['race_committee'],
-        event['umpire'],
-        event['assistants']
+    new Event(id: _toInt(event['id']),
+        url: event['url'],
+        name: event['name'],
+        startDate: DateTime.parse(event['start_date']),
+        endDate: DateTime.parse(event['end_date']),
+        race_count: _toInt(event['race_count']),
+        race_unrated_on: event['race_unrated_on'],
+        organizer: event['organizer'],
+        race_committee: event['race_committee'],
+        umpire: event['umpire'],
+        assistants: event['assistants']
     );
 
   // FIXME: remove
