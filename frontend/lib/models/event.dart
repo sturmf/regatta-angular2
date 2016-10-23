@@ -14,16 +14,24 @@ class Event {
   String organizer;
   String race_committee;
   String umpire;
+
   @DsonType(String)
   Set<String> assistants;
 
   // entries
   // races
 
-
-  Event(this.id, this.url, [this.name, this._start_date, this._end_date,
-  this.race_count, this.race_unrated_on, this.organizer,
-  this.race_committee, this.umpire, this.assistants]);
+  Event(this.id, this.url, [
+  this.name,
+  this.startDate,
+  this.endDate,
+  this.race_count,
+  this.race_unrated_on,
+  this.organizer,
+  this.race_committee,
+  this.umpire,
+  this.assistants
+  ]);
 
   String get start_date {
     var formatter = new DateFormat('yyyy-MM-dd');
