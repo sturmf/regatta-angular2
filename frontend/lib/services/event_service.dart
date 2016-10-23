@@ -28,7 +28,7 @@ class EventService {
     try {
       final response =
           await _http.post('$_eventsUrl/', headers: _headersPost, body: JSON.encode({'name': name}));
-      return fromMap(JSON.decode(response.body), Event);
+      return fromJson(response.body, Event);
     } catch (e) {
       throw _handleError(e);
     }
@@ -39,7 +39,6 @@ class EventService {
       final response = await _http.get('$_eventsUrl/', headers: _headersGet);
       final results = JSON.decode(response.body)['results'];
       final events = fromMapList(results, Event);
-      print(events[0].startDate);
       return events;
     } catch (e) {
       throw _handleError(e);
@@ -49,10 +48,7 @@ class EventService {
   Future<Event> getEvent(int id) async {
     try {
       final response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
-      Event e = fromMap(JSON.decode(response.body), Event);
-      print(e.name);
-      print(e.startDate);
-      print(e.startDateStr);
+      Event e = fromJson(response.body, Event);
       return e;
     } catch (e) {
       throw _handleError(e);
@@ -60,7 +56,7 @@ class EventService {
   }
 
   Future<List<SailingClub>> getSailingClubs() async {
-    try {
+    try { // FIXME deserialize, move to own service
       final response = await _http.get('$_sailingClubsUrl/', headers: _headersGet);
       final sailing_clubs = JSON.decode(response.body)['results'].map((value) => new SailingClub.fromJson(value)).toList();
       return sailing_clubs;
@@ -74,13 +70,11 @@ class EventService {
       var url = '$_eventsUrl/${event.id}/';
       final response =
           await _http.put(url, headers: _headersPost, body: toJson(event));
-      return fromMap(JSON.decode(response.body), Event);
+      return fromJson(response.body, Event);
     } catch (e) {
       throw _handleError(e);
     }
   }
-
-  dynamic _extractData(Response resp) => JSON.decode(resp.body)['results'];
 
   Exception _handleError(dynamic e) {
     print(e); // for demo purposes only
