@@ -16,15 +16,24 @@ class Event {
   String organizer;
   String race_committee;
   String umpire;
-  List<String> assistants; // FIXME: should be a Set
+
+  @DsonType(String)
+  Set<String> assistants;
 
   // entries
   // races
 
-
-  Event(this.id, this.url, [this.name, this.startDate, this.endDate,
-  this.race_count, this.race_unrated_on, this.organizer,
-  this.race_committee, this.umpire, this.assistants]);
+  Event(this.id, this.url, [
+  this.name,
+  this.startDate,
+  this.endDate,
+  this.race_count,
+  this.race_unrated_on,
+  this.organizer,
+  this.race_committee,
+  this.umpire,
+  this.assistants
+  ]);
 
   String get startDateStr {
     return startDate.toIso8601String();
