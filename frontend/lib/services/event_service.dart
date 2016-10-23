@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:angular2/core.dart';
 import 'package:dson/dson.dart';
 import 'package:frontend/models/event.dart';
-import 'package:frontend/models/sailing_club.dart';
 import 'package:http/http.dart';
 
 
@@ -18,7 +17,6 @@ class EventService {
   static const hostname = const String.fromEnvironment('hostname', defaultValue: 'http://localhost:8000');
   // URLs to the web API
   static const _eventsUrl = hostname + '/api/events';
-  static const _sailingClubsUrl = hostname + '/api/sailing_clubs';
 
   EventService(this._http);
 
@@ -50,16 +48,6 @@ class EventService {
       final response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
       Event e = fromJson(response.body, Event);
       return e;
-    } catch (e) {
-      throw _handleError(e);
-    }
-  }
-
-  Future<List<SailingClub>> getSailingClubs() async {
-    try { // FIXME deserialize, move to own service
-      final response = await _http.get('$_sailingClubsUrl/', headers: _headersGet);
-      final sailing_clubs = JSON.decode(response.body)['results'].map((value) => new SailingClub.fromJson(value)).toList();
-      return sailing_clubs;
     } catch (e) {
       throw _handleError(e);
     }

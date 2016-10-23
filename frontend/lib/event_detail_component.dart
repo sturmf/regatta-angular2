@@ -10,6 +10,7 @@ import 'models/event.dart';
 import 'models/sailing_club.dart';
 import 'models/person.dart';
 import 'package:frontend/services/event_service.dart';
+import 'package:frontend/services/sailing_club_service.dart';
 import 'package:frontend/services/person_service.dart';
 
 
@@ -27,16 +28,17 @@ class EventDetailComponent implements OnInit {
   Future<List<Person>> getPersons([String search='']) async => _personService.getAll(search != '' ? {'search': search} : null);
 
   final EventService _eventService;
+  final SailingClubService _sailingClubService;
   final PersonService _personService;
   final Router _router;
   final RouteParams _routeParams;
 
-  EventDetailComponent(this._eventService, this._router, this._routeParams, this._personService);
+  EventDetailComponent(this._eventService, this._sailingClubService, this._personService, this._router, this._routeParams);
 
   ngOnInit() async {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
-    sailing_clubs = await (_eventService.getSailingClubs());
+    sailing_clubs = await (_sailingClubService.getSailingClubs());
     persons = await (_personService.getAll());
   }
 
