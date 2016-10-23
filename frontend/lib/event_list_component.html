@@ -1,14 +1,16 @@
 <h2>Available events</h2>
-<div *ngFor="let event of events" (click)="gotoEvent(event)">
-  <div>
-    <h4>{{event.name}}</h4>
-  </div>
-</div>
-<div class="input-group">
-  <input #regattaName type="text" class="form-control" placeholder="New Regatta Event...">
-  <span class="input-group-btn">
-    <button class="btn btn-secondary" type="button" (click)="addEvent(regattaName.value)">
-      Add
+
+<div class="list-group">
+    <button type="button" class="list-group-item list-group-item-action" *ngFor="let event of events" (click)="gotoEvent(event)">
+        {{event.name}}
     </button>
-  </span>
+</div>
+<p></p>
+<div class="input-group">
+    <input #regattaName type="text" class="form-control" placeholder="New Regatta Event...">
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)="addEvent(regattaName.value)">
+            Add
+        </button>
+    </span>
 </div>

@@ -7,11 +7,11 @@
     </bs-typeahead>
     <br>
 
-    <div class="list-group">
+    <ul class="list-group">
         <li class="list-group-item" *ngFor="let assistant of assistants">{{assistant.first_name}} {{assistant.last_name}}
             <span class="pull-right">
                 <i class="fa fa-trash-o" (click)="removeAssistant(assistant)"></i>
             </span>
         </li>
-    </div>
+    </ul>
 </div>
