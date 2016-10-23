@@ -23,8 +23,8 @@ class Event {
 
   Event(this.id, this.url, [
   this.name,
-  this.startDate,
-  this.endDate,
+  this._start_date,
+  this._end_date,
   this.race_count,
   this.race_unrated_on,
   this.organizer,
