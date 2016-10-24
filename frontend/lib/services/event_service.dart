@@ -10,7 +10,7 @@ import 'package:http/http.dart';
 class EventService {
 
   static final _headersGet = {'Accept': 'application/json'};
-  static final _headersPost = {'Content-Type': 'application/json'};
+  static final _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
   final Client _http;
 
   // Hostname in development mode points to Django port 8000, in production we set it to empty during pub build

@@ -14,7 +14,7 @@ class PersonService {
   final Client _http;
 
   static final _headersGet = {'Accept': 'application/json'};
-  static final _headersPost = {'Content-Type': 'application/json'};
+  static final _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
   // Hostname in development mode points to Django port 8000, in production we set it to empty during pub build
   static const hostname = const String.fromEnvironment('hostname', defaultValue: 'http://localhost:8000');
