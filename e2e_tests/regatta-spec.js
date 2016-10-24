@@ -12,15 +12,14 @@ describe('The Regatta welcome view', function() {
     expect(heading.getText()).toEqual('Regatta');
   });
 
-  it('should start with an empty list.', function() {
+  xit('should start with an empty list.', function() {
     expect(regattaList.count()).toEqual(0);
   });
 
-  it('should add a new regatta item.', function() {
+  xit('should add a new regatta item.', function() {
     newRegattaForm.sendKeys('Christmas Race');
     addButton.click();
     expect(regattaList.count()).toEqual(1);
-    expect(regattaList).;
   });
 
   xit('should show a list of all regattas.', function() {
