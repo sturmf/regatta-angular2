@@ -19,9 +19,14 @@ describe('The Regatta welcome view', function() {
     expect(regattaList.count()).toEqual(0);
   });
 
-  xit('should add a new regatta item.', function() {
+  it('should add a new regatta item.', function() {
     newRegattaForm.sendKeys('Christmas Race');
     addButton.click();
+
+    // FIXME: why do we need this hack? originally mentioned here: http://stackoverflow.com/questions/21748442/protractor-how-to-wait-for-page-complete-after-click-a-button
+    browser.driver.sleep(1);
+    browser.waitForAngular();
+
     expect(regattaList.count()).toEqual(1);
   });
 
