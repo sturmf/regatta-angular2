@@ -1,10 +1,11 @@
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
+
+
 describe('The Regatta welcome view', function() {
   var heading = element(by.css('h1'));
   var newRegattaForm = element(by.css('input'));
   var addButton = element(by.buttonText('Add'));
-  
-  // var regattaList = element.all(by.repeater('let event of events')); // FIXME: not yet supported
-  var regattaList = element.all(by.css('.list-group-item'));
+  var regattaList = element.all(by.css('.list-group-item')); // FIXME: not yet supported, element.all(by.repeater('let event of events'));
 
   beforeEach(function() {
     browser.get('http://localhost:8080/');
