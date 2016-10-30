@@ -25,7 +25,7 @@ class EventDetailComponent implements OnInit {
   List<SailingClub> sailing_clubs;
   List<Person> persons;
 
-  Future<List<Person>> getPersons([String search='']) async => _personService.getAll(search != '' ? {'search': search} : null);
+  Future<List<Person>> getPersons([String search='']) async => _personService.getPersons(search != '' ? {'search': search} : null);
 
   final EventService _eventService;
   final SailingClubService _sailingClubService;
@@ -39,7 +39,7 @@ class EventDetailComponent implements OnInit {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
     sailing_clubs = await (_sailingClubService.getSailingClubs());
-    persons = await (_personService.getAll());
+    persons = await (_personService.getPersons());
   }
 
   Future<Null> onSubmit() async {
@@ -52,21 +52,11 @@ class EventDetailComponent implements OnInit {
   }
 
   addAssistant(person) {
-    print("add requested");
     event.assistants.add(person);
-    // FIXME: the following is a workaround so that the
-    // EventAssistantsListComponent detects the changed assistants,
-    // the add() alone does not trigger this
-    // event.assistants = event.assistants.toList();
   }
 
   deleteAssistant(assistant) {
-    print("delete requested");
     event.assistants.remove(assistant);
-    // FIXME: the following is a workaround so that the
-    // EventAssistantsListComponent detects the changed assistants,
-    // the remove() alone does not trigger this
-    // event.assistants = event.assistants.toList();
   }
 
 }

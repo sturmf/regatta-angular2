@@ -21,7 +21,7 @@ class PersonService {
 
   static const _personsUrl = hostname + '/api/persons';
 
-  Future<Iterable<Person>> getAll([Map<String, dynamic> search]) async {
+  Future<Iterable<Person>> getPersons([Map<String, dynamic> search]) async {
     try {
       final response = await _http.get('$_personsUrl/?${encodeMap(search)}', headers: _headersGet);
       final results = JSON.decode(response.body)['results'] as List<Map>;
