@@ -26,11 +26,7 @@ class EventAssistantsListComponent implements OnInit {
 
   ngOnInit() async {
     Iterable<Person> persons = await getPersons();
-    for (var person in persons) {
-      if (selectedAssistants.any((val) => val == person.url)) {
-        assistants.add(person);
-      }
-    }
+    assistants.addAll(persons.where((person) => selectedAssistants.contains(person.url)));
   }
 
   addAssistant(Person assistant) {
