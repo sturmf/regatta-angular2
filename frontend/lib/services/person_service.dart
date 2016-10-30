@@ -13,8 +13,8 @@ class PersonService {
 
   final Client _http;
 
-  static final _headersGet = {'Accept': 'application/json'};
-  static final _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
+  static final Map<String, String> _headersGet = {'Accept': 'application/json'};
+  //static final Map<String, String> _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
   // Hostname in development mode points to Django port 8000, in production we set it to empty during pub build
   static const hostname = const String.fromEnvironment('hostname', defaultValue: 'http://localhost:8000');
@@ -24,8 +24,8 @@ class PersonService {
   Future<Iterable<Person>> getAll([Map<String, dynamic> search]) async {
     try {
       final response = await _http.get('$_personsUrl/?${encodeMap(search)}', headers: _headersGet);
-      final results = JSON.decode(response.body)['results'];
-      final persons = fromMapList(results, Person);
+      final results = JSON.decode(response.body)['results'] as List<Map>;
+      final persons = fromMapList(results, Person) as List<Person>;
       return persons;
     } catch (e) {
       throw _handleError(e);

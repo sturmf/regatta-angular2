@@ -9,8 +9,8 @@ import 'package:http/http.dart';
 @Injectable()
 class SailingClubService {
 
-  static final _headersGet = {'Accept': 'application/json'};
-  static final _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
+  static final Map<String, String> _headersGet = {'Accept': 'application/json'};
+  //static final Map<String, String> _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
   final Client _http;
 
   // Hostname in development mode points to Django port 8000, in production we set it to empty during pub build
@@ -20,10 +20,11 @@ class SailingClubService {
 
   SailingClubService(this._http);
 
-  Future<List<SailingClub>> getSailingClubs() async {
-    try { // FIXME deserialize, move to own service
+  Future<Iterable<SailingClub>> getSailingClubs() async {
+    try {
       final response = await _http.get('$_sailingClubsUrl/', headers: _headersGet);
-      final sailing_clubs = JSON.decode(response.body)['results'].map((value) => new SailingClub.fromJson(value)).toList();
+      final results = JSON.decode(response.body)['results'] as List<Map>;
+      final sailing_clubs = fromMapList(results, SailingClub) as List<SailingClub>;
       return sailing_clubs;
     } catch (e) {
       throw _handleError(e);

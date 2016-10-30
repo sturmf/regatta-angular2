@@ -30,10 +30,10 @@ class EventDetailComponent implements OnInit {
   final EventService _eventService;
   final SailingClubService _sailingClubService;
   final PersonService _personService;
-  final Router _router;
+  //final Router _router;
   final RouteParams _routeParams;
 
-  EventDetailComponent(this._eventService, this._sailingClubService, this._personService, this._router, this._routeParams);
+  EventDetailComponent(this._eventService, this._sailingClubService, this._personService, /* this._router,*/ this._routeParams);
 
   ngOnInit() async {
     var id = int.parse(_routeParams.get('id'));

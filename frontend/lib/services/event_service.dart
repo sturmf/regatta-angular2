@@ -9,8 +9,8 @@ import 'package:http/http.dart';
 @Injectable()
 class EventService {
 
-  static final _headersGet = {'Accept': 'application/json'};
-  static final _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
+  static final Map<String, String> _headersGet = {'Accept': 'application/json'};
+  static final Map<String, String> _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
   final Client _http;
 
   // Hostname in development mode points to Django port 8000, in production we set it to empty during pub build
@@ -32,11 +32,11 @@ class EventService {
     }
   }
 
-  Future<List<Event>> getEvents() async {
+  Future<Iterable<Event>> getEvents() async {
     try {
       final response = await _http.get('$_eventsUrl/', headers: _headersGet);
-      final results = JSON.decode(response.body)['results'];
-      final events = fromMapList(results, Event);
+      final results = JSON.decode(response.body)['results'] as List<Map>;
+      final events = fromMapList(results, Event) as List<Event>;
       return events;
     } catch (e) {
       throw _handleError(e);
