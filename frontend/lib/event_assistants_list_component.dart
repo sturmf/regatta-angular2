@@ -3,6 +3,7 @@ import 'package:ng_bootstrap/ng_bootstrap.dart';
 
 import 'models/person.dart';
 
+typedef Iterable<Person> GetPersons();
 
 @Component(
   selector: 'my-event-assistants-list',
@@ -12,7 +13,7 @@ import 'models/person.dart';
 )
 class EventAssistantsListComponent implements OnInit {
   @Input() List<String> selectedAssistants; // List of Person.urls
-  @Input() Function getPersons;
+  @Input() GetPersons getPersons;
 
   @Output() final deleteRequest = new EventEmitter<String>();
   @Output() final addRequest = new EventEmitter<String>();
@@ -24,7 +25,7 @@ class EventAssistantsListComponent implements OnInit {
   Set<Person> assistants = new Set();
 
   ngOnInit() async {
-    Iterable<Person> persons = await getPersons() as Iterable<Person>;
+    Iterable<Person> persons = await getPersons();
     for (var person in persons) {
       if (selectedAssistants.any((val) => val == person.url)) {
         assistants.add(person);
