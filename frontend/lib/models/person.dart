@@ -5,12 +5,18 @@ import 'package:dson/dson.dart';
 class Person {
   final int id;
   final String url;
-  String first_name;
-  String last_name;
-  String sailing_club;
+
+  @SerializedName("first_name")
+  String firstName;
+
+  @SerializedName("last_name")
+  String lastName;
+
+  @SerializedName("sailing_club")
+  String sailingClub;
 
 
-  Person(this.id, this.url, [this.first_name, this.last_name, this.sailing_club]);
+  Person(this.id, this.url, [this.firstName, this.lastName, this.sailingClub]);
 
-  String get full_name => first_name + ' ' + last_name;
+  String get fullName => '$firstName $lastName';
 }

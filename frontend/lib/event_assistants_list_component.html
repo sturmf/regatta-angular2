@@ -3,12 +3,12 @@
                   [source]="getPersons"
                   [(selectedItem)]="selectedItemObj"
                   (selectedItemChange)="addAssistant($event)"
-                  optionField="full_name">
+                  optionField="fullName">
     </bs-typeahead>
     <br>
 
     <ul class="list-group">
-        <li class="list-group-item" *ngFor="let assistant of assistants">{{assistant.first_name}} {{assistant.last_name}}
+        <li class="list-group-item" *ngFor="let assistant of assistants">{{assistant.firstName}} {{assistant.lastName}}
             <span class="pull-right">
                 <i class="fa fa-trash-o" (click)="removeAssistant(assistant)"></i>
             </span>
