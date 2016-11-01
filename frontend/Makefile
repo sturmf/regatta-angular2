@@ -8,6 +8,9 @@ lint:
 install:
 	pub get
 
+test:
+	pub run test -j1
+
 run:
 	pub serve
 	

@@ -12,6 +12,8 @@ dependencies:
   ng_bootstrap: 0.4.0
   sass_transformer: any
   reflectable: any
+dev_dependencies:
+  test: ^0.12.0
 transformers:
 - angular2:
     platform_directives:
