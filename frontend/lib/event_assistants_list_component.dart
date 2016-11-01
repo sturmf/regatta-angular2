@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:ng_bootstrap/ng_bootstrap.dart';
 
@@ -24,9 +25,13 @@ class EventAssistantsListComponent implements OnInit {
   // List of assistants, calculated from persons filtered by selectedAssistants
   Set<Person> assistants = new Set();
 
-  ngOnInit() async {
+  Future<Null> getAssistants() async {
     Iterable<Person> persons = await getPersons();
     assistants.addAll(persons.where((person) => selectedAssistants.contains(person.url)));
+  }
+
+  void ngOnInit() {
+    getAssistants();
   }
 
   addAssistant(Person assistant) {
