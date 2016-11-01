@@ -51,12 +51,8 @@ class EventDetailComponent implements OnInit {
     window.history.back();
   }
 
-  addAssistant(person) {
-    event.assistants.add(person);
-  }
+  addAssistant(person) => event.assistants.add(person);
 
-  deleteAssistant(assistant) {
-    event.assistants.remove(assistant);
-  }
+  deleteAssistant(assistant) => event.assistants.remove(assistant);
 
 }
