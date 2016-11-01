@@ -34,13 +34,13 @@ class EventAssistantsListComponent implements OnInit {
     getAssistants();
   }
 
-  addAssistant(Person assistant) {
+  void addAssistant(Person assistant) {
     print('Selected value: ${assistant.url}');
     addRequest.emit(assistant.url);
     assistants.add(assistant);
   }
 
-  removeAssistant(Person assistant) {
+  void removeAssistant(Person assistant) {
     deleteRequest.emit(assistant.url);
     assistants.remove(assistant);
   }
