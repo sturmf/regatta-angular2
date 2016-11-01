@@ -20,12 +20,11 @@ class EventListComponent implements OnInit {
 
   EventListComponent(this._eventService, this._router);
 
-  Future getEvents() async {
+  Future<Null> getEvents() async {
     events = await _eventService.getEvents();
   }
 
-  ngOnInit() async {
-    print('Init called');
+  void ngOnInit() {
     getEvents();
   }
 
@@ -35,12 +34,12 @@ class EventListComponent implements OnInit {
     events.add(event);
   }
 
-  gotoEvent(Event event) {
+  void gotoEvent(Event event) {
     var link = ['EventDetail', {'id': event.id.toString()}];
     _router.navigate(link);
   }
 
-  goBack() {
+  void goBack() {
     window.history.back();
   }
 

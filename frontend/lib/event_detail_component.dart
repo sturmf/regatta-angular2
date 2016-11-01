@@ -35,11 +35,15 @@ class EventDetailComponent implements OnInit {
 
   EventDetailComponent(this._eventService, this._sailingClubService, this._personService, /* this._router,*/ this._routeParams);
 
-  ngOnInit() async {
+  Future<Null> getEvent() async {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
     sailing_clubs = await (_sailingClubService.getSailingClubs());
     persons = await (_personService.getPersons());
+  }
+
+  void ngOnInit() {
+    getEvent();
   }
 
   Future<Null> onSubmit() async {
@@ -47,12 +51,12 @@ class EventDetailComponent implements OnInit {
     goBack();
   }
 
-  goBack() {
+  void goBack() {
     window.history.back();
   }
 
-  addAssistant(person) => event.assistants.add(person);
+  bool addAssistant(person) => event.assistants.add(person);
 
-  deleteAssistant(assistant) => event.assistants.remove(assistant);
+  bool deleteAssistant(assistant) => event.assistants.remove(assistant);
 
 }
