@@ -7,14 +7,16 @@ class Event {
   final int id;
   final String url;
   String name;
-  DateTime _start_date; // replaced with custom formatter
-  DateTime _end_date; // replaced with custom formatter
-  int race_count;
-  String race_unrated_on;
+  DateTime _startDate; // replaced with custom formatter
+  DateTime _endDate; // replaced with custom formatter
+  @SerializedName("race_count")
+  int raceCount;
+  @SerializedName("race_unrated_on")
+  String raceUnratedOn;
   String organizer;
-  String race_committee;
+  @SerializedName("race_committee")
+  String raceCommittee;
   String umpire;
-
   @DsonType(String)
   Set<String> assistants;
 
@@ -23,33 +25,37 @@ class Event {
 
   Event(this.id, this.url, [
   this.name,
-  this._start_date,
-  this._end_date,
-  this.race_count,
-  this.race_unrated_on,
+  this._startDate,
+  this._endDate,
+  this.raceCount,
+  this.raceUnratedOn,
   this.organizer,
-  this.race_committee,
+  this.raceCommittee,
   this.umpire,
   this.assistants
   ]);
 
-  String get start_date {
+  @SerializedName("start_date")
+  String get startDate {
     var formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(_start_date);
+    return formatter.format(_startDate);
     //return _start_date.toIso8601String();
   }
 
-  void set start_date(String date) {
-    _start_date = DateTime.parse(date);
+  @SerializedName("start_date")
+  void set startDate(String date) {
+    _startDate = DateTime.parse(date);
   }
 
-  String get end_date {
+  @SerializedName("end_date")
+  String get endDate {
     var formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(_end_date);
+    return formatter.format(_endDate);
     //return _end_date.toIso8601String();
   }
 
-  void set end_date(String date) {
-    _end_date = DateTime.parse(date);
+  @SerializedName("end_date")
+  void set endDate(String date) {
+    _endDate = DateTime.parse(date);
   }
 }

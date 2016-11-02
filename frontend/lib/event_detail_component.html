@@ -12,43 +12,41 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="start_date">Start Date</label>
-                    <bs-date-picker-popup [(ngModel)]="event.start_date"></bs-date-picker-popup>
-                    <!-- input type="date" class="form-control" required
-                           [(ngModel)]="event.startDateStr"
-                           ngControl="start_date"
-                           #start_date="ngForm">
-                    <div [hidden]="start_date.valid" class="alert alert-danger">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" class="form-control" required
+                           [(ngModel)]="event.startDate"
+                           ngControl="startDate"
+                           #startDate="ngForm">
+                    <div [hidden]="startDate.valid" class="alert alert-danger">
                         Start date is required
-                    </div-->
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="end_date">End Date</label>
-                    <bs-date-picker-popup [(ngModel)]="event.end_date"></bs-date-picker-popup>
-                    <!-- input type="date" class="form-control" required
-                           [(ngModel)]="event.endDateStr"
-                           ngControl="end_date"
-                           #end_date="ngForm">
-                    <div [hidden]="end_date.valid" class="alert alert-danger">
+                    <label for="endDate">End Date</label>
+                    <input type="date" class="form-control" required
+                           [(ngModel)]="event.endDate"
+                           ngControl="endDate"
+                           #endDate="ngForm">
+                    <div [hidden]="endDate.valid" class="alert alert-danger">
                         End date is required
-                    </div-->
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="race_count">Race count</label>
-            <input type="number" class="form-control" required [(ngModel)]="event.race_count" ngControl="race_count" #race_count="ngForm">
-            <div [hidden]="race_count.valid" class="alert alert-danger">
+            <label for="raceCount">Race count</label>
+            <input type="number" class="form-control" required [(ngModel)]="event.raceCount" ngControl="raceCount" #raceCount="ngForm">
+            <div [hidden]="raceCount.valid" class="alert alert-danger">
                 Race count is required
             </div>
         </div>
 
         <div class="form-group">
-            <label for="race_unrated_on">Race unrated on</label>
-            <input type="text" class="form-control" [(ngModel)]="event.race_unrated_on" ngControl="race_unrated_on" #name="ngForm">
+            <label for="raceUnratedOn">Race unrated on</label>
+            <input type="text" class="form-control" [(ngModel)]="event.raceUnratedOn" ngControl="raceUnratedOn" #name="ngForm">
         </div>
 
         <div class="form-group">
@@ -60,8 +58,8 @@
         </div>
 
         <div class="form-group">
-            <label for="race_committee">Race committee</label>
-            <select class="form-control" [(ngModel)]="event.race_committee">
+            <label for="raceCommittee">Race committee</label>
+            <select class="form-control" [(ngModel)]="event.raceCommittee">
                 <option value="">-----</option>
                 <option *ngFor="let person of persons" [value]="person.url">{{person.firstName}} {{person.lastName}}</option>
             </select>

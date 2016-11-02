@@ -5,13 +5,10 @@ import 'package:dson/dson.dart';
 class Person {
   final int id;
   final String url;
-
   @SerializedName("first_name")
   String firstName;
-
   @SerializedName("last_name")
   String lastName;
-
   @SerializedName("sailing_club")
   String sailingClub;
 
