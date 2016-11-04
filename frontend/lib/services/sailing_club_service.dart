@@ -24,8 +24,8 @@ class SailingClubService {
     try {
       final response = await _http.get('$_sailingClubsUrl/', headers: _headersGet);
       final results = JSON.decode(response.body)['results'] as List<Map>;
-      final sailing_clubs = fromMapList(results, SailingClub) as List<SailingClub>;
-      return sailing_clubs;
+      final sailingClubs = fromMapList(results, SailingClub) as List<SailingClub>;
+      return sailingClubs;
     } catch (e) {
       throw _handleError(e);
     }

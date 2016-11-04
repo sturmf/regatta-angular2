@@ -22,7 +22,7 @@ import 'package:frontend/services/person_service.dart';
 )
 class EventDetailComponent implements OnInit {
   Event event;
-  List<SailingClub> sailing_clubs;
+  List<SailingClub> sailingClubs;
   List<Person> persons;
 
   Future<List<Person>> getPersons([String search='']) async => _personService.getPersons(search != '' ? {'search': search} : null);
@@ -38,7 +38,7 @@ class EventDetailComponent implements OnInit {
   Future<Null> getEvent() async {
     var id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
-    sailing_clubs = await (_sailingClubService.getSailingClubs());
+    sailingClubs = await (_sailingClubService.getSailingClubs());
     persons = await (_personService.getPersons());
   }
 
