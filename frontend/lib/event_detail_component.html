@@ -53,7 +53,7 @@
             <label for="organizer">Organizer</label>
             <select class="form-control" [(ngModel)]="event.organizer">
                 <option value="">-----</option>
-                <option *ngFor="let sailing_club of sailing_clubs" [value]="sailing_club.url">{{sailing_club.name}}</option>
+                <option *ngFor="let sailingClub of sailingClubs" [value]="sailingClub.url">{{sailingClub.name}}</option>
             </select>
         </div>
 

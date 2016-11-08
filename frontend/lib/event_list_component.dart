@@ -24,18 +24,19 @@ class EventListComponent implements OnInit {
     events = await _eventService.getEvents();
   }
 
+  @override
   void ngOnInit() {
     getEvents();
   }
 
   Future<Null> addEvent(String name) async {
     print('EventListComponent.addEvent() has been called with name=$name');
-    Event event = await _eventService.addEvent(name);
+    final Event event = await _eventService.addEvent(name);
     events.add(event);
   }
 
   void gotoEvent(Event event) {
-    var link = ['EventDetail', {'id': event.id.toString()}];
+    final List<dynamic> link = ['EventDetail', {'id': event.id.toString()}];
     _router.navigate(link);
   }
 

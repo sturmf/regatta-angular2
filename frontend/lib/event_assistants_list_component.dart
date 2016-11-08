@@ -4,7 +4,7 @@ import 'package:ng_bootstrap/ng_bootstrap.dart';
 
 import 'models/person.dart';
 
-typedef Iterable<Person> GetPersons();
+typedef Future<Iterable<Person>> GetPersons();
 
 @Component(
   selector: 'my-event-assistants-list',
@@ -16,20 +16,21 @@ class EventAssistantsListComponent implements OnInit {
   @Input() List<String> selectedAssistants; // List of Person.urls
   @Input() GetPersons getPersons;
 
-  @Output() final deleteRequest = new EventEmitter<String>();
-  @Output() final addRequest = new EventEmitter<String>();
+  @Output() final EventEmitter<String> deleteRequest = new EventEmitter<String>();
+  @Output() final EventEmitter<String> addRequest = new EventEmitter<String>();
 
   String selectedObj = ""; // The text in the assistant search field
   Person selectedItemObj; // The selected object from the assistant search
 
   // List of assistants, calculated from persons filtered by selectedAssistants
-  Set<Person> assistants = new Set();
+  Set<Person> assistants = new Set<Person>();
 
   Future<Null> getAssistants() async {
-    Iterable<Person> persons = await getPersons();
-    assistants.addAll(persons.where((person) => selectedAssistants.contains(person.url)));
+    final Iterable<Person> persons = await getPersons();
+    assistants.addAll(persons.where((Person person) => selectedAssistants.contains(person.url)));
   }
 
+  @override
   void ngOnInit() {
     getAssistants();
   }

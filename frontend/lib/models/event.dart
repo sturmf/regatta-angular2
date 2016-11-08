@@ -37,25 +37,25 @@ class Event {
 
   @SerializedName("start_date")
   String get startDate {
-    var formatter = new DateFormat('yyyy-MM-dd');
+    final DateFormat formatter = new DateFormat('yyyy-MM-dd');
     return formatter.format(_startDate);
     //return _start_date.toIso8601String();
   }
 
   @SerializedName("start_date")
-  void set startDate(String date) {
+  set startDate(String date) {
     _startDate = DateTime.parse(date);
   }
 
   @SerializedName("end_date")
   String get endDate {
-    var formatter = new DateFormat('yyyy-MM-dd');
+    final DateFormat formatter = new DateFormat('yyyy-MM-dd');
     return formatter.format(_endDate);
     //return _end_date.toIso8601String();
   }
 
   @SerializedName("end_date")
-  void set endDate(String date) {
+  set endDate(String date) {
     _endDate = DateTime.parse(date);
   }
 }

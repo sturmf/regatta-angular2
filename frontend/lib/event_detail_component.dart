@@ -25,8 +25,6 @@ class EventDetailComponent implements OnInit {
   List<SailingClub> sailingClubs;
   List<Person> persons;
 
-  Future<List<Person>> getPersons([String search='']) async => _personService.getPersons(search != '' ? {'search': search} : null);
-
   final EventService _eventService;
   final SailingClubService _sailingClubService;
   final PersonService _personService;
@@ -35,13 +33,16 @@ class EventDetailComponent implements OnInit {
 
   EventDetailComponent(this._eventService, this._sailingClubService, this._personService, /* this._router,*/ this._routeParams);
 
+  Future<List<Person>> getPersons([String search='']) async => _personService.getPersons(search != '' ? {'search': search} : null);
+
   Future<Null> getEvent() async {
-    var id = int.parse(_routeParams.get('id'));
+    final int id = int.parse(_routeParams.get('id'));
     event = await (_eventService.getEvent(id));
     sailingClubs = await (_sailingClubService.getSailingClubs());
     persons = await (_personService.getPersons());
   }
 
+  @override
   void ngOnInit() {
     getEvent();
   }
@@ -55,8 +56,8 @@ class EventDetailComponent implements OnInit {
     window.history.back();
   }
 
-  bool addAssistant(person) => event.assistants.add(person);
+  bool addAssistant(String assistantUrl) => event.assistants.add(assistantUrl);
 
-  bool deleteAssistant(assistant) => event.assistants.remove(assistant);
+  bool deleteAssistant(Person assistant) => event.assistants.remove(assistant);
 
 }
