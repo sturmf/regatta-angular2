@@ -15,17 +15,14 @@ class PersonService {
   //static final Map<String, String> _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
 
   // Hostname in development mode points to Django port 8000, in production we set it to empty during pub build
-  static const String hostname = const String.fromEnvironment('hostname',
-      defaultValue: 'http://localhost:8000');
+  static const String hostname = const String.fromEnvironment('hostname', defaultValue: 'http://localhost:8000');
 
   static const String _personsUrl = hostname + '/api/persons';
 
   Future<Iterable<Person>> getPersons([Map<String, dynamic> search]) async {
     try {
-      final Response response = await _http
-          .get('$_personsUrl/?${encodeMap(search)}', headers: _headersGet);
-      final List<Map<dynamic, dynamic>> results =
-          JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
+      final Response response = await _http.get('$_personsUrl/?${encodeMap(search)}', headers: _headersGet);
+      final List<Map<dynamic, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
       final List<Person> persons = fromMapList(results, Person) as List<Person>;
       return persons;
     } catch (e) {

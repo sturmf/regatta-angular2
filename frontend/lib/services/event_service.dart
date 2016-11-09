@@ -8,15 +8,11 @@ import 'package:http/http.dart';
 @Injectable()
 class EventService {
   static final Map<String, String> _headersGet = {'Accept': 'application/json'};
-  static final Map<String, String> _headersPost = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  };
+  static final Map<String, String> _headersPost = {'Content-Type': 'application/json', 'Accept': 'application/json'};
   final Client _http;
 
   // Hostname in development mode points to Django port 8000, in production we set it to empty during pub build
-  static const String hostname = const String.fromEnvironment('hostname',
-      defaultValue: 'http://localhost:8000');
+  static const String hostname = const String.fromEnvironment('hostname', defaultValue: 'http://localhost:8000');
   // URLs to the web API
   static const String _eventsUrl = hostname + '/api/events';
 
@@ -26,8 +22,8 @@ class EventService {
   Future<Event> addEvent(String name) async {
     print('EventService.addEvent() has been called with name=$name');
     try {
-      final Response response = await _http.post('$_eventsUrl/',
-          headers: _headersPost, body: JSON.encode({'name': name}));
+      final Response response =
+          await _http.post('$_eventsUrl/', headers: _headersPost, body: JSON.encode({'name': name}));
       return fromJson(response.body, Event);
     } catch (e) {
       throw _handleError(e);
@@ -36,10 +32,8 @@ class EventService {
 
   Future<Iterable<Event>> getEvents() async {
     try {
-      final Response response =
-          await _http.get('$_eventsUrl/', headers: _headersGet);
-      final List<Map<dynamic, dynamic>> results =
-          JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
+      final Response response = await _http.get('$_eventsUrl/', headers: _headersGet);
+      final List<Map<dynamic, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
       print(results);
       final List<Event> events = fromMapList(results, Event) as List<Event>;
       return events;
@@ -50,8 +44,7 @@ class EventService {
 
   Future<Event> getEvent(int id) async {
     try {
-      final Response response =
-          await _http.get('$_eventsUrl/$id/', headers: _headersGet);
+      final Response response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
       final Event e = fromJson(response.body, Event);
       return e;
     } catch (e) {
@@ -62,8 +55,7 @@ class EventService {
   Future<Event> update(Event event) async {
     try {
       final String url = '$_eventsUrl/${event.id}/';
-      final Response response =
-          await _http.put(url, headers: _headersPost, body: toJson(event));
+      final Response response = await _http.put(url, headers: _headersPost, body: toJson(event));
       return fromJson(response.body, Event);
     } catch (e) {
       throw _handleError(e);

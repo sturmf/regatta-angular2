@@ -30,8 +30,7 @@ class EventAssistantsListComponent implements OnInit {
 
   Future<Null> getAssistants() async {
     final Iterable<Person> persons = await getPersons();
-    assistants.addAll(persons
-        .where((Person person) => selectedAssistants.contains(person.url)));
+    assistants.addAll(persons.where((Person person) => selectedAssistants.contains(person.url)));
   }
 
   @override

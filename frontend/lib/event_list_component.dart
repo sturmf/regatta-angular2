@@ -8,9 +8,7 @@ import 'package:frontend/services/event_service.dart';
 import 'models/event.dart';
 
 @Component(
-    selector: 'my-event-list',
-    templateUrl: 'event_list_component.html',
-    styleUrls: const ['event_list_component.css'])
+    selector: 'my-event-list', templateUrl: 'event_list_component.html', styleUrls: const ['event_list_component.css'])
 class EventListComponent implements OnInit {
   List<Event> events;
 

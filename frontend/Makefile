@@ -9,7 +9,7 @@ lint:
 	dartanalyzer --fatal-warnings web lib
 
 style:
-	dartfmt -w --set-exit-if-changed web lib
+	dartfmt -l 120 -w --set-exit-if-changed web lib
 
 test:
 	pub run test -j1

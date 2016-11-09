@@ -25,12 +25,7 @@ import 'package:frontend/services/person_service.dart';
       PersonService
     ])
 @RouteConfig(const [
-  const Route(
-      path: '/events',
-      name: 'Events',
-      component: EventListComponent,
-      useAsDefault: true),
-  const Route(
-      path: '/event/:id', name: 'EventDetail', component: EventDetailComponent)
+  const Route(path: '/events', name: 'Events', component: EventListComponent, useAsDefault: true),
+  const Route(path: '/event/:id', name: 'EventDetail', component: EventDetailComponent)
 ])
 class AppComponent {}

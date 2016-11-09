@@ -29,8 +29,8 @@ class EventDetailComponent implements OnInit {
   //final Router _router;
   final RouteParams _routeParams;
 
-  EventDetailComponent(this._eventService, this._sailingClubService,
-      this._personService, /* this._router,*/ this._routeParams);
+  EventDetailComponent(
+      this._eventService, this._sailingClubService, this._personService, /* this._router,*/ this._routeParams);
 
   Future<List<Person>> getPersons([String search = '']) async =>
       _personService.getPersons(search != '' ? {'search': search} : null);

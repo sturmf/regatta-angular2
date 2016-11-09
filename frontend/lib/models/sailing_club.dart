@@ -9,6 +9,5 @@ class SailingClub {
   String registration;
   // was_organizer
 
-  SailingClub(this.id, this.url,
-      [this.name, this.abbreviation, this.registration]);
+  SailingClub(this.id, this.url, [this.name, this.abbreviation, this.registration]);
 }
