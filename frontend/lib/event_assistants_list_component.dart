@@ -7,17 +7,20 @@ import 'models/person.dart';
 typedef Future<Iterable<Person>> GetPersons();
 
 @Component(
-  selector: 'my-event-assistants-list',
-  templateUrl: 'event_assistants_list_component.html',
-  styleUrls: const ['event_assistants_list_component.css'],
-  directives: const [BsTypeAheadComponent]
-)
+    selector: 'my-event-assistants-list',
+    templateUrl: 'event_assistants_list_component.html',
+    styleUrls: const ['event_assistants_list_component.css'],
+    directives: const [BsTypeAheadComponent])
 class EventAssistantsListComponent implements OnInit {
-  @Input() List<String> selectedAssistants; // List of Person.urls
-  @Input() GetPersons getPersons;
+  @Input()
+  List<String> selectedAssistants; // List of Person.urls
+  @Input()
+  GetPersons getPersons;
 
-  @Output() final EventEmitter<String> deleteRequest = new EventEmitter<String>();
-  @Output() final EventEmitter<String> addRequest = new EventEmitter<String>();
+  @Output()
+  final EventEmitter<String> deleteRequest = new EventEmitter<String>();
+  @Output()
+  final EventEmitter<String> addRequest = new EventEmitter<String>();
 
   String selectedObj = ""; // The text in the assistant search field
   Person selectedItemObj; // The selected object from the assistant search
@@ -27,7 +30,8 @@ class EventAssistantsListComponent implements OnInit {
 
   Future<Null> getAssistants() async {
     final Iterable<Person> persons = await getPersons();
-    assistants.addAll(persons.where((Person person) => selectedAssistants.contains(person.url)));
+    assistants.addAll(persons
+        .where((Person person) => selectedAssistants.contains(person.url)));
   }
 
   @override

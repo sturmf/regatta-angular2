@@ -1,7 +1,6 @@
 import 'package:dson/dson.dart';
 import 'package:intl/intl.dart';
 
-
 @serializable
 class Event {
   final int id;
@@ -23,17 +22,16 @@ class Event {
   // entries
   // races
 
-  Event(this.id, this.url, [
-  this.name,
-  this._startDate,
-  this._endDate,
-  this.raceCount,
-  this.raceUnratedOn,
-  this.organizer,
-  this.raceCommittee,
-  this.umpire,
-  this.assistants
-  ]);
+  Event(this.id, this.url,
+      [this.name,
+      this._startDate,
+      this._endDate,
+      this.raceCount,
+      this.raceUnratedOn,
+      this.organizer,
+      this.raceCommittee,
+      this.umpire,
+      this.assistants]);
 
   @SerializedName("start_date")
   String get startDate {

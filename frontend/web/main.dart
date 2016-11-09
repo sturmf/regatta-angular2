@@ -12,4 +12,3 @@ void main() {
   // once there is a fix for:
   // https://github.com/dart-lang/angular2/issues/37
 }
-

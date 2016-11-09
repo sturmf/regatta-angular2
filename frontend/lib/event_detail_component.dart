@@ -13,13 +13,11 @@ import 'package:frontend/services/event_service.dart';
 import 'package:frontend/services/sailing_club_service.dart';
 import 'package:frontend/services/person_service.dart';
 
-
 @Component(
     selector: 'my-event-detail',
     templateUrl: 'event_detail_component.html',
     styleUrls: const ['event_detail_component.css'],
-    directives: const [BS_DIRECTIVES, EventAssistantsListComponent]
-)
+    directives: const [BS_DIRECTIVES, EventAssistantsListComponent])
 class EventDetailComponent implements OnInit {
   Event event;
   List<SailingClub> sailingClubs;
@@ -31,9 +29,11 @@ class EventDetailComponent implements OnInit {
   //final Router _router;
   final RouteParams _routeParams;
 
-  EventDetailComponent(this._eventService, this._sailingClubService, this._personService, /* this._router,*/ this._routeParams);
+  EventDetailComponent(this._eventService, this._sailingClubService,
+      this._personService, /* this._router,*/ this._routeParams);
 
-  Future<List<Person>> getPersons([String search='']) async => _personService.getPersons(search != '' ? {'search': search} : null);
+  Future<List<Person>> getPersons([String search = '']) async =>
+      _personService.getPersons(search != '' ? {'search': search} : null);
 
   Future<Null> getEvent() async {
     final int id = int.parse(_routeParams.get('id'));
@@ -59,5 +59,4 @@ class EventDetailComponent implements OnInit {
   bool addAssistant(String assistantUrl) => event.assistants.add(assistantUrl);
 
   bool deleteAssistant(Person assistant) => event.assistants.remove(assistant);
-
 }

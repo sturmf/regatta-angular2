@@ -1,6 +1,5 @@
 import 'package:dson/dson.dart';
 
-
 @serializable
 class Person {
   final int id;
@@ -11,7 +10,6 @@ class Person {
   String lastName;
   @SerializedName("sailing_club")
   String sailingClub;
-
 
   Person(this.id, this.url, [this.firstName, this.lastName, this.sailingClub]);
 
