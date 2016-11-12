@@ -22,6 +22,7 @@ dev_dependencies:
   dart_style: any
   test: ^0.12.6
   angular2_testing: ^2.0.0-beta.17
+  quiver: any
 
 dependency_overrides:
   angular2: 2.0.0
