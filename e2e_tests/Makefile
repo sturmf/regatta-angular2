@@ -1,4 +1,4 @@
-SHELL = /bin/sh
+SHELL = /bin/bash
 
 all: install run
 
@@ -10,6 +10,6 @@ install:
 run:
 	node_modules/protractor/bin/webdriver-manager start
 
-test:
+tests:
 	node_modules/protractor/bin/protractor conf.js
-	
+
