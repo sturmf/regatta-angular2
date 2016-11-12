@@ -12,7 +12,10 @@ style:
 	dartfmt -l 120 -w --set-exit-if-changed web lib test
 
 tests:
-	pub run test -j1
+	pub run test -j1 -p firefox
+
+dtests:
+	pub run test -j1 -p dartium
 
 run:
 	pub serve
