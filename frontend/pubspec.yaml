@@ -8,20 +8,23 @@ documentation:
 environment:
   sdk: '>=1.13.0 <2.0.0'
 
-dev_dependencies:
-  dart_style: any
-  test: any
-  #angular2_testing: 2.0.0
-
 dependencies:
-  angular2: 2.0.0
+  angular2: ^2.0.0
   browser: ^0.10.0
   dart_to_js_script_rewriter: ^1.0.1
   http: ^0.11.0
   stream_transformers: ^0.3.0
-  ng_bootstrap: 0.4.0
+  ng_bootstrap: ^0.4.2
   sass_transformer: any
   reflectable: any
+
+dev_dependencies:
+  dart_style: any
+  test: ^0.12.6
+  angular2_testing: ^2.0.0-beta.17
+
+dependency_overrides:
+  angular2: 2.0.0
 
 transformers:
 - angular2:
