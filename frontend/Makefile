@@ -3,7 +3,7 @@ SHELL = /bin/bash
 all: install run
 
 install:
-	pub get
+	pub get --packages-dir
 
 lint:
 	dartanalyzer --fatal-warnings web lib
