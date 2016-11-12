@@ -1,4 +1,4 @@
-SHELL = /bin/sh
+SHELL = /bin/bash
 
 all: install run
 
@@ -11,7 +11,7 @@ lint:
 style:
 	dartfmt -l 120 -w --set-exit-if-changed web lib
 
-test:
+tests:
 	pub run test -j1
 
 run:
