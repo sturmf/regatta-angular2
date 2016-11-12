@@ -17,6 +17,7 @@ install:
   - sudo apt-get install dart
   - export PATH=$PATH:/usr/lib/dart/bin
   # General install
+  - (cd backend  && make env)
   - (cd backend  && make install_tools)
   - (cd backend  && make install)
   - (cd frontend && make install)
