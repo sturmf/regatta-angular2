@@ -2,21 +2,33 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 120000;
 
 
 describe('The Regatta welcome view', function() {
+  browser.get('http://localhost:8080/');
   var heading = element(by.css('h1'));
   var newRegattaForm = element(by.css('input'));
   var addButton = element(by.buttonText('Add'));
   var regattaList = element.all(by.css('.list-group-item')); // FIXME: not yet supported, element.all(by.repeater('let event of events'));
+  var initialRegattaListLength;
+
+  beforeAll(function(done) {
+    element.all(by.css('.list-group-item')).count().then((n) => {
+      initialRegattaListLength = n;
+      console.log("initialRegattaListLength:", initialRegattaListLength);
+      done()
+    })
+  });
 
   beforeEach(function() {
-    browser.get('http://localhost:8080/');
+  });
+
+  afterEach(function() {
   });
 
   it('should display the application\'s name.', function() {
     expect(heading.getText()).toEqual('Regatta');
   });
 
-  it('should start with an empty list.', function() {
-    expect(regattaList.count()).toEqual(0);
+  it('should display initial regatta items.', function() {
+    expect(regattaList.count()).toEqual(initialRegattaListLength);
   });
 
   it('should add a new regatta item.', function() {
@@ -27,7 +39,7 @@ describe('The Regatta welcome view', function() {
     browser.driver.sleep(1);
     browser.waitForAngular();
 
-    expect(regattaList.count()).toEqual(1);
+    expect(regattaList.count()).toEqual(initialRegattaListLength + 1);
   });
 
 /*
