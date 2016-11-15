@@ -10,13 +10,7 @@ import 'package:angular2/src/core/reflection/reflection_capabilities.dart';
 // Experimental. Will be published under package:angular2/testing.dart soon.
 import 'package:angular2/src/modules/testing/lib/testing.dart';
 
-//import 'package:angular2_api_examples.testing/api.dart';
-//import 'package:angular2_api_examples.testing/ui.dart';
-//import 'package:angular2_api_examples.testing/testing.dart';
-
 import 'package:angular2/angular2.dart';
-//import 'package:mockito/mockito_no_mirrors.dart';
-//import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'package:frontend/event_list_component.dart';
