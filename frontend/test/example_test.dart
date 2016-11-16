@@ -18,7 +18,7 @@ import 'package:frontend/event_list_component.dart';
 
 @Component(
     selector: 'test-cmp',
-    template: '<textarea \n\n</textarea>')
+    template: '<textarea> \n\n</textarea>')
 class TestComponent {}
 
 
@@ -30,7 +30,7 @@ void main() {
     expect(string.split(","), equals(["foo", "bar", "baz"]));
   });
 
-
+/*
   test('New event list component is empty', () async {
     print('test start');
     var testBed = new NgTestBed<TestComponent>();
@@ -45,4 +45,5 @@ void main() {
 
     // var regattaList = element.all(by.css('.list-group-item'))
   });
+  */
 }
