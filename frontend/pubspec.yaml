@@ -27,12 +27,6 @@ transformers:
   - angular2/transform/codegen:
       platform_directives:
         - package:angular2/common.dart#COMMON_DIRECTIVES
-  - angular2/transform/reflection_remover:
-      $include:
-        - test/example_test.dart
-        - web/main.dart
-  - test/pub_serve:
-      $include: test/**_test.dart
   - angular2:
       platform_directives:
         - 'package:angular2/common.dart#COMMON_DIRECTIVES'
@@ -46,5 +40,11 @@ transformers:
       entry_points:
         - web/main.dart
       formatted: true
+  - angular2/transform/reflection_remover:
+      $include:
+        - test/example_test.dart
+        - web/main.dart
+  - test/pub_serve:
+      $include: test/**_test.dart
   - dart_to_js_script_rewriter
   - sass_transformer
