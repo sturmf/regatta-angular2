@@ -30,20 +30,19 @@ void main() {
     expect(string.split(","), equals(["foo", "bar", "baz"]));
   });
 
-/*
+
   test('New event list component is empty', () async {
     print('test start');
     var testBed = new NgTestBed<TestComponent>();
     var fixture = await testBed.create();
 
-
     print(fixture);
-    //expect(string.split(","), equals(["foo", "bar", "baz"]));
+    final string = "foo,bar,baz";
+    expect(string.split(","), equals(["foo", "bar", "baz"]));
     //eventListComponent.debugElement.queryAll(());
     //nativeElement.
     //.text, equals('1;2;'));
 
     // var regattaList = element.all(by.css('.list-group-item'))
   });
-  */
 }

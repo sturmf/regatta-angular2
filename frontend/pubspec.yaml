@@ -24,13 +24,13 @@ dev_dependencies:
   quiver: any
 
 transformers:
-#  - angular2/transform/codegen:
-#      platform_directives:
-#        - package:angular2/common.dart#COMMON_DIRECTIVES
-#  - angular2/transform/reflection_remover:
-#      $include:
-#        - test/example_test.dart
-#        - web/main.dart
+  - angular2/transform/codegen:
+      platform_directives:
+        - package:angular2/common.dart#COMMON_DIRECTIVES
+  - angular2/transform/reflection_remover:
+      $include:
+        - test/example_test.dart
+        - web/main.dart
   - test/pub_serve:
       $include: test/**_test.dart
   - angular2:
