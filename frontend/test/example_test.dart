@@ -15,12 +15,8 @@ import 'package:test/test.dart';
 
 import 'package:frontend/event_list_component.dart';
 
-
-@Component(
-    selector: 'test-cmp',
-    template: '<textarea> \n\n</textarea>')
+@Component(selector: 'test-cmp', template: '<textarea> \n\n</textarea>')
 class TestComponent {}
-
 
 void main() {
   reflector.reflectionCapabilities = new ReflectionCapabilities();
@@ -29,7 +25,6 @@ void main() {
     final string = "foo,bar,baz";
     expect(string.split(","), equals(["foo", "bar", "baz"]));
   });
-
 
   test('New event list component is empty', () async {
     print('test start');
