@@ -32,11 +32,11 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - (cd backend   && make run > django-server.log 2>&1 &)
   - (cd frontend  && make run > angular-server.log 2>&1 &)
-  - (cd e2e_tests && make run > webdriver.log 2>&1 &)
 
 script:
   - (cd backend   && make tests)
   - (cd frontend  && make tests)
+  - (cd e2e_tests && make run > webdriver.log 2>&1 &)
   - (cd e2e_tests && make tests)
 
 after_success:
