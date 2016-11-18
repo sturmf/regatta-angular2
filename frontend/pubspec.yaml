@@ -24,7 +24,7 @@ dev_dependencies:
   quiver: any
 
 transformers:
-  - angular2/transform/codegen:
+  - angular2:
       platform_directives:
         - package:angular2/common.dart#COMMON_DIRECTIVES
       platform_pipes:
@@ -43,5 +43,5 @@ transformers:
       formatted: true
   - test/pub_serve:
       $include: test/**_test.dart
-#  - dart_to_js_script_rewriter
+  - dart_to_js_script_rewriter
   - sass_transformer
