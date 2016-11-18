@@ -33,6 +33,5 @@ void main() {
     expect(dummyComponentFixture.element.querySelector('textarea').text, contains('Hello World!'));
   });
 
-  test('New event list component is empty', () async {
-  });
+  test('New event list component is empty', () async {});
 }
