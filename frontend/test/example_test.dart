@@ -12,10 +12,23 @@ import 'package:angular2/src/modules/testing/lib/testing.dart';
 import 'package:angular2/angular2.dart';
 import 'package:test/test.dart';
 
-//import 'package:frontend/event_list_component.dart';
+import 'packages/mockito/mockito.dart';
+
+import 'package:frontend/event_list_component.dart';
+import 'package:frontend/services/event_service.dart';
+import 'package:frontend/models/event.dart';
+
+import 'package:angular2/router.dart';
+import 'package:http/http.dart';
 
 @Component(selector: 'test-cmp', template: '<textarea>Hello World!\n</textarea>')
 class DummyComponent {}
+
+class EventServiceMock extends Mock implements EventService {}
+
+class RouterMock extends Mock implements Router {}
+
+class ClientMock extends Mock implements Client {}
 
 void main() {
   reflector.reflectionCapabilities = new ReflectionCapabilities();
@@ -33,5 +46,16 @@ void main() {
     expect(dummyComponentFixture.element.querySelector('textarea').text, contains('Hello World!'));
   });
 
-  test('New event list component is empty', () async {});
+  test('New event list component is empty', () async {
+    var eventServiceMock = new EventServiceMock();
+    var routerMock = new RouterMock();
+    var clientMock = new ClientMock();
+
+    var testBed = new NgTestBed<EventListComponent>().addProviders([
+      provide(EventService, useValue: eventServiceMock),
+      provide(Router, useValue: routerMock),
+      //provide(Client, useValue: clientMock),
+    ]);
+    var dummyComponentFixture = await testBed.create();
+  });
 }
