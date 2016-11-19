@@ -32,7 +32,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - (cd backend   && make run > django-server.log 2>&1 &)
   - (cd frontend  && make run > angular-server.log 2>&1 &)
-  - sleep 3 && echo sleep done  # necessary for pub server to become available
+  - sleep 30 && echo sleep done  # necessary for pub server to become available
 
 script:
   - (cd backend   && make tests)
