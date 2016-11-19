@@ -38,7 +38,7 @@ script:
   - (cd backend   && make tests)
   - (cd frontend  && make tests)
   - (cd e2e_tests && make run > webdriver.log 2>&1 &)
-  - sleep 1 && echo sleep done  # necessary for webdriver to become available
+  - sleep 3 && echo sleep done  # necessary for webdriver to become available
   - (cd e2e_tests && make tests)
 
 after_success:
