@@ -10,7 +10,7 @@ import 'models/event.dart';
 //import 'package:http/http.dart';
 
 @Component(
-    selector: 'my-event-list', templateUrl: 'event_list_component.html', styleUrls: const ['event_list_component.css'],
+  selector: 'my-event-list', templateUrl: 'event_list_component.html', styleUrls: const ['event_list_component.css'],
 //    providers: const [EventService, Client]
 )
 class EventListComponent implements OnInit {

@@ -25,7 +25,9 @@ import 'package:http/http.dart';
 class DummyComponent {}
 
 class EventServiceMock extends Mock implements EventService {}
+
 class RouterMock extends Mock implements Router {}
+
 class ClientMock extends Mock implements Client {}
 
 void main() {
@@ -45,7 +47,6 @@ void main() {
   });
 
   test('New event list component is empty', () async {
-
     var eventServiceMock = new EventServiceMock();
     var routerMock = new RouterMock();
     var clientMock = new ClientMock();
@@ -54,7 +55,7 @@ void main() {
       provide(EventService, useValue: eventServiceMock),
       provide(Router, useValue: routerMock),
       //provide(Client, useValue: clientMock),
-      ]);
+    ]);
     var dummyComponentFixture = await testBed.create();
   });
 }
