@@ -15,7 +15,6 @@ import 'package:pageloader/html.dart';
 import 'package:pageloader/objects.dart';
 import 'package:test/test.dart';
 
-
 @Component(selector: 'test-cmp', template: '<textarea>Hello World!\n</textarea>')
 class DummyComponent {}
 
@@ -35,14 +34,10 @@ void main() {
     var testBed = new NgTestBed<DummyComponent>();
     var fixture = await testBed.create();
     // Create an instance of the in-browser page loader that uses our fixture.
-    var loader = new HtmlPageLoader(
-        fixture.element.parent,
-        executeSyncedFn: (c) async {
-          await c();
-          return fixture.update;
-        },
-        useShadowDom: false
-    );
+    var loader = new HtmlPageLoader(fixture.element.parent, executeSyncedFn: (c) async {
+      await c();
+      return fixture.update;
+    }, useShadowDom: false);
 
     // Get a handle to the list.
     TestComponentPO po = await loader.getInstance(TestComponentPO);
