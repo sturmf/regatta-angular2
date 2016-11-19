@@ -5,11 +5,11 @@ import 'package:pageloader/objects.dart';
 import 'package:frontend/services/event_service.dart';
 
 class MockRouter extends Mock implements Router {}
+
 class MockEventService extends Mock implements EventService {}
 
 @EnsureTag('my-event-list')
 class EventListPO {
-
   @ByCss('.list-group-item')
   Lazy<List<PageLoaderElement>> _items;
 

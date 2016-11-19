@@ -1,7 +1,6 @@
 // Because Angular is using dart:html, we need these tests to run on an actual
 // browser. This means that it should be run with `-p dartium` or `-p chrome`.
 @TestOn('browser')
-import 'dart:async';
 
 // Replaced with code generation.
 import 'package:angular2/src/core/reflection/reflection.dart';
@@ -11,8 +10,8 @@ import 'package:angular2/src/core/reflection/reflection_capabilities.dart';
 import 'package:angular2/src/modules/testing/lib/testing.dart';
 
 import 'package:angular2/angular2.dart';
-import 'package:mockito/mockito_no_mirrors.dart';
 import 'package:angular2/router.dart';
+import 'package:mockito/mockito_no_mirrors.dart';
 import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
@@ -31,11 +30,10 @@ void main() {
   test('EventListComponent list is empty', () async {
     var router = new MockRouter();
     var service = new MockEventService();
-    when(service.getEvents()).thenReturn([new Event(1, 'dummy url')..name='Dummy Event']);
-    var testBed = new NgTestBed<EventListTestComponent>()
-      .addProviders([
-        provide(Router, useValue: router),
-        provide(EventService, useValue: service),
+    when(service.getEvents()).thenReturn([new Event(1, 'dummy url')..name = 'Dummy Event']);
+    var testBed = new NgTestBed<EventListTestComponent>().addProviders([
+      provide(Router, useValue: router),
+      provide(EventService, useValue: service),
     ]);
     var fixture = await testBed.create();
 
