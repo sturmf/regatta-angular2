@@ -17,6 +17,7 @@ dependencies:
   ng_bootstrap: ^0.4.2
   sass_transformer: any
   reflectable: any
+  mockito:
 
 dev_dependencies:
   dart_style: any
