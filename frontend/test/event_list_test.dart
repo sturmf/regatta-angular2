@@ -21,7 +21,7 @@ import 'package:frontend/event_list_component.dart';
 import 'package:frontend/event_list_component_po.dart';
 import 'package:frontend/models/event.dart';
 
-// We have to wrap our component in a slim wrapper to resolve it with getInstance
+// We have to wrap our component in a slim wrapper to resolve it with getInstance later
 @Component(selector: 'test', directives: const [EventListComponent], template: '<my-event-list></my-event-list>')
 class EventListTestComponent {}
 
@@ -31,9 +31,7 @@ void main() {
   test('EventListComponent list is empty', () async {
     var router = new MockRouter();
     var service = new MockEventService();
-    final e = new Event(1, 'dummy url')
-      ..name='Dummy Event';
-    when(service.getEvents()).thenReturn([e]);
+    when(service.getEvents()).thenReturn([new Event(1, 'dummy url')..name='Dummy Event']);
     var testBed = new NgTestBed<EventListTestComponent>()
       .addProviders([
         provide(Router, useValue: router),
