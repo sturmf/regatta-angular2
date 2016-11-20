@@ -14,6 +14,12 @@ install:
   - sudo apt-get update
   - sudo apt-get install dart
   - export PATH=$PATH:/usr/lib/dart/bin
+  # Install Dartium
+  - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
+  - unzip dartium-linux-x64-release.zip
+  - rm dartium-linux-x64-release.zip
+  - mv `echo dartium-*-full-stable-*`/{chrome,dartium}
+  - export PATH="${PWD%/}/$(echo dartium-*-full-stable-*):$PATH"
   # General install
   - (cd backend  && make env)
   - (cd backend  && make install_tools)
@@ -37,7 +43,7 @@ before_script:
 
 script:
   - (cd backend   && make tests)
-  - (cd frontend  && make tests)
+  - (cd frontend  && make dtests)
   - (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   - sleep 3 && echo sleep done
