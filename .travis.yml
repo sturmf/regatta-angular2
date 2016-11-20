@@ -18,8 +18,8 @@ install:
   - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
   - unzip dartium-linux-x64-release.zip
   - rm dartium-linux-x64-release.zip
-  - mv `echo dartium-*-full-stable-*`/{chrome,dartium}
-  - export PATH="${PWD%/}/$(echo dartium-*-full-stable-*):$PATH"
+  - mv `echo dartium-*-stable-*`/{chrome,dartium}
+  - export PATH="${PWD%/}/$(echo dartium-*-stable-*):$PATH"
   # General install
   - (cd backend  && make env)
   - (cd backend  && make install_tools)
