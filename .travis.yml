@@ -32,13 +32,15 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - (cd backend   && make run > django-server.log 2>&1 &)
   - (cd frontend  && make run > angular-server.log 2>&1 &)
-  - timeout 600 grep -q 'Build completed' <(tail -f angular-server.log) # necessary for pub server to become available
+  # necessary for pub server to become available
+  - (cd frontend  && timeout 600 grep -q 'Build completed' <(tail -f angular-server.log))
 
 script:
   - (cd backend   && make tests)
   - (cd frontend  && make tests)
   - (cd e2e_tests && make run > webdriver.log 2>&1 &)
-  - sleep 3 && echo sleep done  # necessary for webdriver to become available
+  # necessary for webdriver to become available
+  - sleep 3 && echo sleep done
   - (cd e2e_tests && make tests)
 
 after_success:
