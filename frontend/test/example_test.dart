@@ -31,16 +31,16 @@ void main() {
   reflector.reflectionCapabilities = new ReflectionCapabilities();
 
   test('DummyComponent "Hello World!" test', () async {
-    var testBed = new NgTestBed<DummyComponent>();
-    var fixture = await testBed.create();
+    final testBed = new NgTestBed<DummyComponent>();
+    final fixture = await testBed.create();
     // Create an instance of the in-browser page loader that uses our fixture.
-    var loader = new HtmlPageLoader(fixture.element.parent, executeSyncedFn: (c) async {
+    final loader = new HtmlPageLoader(fixture.element.parent, executeSyncedFn: (c) async {
       await c();
       return fixture.update;
     }, useShadowDom: false);
 
     // Get a handle to the list.
-    TestComponentPO po = await loader.getInstance(TestComponentPO);
+    final po = await loader.getInstance(TestComponentPO);
     expect(await po.text, equals('Hello World!'));
   });
 }

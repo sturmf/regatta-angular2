@@ -28,24 +28,24 @@ void main() {
   reflector.reflectionCapabilities = new ReflectionCapabilities();
 
   test('EventListComponent list is empty', () async {
-    var router = new MockRouter();
-    var service = new MockEventService();
+    final router = new MockRouter();
+    final service = new MockEventService();
     when(service.getEvents()).thenReturn([new Event(1, 'dummy url')..name = 'Dummy Event']);
-    var testBed = new NgTestBed<EventListTestComponent>().addProviders([
+    final testBed = new NgTestBed<EventListTestComponent>().addProviders([
       provide(Router, useValue: router),
       provide(EventService, useValue: service),
     ]);
-    var fixture = await testBed.create();
+    final fixture = await testBed.create();
 
     // Create an instance of the in-browser page loader that uses our fixture.
-    var loader = new HtmlPageLoader(fixture.element.parent, executeSyncedFn: (c) async {
+    final loader = new HtmlPageLoader(fixture.element.parent, executeSyncedFn: (c) async {
       await c();
       return fixture.update;
     }, useShadowDom: false);
 
     // Get a handle to the list.
-    EventListPO po = await loader.getInstance(EventListPO);
-    var items = await po.items;
+    final po = await loader.getInstance(EventListPO);
+    final items = await po.items;
     expect(items, hasLength(1));
     expect(await items[0].visibleText, equals('Dummy Event'));
   });
