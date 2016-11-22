@@ -1,12 +1,10 @@
-<h2>Available events</h2>
+<h2>Events</h2>
 
-<div class="input-group">
-    <input #regattaName type="text" class="form-control" placeholder="New Regatta Event...">
-    <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button" (click)="addEvent(regattaName.value)">
-            Add
-        </button>
-    </span>
+<div style="display:flex;flex-direction:row" onkeyup="event.keyCode == 13 ? document.getElementById('addButton').click() : null">
+    <material-input #regattaName style="flex:1" required label="New regatta event" [expanded]="true"></material-input>
+    <div>
+        <material-button id="addButton" raised class="blue" (click)="addEvent(regattaName.inputText)">Add</material-button>
+    </div>
 </div>
 <p></p>
 <div class="list-group">
@@ -14,3 +12,5 @@
         {{event.name}}
     </button>
 </div>
+
+
