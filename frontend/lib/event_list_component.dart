@@ -3,12 +3,17 @@ import 'dart:html' show window;
 
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
+import 'package:angular2_components/angular2_components.dart';
 
 import 'package:frontend/services/event_service.dart';
 import 'models/event.dart';
 
 @Component(
-    selector: 'my-event-list', templateUrl: 'event_list_component.html', styleUrls: const ['event_list_component.css'])
+    selector: 'my-event-list',
+    templateUrl: 'event_list_component.html',
+    styleUrls: const ['event_list_component.css'],
+    directives: const [materialDirectives],
+    providers: const [materialProviders])
 class EventListComponent implements OnInit {
   List<Event> events;
 
