@@ -7,15 +7,18 @@ import 'event_detail_component.dart';
 import 'package:frontend/services/event_service.dart';
 import 'package:frontend/services/sailing_club_service.dart';
 import 'package:frontend/services/person_service.dart';
+import 'package:frontend/navigation_bar_component.dart';
 
 @Component(
     selector: 'my-app',
     template: '''
     <h1 align="center">Regatta</h1>
+    <my-navigation-bar></my-navigation-bar>
     <router-outlet></router-outlet>
     ''',
     directives: const [
-      ROUTER_DIRECTIVES
+      ROUTER_DIRECTIVES,
+      NavigationBarComponent
     ],
     providers: const [
       ROUTER_PROVIDERS,
