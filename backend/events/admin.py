@@ -44,6 +44,7 @@ class RaceAdmin(admin.ModelAdmin):
         PlacementInline,
     ]
 
+
 admin.site.register(Event, EventAdmin)
 admin.site.register(Person)
 admin.site.register(SailingClub)
