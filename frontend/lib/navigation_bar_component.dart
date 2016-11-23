@@ -20,12 +20,7 @@ class NavigationBarComponent implements OnInit {
   void ngOnInit() {}
 
   void gotoLink(String dest) {
-    /*
-    final List<dynamic> link = [
-      'EventDetail',
-      {'id': event.id.toString()}
-    ];
-    _router.navigate(link);
-    */
+    print(dest);
+    _router.navigate([dest]);
   }
 }
