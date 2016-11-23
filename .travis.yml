@@ -14,6 +14,12 @@ install:
   - sudo apt-get update
   - sudo apt-get install dart
   - export PATH=$PATH:/usr/lib/dart/bin
+  # Install Dartium
+  - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
+  - unzip dartium-linux-x64-release.zip
+  - rm dartium-linux-x64-release.zip
+  - mv `echo dartium-*-stable-*`/{chrome,dartium}
+  - export PATH="${PWD%/}/$(echo dartium-*-stable-*):$PATH"
   # General install
   - (cd backend  && make env)
   - (cd backend  && make install_tools)
@@ -32,13 +38,15 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - (cd backend   && make run > django-server.log 2>&1 &)
   - (cd frontend  && make run > angular-server.log 2>&1 &)
-  - sleep 3 && echo sleep done  # necessary for pub server to become available
+  # necessary for pub server to become available
+  - (cd frontend  && timeout 600 grep -q 'Build completed' <(tail -f angular-server.log))
 
 script:
   - (cd backend   && make tests)
-  - (cd frontend  && make tests)
+  - (cd frontend  && make dtests)
   - (cd e2e_tests && make run > webdriver.log 2>&1 &)
-  - sleep 1 && echo sleep done  # necessary for webdriver to become available
+  # necessary for webdriver to become available
+  - sleep 3 && echo sleep done
   - (cd e2e_tests && make tests)
 
 after_success:

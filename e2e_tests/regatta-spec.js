@@ -5,7 +5,7 @@ describe('The Regatta welcome view', function() {
   browser.get('http://localhost:8080/');
   var heading = element(by.css('h1'));
   var newRegattaForm = element(by.css('input'));
-  var addButton = element(by.buttonText('Add'));
+  var addButton = element(by.id('addButton'));
   var regattaList = element.all(by.css('.list-group-item')); // FIXME: not yet supported, element.all(by.repeater('let event of events'));
   var initialRegattaListLength;
 
