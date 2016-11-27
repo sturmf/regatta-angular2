@@ -14,6 +14,7 @@ dependencies:
   browser: ^0.10.0
   dart_to_js_script_rewriter: ^1.0.1
   dson: any
+  greencat: any
   http: ^0.11.0
   stream_transformers: ^0.3.0
   sass_transformer: any
