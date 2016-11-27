@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:angular2/core.dart';
-import 'package:ng_bootstrap/ng_bootstrap.dart';
 
 import 'models/person.dart';
 
@@ -9,8 +8,7 @@ typedef Future<Iterable<Person>> GetPersons();
 @Component(
     selector: 'my-event-assistants-list',
     templateUrl: 'event_assistants_list_component.html',
-    styleUrls: const ['event_assistants_list_component.css'],
-    directives: const [BsTypeAheadComponent])
+    styleUrls: const ['event_assistants_list_component.css'])
 class EventAssistantsListComponent implements OnInit {
   @Input()
   List<String> selectedAssistants; // List of Person.urls
