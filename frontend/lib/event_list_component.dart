@@ -4,6 +4,8 @@ import 'dart:html' show window;
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
+import 'package:frontend/store/RegattaStore.dart'; // FIXME: should just be store
+import 'package:greencat/greencat.dart';
 
 import 'package:frontend/services/event_service.dart';
 import 'models/event.dart';
@@ -19,8 +21,9 @@ class EventListComponent implements OnInit {
 
   final EventService _eventService;
   final Router _router;
+  final RegattaStore _store;
 
-  EventListComponent(this._eventService, this._router);
+  EventListComponent(this._eventService, this._router, this._store);
 
   Future<Null> getEvents() async {
     events = await _eventService.getEvents();
@@ -29,6 +32,12 @@ class EventListComponent implements OnInit {
   @override
   void ngOnInit() {
     getEvents();
+
+    print(_store.store.state);
+    print('before dispatch');
+    _store.store.dispatch(addEventX('test event'));
+    print('after dispatch');
+    print(_store.store.state);
   }
 
   Future<Null> addEvent(String name) async {
