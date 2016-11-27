@@ -52,9 +52,8 @@ class EventDetailComponent implements OnInit {
 
   set raceCount(String raceCount) {
     print("Setting raceCount: $raceCount");
-    event.raceCount = int.parse(raceCount,onError: (value) => event.raceCount);
+    event.raceCount = int.parse(raceCount, onError: (value) => event.raceCount);
     submit();
-
   }
 
   Future<Null> submit() async {
