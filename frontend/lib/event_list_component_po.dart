@@ -10,7 +10,7 @@ class MockEventService extends Mock implements EventService {}
 
 @EnsureTag('my-event-list')
 class EventListPO {
-  @ByCss('.list-group-item')
+  @ByCss('.event-item')
   Lazy<List<PageLoaderElement>> _items;
 
   /// Items in the list.
