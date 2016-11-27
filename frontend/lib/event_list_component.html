@@ -7,5 +7,5 @@
 <p></p>
 
 <div style="display:flex; flex-direction:column">
-    <material-button raised *ngFor="let event of events" (click)="gotoEvent(event)">{{event.name}}</material-button>
+    <material-button class="event-item" raised *ngFor="let event of events" (click)="gotoEvent(event)">{{event.name}}</material-button>
 </div>

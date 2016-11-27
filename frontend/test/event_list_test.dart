@@ -27,7 +27,7 @@ class EventListTestComponent {}
 void main() {
   reflector.reflectionCapabilities = new ReflectionCapabilities();
 
-  test('EventListComponent list is empty', () async {
+  test('EventListComponent list contains dummy event', () async {
     final router = new MockRouter();
     final service = new MockEventService();
     when(service.getEvents()).thenReturn([new Event(1, 'dummy url')..name = 'Dummy Event']);
