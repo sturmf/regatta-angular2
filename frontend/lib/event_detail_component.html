@@ -12,7 +12,7 @@
             </div>
 
             <div style="display:flex">
-                <material-input style="flex:1" floatingLabel label="Race count" ></material-input>
+                <material-input type="number" style="flex:1" floatingLabel label="Race count" [ngModel]="raceCount" (change)="raceCount=$event"></material-input>
             </div>
 
             <div style="display:flex">

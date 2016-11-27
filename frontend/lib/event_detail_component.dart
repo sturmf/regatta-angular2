@@ -48,13 +48,17 @@ class EventDetailComponent implements OnInit {
     getEvent();
   }
 
-  Future<Null> onSubmit() async {
-    await _eventService.update(event);
-    goBack();
+  get raceCount => event.raceCount.toString();
+
+  set raceCount(String raceCount) {
+    print("Setting raceCount: $raceCount");
+    event.raceCount = int.parse(raceCount,onError: (value) => event.raceCount);
+    submit();
+
   }
 
-  void goBack() {
-    window.history.back();
+  Future<Null> submit() async {
+    await _eventService.update(event);
   }
 
   bool addAssistant(String assistantUrl) => event.assistants.add(assistantUrl);
