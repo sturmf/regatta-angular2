@@ -6,11 +6,11 @@ describe('The Regatta welcome view', function() {
   var heading = element(by.css('h1'));
   var newRegattaForm = element(by.css('input'));
   var addButton = element(by.id('addButton'));
-  var regattaList = element.all(by.css('.list-group-item')); // FIXME: not yet supported, element.all(by.repeater('let event of events'));
+  var regattaList = element(by.id('eventList')).all(by.css('material-button')); // FIXME: not yet supported, element.all(by.repeater('let event of events'));
   var initialRegattaListLength;
 
   beforeAll(function(done) {
-    element.all(by.css('.list-group-item')).count().then((n) => {
+    element(by.id('eventList')).all(by.css('material-button')).count().then((n) => {
       initialRegattaListLength = n;
       console.log("initialRegattaListLength:", initialRegattaListLength);
       done()
