@@ -20,6 +20,7 @@ install:
   - rm dartium-linux-x64-release.zip
   - mv `echo dartium-*-stable-*`/{chrome,dartium}
   - export PATH="${PWD%/}/$(echo dartium-*-stable-*):$PATH"
+  - which dartium
   # General install
   - (cd backend  && make env)
   - (cd backend  && make install_tools)
