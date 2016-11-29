@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/models/event.dart';
+import 'package:frontend/services/event_service.dart';
 
 
 enum ActionType {
-  addEvent
+  addEvent,
+  addNewEvent
 }
 
 /// Actions to be triggered to the app store.
@@ -18,16 +21,29 @@ abstract class RegattaAction<T> extends Action<ActionType> {
 }
 
 /// Action to add an Event.
-class AddEventAction extends RegattaAction<String> {
+class AddEventAction extends RegattaAction<Event> {
   ///
-  AddEventAction(String payload) : super(payload);
+  AddEventAction(Event payload) : super(payload);
 
   @override
   ActionType get type => ActionType.addEvent;
 }
 
+/// Action to add a new Event.
+class AddNewEventAction extends RegattaAction<String> {
+  ///
+  AddNewEventAction(String payload) : super(payload);
+
+  @override
+  ActionType get type => ActionType.addNewEvent;
+}
+
 /// Utility function to trigger the addEvent action.
-RegattaAction<String> addEventX(String description) => new AddEventAction(description);
+RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
+
+/// Utility function to trigger the addEvent action.
+RegattaAction<String> addNewEvent(String name) => new AddNewEventAction(name);
+
 
 /// State of the regattaApp.
 class RegattaState {
@@ -60,15 +76,16 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
     return new RegattaState.initial();
   }
 
-  print('before switch');
-  print('Action: $action');
-
   switch (action.type) {
     case ActionType.addEvent:
       final events = (new List<Event>.from(currentState.events)
-            ..add(new Event(1, action.payload)))
+            ..add(action.payload))
           .toList(growable: false);
       return currentState.copy(events: events);
+    case ActionType.addNewEvent:
+      // FIXME: implement
+      print('FIXME: implement');
+      return currentState;
     default:
       return currentState;
   }
@@ -76,10 +93,25 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
 
 @Injectable()
 class RegattaStore {
+  final EventService _eventService;
   var store;
-  RegattaStore() {
+
+  RegattaStore(this._eventService) {
     store = new Store.createStore(regattaApp);
+    loadEvents();
   }
+
+  Future<Null> loadEvents() async {
+    print('loadevents start');
+    final events = await _eventService.getEvents();
+    for (var event in events) {
+      print('dispatch');
+      store.dispatch(addEvent(event));
+      print(store.state);
+    }
+    print('loadevents end');
+  }
+
 }
 
 

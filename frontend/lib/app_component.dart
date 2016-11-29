@@ -15,6 +15,7 @@ import 'package:frontend/navigation_bar_component.dart';
     selector: 'my-app',
     templateUrl: 'app_component.html',
     directives: const [ROUTER_DIRECTIVES, NavigationBarComponent],
+    //changeDetection: ChangeDetectionStrategy.OnPush,
     providers: const [
       ROUTER_PROVIDERS,
       const Provider(LocationStrategy, useClass: HashLocationStrategy),
@@ -22,8 +23,7 @@ import 'package:frontend/navigation_bar_component.dart';
       EventService,
       SailingClubService,
       PersonService
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush)
+    ])
 @RouteConfig(const [
   const Route(path: '/events', name: 'Events', component: EventListComponent, useAsDefault: true),
   const Route(path: '/event/:id', name: 'EventDetail', component: EventDetailComponent)
