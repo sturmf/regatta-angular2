@@ -39,6 +39,7 @@ describe('The Regatta welcome view', function() {
     browser.driver.sleep(1);
     browser.waitForAngular();
 
+    regattaList = element(by.id('eventList')).all(by.css('material-button')); // FIXME: not yet supported, element.all(by.repeater('let event of events'));
     expect(regattaList.count()).toEqual(initialRegattaListLength + 1);
   });
 
