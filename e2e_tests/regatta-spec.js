@@ -3,6 +3,7 @@ var AngularPage = require('./page_objects/event_list.page.js');
 describe('The Regatta event list view', function() {
 
   var page;
+  var initialEventListLength;
 
   beforeAll(function(done) {
     page = new AngularPage();
