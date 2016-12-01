@@ -11,7 +11,12 @@ var EventListPage = function () {
     eventList: { get: function () { return element(by.id('eventList')).all(by.css('material-button')); }},
     eventListLength: { get: function () { return this.eventList.count(); }},
 
-    clickAddButton: { value: function () { this.addButton.click(); }},
+    clickAddButton: { value: function () {
+      this.addButton.click();
+      // FIXME: why do we need this hack? originally mentioned here: http://stackoverflow.com/questions/21748442/protractor-how-to-wait-for-page-complete-after-click-a-button
+      browser.driver.sleep(1);
+      browser.waitForAngular();
+    }},
     typeIntoNewEventForm: { value: function (input) { this.newEventForm.sendKeys(input); }}
  });
 
