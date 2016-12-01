@@ -6,6 +6,6 @@
 </div>
 <p></p>
 
-<div style="display:flex; flex-direction:column">
+<div id="eventList" style="display:flex; flex-direction:column">
     <material-button class="event-item" raised *ngFor="let event of events" (click)="gotoEvent(event)">{{event.name}}</material-button>
 </div>
