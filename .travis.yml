@@ -51,7 +51,6 @@ script:
   - (cd backend   && make tests)
   - (cd frontend  && make dtests)
   - which java
-  - java
   - echo $JAVA_HOME
   - echo $PATH
   - ls -la /usr/lib/
