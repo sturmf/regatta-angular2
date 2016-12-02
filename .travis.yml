@@ -14,7 +14,7 @@ install:
   - sudo apt-get update
   - sudo apt-get install dart
   - export PATH=$PATH:/usr/lib/dart/bin
-  - sudo apt-get install openjdk-7-jdk
+  - sudo apt-get install openjdk-7-jre-headless
   # Install Dartium
   - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
   - unzip dartium-linux-x64-release.zip
