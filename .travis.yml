@@ -44,6 +44,8 @@ before_script:
 script:
   - (cd backend   && make tests)
   - (cd frontend  && make dtests)
+  - which java
+  - java
   - (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   - sleep 3 && echo sleep done
