@@ -54,6 +54,8 @@ script:
   - java
   - echo $JAVA_HOME
   - echo $PATH
+  - ls -la /usr/lib/
+  - ls -la /usr/lib/jvm/
   - (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   - sleep 3 && echo sleep done
