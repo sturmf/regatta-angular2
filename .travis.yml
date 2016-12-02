@@ -13,7 +13,8 @@ install:
   - sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
   - sudo apt-get update
   - sudo apt-get install dart
-  - export PATH=$PATH:/usr/lib/dart/bin:$JAVA_HOME/bin
+  - export PATH=$PATH:/usr/lib/dart/bin
+  - export PATH=$PATH:$JAVA_HOME/bin # TODO: is there a better way to make java available?
   # Install Dartium
   - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
   - unzip dartium-linux-x64-release.zip
