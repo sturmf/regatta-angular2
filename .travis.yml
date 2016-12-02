@@ -7,11 +7,6 @@ python:
   - "3.4"
   - "3.5"
 
-#addons:
-#  apt:
-#    packages:
-#      - oracle-java8-installer
-
 install:
   # Travis specific install
   - sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
@@ -19,7 +14,6 @@ install:
   - sudo apt-get update
   - sudo apt-get install dart
   - export PATH=$PATH:/usr/lib/dart/bin:$JAVA_HOME/bin
-  - sudo apt-get install openjdk-7-jre-headless
   # Install Dartium
   - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
   - unzip dartium-linux-x64-release.zip
@@ -50,11 +44,6 @@ before_script:
 script:
   - (cd backend   && make tests)
   - (cd frontend  && make dtests)
-  - which java
-  - echo $JAVA_HOME
-  - echo $PATH
-  - ls -la /usr/lib/
-  - ls -la /usr/lib/jvm/
   - (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   - sleep 3 && echo sleep done
