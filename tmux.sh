@@ -12,6 +12,6 @@ tmux send-keys -t $SESSION:2 'cd backend'   ENTER 'make' ENTER
 tmux send-keys -t $SESSION:3 'cd frontend'  ENTER 'make' ENTER
 tmux send-keys -t $SESSION:4 'cd e2e_tests' ENTER 'make' ENTER
 
-tmux send-keys -t $SESSION:5 'cd e2e_tests' ENTER 'make test'
+tmux send-keys -t $SESSION:5 'cd e2e_tests' ENTER 'make tests'
 
 tmux attach
