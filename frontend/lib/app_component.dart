@@ -11,10 +11,10 @@ import 'package:frontend/services/sailing_club_service.dart';
 import 'package:frontend/services/person_service.dart';
 import 'package:frontend/navigation_bar_component.dart';
 
-@Component(
-    selector: 'my-app',
-    templateUrl: 'app_component.html',
-    directives: const [ROUTER_DIRECTIVES, NavigationBarComponent],
+@Component(selector: 'my-app', templateUrl: 'app_component.html', directives: const [
+  ROUTER_DIRECTIVES,
+  NavigationBarComponent
+],
     //changeDetection: ChangeDetectionStrategy.OnPush,
     providers: const [
       ROUTER_PROVIDERS,
@@ -31,4 +31,3 @@ import 'package:frontend/navigation_bar_component.dart';
 class AppComponent {
   static Injector myinjector;
 }
-

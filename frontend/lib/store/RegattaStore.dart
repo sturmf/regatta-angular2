@@ -5,10 +5,7 @@ import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
 import 'package:frontend/app_component.dart';
 
-enum ActionType {
-  addEvent,
-  addNewEvent
-}
+enum ActionType { addEvent, addNewEvent }
 
 /// Actions to be triggered to the app store.
 abstract class RegattaAction<T> extends Action<ActionType> {
@@ -40,9 +37,9 @@ class AddNewEventAction extends RegattaAction<String> implements AsyncAction {
   @override
   Future call(MiddlewareApi api) {
     EventService _event_service = AppComponent.myinjector.get(EventService);
-    return _event_service.addEvent(payload).then(
-        (event) { api.dispatch(addEvent(event)); }
-    );
+    return _event_service.addEvent(payload).then((event) {
+      api.dispatch(addEvent(event));
+    });
   }
 }
 
@@ -52,24 +49,19 @@ RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> addNewEvent(String name) => new AddNewEventAction(name);
 
-
 /// State of the regattaApp.
 class RegattaState {
-
   /// Events available in the app.
   final Iterable<Event> events;
 
   /// Creates a new instance.
-  RegattaState(Iterable<Event> events)
-      : this.events = events;
+  RegattaState(Iterable<Event> events) : this.events = events;
 
   /// Default state for the app, used when is not explicitly initialized.
-  const RegattaState.initial()
-      : this.events = const <Event>[];
+  const RegattaState.initial() : this.events = const <Event>[];
 
   /// Clones this instance
-  RegattaState copy({Iterable<Event> events}) =>
-      new RegattaState(events ?? this.events);
+  RegattaState copy({Iterable<Event> events}) => new RegattaState(events ?? this.events);
 
   @override
   String toString() {
@@ -87,9 +79,7 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
   switch (action.type) {
     case ActionType.addEvent:
       print('Reducer: addEvent');
-      final events = (new List<Event>.from(currentState.events)
-            ..add(action.payload))
-          .toList(growable: false);
+      final events = (new List<Event>.from(currentState.events)..add(action.payload)).toList(growable: false);
       return currentState.copy(events: events);
     case ActionType.addNewEvent:
       print('Reducer: addNewEvent');
@@ -121,7 +111,4 @@ class RegattaStore {
     }
     print('loadevents end');
   }
-
 }
-
-
