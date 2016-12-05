@@ -29,5 +29,6 @@ import 'package:frontend/navigation_bar_component.dart';
   const Route(path: '/event/:id', name: 'EventDetail', component: EventDetailComponent)
 ])
 class AppComponent {
+  static Injector myinjector;
 }
 

@@ -3,7 +3,7 @@ import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
-
+import 'package:frontend/app_component.dart';
 
 enum ActionType {
   addEvent,
@@ -29,13 +29,21 @@ class AddEventAction extends RegattaAction<Event> {
   ActionType get type => ActionType.addEvent;
 }
 
-/// Action to add a new Event.
-class AddNewEventAction extends RegattaAction<String> {
+/// Action to request the add of a new Event.
+class AddNewEventAction extends RegattaAction<String> implements AsyncAction {
   ///
   AddNewEventAction(String payload) : super(payload);
 
   @override
   ActionType get type => ActionType.addNewEvent;
+
+  @override
+  Future call(MiddlewareApi api) {
+    EventService _event_service = AppComponent.myinjector.get(EventService);
+    return _event_service.addEvent(payload).then(
+        (event) { api.dispatch(addEvent(event)); }
+    );
+  }
 }
 
 /// Utility function to trigger the addEvent action.
@@ -78,14 +86,14 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
 
   switch (action.type) {
     case ActionType.addEvent:
+      print('Reducer: addEvent');
       final events = (new List<Event>.from(currentState.events)
             ..add(action.payload))
           .toList(growable: false);
       return currentState.copy(events: events);
     case ActionType.addNewEvent:
-      // FIXME: implement
-      print('FIXME: implement');
-      return currentState;
+      print('Reducer: addNewEvent');
+      return currentState.copy();
     default:
       return currentState;
   }
@@ -98,6 +106,8 @@ class RegattaStore {
 
   RegattaStore(this._eventService) {
     store = new Store.createStore(regattaApp);
+    // The ThunkMiddleware adds async call capability to actions
+    store.addMiddleware(new ThunkMiddleware<RegattaState, RegattaAction<dynamic>>());
     loadEvents();
   }
 
