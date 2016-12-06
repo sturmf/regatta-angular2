@@ -28,15 +28,18 @@ class AddEventAction extends RegattaAction<Event> {
 
 /// Action to request the add of a new Event.
 class AddNewEventAction extends RegattaAction<String> implements AsyncAction {
+  final EventService _event_service;
+
   ///
-  AddNewEventAction(String payload) : super(payload);
+  AddNewEventAction(String payload)
+      : _event_service = AppComponent.myinjector.get(EventService),
+        super(payload);
 
   @override
   ActionType get type => ActionType.addNewEvent;
 
   @override
   Future call(MiddlewareApi api) {
-    EventService _event_service = AppComponent.myinjector.get(EventService);
     return _event_service.addEvent(payload).then((event) {
       api.dispatch(addEvent(event));
     });
