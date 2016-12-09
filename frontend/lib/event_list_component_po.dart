@@ -6,8 +6,11 @@ import 'package:frontend/store/RegattaStore.dart';
 import 'package:greencat/greencat.dart';
 
 class MockRouter extends Mock implements Router {}
+
 class MockRegattaStore extends Mock implements RegattaStore {}
+
 class MockStore extends Mock implements Store {}
+
 class MockRegattaState extends Mock implements RegattaState {}
 
 @EnsureTag('my-event-list')
