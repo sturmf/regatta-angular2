@@ -2,11 +2,13 @@ import 'dart:async';
 import 'package:angular2/router.dart';
 import 'package:mockito/mockito_no_mirrors.dart';
 import 'package:pageloader/objects.dart';
-import 'package:frontend/services/event_service.dart';
+import 'package:frontend/store/RegattaStore.dart';
+import 'package:greencat/greencat.dart';
 
 class MockRouter extends Mock implements Router {}
-
-class MockEventService extends Mock implements EventService {}
+class MockRegattaStore extends Mock implements RegattaStore {}
+class MockStore extends Mock implements Store {}
+class MockRegattaState extends Mock implements RegattaState {}
 
 @EnsureTag('my-event-list')
 class EventListPO {

@@ -15,7 +15,7 @@ import 'package:mockito/mockito_no_mirrors.dart';
 import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'package:frontend/services/event_service.dart';
+import 'package:frontend/store/RegattaStore.dart';
 import 'package:frontend/event_list_component.dart';
 import 'package:frontend/event_list_component_po.dart';
 import 'package:frontend/models/event.dart';
@@ -29,12 +29,19 @@ void main() {
 
   test('EventListComponent list contains dummy event', () async {
     final router = new MockRouter();
-    final service = new MockEventService();
-    when(service.getEvents()).thenReturn([new Event(1, 'dummy url')..name = 'Dummy Event']);
+    final regatta_store = new MockRegattaStore();
+    final store = new MockStore();
+    final regatta_state = new MockRegattaState();
+
+    when(regatta_store.store).thenReturn(store);
+    when(store.state).thenReturn(regatta_state);
+    when(regatta_state.events).thenReturn([new Event(1, 'dummy url', 'Dummy Event')]);
+
     final testBed = new NgTestBed<EventListTestComponent>().addProviders([
       provide(Router, useValue: router),
-      provide(EventService, useValue: service),
+      provide(RegattaStore, useValue: regatta_store),
     ]);
+
     final fixture = await testBed.create();
 
     // Create an instance of the in-browser page loader that uses our fixture.
