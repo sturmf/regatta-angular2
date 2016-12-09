@@ -27,7 +27,7 @@ class AddEventAction extends RegattaAction<Event> {
 }
 
 /// Action to request the add of a new Event.
-class AddNewEventAction extends RegattaAction<String> implements AsyncAction {
+class AddNewEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
   final EventService _event_service;
 
   ///
