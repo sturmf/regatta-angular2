@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:angular2/router.dart';
 import 'package:mockito/mockito_no_mirrors.dart';
 import 'package:pageloader/objects.dart';
-import 'package:frontend/store/RegattaStore.dart';
+import 'package:frontend/store/regatta_store.dart';
 import 'package:greencat/greencat.dart';
 
 class MockRouter extends Mock implements Router {}

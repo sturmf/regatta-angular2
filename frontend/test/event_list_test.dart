@@ -15,7 +15,7 @@ import 'package:mockito/mockito_no_mirrors.dart';
 import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
-import 'package:frontend/store/RegattaStore.dart';
+import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/event_list_component.dart';
 import 'package:frontend/event_list_component_po.dart';
 import 'package:frontend/models/event.dart';

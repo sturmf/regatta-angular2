@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
-import 'package:frontend/store/RegattaStore.dart';
+import 'package:frontend/store/regatta_store.dart';
 
 import 'models/event.dart';
 
