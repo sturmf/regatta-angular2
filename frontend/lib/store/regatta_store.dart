@@ -1,30 +1,11 @@
 import 'dart:async';
 import 'action_type.dart';
 import 'regatta_action.dart';
+import 'regatta_state.dart';
 import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
-
-/// State of the regattaApp.
-class RegattaState {
-  /// Events available in the app.
-  final Iterable<Event> events;
-
-  /// Creates a new instance.
-  RegattaState(Iterable<Event> events) : this.events = events;
-
-  /// Default state for the app, used when is not explicitly initialized.
-  const RegattaState.initial() : this.events = const <Event>[];
-
-  /// Clones this instance
-  RegattaState copy({Iterable<Event> events}) => new RegattaState(events ?? this.events);
-
-  @override
-  String toString() {
-    return 'RegattaState{events: $events}';
-  }
-}
 
 /// The reducer for the RegattaApp.
 Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
