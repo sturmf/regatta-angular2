@@ -7,14 +7,12 @@ import 'package:greencat/greencat.dart';
 import 'package:frontend/services/event_service.dart';
 
 @Injectable()
-class RegattaStore {
+class RegattaStore extends Store<RegattaState, RegattaAction> {
   final EventService _eventService;
-  var store;
 
-  RegattaStore(this._eventService) {
-    store = new Store.createStore(regattaApp);
+  RegattaStore(this._eventService) : super.createStore(regattaApp) {
     // The ThunkMiddleware adds async call capability to actions
-    store.addMiddleware(new ThunkMiddleware<RegattaState, RegattaAction<dynamic>>());
+    addMiddleware(new ThunkMiddleware<RegattaState, RegattaAction<dynamic>>());
     loadEvents();
   }
 
@@ -23,8 +21,8 @@ class RegattaStore {
     final events = await _eventService.getEvents();
     for (var event in events) {
       print('dispatch');
-      store.dispatch(addEvent(event));
-      print(store.state);
+      dispatch(addEvent(event));
+      print(state);
     }
     print('loadevents end');
   }

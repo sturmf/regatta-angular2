@@ -19,10 +19,10 @@ class EventListComponent {
 
   EventListComponent(this._router, this._store);
 
-  Iterable<Event> get events => _store.store.state.events as Iterable<Event>;
+  Iterable<Event> get events => _store.state.events as Iterable<Event>;
 
   void addNewEventHandler(String name) {
-    _store.store.dispatch(addNewEvent(name));
+    _store.dispatch(addNewEvent(name));
   }
 
   // FIXME: rewrite as redux change
