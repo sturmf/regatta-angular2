@@ -32,7 +32,7 @@ void main() {
     final regattaStore = new MockRegattaStore();
     final regattaState = new MockRegattaState();
 
-    when(regattaStore).thenReturn(regattaStore);
+    when(regattaStore.state).thenReturn(regattaState);
     when(regattaState.events).thenReturn([new Event(1, 'dummy url', 'Dummy Event')]);
 
     final testBed = new NgTestBed<EventListTestComponent>().addProviders([
