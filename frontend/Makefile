@@ -6,7 +6,7 @@ install:
 	pub get --packages-dir
 
 lint:
-	dartanalyzer --fatal-warnings web lib test
+	dartanalyzer --fatal-warnings --fatal-lints --fatal-hints web lib test
 
 style:
 	dartfmt -l 120 -w --set-exit-if-changed web lib test

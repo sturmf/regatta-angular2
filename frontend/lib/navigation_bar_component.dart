@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:html' show window;
-
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';

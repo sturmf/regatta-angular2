@@ -34,7 +34,7 @@ class EventService {
     try {
       final Response response = await _http.get('$_eventsUrl/', headers: _headersGet);
       final List<Map<dynamic, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
-      print(results);
+      //print(results);
       final List<Event> events = fromMapList(results, Event) as List<Event>;
       return events;
     } catch (e) {
