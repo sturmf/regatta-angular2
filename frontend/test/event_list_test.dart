@@ -53,5 +53,7 @@ void main() {
     final items = await po.items;
     expect(items, hasLength(1));
     expect(await items[0].visibleText, equals('Dummy Event'));
+
+    regattaStore.close();
   });
 }
