@@ -19,7 +19,7 @@ class EventListComponent {
 
   EventListComponent(this._router, this._store);
 
-  Iterable<Event> get events => _store.state.events as Iterable<Event>;
+  Iterable<Event> get events => _store.state.events;
 
   void addNewEventHandler(String name) {
     _store.dispatch(addNewEvent(name));

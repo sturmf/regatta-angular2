@@ -29,15 +29,15 @@ void main() {
 
   test('EventListComponent list contains dummy event', () async {
     final router = new MockRouter();
-    final regatta_store = new MockRegattaStore();
-    final regatta_state = new MockRegattaState();
+    final regattaStore = new MockRegattaStore();
+    final regattaState = new MockRegattaState();
 
-    when(regatta_store).thenReturn(regatta_store);
-    when(regatta_state.events).thenReturn([new Event(1, 'dummy url', 'Dummy Event')]);
+    when(regattaStore).thenReturn(regattaStore);
+    when(regattaState.events).thenReturn([new Event(1, 'dummy url', 'Dummy Event')]);
 
     final testBed = new NgTestBed<EventListTestComponent>().addProviders([
       provide(Router, useValue: router),
-      provide(RegattaStore, useValue: regatta_store),
+      provide(RegattaStore, useValue: regattaStore),
     ]);
 
     final fixture = await testBed.create();

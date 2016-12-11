@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html' show window;
 
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
@@ -48,7 +47,7 @@ class EventDetailComponent implements OnInit {
     getEvent();
   }
 
-  get raceCount => event.raceCount.toString();
+  String get raceCount => event.raceCount.toString();
 
   set raceCount(String raceCount) {
     print("Setting raceCount: $raceCount");
