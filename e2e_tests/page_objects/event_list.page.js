@@ -8,7 +8,7 @@ var EventListPage = function () {
     heading: { get: function () { return element(by.css('h1')).getText(); }},
     newEventForm: { get: function () { return element(by.css('input')); }},
     addButton: { get: function () { return element(by.id('addButton')); }},
-    eventList: { get: function () { return element(by.id('eventList')).all(by.css('material-button')); }},
+    eventList: { get: function () { return element(by.id('eventList')).all(by.css('.event-item')); }},
     eventListLength: { get: function () { return this.eventList.count(); }},
 
     clickAddButton: { value: function () {

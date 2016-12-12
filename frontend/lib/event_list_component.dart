@@ -25,6 +25,11 @@ class EventListComponent {
     _store.dispatch(addNewEvent(name));
   }
 
+  void deleteEventHandler(Event event) {
+    print('delete $event');
+    _store.dispatch(requestDeleteEvent(event));
+  }
+
   // FIXME: rewrite as redux change
   void gotoEvent(Event event) {
     final List<dynamic> link = [
