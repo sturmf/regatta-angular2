@@ -30,10 +30,8 @@ void main() {
   test('EventListComponent list contains dummy event', () async {
     final router = new MockRouter();
     final regattaStore = new MockRegattaStore();
-    final regattaState = new MockRegattaState();
 
-    when(regattaStore.state).thenReturn(regattaState);
-    when(regattaState.events).thenReturn([new Event(1, 'dummy url', 'Dummy Event')]);
+    when(regattaStore.state.events).thenReturn([new Event(1, 'dummy url', 'Dummy Event')]);
 
     final testBed = new NgTestBed<EventListTestComponent>().addProviders([
       provide(Router, useValue: router),

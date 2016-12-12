@@ -7,9 +7,12 @@ import 'package:frontend/store/regatta_store.dart';
 
 class MockRouter extends Mock implements Router {}
 
-class MockRegattaStore extends Mock implements RegattaStore {}
-
 class MockRegattaState extends Mock implements RegattaState {}
+
+class MockRegattaStore extends Mock implements RegattaStore {
+  @override
+  RegattaState state = new MockRegattaState();
+}
 
 @EnsureTag('my-event-list')
 class EventListPO {
