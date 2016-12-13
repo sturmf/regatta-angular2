@@ -1,8 +1,8 @@
 <h2>Events</h2>
 
-<div style="display:flex; flex-direction:row; align-items:baseline" onkeyup="event.keyCode == 13 ? document.getElementById('addButton').click() : null">
-    <material-input #regattaName style="flex:1" label="New regatta event"></material-input>
-    <material-button id="addButton" raised class="blue" [disabled]="regattaName.inputTextLength == 0" (trigger)="addNewEventHandler(regattaName.inputText); regattaName.inputText=''">Add</material-button>
+<div style="display:flex; flex-direction:row; align-items:baseline">
+    <material-input style="flex:1" label="New regatta event" [(ngModel)]="eventName" (keydown)="onKeyDown($event)"></material-input>
+    <material-button id="addButton" raised class="blue" [disabled]="eventName.length == 0" (trigger)="addNewEventHandler();">Add</material-button>
 </div>
 <p></p>
 
