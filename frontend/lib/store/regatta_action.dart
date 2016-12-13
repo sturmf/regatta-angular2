@@ -7,7 +7,7 @@ import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
 
 /// Utility function to trigger the addEvent action.
-RegattaAction<String> addNewEvent(String name) => new AddNewEventAction(name); // FIXME: rename to requestCreateEvent
+RegattaAction<String> addNewEvent(String name) => new RequestCreateEventAction(name); // FIXME: rename to requestCreateEvent
 
 /// Utility function to trigger the addEvent action.
 RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
@@ -29,15 +29,15 @@ abstract class RegattaAction<T> extends Action<ActionType> {
 }
 
 /// Action to request the add of a new Event.
-class AddNewEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
+class RequestCreateEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
   final EventService _eventService;
 
-  AddNewEventAction(String payload)
+  RequestCreateEventAction(String payload)
       : _eventService = AppComponent.myinjector.get(EventService),
         super(payload);
 
   @override
-  ActionType get type => ActionType.createNewEvent;
+  ActionType get type => ActionType.requestCreateEvent;
 
   @override
   Future call(MiddlewareApi api) {

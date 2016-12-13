@@ -67,7 +67,8 @@ class EventService {
     print('EventService.deleteEvent() has been called with event=$event');
     try {
       final String url = '$_eventsUrl/${event.id}/';
-      final Response response = await _http.delete(url, headers: _headersPost);
+      /* final Response response = */
+      await _http.delete(url, headers: _headersPost);
       // FIXME: what to return on failure?
     } catch (e) {
       throw _handleError(e);

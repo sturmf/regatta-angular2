@@ -1,7 +1,7 @@
 /// The type of actions on the TodoApp.
 enum ActionType {
   /// Indicates the intention to create a new event by title
-  createNewEvent,
+  requestCreateEvent,
 
   /// Indicates to add a loaded event to the store
   addEvent,
