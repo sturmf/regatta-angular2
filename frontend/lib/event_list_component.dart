@@ -1,3 +1,4 @@
+import 'dart:html' show KeyboardEvent;
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
@@ -19,10 +20,23 @@ class EventListComponent {
 
   EventListComponent(this._router, this._store);
 
+  String eventName = '';
   Iterable<Event> get events => _store.state.events;
 
-  void addNewEventHandler(String name) {
-    _store.dispatch(addNewEvent(name));
+  void onKeyDown(KeyboardEvent key) {
+    if (key.keyCode == 13) {
+      addNewEventHandler();
+    }
+  }
+
+  void addNewEventHandler() {
+    _store.dispatch(requestCreateEvent(eventName));
+    eventName = '';
+  }
+
+  void deleteEventHandler(Event event) {
+    print('delete $event');
+    _store.dispatch(requestDeleteEvent(event));
   }
 
   // FIXME: rewrite as redux change

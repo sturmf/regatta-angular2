@@ -20,6 +20,7 @@ class EventService {
 
   // CRUD nomenclature
   Future<Event> addEvent(String name) async {
+    // FIXME: rename to create
     print('EventService.addEvent() has been called with name=$name');
     try {
       final Response response =
@@ -57,6 +58,18 @@ class EventService {
       final String url = '$_eventsUrl/${event.id}/';
       final Response response = await _http.put(url, headers: _headersPost, body: toJson(event));
       return fromJson(response.body, Event);
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future<Null> deleteEvent(Event event) async {
+    print('EventService.deleteEvent() has been called with event=$event');
+    try {
+      final String url = '$_eventsUrl/${event.id}/';
+      /* final Response response = */
+      await _http.delete(url, headers: _headersPost);
+      // FIXME: what to return on failure?
     } catch (e) {
       throw _handleError(e);
     }

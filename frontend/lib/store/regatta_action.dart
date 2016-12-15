@@ -7,10 +7,16 @@ import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
 
 /// Utility function to trigger the addEvent action.
-RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
+RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
 
 /// Utility function to trigger the addEvent action.
-RegattaAction<String> addNewEvent(String name) => new AddNewEventAction(name);
+RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
+
+/// Utility function to trigger the deleteEvent action.
+RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAction(event);
+
+/// Utility function to trigger the deleteEvent action.
+RegattaAction<Event> deleteEvent(Event event) => new DeleteEventAction(event);
 
 /// Actions to be triggered to the app store.
 abstract class RegattaAction<T> extends Action<ActionType> {
@@ -22,6 +28,25 @@ abstract class RegattaAction<T> extends Action<ActionType> {
   RegattaAction(this.payload);
 }
 
+/// Action to request the add of a new Event.
+class RequestCreateEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
+  final EventService _eventService;
+
+  RequestCreateEventAction(String payload)
+      : _eventService = AppComponent.myinjector.get(EventService),
+        super(payload);
+
+  @override
+  ActionType get type => ActionType.requestCreateEvent;
+
+  @override
+  Future call(MiddlewareApi api) {
+    return _eventService.addEvent(payload).then((event) {
+      api.dispatch(addEvent(event));
+    });
+  }
+}
+
 /// Action to add an Event.
 class AddEventAction extends RegattaAction<Event> {
   ///
@@ -31,22 +56,30 @@ class AddEventAction extends RegattaAction<Event> {
   ActionType get type => ActionType.addEvent;
 }
 
-/// Action to request the add of a new Event.
-class AddNewEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
+/// Action to add an Event.
+class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
   final EventService _eventService;
 
-  ///
-  AddNewEventAction(String payload)
+  RequestDeleteEventAction(Event payload)
       : _eventService = AppComponent.myinjector.get(EventService),
         super(payload);
 
   @override
-  ActionType get type => ActionType.createNewEvent;
+  ActionType get type => ActionType.deleteEvent;
 
   @override
   Future call(MiddlewareApi api) {
-    return _eventService.addEvent(payload).then((event) {
-      api.dispatch(addEvent(event));
+    return _eventService.deleteEvent(payload).then((_) {
+      api.dispatch(deleteEvent(payload));
     });
   }
+}
+
+/// Action to add an Event.
+class DeleteEventAction extends RegattaAction<Event> {
+  ///
+  DeleteEventAction(Event payload) : super(payload);
+
+  @override
+  ActionType get type => ActionType.deleteEvent;
 }
