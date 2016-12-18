@@ -71,6 +71,7 @@ after_script:
   - (cd e2e_tests && cat webdriver.log)
 
 deploy:
+  provider: script
   script: ./deploy.sh
   on:
     all_branches: true
