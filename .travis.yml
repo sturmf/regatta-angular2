@@ -73,6 +73,7 @@ after_script:
 deploy:
   provider: script
   script: ./deploy.sh
+  script_cleanup: true
   on:
     all_branches: true
     python: 3.4
