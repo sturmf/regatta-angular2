@@ -6,7 +6,7 @@ install:
 	pub get --packages-dir
 
 build:
-	pub build --define hostname=
+	pub build --define hostname= --define hash=`git rev-parse HEAD`
 
 lint:
 	dartanalyzer --fatal-warnings --fatal-lints --fatal-hints web lib test

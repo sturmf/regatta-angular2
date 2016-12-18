@@ -29,4 +29,5 @@ import 'package:frontend/navigation_bar_component.dart';
 ])
 class AppComponent {
   static Injector myinjector;
+  String hash = const String.fromEnvironment('hash', defaultValue: 'Unknown');
 }
