@@ -5,6 +5,9 @@ all: install run
 install:
 	pub get --packages-dir
 
+build:
+	pub build --define hostname= --define hash=`git rev-parse HEAD`
+
 lint:
 	dartanalyzer --fatal-warnings --fatal-lints --fatal-hints web lib test
 
@@ -22,3 +25,4 @@ dtests:
 run:
 	pub serve
 
+.PHONY: install build lint style tests dtests run
