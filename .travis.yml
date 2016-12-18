@@ -73,4 +73,5 @@ after_script:
 deploy:
   script: ./deploy.sh
   on:
+    all_branches: true
     python: 3.4
