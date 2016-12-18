@@ -64,10 +64,13 @@ script:
 
 after_success:
   - (cd backend && coveralls)
-  - (cd frontend && make build)
-  - (cd docker && make deploy)
 
 after_script:
   - (cd backend && cat django-server.log)
   - (cd frontend && cat angular-server.log)
   - (cd e2e_tests && cat webdriver.log)
+
+deploy:
+  script: ./deploy.sh
+  on:
+    python: 3.4
