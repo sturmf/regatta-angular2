@@ -17,14 +17,8 @@ deploy:
 	docker rename regatta_container_new regatta_container
 	# FIXME: with docker 1.13 we can use system prune
 	# Cleanup leftover container and images
-	exited_containers=$$(docker ps --filter status=exited -q 2>/dev/null); \
-	if [ -n "$$exited_containers" ]; then \
-	    docker rm $$exited_containers; \
-	fi
-	dangling_images=$$(docker images --filter dangling=true -q --no-trunc 2>/dev/null); \
-	if [ -n "$$dangling_images" ]; then \
-	    docker rmi $$dangling_images; \
-	fi
+	docker ps --filter status=exited -q --no-trunc | xargs --no-run-if-empty docker rm 
+	docker images --filter dangling=true -q --no-trunc | xargs --no-run-if-empty docker rmi
 
 run:
 	docker run -p 80:80 -d --name regatta_container regatta

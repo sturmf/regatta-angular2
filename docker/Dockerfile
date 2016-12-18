@@ -1,13 +1,13 @@
 FROM python:alpine
 
 # We need the Django source for the REST backend
-COPY /backend /regatta/backend
+COPY /build/backend /regatta/backend
 RUN mkdir /regatta/static
 RUN pip install -r /regatta/backend/requirements.txt
 RUN pip install gunicorn
 
 # We need the generated html and js for the frontend
-COPY /frontend/build/web /regatta/web
+COPY /build/web /regatta/web
 
 # Install nginx for serving the backend and frontend
 RUN apk add --update nginx
