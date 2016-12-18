@@ -8,9 +8,10 @@ python:
   - "3.5"
 
 env:
-  - DOCKER_CERT_PATH=cloud_hero
-  - DOCKER_HOST=tcp://swarm3355.chapi.co:8443
-  - DOCKER_TLS_VERIFY=1
+  global:
+    - DOCKER_CERT_PATH=cloud_hero
+    - DOCKER_HOST=tcp://swarm3355.chapi.co:8443
+    - DOCKER_TLS_VERIFY=1
 
 before_install:
   # Decrypt cloudhero key
