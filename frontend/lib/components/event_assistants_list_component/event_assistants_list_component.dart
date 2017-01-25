@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:angular2/core.dart';
 
-import 'models/person.dart';
+import 'package:frontend/models/person.dart';
 
 typedef Future<Iterable<Person>> GetPersons();
 
