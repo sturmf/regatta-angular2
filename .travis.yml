@@ -24,12 +24,9 @@ install:
   # Travis specific install
   - sudo sh -c 'curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -'
   - sudo sh -c 'curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list'
-  - sudo sh -c 'apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280'
-  - sudo sh -c 'apt-add-repository "deb https://deb.nodesource.com/node_7.x $(lsb_release -sc) main"'
   - sudo apt-get update
-  - sudo apt-get install dart npm
+  - sudo apt-get install dart
   - export PATH=$PATH:/usr/lib/dart/bin
-  - node --version
   # Install Dartium
   - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
   - unzip dartium-linux-x64-release.zip
@@ -42,7 +39,7 @@ install:
   - (cd backend  && make install)
   - (cd frontend && make install)
   # Prepare e2e test tools
-  - (cd e2e_tests  && make install)
+  #- (cd e2e_tests  && make install)
 
 before_script:
   # Static analysis
@@ -60,7 +57,7 @@ before_script:
 script:
   - (cd backend   && make tests)
   - (cd frontend  && make dtests)
-  - (cd e2e_tests && make run > webdriver.log 2>&1 &)
+  #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   - sleep 3 && echo sleep done
   - (cd e2e_tests && make tests)
@@ -71,7 +68,7 @@ after_success:
 after_script:
   - (cd backend && cat django-server.log)
   - (cd frontend && cat angular-server.log)
-  - (cd e2e_tests && cat webdriver.log)
+  #- (cd e2e_tests && cat webdriver.log)
 
 deploy:
   provider: script
