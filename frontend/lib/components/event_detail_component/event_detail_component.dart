@@ -5,9 +5,9 @@ import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
 
 import 'package:frontend/components/event_assistants_list_component/event_assistants_list_component.dart';
-import 'models/event.dart';
-import 'models/sailing_club.dart';
-import 'models/person.dart';
+import 'package:frontend/models/event.dart';
+import 'package:frontend/models/sailing_club.dart';
+import 'package:frontend/models/person.dart';
 import 'package:frontend/services/event_service.dart';
 import 'package:frontend/services/sailing_club_service.dart';
 import 'package:frontend/services/person_service.dart';
