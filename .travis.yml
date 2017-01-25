@@ -27,7 +27,7 @@ install:
   - sudo sh -c 'apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280'
   - sudo sh -c 'apt-add-repository "deb https://deb.nodesource.com/node_7.x $(lsb_release -sc) main"'
   - sudo apt-get update
-  - sudo apt-get install dart nodejs
+  - sudo apt-get install dart npm
   - export PATH=$PATH:/usr/lib/dart/bin
   - node --version
   # Install Dartium
