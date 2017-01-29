@@ -5,7 +5,7 @@ import 'package:angular2_components/angular2_components.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
 
-import 'models/event.dart';
+import 'package:frontend/models/event.dart';
 
 @Component(
     selector: 'my-event-list',
@@ -35,7 +35,6 @@ class EventListComponent {
   }
 
   void deleteEventHandler(Event event) {
-    print('delete $event');
     _store.dispatch(requestDeleteEvent(event));
   }
 

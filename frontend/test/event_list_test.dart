@@ -16,8 +16,8 @@ import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/event_list_component.dart';
-import 'package:frontend/event_list_component_po.dart';
+import 'package:frontend/components/event_list_component/event_list_component.dart';
+import 'package:frontend/components/event_list_component/event_list_component_po.dart';
 import 'package:frontend/models/event.dart';
 
 // We have to wrap our component in a slim wrapper to resolve it with getInstance later

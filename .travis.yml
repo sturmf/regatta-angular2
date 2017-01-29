@@ -39,7 +39,7 @@ install:
   - (cd backend  && make install)
   - (cd frontend && make install)
   # Prepare e2e test tools
-  - (cd e2e_tests  && make install)
+  #- (cd e2e_tests  && make install)
 
 before_script:
   # Static analysis
@@ -57,10 +57,10 @@ before_script:
 script:
   - (cd backend   && make tests)
   - (cd frontend  && make dtests)
-  - (cd e2e_tests && make run > webdriver.log 2>&1 &)
+  #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   - sleep 3 && echo sleep done
-  - (cd e2e_tests && make tests)
+  #- (cd e2e_tests && make tests)
 
 after_success:
   - (cd backend && coveralls)
@@ -68,7 +68,7 @@ after_success:
 after_script:
   - (cd backend && cat django-server.log)
   - (cd frontend && cat angular-server.log)
-  - (cd e2e_tests && cat webdriver.log)
+  #- (cd e2e_tests && cat webdriver.log)
 
 deploy:
   provider: script
