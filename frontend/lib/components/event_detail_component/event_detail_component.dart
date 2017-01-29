@@ -1,16 +1,10 @@
-import 'dart:async';
-
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
 
 import 'package:frontend/components/event_assistants_list_component/event_assistants_list_component.dart';
+import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/event.dart';
-import 'package:frontend/models/sailing_club.dart';
-import 'package:frontend/models/person.dart';
-import 'package:frontend/services/event_service.dart';
-import 'package:frontend/services/sailing_club_service.dart';
-import 'package:frontend/services/person_service.dart';
 
 @Component(
     selector: 'my-event-detail',
@@ -18,48 +12,16 @@ import 'package:frontend/services/person_service.dart';
     styleUrls: const ['event_detail_component.css'],
     directives: const [materialDirectives, EventAssistantsListComponent],
     providers: const [materialProviders])
-class EventDetailComponent implements OnInit {
-  Event event;
-  List<SailingClub> sailingClubs;
-  List<Person> persons;
+class EventDetailComponent /*implements OnInit*/ {
+  // final Router _router;
+  // final RouteParams _routeParams;
+  final RegattaStore _store;
 
-  final EventService _eventService;
-  final SailingClubService _sailingClubService;
-  final PersonService _personService;
-  //final Router _router;
-  final RouteParams _routeParams;
+  EventDetailComponent(/* this._router, this._routeParams*/ this._store);
 
-  EventDetailComponent(
-      this._eventService, this._sailingClubService, this._personService, /* this._router,*/ this._routeParams);
-
-  Future<List<Person>> getPersons([String search = '']) async =>
-      _personService.getPersons(search != '' ? {'search': search} : null);
-
-  Future<Null> getEvent() async {
-    final int id = int.parse(_routeParams.get('id'));
-    event = await (_eventService.getEvent(id));
-    sailingClubs = await (_sailingClubService.getSailingClubs());
-    persons = await (_personService.getPersons());
+  //Event get event => _store.state.selectedEvent;
+  Event get event {
+    print('loadind selected event ${_store.state.selectedEvent}');
+    return _store.state.selectedEvent;
   }
-
-  @override
-  void ngOnInit() {
-    getEvent();
-  }
-
-  String get raceCount => event.raceCount.toString();
-
-  set raceCount(String raceCount) {
-    print("Setting raceCount: $raceCount");
-    event.raceCount = int.parse(raceCount, onError: (value) => event.raceCount);
-    submit();
-  }
-
-  Future<Null> submit() async {
-    await _eventService.update(event);
-  }
-
-  bool addAssistant(String assistantUrl) => event.assistants.add(assistantUrl);
-
-  bool deleteAssistant(Person assistant) => event.assistants.remove(assistant);
 }

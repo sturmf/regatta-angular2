@@ -6,6 +6,9 @@ import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
 
+/// Utility function to trigger the selectEvent action.
+RegattaAction<Event> selectEvent(Event event) => new SelectEventAction(event);
+
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
 
@@ -47,6 +50,15 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
   }
 }
 
+/// Action to select an Event.
+class SelectEventAction extends RegattaAction<Event> {
+  ///
+  SelectEventAction(Event payload) : super(payload);
+
+  @override
+  ActionType get type => ActionType.selectEvent;
+}
+
 /// Action to add an Event.
 class AddEventAction extends RegattaAction<Event> {
   ///
@@ -54,6 +66,14 @@ class AddEventAction extends RegattaAction<Event> {
 
   @override
   ActionType get type => ActionType.addEvent;
+}
+
+class UpdateEventAction extends RegattaAction<Event> {
+  ///
+  UpdateEventAction(Event payload) : super(payload);
+
+  @override
+  ActionType get type => ActionType.updateEvent;
 }
 
 /// Action to add an Event.

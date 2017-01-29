@@ -40,6 +40,7 @@ class EventListComponent {
 
   // FIXME: rewrite as redux change
   void gotoEvent(Event event) {
+    _store.dispatch(selectEvent(event));
     final List<dynamic> link = [
       'EventDetail',
       {'id': event.id.toString()}
