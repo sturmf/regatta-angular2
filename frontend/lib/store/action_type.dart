@@ -9,7 +9,10 @@ enum ActionType {
   /// Indicates to add an event to the store
   addEvent,
 
-  /// Indicates an event changed its data and requires a store update
+  /// Indicates the intention to update an even in the store
+  requestUpdateEvent,
+
+  /// Indicates an update an event in the store
   updateEvent,
 
   /// Indicates the intention to delete an event from the store

@@ -53,7 +53,7 @@ class EventService {
     }
   }
 
-  Future<Event> update(Event event) async {
+  Future<Event> updateEvent(Event event) async {
     try {
       final String url = '$_eventsUrl/${event.id}/';
       final Response response = await _http.put(url, headers: _headersPost, body: toJson(event));

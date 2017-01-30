@@ -56,4 +56,11 @@ class Event {
   set endDate(String date) {
     _endDate = DateTime.parse(date);
   }
+
+  /// Clones this instance
+  Event copy({String name}) => new Event(this.id, this.url, name ?? this.name, this._startDate, this._endDate,
+      this.raceCount, this.raceUnratedOn, this.organizer, this.raceCommittee, this.umpire, this.assistants);
+
+  @override
+  String toString() => 'Event($name)';
 }
