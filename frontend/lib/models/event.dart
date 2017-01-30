@@ -58,8 +58,18 @@ class Event {
   }
 
   /// Clones this instance
-  Event copy({String name}) => new Event(this.id, this.url, name ?? this.name, this._startDate, this._endDate,
-      this.raceCount, this.raceUnratedOn, this.organizer, this.raceCommittee, this.umpire, this.assistants);
+  Event copy({String name, DateTime startDate, DateTime endDate, int raceCount}) => new Event(
+      this.id,
+      this.url,
+      name ?? this.name,
+      startDate ?? this._startDate,
+      endDate ?? this._endDate,
+      raceCount ?? this.raceCount,
+      this.raceUnratedOn,
+      this.organizer,
+      this.raceCommittee,
+      this.umpire,
+      this.assistants);
 
   @override
   String toString() => 'Event($name)';

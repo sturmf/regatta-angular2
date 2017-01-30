@@ -12,15 +12,42 @@ import 'package:frontend/models/event.dart';
     styleUrls: const ['event_detail_component.css'],
     directives: const [materialDirectives, EventAssistantsListComponent],
     providers: const [materialProviders])
-class EventDetailComponent /*implements OnInit*/ {
+class EventDetailComponent {
   final RegattaStore _store;
 
   EventDetailComponent(this._store);
 
   Event get event => _store.state.selectedEvent;
 
-  void onNameChanged(String name) {
-    print('Name changed: $name');
-    _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(name: name)));
+  String get raceCount => _store.state.selectedEvent.raceCount.toString();
+
+  void onNameChanged(String data) {
+    _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(name: data)));
+  }
+
+  // FIXME: workaround for a missing date picker
+  void onStartDateChanged(String data) {
+    try {
+      _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(startDate: DateTime.parse(data))));
+    } on FormatException {
+      // FIXME: what to do then?
+    }
+  }
+
+  // FIXME: workaround for a missing date picker
+  void onEndDateChanged(String data) {
+    try {
+      _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(endDate: DateTime.parse(data))));
+    } on FormatException {
+      // FIXME: what to do then?
+    }
+  }
+
+  void onRaceCountChanged(String data) {
+    try {
+      _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(raceCount: int.parse(data))));
+    } on FormatException {
+      // FIXME: what to do then?
+    }
   }
 }
