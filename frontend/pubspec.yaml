@@ -9,20 +9,20 @@ environment:
   sdk: '>=1.13.0 <2.0.0'
 
 dependencies:
-  angular2: 2.0.0
-  angular2_components: ^0.1.0
-  browser: ^0.10.0
-  dart_to_js_script_rewriter: ^1.0.1
+  angular2: any
+  angular2_components: any
+  browser: any
+  dart_to_js_script_rewriter: any
   dson: any
   greencat: any
-  http: ^0.11.0
-  stream_transformers: ^0.3.0
+  http: any
+  stream_transformers: any
   sass_transformer: any
   reflectable: any
 
 dev_dependencies:
   dart_style: any
-  test: ^0.12.6
+  test: any
   pageloader: any
   quiver: any
   mockito: any
