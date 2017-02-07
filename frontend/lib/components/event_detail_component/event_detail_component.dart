@@ -1,4 +1,5 @@
 import 'package:angular2/core.dart';
+import 'package:angular2/router.dart';
 import 'package:angular2_components/angular2_components.dart';
 
 import 'package:frontend/components/event_assistants_list_component/event_assistants_list_component.dart';
@@ -14,21 +15,25 @@ import 'package:frontend/models/event.dart';
     providers: const [materialProviders])
 class EventDetailComponent {
   final RegattaStore _store;
+  final RouteParams _routeParams;
+  int selectedEvent;
 
-  EventDetailComponent(this._store);
+  EventDetailComponent(this._store, this._routeParams) {
+    selectedEvent = int.parse(_routeParams.get('id'));
+  }
 
-  Event get event => _store.state.selectedEvent;
+  Event get event => _store.state.events[selectedEvent];
 
-  String get raceCount => _store.state.selectedEvent.raceCount.toString();
+  String get raceCount => _store.state.events[selectedEvent].raceCount.toString();
 
   void onNameChanged(String data) {
-    _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(name: data)));
+    _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(name: data)));
   }
 
   // FIXME: workaround for a missing date picker
   void onStartDateChanged(String data) {
     try {
-      _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(startDate: DateTime.parse(data))));
+      _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(startDate: DateTime.parse(data))));
     } on FormatException {
       // FIXME: what to do then?
     }
@@ -37,7 +42,7 @@ class EventDetailComponent {
   // FIXME: workaround for a missing date picker
   void onEndDateChanged(String data) {
     try {
-      _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(endDate: DateTime.parse(data))));
+      _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(endDate: DateTime.parse(data))));
     } on FormatException {
       // FIXME: what to do then?
     }
@@ -45,7 +50,7 @@ class EventDetailComponent {
 
   void onRaceCountChanged(String data) {
     try {
-      _store.dispatch(requestUpdateEvent(_store.state.selectedEvent.copy(raceCount: int.parse(data))));
+      _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(raceCount: int.parse(data))));
     } on FormatException {
       // FIXME: what to do then?
     }

@@ -6,9 +6,6 @@ import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
 
-/// Utility function to trigger the selectEvent action.
-RegattaAction<Event> selectEvent(Event event) => new SelectEventAction(event);
-
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
 

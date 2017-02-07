@@ -21,7 +21,7 @@ class EventListComponent {
   EventListComponent(this._router, this._store);
 
   String eventName = '';
-  Iterable<Event> get events => _store.state.events;
+  Iterable<Event> get events => _store.state.events.values;
 
   void onKeyDown(KeyboardEvent key) {
     if (key.keyCode == 13) {
@@ -40,8 +40,6 @@ class EventListComponent {
 
   // FIXME: rewrite as redux change
   void gotoEvent(Event event) {
-    print('Before routing to ${_store.state.selectedEvent}');
-    _store.dispatch(selectEvent(event));
     final List<dynamic> link = [
       'EventDetail',
       {'id': event.id.toString()}
