@@ -53,15 +53,6 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
   }
 }
 
-/// Action to select an Event.
-class SelectEventAction extends RegattaAction<Event> {
-  ///
-  SelectEventAction(Event payload) : super(payload);
-
-  @override
-  ActionType get type => ActionType.selectEvent;
-}
-
 /// Action to add an Event.
 class AddEventAction extends RegattaAction<Event> {
   ///
