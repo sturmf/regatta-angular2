@@ -10,9 +10,9 @@
             </div>
 
             <div style="display:flex">
-                <material-input style="flex:1" floatingLabel required label="Start Date" [ngModel]="event.startDate" (change)="onStartDateChanged($event)"></material-input>
+                <material-input style="flex:1" floatingLabel required label="Start Date" [ngModel]="event.startDateStr" (change)="onStartDateChanged($event)"></material-input>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <material-input style="flex:1" floatingLabel required label="End Date" [ngModel]="event.endDate" (change)="onEndDateChanged($event)"></material-input>
+                <material-input style="flex:1" floatingLabel required label="End Date" [ngModel]="event.endDateStr" (change)="onEndDateChanged($event)"></material-input>
             </div>
 
             <div style="display:flex">

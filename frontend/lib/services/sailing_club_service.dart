@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:angular2/core.dart';
-import 'package:dson/dson.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:http/http.dart';
 
@@ -21,8 +20,8 @@ class SailingClubService {
   Future<Iterable<SailingClub>> getSailingClubs() async {
     try {
       final Response response = await _http.get('$_sailingClubsUrl/', headers: _headersGet);
-      final List<Map<dynamic, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
-      final List<SailingClub> sailingClubs = fromMapList(results, SailingClub) as List<SailingClub>;
+      final List<Map<String, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<String, dynamic>>;
+      final List<SailingClub> sailingClubs = results.map((e) => new SailingClub.fromJson(e));
       return sailingClubs;
     } catch (e) {
       throw _handleError(e);

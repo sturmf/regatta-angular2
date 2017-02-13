@@ -6,31 +6,30 @@ homepage: https://regatta.atlassian.net
 documentation:
 
 environment:
-  sdk: '>=1.13.0 <2.0.0'
+  sdk: '>=1.19.0 <2.0.0'
 
 dependencies:
-  angular2: any
-  angular2_components: any
-  browser: any
-  dart_to_js_script_rewriter: any
-  dson: any
-  greencat: any
-  http: any
-  stream_transformers: any
-  sass_transformer: any
-  reflectable: any
+  angular2: 3.0.0-alpha
+  angular2_components: 0.3.1-alpha
+  reflectable: 1.0.1
+  sass_transformer: 0.1.2+1
+  greencat: 0.0.2
+  browser: 0.10.0+2
+  http: 0.11.3+9
+  stream_transformers: 0.3.0+3
 
 dev_dependencies:
-  dart_style: any
-  test: any
-  pageloader: any
-  quiver: any
-  mockito: any
+  test: 0.12.19
+  dart_to_js_script_rewriter: 1.0.2
+  dart_style: 0.2.16
+  pageloader: 2.2.5
+  mockito: 1.0.1
+  angular_test: 1.0.0-alpha+5
 
 transformers:
   - angular2/transform/codegen:
       platform_directives:
-        - package:angular2/common.dart#COMMON_DIRECTIVES
+        - 'package:angular2/common.dart#COMMON_DIRECTIVES'
       platform_pipes:
         - 'package:angular2/common.dart#COMMON_PIPES'
       entry_points: web/main.dart
@@ -39,7 +38,7 @@ transformers:
         Client: 'package:http/http.dart'
   - angular2/transform/reflection_remover:
       $include:
-        - test/**_test.dart
+        - test/event_list_test.dart
         - web/main.dart
   - reflectable:
       entry_points:

@@ -1,18 +1,20 @@
 // Because Angular is using dart:html, we need these tests to run on an actual
 // browser. This means that it should be run with `-p dartium` or `-p chrome`.
+@Tags(const ['aot'])
 @TestOn('browser')
 
 // Replaced with code generation.
-import 'package:angular2/src/core/reflection/reflection.dart';
-import 'package:angular2/src/core/reflection/reflection_capabilities.dart';
+//import 'package:angular2/src/core/reflection/reflection.dart';
+//import 'package:angular2/src/core/reflection/reflection_capabilities.dart';
 
 // Experimental. Will be published under package:angular2/testing.dart soon.
-import 'package:angular2/src/modules/testing/lib/testing.dart';
+//import 'package:angular2/src/modules/testing/lib/testing.dart';
 
 import 'package:angular2/angular2.dart';
+import 'package:angular_test/angular_test.dart';
 import 'package:angular2/router.dart';
 import 'package:mockito/mockito_no_mirrors.dart';
-import 'package:pageloader/html.dart';
+//import 'package:pageloader/html.dart';
 import 'package:test/test.dart';
 
 import 'package:frontend/store/regatta_store.dart';
@@ -24,8 +26,11 @@ import 'package:frontend/models/event.dart';
 @Component(selector: 'test', directives: const [EventListComponent], template: '<my-event-list></my-event-list>')
 class EventListTestComponent {}
 
+@AngularEntrypoint()
 void main() {
-  reflector.reflectionCapabilities = new ReflectionCapabilities();
+  tearDown(disposeAnyRunningTest);
+
+  //reflector.reflectionCapabilities = new ReflectionCapabilities();
 
   test('EventListComponent list contains dummy event', () async {
     final router = new MockRouter();
@@ -40,15 +45,21 @@ void main() {
 
     final fixture = await testBed.create();
 
+    /*
     // Create an instance of the in-browser page loader that uses our fixture.
     final loader = new HtmlPageLoader(fixture.element.parent, executeSyncedFn: (c) async {
       await c();
       return fixture.update;
     }, useShadowDom: false);
+    */
 
     // Get a handle to the list.
-    final po = await loader.getInstance(EventListPO);
-    final items = await po.items;
+    //final po = await loader.getInstance(EventListPO);
+    final pageObject = await fixture.resolvePageObject/*<EventListPO>*/(
+      EventListPO,
+    );
+
+    final items = await pageObject.items;
     expect(items, hasLength(1));
     expect(await items[0].visibleText, equals('Dummy Event'));
 
