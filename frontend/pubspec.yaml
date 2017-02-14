@@ -38,7 +38,7 @@ transformers:
         Client: 'package:http/http.dart'
   - angular2/transform/reflection_remover:
       $include:
-        - test/event_list_test.dart
+        - test/**_test.dart
         - web/main.dart
   - reflectable:
       entry_points:
