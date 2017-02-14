@@ -1,19 +1,13 @@
 // Because Angular is using dart:html, we need these tests to run on an actual
 // browser. This means that it should be run with `-p dartium` or `-p chrome`.
+@Tags(const ['aot'])
 @TestOn('browser')
 import 'dart:async';
-
-// Replaced with code generation.
-import 'package:angular2/src/core/reflection/reflection.dart';
-import 'package:angular2/src/core/reflection/reflection_capabilities.dart';
-
-// Experimental. Will be published under package:angular2/testing.dart soon.
-import 'package:angular2/src/modules/testing/lib/testing.dart';
-
 import 'package:angular2/angular2.dart';
+import 'package:angular_test/angular_test.dart';
+import 'package:test/test.dart';
 import 'package:pageloader/html.dart';
 import 'package:pageloader/objects.dart';
-import 'package:test/test.dart';
 
 @Component(selector: 'test-cmp', template: '<textarea>Hello World!\n</textarea>')
 class DummyComponent {}
@@ -27,20 +21,19 @@ class TestComponentPO {
   Future<String> get text => _textArea.visibleText;
 }
 
+@AngularEntrypoint()
 void main() {
-  reflector.reflectionCapabilities = new ReflectionCapabilities();
+  tearDown(disposeAnyRunningTest);
 
   test('DummyComponent "Hello World!" test', () async {
     final testBed = new NgTestBed<DummyComponent>();
     final fixture = await testBed.create();
-    // Create an instance of the in-browser page loader that uses our fixture.
-    final loader = new HtmlPageLoader(fixture.element.parent, executeSyncedFn: (c) async {
-      await c();
-      return fixture.update;
-    }, useShadowDom: false);
 
     // Get a handle to the list.
-    final po = await loader.getInstance(TestComponentPO);
-    expect(await po.text, equals('Hello World!'));
+    final pageObject = await fixture.resolvePageObject/*<TestComponentPO>*/(
+      TestComponentPO,
+    );
+
+    await expect(await pageObject.text, equals('Hello World!'));
   });
 }

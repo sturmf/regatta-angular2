@@ -39,11 +39,12 @@ transformers:
   - angular2/transform/reflection_remover:
       $include:
         - test/event_list_test.dart
+        - test/example_test.dart
         - web/main.dart
-  - reflectable:
-      entry_points:
-        - web/main.dart
-      formatted: true
+  #- reflectable:
+  #    entry_points:
+  #      - web/main.dart
+  #    formatted: true
   - test/pub_serve:
       $include: test/**_test.dart
   - dart_to_js_script_rewriter
