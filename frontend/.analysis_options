@@ -56,7 +56,7 @@ linter:
     - super_goes_last
     - type_annotate_public_apis # subset of always_specify_types
     - type_init_formals
-    - unawaited_futures
+    # - unawaited_futures # This _maybe_ needs to be enabled again!!!
     - unnecessary_brace_in_string_interp
     - unnecessary_getters_setters
 
