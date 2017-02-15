@@ -39,7 +39,6 @@ transformers:
   - angular2/transform/reflection_remover:
       $include:
         - test/**_test.dart
-        - test/example_test.dart
         - web/main.dart
   #- reflectable:
   #    entry_points:
