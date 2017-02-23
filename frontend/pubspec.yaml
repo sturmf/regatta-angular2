@@ -27,7 +27,8 @@ dev_dependencies:
   angular_test: 1.0.0-alpha+5
 
 transformers:
-  - angular2/transform/codegen:
+  - sass_transformer
+  - angular2:
       platform_directives:
         - 'package:angular2/common.dart#COMMON_DIRECTIVES'
       platform_pipes:
@@ -47,4 +48,3 @@ transformers:
   - test/pub_serve:
       $include: test/**_test.dart
   - dart_to_js_script_rewriter
-  - sass_transformer
