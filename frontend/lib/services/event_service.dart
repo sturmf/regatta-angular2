@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:angular2/core.dart';
-import 'package:dson/dson.dart';
 import 'package:frontend/models/event.dart';
 import 'package:http/http.dart';
 
@@ -25,7 +24,7 @@ class EventService {
     try {
       final Response response =
           await _http.post('$_eventsUrl/', headers: _headersPost, body: JSON.encode({'name': name}));
-      return fromJson(response.body, Event);
+      return new Event.fromJson(JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
     }
@@ -34,9 +33,9 @@ class EventService {
   Future<Iterable<Event>> getEvents() async {
     try {
       final Response response = await _http.get('$_eventsUrl/', headers: _headersGet);
-      final List<Map<dynamic, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
+      final List<Map<String, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<String, dynamic>>;
       //print(results);
-      final List<Event> events = fromMapList(results, Event) as List<Event>;
+      final List<Event> events = results.map((e) => new Event.fromJson(e));
       return events;
     } catch (e) {
       throw _handleError(e);
@@ -46,18 +45,18 @@ class EventService {
   Future<Event> getEvent(int id) async {
     try {
       final Response response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
-      final Event e = fromJson(response.body, Event);
+      final Event e = new Event.fromJson(JSON.decode(response.body));
       return e;
     } catch (e) {
       throw _handleError(e);
     }
   }
 
-  Future<Event> update(Event event) async {
+  Future<Event> updateEvent(Event event) async {
     try {
       final String url = '$_eventsUrl/${event.id}/';
-      final Response response = await _http.put(url, headers: _headersPost, body: toJson(event));
-      return fromJson(response.body, Event);
+      final Response response = await _http.put(url, headers: _headersPost, body: JSON.encode(event.toJson()));
+      return new Event.fromJson(JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
     }

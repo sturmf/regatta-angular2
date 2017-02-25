@@ -12,7 +12,13 @@ RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventA
 /// Utility function to trigger the addEvent action.
 RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
 
-/// Utility function to trigger the deleteEvent action.
+/// Utility function to request the updateEvent action.
+RegattaAction<Event> requestUpdateEvent(Event event) => new RequestUpdateEventAction(event);
+
+/// Utility function to trigger the updateEvent action.
+RegattaAction<Event> updateEvent(Event event) => new UpdateEventAction(event);
+
+/// Utility function to request the deleteEvent action.
 RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAction(event);
 
 /// Utility function to trigger the deleteEvent action.
@@ -57,6 +63,33 @@ class AddEventAction extends RegattaAction<Event> {
 }
 
 /// Action to add an Event.
+class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
+  final EventService _eventService;
+
+  RequestUpdateEventAction(Event payload)
+      : _eventService = AppComponent.myinjector.get(EventService),
+        super(payload);
+
+  @override
+  ActionType get type => ActionType.requestUpdateEvent;
+
+  @override
+  Future call(MiddlewareApi api) {
+    return _eventService.updateEvent(payload).then((_) {
+      api.dispatch(updateEvent(payload));
+    });
+  }
+}
+
+class UpdateEventAction extends RegattaAction<Event> {
+  ///
+  UpdateEventAction(Event payload) : super(payload);
+
+  @override
+  ActionType get type => ActionType.updateEvent;
+}
+
+/// Action to add an Event.
 class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
   final EventService _eventService;
 
@@ -65,7 +98,7 @@ class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncActi
         super(payload);
 
   @override
-  ActionType get type => ActionType.deleteEvent;
+  ActionType get type => ActionType.requestDeleteEvent;
 
   @override
   Future call(MiddlewareApi api) {

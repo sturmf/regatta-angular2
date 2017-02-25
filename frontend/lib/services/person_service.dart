@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:angular2/angular2.dart';
-import 'package:dson/dson.dart';
 import 'package:frontend/models/person.dart';
 import 'package:http/http.dart';
 
@@ -22,8 +21,8 @@ class PersonService {
   Future<Iterable<Person>> getPersons([Map<String, dynamic> search]) async {
     try {
       final Response response = await _http.get('$_personsUrl/?${encodeMap(search)}', headers: _headersGet);
-      final List<Map<dynamic, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<dynamic, dynamic>>;
-      final List<Person> persons = fromMapList(results, Person) as List<Person>;
+      final List<Map<String, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<String, dynamic>>;
+      final List<Person> persons = results.map((e) => new Person.fromJson(e));
       return persons;
     } catch (e) {
       throw _handleError(e);

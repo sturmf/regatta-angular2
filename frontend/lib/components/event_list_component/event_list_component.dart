@@ -21,7 +21,7 @@ class EventListComponent {
   EventListComponent(this._router, this._store);
 
   String eventName = '';
-  Iterable<Event> get events => _store.state.events;
+  Iterable<Event> get events => _store.state.events.values;
 
   void onKeyDown(KeyboardEvent key) {
     if (key.keyCode == 13) {

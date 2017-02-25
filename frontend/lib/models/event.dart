@@ -1,59 +1,105 @@
-import 'package:dson/dson.dart';
 import 'package:intl/intl.dart';
 
-@serializable
 class Event {
   final int id;
   final String url;
   String name;
-  DateTime _startDate; // replaced with custom formatter
-  DateTime _endDate; // replaced with custom formatter
-  @SerializedName("race_count")
+  DateTime startDate;
+  DateTime endDate;
   int raceCount;
-  @SerializedName("race_unrated_on")
   String raceUnratedOn;
   String organizer;
-  @SerializedName("race_committee")
   String raceCommittee;
   String umpire;
-  @DsonType(String)
-  Set<String> assistants;
-
+  List<String> assistants;
   // entries
   // races
 
   Event(this.id, this.url,
       [this.name,
-      this._startDate,
-      this._endDate,
+      this.startDate,
+      this.endDate,
       this.raceCount,
       this.raceUnratedOn,
       this.organizer,
       this.raceCommittee,
       this.umpire,
-      this.assistants]);
+      this.assistants]) {
+    startDate ??= new DateTime.now();
+    endDate ??= new DateTime.now();
+  }
 
-  @SerializedName("start_date")
-  String get startDate {
+  factory Event.fromJson(Map<String, dynamic> event) => new Event(
+      _toInt(event['id']),
+      event['url'],
+      event['name'],
+      DateTime.parse(event['start_date']),
+      DateTime.parse(event['end_date']),
+      _toInt(event['race_count']),
+      event['race_unrated_on'],
+      event['organizer'],
+      event['race_committee'],
+      event['umpire'],
+      event['assistants']);
+
+  String get startDateStr {
     final DateFormat formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(_startDate);
-    //return _start_date.toIso8601String();
+    return formatter.format(startDate);
   }
 
-  @SerializedName("start_date")
-  set startDate(String date) {
-    _startDate = DateTime.parse(date);
+  set startDateStr(String date) {
+    startDate = DateTime.parse(date);
   }
 
-  @SerializedName("end_date")
-  String get endDate {
+  String get endDateStr {
     final DateFormat formatter = new DateFormat('yyyy-MM-dd');
-    return formatter.format(_endDate);
-    //return _end_date.toIso8601String();
+    return formatter.format(endDate);
   }
 
-  @SerializedName("end_date")
-  set endDate(String date) {
-    _endDate = DateTime.parse(date);
+  set endDateStr(String date) {
+    endDate = DateTime.parse(date);
   }
+
+  /// Clones this instance
+  Event copy(
+          {String name,
+          DateTime startDate,
+          DateTime endDate,
+          int raceCount,
+          String raceUnratedOn,
+          String organizer,
+          String raceCommittee,
+          String umpire,
+          List<String> assistants}) =>
+      new Event(
+          this.id,
+          this.url,
+          name ?? this.name,
+          startDate ?? this.startDate,
+          endDate ?? this.endDate,
+          raceCount ?? this.raceCount,
+          raceUnratedOn ?? this.raceUnratedOn,
+          organizer ?? this.organizer,
+          raceCommittee ?? this.raceCommittee,
+          umpire ?? this.umpire,
+          assistants ?? this.assistants);
+
+  Map toJson() => {
+        'id': id,
+        'url': url,
+        'name': name,
+        'start_date': startDateStr,
+        'end_date': endDateStr,
+        'race_count': raceCount,
+        'race_unrated_on': raceUnratedOn,
+        'organizer': organizer,
+        'race_committee': raceCommittee,
+        'umpire': umpire,
+        'assistants': assistants
+      };
+
+  @override
+  String toString() => 'Event($name)';
 }
+
+int _toInt(id) => id is int ? id : int.parse(id);

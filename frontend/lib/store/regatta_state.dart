@@ -3,17 +3,17 @@ import 'package:frontend/models/event.dart';
 
 /// State of the regattaApp.
 class RegattaState {
-  /// Events available in the app.
-  final Iterable<Event> events;
+  /// All events available in the app.
+  final Map<int, Event> events;
 
   /// Creates a new instance.
-  RegattaState(Iterable<Event> events) : this.events = events;
+  RegattaState(Map<int, Event> events) : this.events = new Map.from(events);
 
   /// Default state for the app, used when is not explicitly initialized.
-  const RegattaState.initial() : this.events = const <Event>[];
+  RegattaState.initial() : this.events = <int, Event>{};
 
   /// Clones this instance
-  RegattaState copy({Iterable<Event> events}) => new RegattaState(events ?? this.events);
+  RegattaState copy({Map<int, Event> events}) => new RegattaState(events ?? this.events);
 
   @override
   String toString() {

@@ -14,10 +14,16 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
 
   switch (action.type) {
     case ActionType.addEvent:
-      final events = (new List<Event>.from(currentState.events)..add(action.payload)).toList(growable: false);
+      final events = new Map<int, Event>.from(currentState.events);
+      events[action.payload.id] = action.payload;
+      return currentState.copy(events: events);
+    case ActionType.updateEvent:
+      final events = new Map<int, Event>.from(currentState.events);
+      events[action.payload.id] = action.payload;
       return currentState.copy(events: events);
     case ActionType.deleteEvent:
-      final events = currentState.events.where((event) => event != action.payload).toList(growable: false);
+      final events = new Map<int, Event>.from(currentState.events);
+      events.remove(action.payload.id);
       return currentState.copy(events: events);
     default:
       return currentState;
