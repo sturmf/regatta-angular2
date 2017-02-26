@@ -75,4 +75,5 @@ deploy:
   script: ./deploy.sh
   skip_cleanup: true
   on:
+    all_branches: true
     python: 3.4
