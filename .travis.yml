@@ -10,7 +10,7 @@ python:
 env:
   global:
     - DOCKER_CERT_PATH=cloud_hero
-    - DOCKER_HOST=tcp://swarm3956.cloutout.co:8443
+    - DOCKER_HOST=tcp://swarm3956.cloudout.co:8443
     - DOCKER_TLS_VERIFY=1
 
 before_install:
