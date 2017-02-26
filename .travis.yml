@@ -59,10 +59,11 @@ script:
   - (cd frontend  && make dtests)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
-  - sleep 3 && echo sleep done
+  # - sleep 3 && echo sleep done
   #- (cd e2e_tests && make tests)
 
 after_success:
+  - (cd frontend && make build)
   - (cd backend && coveralls)
 
 after_script:
