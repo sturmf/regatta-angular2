@@ -1,6 +1,5 @@
 // Because Angular is using dart:html, we need these tests to run on an actual
 // browser. This means that it should be run with `-p dartium` or `-p chrome`.
-@Tags(const ['aot'])
 @TestOn('browser')
 import 'dart:async';
 import 'package:angular2/angular2.dart';

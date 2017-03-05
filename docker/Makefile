@@ -10,10 +10,11 @@ deploy:
 	# Build image
 	docker build -t regatta .
 	# Flip old with new container
-	docker stop regatta_container
+	-docker stop regatta_container
+	# Start new container
 	docker run -p 80:80 -d --name regatta_container_new regatta
 	# FIXME: here we would check if the new container started...
-	docker rm regatta_container
+	-docker rm regatta_container
 	docker rename regatta_container_new regatta_container
 	# FIXME: with docker 1.13 we can use system prune
 	# Cleanup leftover container and images

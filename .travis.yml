@@ -10,12 +10,12 @@ python:
 env:
   global:
     - DOCKER_CERT_PATH=cloud_hero
-    - DOCKER_HOST=tcp://swarm3355.chapi.co:8443
+    - DOCKER_HOST=tcp://swarm3956.chapi.co:8443
     - DOCKER_TLS_VERIFY=1
 
 before_install:
   # Decrypt cloudhero key
-  - openssl aes-256-cbc -K $encrypted_fe7987b1707b_key -iv $encrypted_fe7987b1707b_iv -in docker/cloud_hero/key.pem.enc -out docker/cloud_hero/key.pem -d
+  - openssl aes-256-cbc -K $encrypted_66e01c2c6c83_key -iv $encrypted_66e01c2c6c83_iv -in docker/cloud_hero/key.pem.enc -out docker/cloud_hero/key.pem -d
   # 2 lines of workaround as proposed here: https://github.com/travis-ci/travis-ci/issues/6928#issuecomment-264227708
   - source /opt/jdk_switcher/jdk_switcher.sh
   - jdk_switcher use oraclejdk8
@@ -59,10 +59,11 @@ script:
   - (cd frontend  && make dtests)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
-  - sleep 3 && echo sleep done
+  # - sleep 3 && echo sleep done
   #- (cd e2e_tests && make tests)
 
 after_success:
+  - (cd frontend && make build)
   - (cd backend && coveralls)
 
 after_script:
@@ -75,5 +76,5 @@ deploy:
   script: ./deploy.sh
   skip_cleanup: true
   on:
-    branch: master
+    all_branches: true
     python: 3.4
