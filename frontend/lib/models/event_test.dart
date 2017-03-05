@@ -32,7 +32,7 @@ void main() {
 
   test('serialize event without parameters', () {
     final event = new Event(1, 'http://localhost:8000/api/events/1/');
-    final json = event.toJson();
+    final json = event.toMap();
     expect(json, dataJsonDefault);
   });
 
@@ -48,13 +48,13 @@ void main() {
         'http://localhost:8000/api/persons/1/',
         'http://localhost:8000/api/persons/2/',
         'http://localhost:8000/api/persons/3/');
-    final json = event.toJson();
+    final json = event.toMap();
     expect(json, dataJson);
   });
 
   test('deserialize and serialize roudtrip of event', () {
-    final event = new Event.fromJson(dataJson);
-    final json = event.toJson();
+    final event = new Event.fromMap(dataJson);
+    final json = event.toMap();
     expect(json, dataJson);
   });
 }

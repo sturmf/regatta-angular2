@@ -24,7 +24,7 @@ class EventService {
     try {
       final Response response =
           await _http.post('$_eventsUrl/', headers: _headersPost, body: JSON.encode({'name': name}));
-      return new Event.fromJson(JSON.decode(response.body));
+      return new Event.fromMap(JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
     }
@@ -35,7 +35,7 @@ class EventService {
       final Response response = await _http.get('$_eventsUrl/', headers: _headersGet);
       final List<Map<String, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<String, dynamic>>;
       //print(results);
-      final List<Event> events = results.map((e) => new Event.fromJson(e));
+      final List<Event> events = results.map((e) => new Event.fromMap(e));
       return events;
     } catch (e) {
       throw _handleError(e);
@@ -45,7 +45,7 @@ class EventService {
   Future<Event> getEvent(int id) async {
     try {
       final Response response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
-      final Event e = new Event.fromJson(JSON.decode(response.body));
+      final Event e = new Event.fromMap(JSON.decode(response.body));
       return e;
     } catch (e) {
       throw _handleError(e);
@@ -55,8 +55,8 @@ class EventService {
   Future<Event> updateEvent(Event event) async {
     try {
       final String url = '$_eventsUrl/${event.id}/';
-      final Response response = await _http.put(url, headers: _headersPost, body: JSON.encode(event.toJson()));
-      return new Event.fromJson(JSON.decode(response.body));
+      final Response response = await _http.put(url, headers: _headersPost, body: JSON.encode(event.toMap()));
+      return new Event.fromMap(JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
     }

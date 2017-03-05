@@ -29,10 +29,11 @@ class Event {
     endDate ??= new DateTime.now();
   }
 
-  factory Event.fromJson(Map<String, dynamic> event) => new Event(
+  factory Event.fromMap(Map<String, dynamic> event) => new Event(
       _toInt(event['id']),
       event['url'],
-      event['name'],
+      event['name']
+      /*,
       DateTime.parse(event['start_date']),
       DateTime.parse(event['end_date']),
       _toInt(event['race_count']),
@@ -40,7 +41,21 @@ class Event {
       event['organizer'],
       event['race_committee'],
       event['umpire'],
-      event['assistants']);
+      event['assistants']*/);
+
+  Map toMap() => {
+    'id': id,
+    'url': url,
+    'name': name,
+    'start_date': startDateStr,
+    'end_date': endDateStr,
+    'race_count': raceCount,
+    'race_unrated_on': raceUnratedOn,
+    'organizer': organizer,
+    'race_committee': raceCommittee,
+    'umpire': umpire,
+    'assistants': assistants
+  };
 
   String get startDateStr {
     final DateFormat formatter = new DateFormat('yyyy-MM-dd');
@@ -84,19 +99,6 @@ class Event {
           umpire ?? this.umpire,
           assistants ?? this.assistants);
 
-  Map toJson() => {
-        'id': id,
-        'url': url,
-        'name': name,
-        'start_date': startDateStr,
-        'end_date': endDateStr,
-        'race_count': raceCount,
-        'race_unrated_on': raceUnratedOn,
-        'organizer': organizer,
-        'race_committee': raceCommittee,
-        'umpire': umpire,
-        'assistants': assistants
-      };
 
   @override
   String toString() => 'Event($name)';
