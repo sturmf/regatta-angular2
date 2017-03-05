@@ -1,12 +1,14 @@
+<app-header></app-header>
+
 <h1 align="center">Regatta</h1>
 
-<div style="display:flex">
-    <my-navigation-bar style="margin-right:25px"></my-navigation-bar>
+<div id="content">
+    <my-navigation-bar id="navigation"></my-navigation-bar>
     <div style="flex:1">
         <router-outlet></router-outlet>
     </div>
 </div>
 <br>
-<div style="margin: 0 auto; text-align: center; font-size:12px; color:#C8C8C8">
+<div id="footer">
     Current version: <a href="https://github.com/sturmf/regatta-angular2/commit/{{hash}}" style="color:#C8C8C8">{{hash}}</a>
 </div>
