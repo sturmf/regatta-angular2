@@ -4,7 +4,7 @@ import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:frontend/models/event.dart';
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart';
+import 'package:frontend/store/regatta_action.dart' as actions;
 
 @Injectable()
 class FirebaseService {
@@ -24,7 +24,7 @@ class FirebaseService {
       databaseURL: "https://regatta-17147.firebaseio.com",
       storageBucket: "regatta-17147.appspot.com",
     );
-    // Set everrything up for the auth service
+    // Set everything up for the auth service
     _fbGoogleAuthProvider = new fb.GoogleAuthProvider();
     _fbAuth = fb.auth();
     _fbAuth.onAuthStateChanged.listen(_authChanged);
@@ -55,7 +55,16 @@ class FirebaseService {
 
   void _newEvent(fb.QueryEvent event) {
     print("Event loaded ${event.snapshot}");
-    Event ev = new Event.fromMap(event.snapshot.val());
-    _store.dispatch(addEvent(ev));
+    final Event ev = new Event.fromMap(event.snapshot.val());
+    _store.dispatch(actions.addEvent(ev));
+  }
+
+  Future addEvent(Event event) async {
+    try {
+      await _fbRefEvents.push(event.toMap()).future;
+    }
+    catch (error) {
+      print("$runtimeType::addEvent() -- $error");
+    }
   }
 }

@@ -18,6 +18,7 @@ class EventService {
   EventService(this._http);
 
   // CRUD nomenclature
+/*
   Future<Event> addEvent(String name) async {
     // FIXME: rename to create
     print('EventService.addEvent() has been called with name=$name');
@@ -29,7 +30,8 @@ class EventService {
       throw _handleError(e);
     }
   }
-
+*/
+  /*
   Future<Iterable<Event>> getEvents() async {
     try {
       final Response response = await _http.get('$_eventsUrl/', headers: _headersGet);
@@ -41,7 +43,7 @@ class EventService {
       throw _handleError(e);
     }
   }
-
+  */
   Future<Event> getEvent(int id) async {
     try {
       final Response response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);

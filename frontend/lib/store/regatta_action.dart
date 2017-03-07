@@ -5,6 +5,7 @@ import 'package:greencat/greencat.dart';
 import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/services/event_service.dart';
+import 'package:frontend/services/firebase_service.dart';
 
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
@@ -36,10 +37,10 @@ abstract class RegattaAction<T> extends Action<ActionType> {
 
 /// Action to request the add of a new Event.
 class RequestCreateEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final EventService _eventService;
+  final FirebaseService _fbService;
 
   RequestCreateEventAction(String payload)
-      : _eventService = AppComponent.myinjector.get(EventService),
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
 
   @override
@@ -47,9 +48,7 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
 
   @override
   Future call(MiddlewareApi api) {
-    return _eventService.addEvent(payload).then((event) {
-      api.dispatch(addEvent(event));
-    });
+    return _fbService.addEvent(new Event(-1, "", payload));
   }
 }
 
