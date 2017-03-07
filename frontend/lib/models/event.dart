@@ -1,8 +1,7 @@
 import 'package:intl/intl.dart';
 
 class Event {
-  final int id;
-  final String url;
+  final String key;
   String name;
   DateTime startDate;
   DateTime endDate;
@@ -15,7 +14,7 @@ class Event {
   // entries
   // races
 
-  Event(this.id, this.url,
+  Event(this.key,
       [this.name,
       this.startDate,
       this.endDate,
@@ -29,9 +28,8 @@ class Event {
     endDate ??= new DateTime.now();
   }
 
-  factory Event.fromMap(Map<String, dynamic> event) => new Event(
-      _toInt(event['id']),
-      event['url'],
+  factory Event.fromMap(key, Map<String, dynamic> event) => new Event(
+      key,
       event['name']
       /*,
       DateTime.parse(event['start_date']),
@@ -44,8 +42,6 @@ class Event {
       event['assistants']*/);
 
   Map toMap() => {
-    'id': id,
-    'url': url,
     'name': name,
     'start_date': startDateStr,
     'end_date': endDateStr,
@@ -87,8 +83,7 @@ class Event {
           String umpire,
           List<String> assistants}) =>
       new Event(
-          this.id,
-          this.url,
+          this.key,
           name ?? this.name,
           startDate ?? this.startDate,
           endDate ?? this.endDate,

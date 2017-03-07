@@ -54,8 +54,8 @@ class FirebaseService {
   }
 
   void _newEvent(fb.QueryEvent event) {
-    print("Event loaded ${event.snapshot}");
-    final Event ev = new Event.fromMap(event.snapshot.val());
+    print("Event loaded ${event.snapshot.val()} ${event.snapshot.key}");
+    final Event ev = new Event.fromMap(event.snapshot.key, event.snapshot.val());
     _store.dispatch(actions.addEvent(ev));
   }
 

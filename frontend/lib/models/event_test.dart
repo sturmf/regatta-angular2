@@ -3,8 +3,7 @@ import 'package:frontend/models/event.dart';
 
 void main() {
   final dataJsonDefault = {
-    'id': 1,
-    'url': 'http://localhost:8000/api/events/1/',
+    'key': "abc",
     'name': null,
     'start_date': '2017-02-13',
     'end_date': '2017-02-13',
@@ -17,8 +16,7 @@ void main() {
   };
 
   final dataJson = {
-    'id': 1,
-    'url': 'http://localhost:8000/api/events/1/',
+    'key': "abc",
     'name': 'Christmas Race',
     'start_date': '2017-02-12',
     'end_date': '2017-02-13',
@@ -31,15 +29,14 @@ void main() {
   };
 
   test('serialize event without parameters', () {
-    final event = new Event(1, 'http://localhost:8000/api/events/1/');
+    final event = new Event("abc", 'http://localhost:8000/api/events/1/');
     final json = event.toMap();
     expect(json, dataJsonDefault);
   });
 
   test('serialize event with given parameters', () {
     final event = new Event(
-        1,
-        'http://localhost:8000/api/events/1/',
+        "abc",
         'Christmas Race',
         new DateTime(2017, 2, 12),
         new DateTime(2017, 2, 13),
@@ -53,7 +50,7 @@ void main() {
   });
 
   test('deserialize and serialize roudtrip of event', () {
-    final event = new Event.fromMap(dataJson);
+    final event = new Event.fromMap("abc", dataJson);
     final json = event.toMap();
     expect(json, dataJson);
   });

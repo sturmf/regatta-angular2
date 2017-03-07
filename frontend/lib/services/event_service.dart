@@ -56,9 +56,9 @@ class EventService {
 
   Future<Event> updateEvent(Event event) async {
     try {
-      final String url = '$_eventsUrl/${event.id}/';
+      final String url = '$_eventsUrl/${event.key}/';
       final Response response = await _http.put(url, headers: _headersPost, body: JSON.encode(event.toMap()));
-      return new Event.fromMap(JSON.decode(response.body));
+      return new Event.fromMap("", JSON.decode(response.body));
     } catch (e) {
       throw _handleError(e);
     }
@@ -67,9 +67,9 @@ class EventService {
   Future<Null> deleteEvent(Event event) async {
     print('EventService.deleteEvent() has been called with event=$event');
     try {
-      final String url = '$_eventsUrl/${event.id}/';
+      final String key = '$_eventsUrl/${event.key}/';
       /* final Response response = */
-      await _http.delete(url, headers: _headersPost);
+      await _http.delete(key, headers: _headersPost);
       // FIXME: what to return on failure?
     } catch (e) {
       throw _handleError(e);

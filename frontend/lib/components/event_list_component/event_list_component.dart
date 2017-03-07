@@ -42,7 +42,7 @@ class EventListComponent {
   void gotoEvent(Event event) {
     final List<dynamic> link = [
       'EventDetail',
-      {'id': event.id.toString()}
+      {'key': event.key}
     ];
     _router.navigate(link);
   }

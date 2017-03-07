@@ -48,7 +48,7 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.addEvent(new Event(-1, "", payload));
+    return _fbService.addEvent(new Event(null, payload));
   }
 }
 
