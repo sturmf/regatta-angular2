@@ -18,51 +18,6 @@ class EventService {
   EventService(this._http);
 
   // CRUD nomenclature
-/*
-  Future<Event> addEvent(String name) async {
-    // FIXME: rename to create
-    print('EventService.addEvent() has been called with name=$name');
-    try {
-      final Response response =
-          await _http.post('$_eventsUrl/', headers: _headersPost, body: JSON.encode({'name': name}));
-      return new Event.fromMap(JSON.decode(response.body));
-    } catch (e) {
-      throw _handleError(e);
-    }
-  }
-*/
-  /*
-  Future<Iterable<Event>> getEvents() async {
-    try {
-      final Response response = await _http.get('$_eventsUrl/', headers: _headersGet);
-      final List<Map<String, dynamic>> results = JSON.decode(response.body)['results'] as List<Map<String, dynamic>>;
-      //print(results);
-      final List<Event> events = results.map((e) => new Event.fromMap(e));
-      return events;
-    } catch (e) {
-      throw _handleError(e);
-    }
-  }
-  */
-  Future<Event> getEvent(int id) async {
-    try {
-      final Response response = await _http.get('$_eventsUrl/$id/', headers: _headersGet);
-      final Event e = new Event.fromMap(JSON.decode(response.body));
-      return e;
-    } catch (e) {
-      throw _handleError(e);
-    }
-  }
-
-  Future<Event> updateEvent(Event event) async {
-    try {
-      final String url = '$_eventsUrl/${event.key}/';
-      final Response response = await _http.put(url, headers: _headersPost, body: JSON.encode(event.toMap()));
-      return new Event.fromMap("", JSON.decode(response.body));
-    } catch (e) {
-      throw _handleError(e);
-    }
-  }
 
   Future<Null> deleteEvent(Event event) async {
     print('EventService.deleteEvent() has been called with event=$event');

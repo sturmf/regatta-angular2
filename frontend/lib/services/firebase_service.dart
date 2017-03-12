@@ -67,4 +67,13 @@ class FirebaseService {
       print("$runtimeType::addEvent() -- $error");
     }
   }
+
+  Future updateEvent(Event event) async {
+    try {
+      await _fbRefEvents.child(event.key).update(event.toMap());
+    }
+    catch (error) {
+      print("$runtimeType::updateEvent() -- $error");
+    }
+  }
 }

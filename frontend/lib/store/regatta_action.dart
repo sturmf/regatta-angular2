@@ -63,10 +63,10 @@ class AddEventAction extends RegattaAction<Event> {
 
 /// Action to add an Event.
 class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final EventService _eventService;
+  final FirebaseService _fbService;
 
   RequestUpdateEventAction(Event payload)
-      : _eventService = AppComponent.myinjector.get(EventService),
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
 
   @override
@@ -74,9 +74,7 @@ class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _eventService.updateEvent(payload).then((_) {
-      api.dispatch(updateEvent(payload));
-    });
+    return _fbService.updateEvent(payload);
   }
 }
 
