@@ -4,7 +4,6 @@ import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
-import 'package:frontend/services/event_service.dart';
 import 'package:frontend/services/firebase_service.dart';
 
 /// Utility function to trigger the addEvent action.
