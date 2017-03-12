@@ -88,10 +88,10 @@ class UpdateEventAction extends RegattaAction<Event> {
 
 /// Action to add an Event.
 class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final EventService _eventService;
+  final FirebaseService _fbService;
 
   RequestDeleteEventAction(Event payload)
-      : _eventService = AppComponent.myinjector.get(EventService),
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
 
   @override
@@ -99,13 +99,11 @@ class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _eventService.deleteEvent(payload).then((_) {
-      api.dispatch(deleteEvent(payload));
-    });
+    return _fbService.deleteEvent(payload);
   }
 }
 
-/// Action to add an Event.
+/// Action to delete an Event.
 class DeleteEventAction extends RegattaAction<Event> {
   ///
   DeleteEventAction(Event payload) : super(payload);

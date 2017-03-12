@@ -39,6 +39,7 @@ class FirebaseService {
       // FIXME: maybe send a clear event since the user might have changed
       _fbRefEvents.onChildAdded.listen(_newEvent);
       _fbRefEvents.onChildChanged.listen(_changedEvent);
+      _fbRefEvents.onChildRemoved.listen(_removedEvent);
     }
   }
 
@@ -77,6 +78,20 @@ class FirebaseService {
   Future updateEvent(Event event) async {
     try {
       await _fbRefEvents.child(event.key).update(event.toMap());
+    }
+    catch (error) {
+      print("$runtimeType::updateEvent() -- $error");
+    }
+  }
+
+  void _removedEvent(fb.QueryEvent event) {
+    final Event ev = new Event.fromMap(event.snapshot.key, event.snapshot.val());
+    _store.dispatch(actions.deleteEvent(ev));
+  }
+
+  Future deleteEvent(Event event) async {
+    try {
+      await _fbRefEvents.child(event.key).remove();
     }
     catch (error) {
       print("$runtimeType::updateEvent() -- $error");

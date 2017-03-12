@@ -19,18 +19,6 @@ class EventService {
 
   // CRUD nomenclature
 
-  Future<Null> deleteEvent(Event event) async {
-    print('EventService.deleteEvent() has been called with event=$event');
-    try {
-      final String key = '$_eventsUrl/${event.key}/';
-      /* final Response response = */
-      await _http.delete(key, headers: _headersPost);
-      // FIXME: what to return on failure?
-    } catch (e) {
-      throw _handleError(e);
-    }
-  }
-
   Exception _handleError(dynamic e) {
     print(e); // for demo purposes only
     return new Exception('Server error; cause: $e');
