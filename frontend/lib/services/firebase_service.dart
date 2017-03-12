@@ -38,6 +38,7 @@ class FirebaseService {
     if (user != null) {
       // FIXME: maybe send a clear event since the user might have changed
       _fbRefEvents.onChildAdded.listen(_newEvent);
+      _fbRefEvents.onChildChanged.listen(_changedEvent);
     }
   }
 
@@ -66,6 +67,11 @@ class FirebaseService {
     catch (error) {
       print("$runtimeType::addEvent() -- $error");
     }
+  }
+
+  void _changedEvent(fb.QueryEvent event) {
+    final Event ev = new Event.fromMap(event.snapshot.key, event.snapshot.val());
+    _store.dispatch(actions.updateEvent(ev));
   }
 
   Future updateEvent(Event event) async {
