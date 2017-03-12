@@ -16,10 +16,10 @@ import 'package:frontend/models/event.dart';
 class EventDetailComponent {
   final RegattaStore _store;
   final RouteParams _routeParams;
-  int selectedEvent;
+  String selectedEvent;
 
   EventDetailComponent(this._store, this._routeParams) {
-    selectedEvent = int.parse(_routeParams.get('id'));
+    selectedEvent = _routeParams.get('key');
   }
 
   Event get event => _store.state.events[selectedEvent];

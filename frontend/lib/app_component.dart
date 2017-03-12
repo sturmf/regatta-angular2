@@ -31,7 +31,7 @@ import 'package:frontend/services/person_service.dart';
     ])
 @RouteConfig(const [
   const Route(path: '/events', name: 'Events', component: EventListComponent, useAsDefault: true),
-  const Route(path: '/event/:id', name: 'EventDetail', component: EventDetailComponent)
+  const Route(path: '/event/:key', name: 'EventDetail', component: EventDetailComponent)
 ])
 class AppComponent {
   static Injector myinjector;
