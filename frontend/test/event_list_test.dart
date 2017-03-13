@@ -25,7 +25,7 @@ void main() {
     final router = new MockRouter();
     final regattaStore = new MockRegattaStore();
 
-    when(regattaStore.state.events).thenReturn({1: new Event(1, 'dummy url', 'Dummy Event')});
+    when(regattaStore.state.events).thenReturn({1: new Event('-K2ib4H77rj0LYewF7dP', 'Dummy Event')});
 
     final testBed = new NgTestBed<EventListTestComponent>().addProviders([
       provide(Router, useValue: router),
