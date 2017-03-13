@@ -1,12 +1,14 @@
+import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 import 'package:frontend/models/event.dart';
 
 void main() {
+  final formatter = new DateFormat('yyyy-MM-dd');
+
   final dataJsonDefault = {
-    'key': "abc",
     'name': null,
-    'start_date': '2017-02-13',
-    'end_date': '2017-02-13',
+    'start_date': formatter.format(new DateTime.now()),
+    'end_date': formatter.format(new DateTime.now()),
     'race_count': null,
     'race_unrated_on': null,
     'organizer': null,
@@ -16,7 +18,6 @@ void main() {
   };
 
   final dataJson = {
-    'key': "abc",
     'name': 'Christmas Race',
     'start_date': '2017-02-12',
     'end_date': '2017-02-13',
@@ -29,14 +30,14 @@ void main() {
   };
 
   test('serialize event without parameters', () {
-    final event = new Event("abc", 'http://localhost:8000/api/events/1/');
+    final event = new Event("-K2ib4H77rj0LYewF7dP");
     final json = event.toMap();
     expect(json, dataJsonDefault);
   });
 
   test('serialize event with given parameters', () {
     final event = new Event(
-        "abc",
+        "-K2ib4H77rj0LYewF7dP",
         'Christmas Race',
         new DateTime(2017, 2, 12),
         new DateTime(2017, 2, 13),
@@ -50,7 +51,7 @@ void main() {
   });
 
   test('deserialize and serialize roudtrip of event', () {
-    final event = new Event.fromMap("abc", dataJson);
+    final event = new Event.fromMap("-K2ib4H77rj0LYewF7dP", dataJson);
     final json = event.toMap();
     expect(json, dataJson);
   });
