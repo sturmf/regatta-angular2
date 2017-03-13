@@ -28,7 +28,6 @@ class LoggingMiddleware2<S, A extends Action> implements Function {
 
 @Injectable()
 class RegattaStore extends Store<RegattaState, RegattaAction> {
-
   RegattaStore() : super.createStore(regattaApp) {
     Logger.root.level = Level.INFO;
     Logger.root.onRecord.listen((LogRecord rec) {

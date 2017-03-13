@@ -64,8 +64,7 @@ class FirebaseService {
   Future addEvent(Event event) async {
     try {
       await _fbRefEvents.push(event.toMap()).future;
-    }
-    catch (error) {
+    } catch (error) {
       print("$runtimeType::addEvent() -- $error");
     }
   }
@@ -78,8 +77,7 @@ class FirebaseService {
   Future updateEvent(Event event) async {
     try {
       await _fbRefEvents.child(event.key).update(event.toMap());
-    }
-    catch (error) {
+    } catch (error) {
       print("$runtimeType::updateEvent() -- $error");
     }
   }
@@ -92,8 +90,7 @@ class FirebaseService {
   Future deleteEvent(Event event) async {
     try {
       await _fbRefEvents.child(event.key).remove();
-    }
-    catch (error) {
+    } catch (error) {
       print("$runtimeType::updateEvent() -- $error");
     }
   }

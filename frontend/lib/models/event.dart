@@ -41,16 +41,16 @@ class Event {
       event['assistants']);
 
   Map toMap() => {
-    'name': name,
-    'start_date': startDateStr,
-    'end_date': endDateStr,
-    'race_count': raceCount,
-    'race_unrated_on': raceUnratedOn,
-    'organizer': organizer,
-    'race_committee': raceCommittee,
-    'umpire': umpire,
-    'assistants': assistants
-  };
+        'name': name,
+        'start_date': startDateStr,
+        'end_date': endDateStr,
+        'race_count': raceCount,
+        'race_unrated_on': raceUnratedOn,
+        'organizer': organizer,
+        'race_committee': raceCommittee,
+        'umpire': umpire,
+        'assistants': assistants
+      };
 
   String get startDateStr {
     final DateFormat formatter = new DateFormat('yyyy-MM-dd');
@@ -92,7 +92,6 @@ class Event {
           raceCommittee ?? this.raceCommittee,
           umpire ?? this.umpire,
           assistants ?? this.assistants);
-
 
   @override
   String toString() => 'Event($name)';
