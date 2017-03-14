@@ -5,7 +5,6 @@ language: python
 
 python:
   - "3.4"
-  - "3.5"
 
 before_install:
   # 2 lines of workaround as proposed here: https://github.com/travis-ci/travis-ci/issues/6928#issuecomment-264227708
@@ -26,28 +25,22 @@ install:
   - mv `echo dartium-*-stable-*`/{chrome,dartium}
   - export PATH="${PWD%/}/$(echo dartium-*-stable-*):$PATH"
   # General install
-  - (cd backend  && make env)
-  - (cd backend  && make install_tools)
-  - (cd backend  && make install)
   - (cd frontend && make install)
   # Prepare e2e test tools
   #- (cd e2e_tests  && make install)
 
 before_script:
   # Static analysis
-  - (cd backend  && make lint)
   - (cd frontend && make lint)
   - (cd frontend && make style)
   # e2e test preparation
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - (cd backend   && make run > django-server.log 2>&1 &)
   - (cd frontend  && make run > angular-server.log 2>&1 &)
   # necessary for pub server to become available
   - (cd frontend  && timeout 600 grep -q 'Build completed' <(tail -f angular-server.log))
 
 script:
-  - (cd backend   && make tests)
   - (cd frontend  && make dtests)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
@@ -56,10 +49,8 @@ script:
 
 after_success:
   - (cd frontend && make build)
-  - (cd backend && coveralls)
 
 after_script:
-  - (cd backend && cat django-server.log)
   - (cd frontend && cat angular-server.log)
   #- (cd e2e_tests && cat webdriver.log)
 
@@ -70,4 +61,3 @@ deploy:
   skip_cleanup: true
   on:
     all_branches: true
-    python: 3.4
