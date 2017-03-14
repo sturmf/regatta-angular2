@@ -7,15 +7,7 @@ python:
   - "3.4"
   - "3.5"
 
-env:
-  global:
-    - DOCKER_CERT_PATH=cloud_hero
-    - DOCKER_HOST=tcp://swarm3956.chapi.co:8443
-    - DOCKER_TLS_VERIFY=1
-
 before_install:
-  # Decrypt cloudhero key
-  - openssl aes-256-cbc -K $encrypted_66e01c2c6c83_key -iv $encrypted_66e01c2c6c83_iv -in docker/cloud_hero/key.pem.enc -out docker/cloud_hero/key.pem -d
   # 2 lines of workaround as proposed here: https://github.com/travis-ci/travis-ci/issues/6928#issuecomment-264227708
   - source /opt/jdk_switcher/jdk_switcher.sh
   - jdk_switcher use oraclejdk8
@@ -72,8 +64,9 @@ after_script:
   #- (cd e2e_tests && cat webdriver.log)
 
 deploy:
-  provider: script
-  script: ./deploy.sh
+  provider: firebase
+  token:
+    secure: "cxPUVZpp+6AqIw55ANPotUhM/QLEv0xYusxKr0fnCvkCdO1VqPXGhraUtP38LPQB8U3+9PkJCf0/ZBNlUF1TT1cZaDnaBMLkUugtFuuzmy6DavFL/2vJsbCjpC5YDEgKE05BFsrhY0OvyRSyMwHftw3TTJQu/HHSSw71oADh2gQJEqUO1xLH8kbEx9ojLrAdj4MUzFMxn5DcnjWe0Jiqsd+9//x4a5bg/rN/0hh0PHAEG/fb95uqavQmss154DmTFoqEv77RlqXx9sT3G56iv7D8Ya9V6Te/+bL2JhOGedWhzOctgT636NrZrtfGzVgx4Ra2cNh+HJbJHJfRlHlUE8T0Jyjavn3f/cAgJ8B7DlvCxnlpooZq7HssITSmciIHf+rZaVBTWZZudO3D/rVQKwTE7x6fr78MgVH1D+o7ctIsIDyGZdIIE6/jYZrmBcAi34b03rK/uoaYs4t+ccij/j35KanSPr65SU1DfIQQSSBKn5d5zUXlxE3eodmo05N7pGyolCrcnudtTYJSLywaicTRZX3Buj0KfaoXQWMQuWb84jAlDC3Nh+bXjJyl5P0WnTSNl78Gt1l/govx//KIdseDZcrTqkJPtyI+xYbyjzz3nXv4HmcLpDVgj1pOrLAU7Ar40faHDJutbnGsjO9KvApXPUWpeUA6uHiyvmVtRHI="
   skip_cleanup: true
   on:
     all_branches: true
