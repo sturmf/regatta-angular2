@@ -54,6 +54,9 @@ after_script:
   - (cd frontend && cat angular-server.log)
   #- (cd e2e_tests && cat webdriver.log)
 
+before_deploy:
+  - (cd functions && npm install)
+
 deploy:
   provider: firebase
   token:
