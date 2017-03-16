@@ -22,30 +22,17 @@ This means especially using the following:
 * Documentation ([JIRA Confluence](https://www.atlassian.com/software/confluence)) [https://regatta.atlassian.net/wiki](https://regatta.atlassian.net/wiki)
 
 
-# Running the Django backend program
-
-Initial setup of the environment
-
-    pyvenv env
-    source env/bin/activate
-    pip install -r backend/requirements.txt
-    cd backend && python manage.py migrate
-
-Now run the Django app with
-
-    cd backend && python3 manage.py runserver
-    # open a browser and point it to localhost:8000/api
-
-
 # Running the Angular2 Dart frontend program
 
 Initial setup of the environment
 
-    cd frontend && pub get 
+    cd frontend
+    make install
 
 Now run the Dart webserver with
 
-    cd frontend && pub serve
+    cd frontend
+    make run
     # open a browser and point it to localhost:8080
 
 
@@ -53,15 +40,11 @@ Now run the Dart webserver with
 
 To run the style guide checks and tests run
 
-    cd backend 
-    python3 setup.py flake8
-    python3 setup.py test
-
-or
-
-    cd backend
-    flake8 events
-    python runtests.py
+    cd frontend
+    make lint
+    make style
+    make test
+    make dtests
 
 
 # Contributions from non team members

@@ -1,0 +1,15 @@
+#content {
+  display:flex;
+  margin: 10px;
+}
+
+#navigation {
+  margin-right: 25px;
+}
+
+#footer {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 12px;
+  color:#C8C8C8;
+}

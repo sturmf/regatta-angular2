@@ -1,8 +1,6 @@
-import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
-import 'package:frontend/services/event_service.dart';
 import 'regatta_action.dart';
 import 'regatta_state.dart';
 import 'regatta_reducer.dart';
@@ -30,9 +28,7 @@ class LoggingMiddleware2<S, A extends Action> implements Function {
 
 @Injectable()
 class RegattaStore extends Store<RegattaState, RegattaAction> {
-  final EventService _eventService;
-
-  RegattaStore(this._eventService) : super.createStore(regattaApp) {
+  RegattaStore() : super.createStore(regattaApp) {
     Logger.root.level = Level.INFO;
     Logger.root.onRecord.listen((LogRecord rec) {
       print('${rec.loggerName} ${rec.time}');
@@ -42,16 +38,5 @@ class RegattaStore extends Store<RegattaState, RegattaAction> {
     // The ThunkMiddleware adds async call capability to actions
     addMiddleware(new ThunkMiddleware<RegattaState, RegattaAction<dynamic>>());
     addMiddleware(new LoggingMiddleware2(Logger.root, Level.INFO));
-    loadEvents();
-  }
-
-  // FIXME: move this into a separate action
-  Future<Null> loadEvents() async {
-    print('loadevents start');
-    final events = await _eventService.getEvents();
-    for (var event in events) {
-      dispatch(addEvent(event));
-    }
-    print('loadevents end');
   }
 }

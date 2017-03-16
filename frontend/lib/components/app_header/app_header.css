@@ -1,0 +1,21 @@
+#header {
+  display: flex;
+  justify-content: flex-end;
+  height: 40px;
+  background-color: #0275d8;
+}
+
+#sign-in, #sign-out {
+  display: flex;
+  align-items: center;
+}
+
+#user-name {
+  margin-right: 15px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}

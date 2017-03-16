@@ -1,13 +1,14 @@
+import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 import 'package:frontend/models/event.dart';
 
 void main() {
+  final formatter = new DateFormat('yyyy-MM-dd');
+
   final dataJsonDefault = {
-    'id': 1,
-    'url': 'http://localhost:8000/api/events/1/',
     'name': null,
-    'start_date': '2017-02-13',
-    'end_date': '2017-02-13',
+    'start_date': formatter.format(new DateTime.now()),
+    'end_date': formatter.format(new DateTime.now()),
     'race_count': null,
     'race_unrated_on': null,
     'organizer': null,
@@ -17,8 +18,6 @@ void main() {
   };
 
   final dataJson = {
-    'id': 1,
-    'url': 'http://localhost:8000/api/events/1/',
     'name': 'Christmas Race',
     'start_date': '2017-02-12',
     'end_date': '2017-02-13',
@@ -31,15 +30,14 @@ void main() {
   };
 
   test('serialize event without parameters', () {
-    final event = new Event(1, 'http://localhost:8000/api/events/1/');
-    final json = event.toJson();
+    final event = new Event("-K2ib4H77rj0LYewF7dP");
+    final json = event.toMap();
     expect(json, dataJsonDefault);
   });
 
   test('serialize event with given parameters', () {
     final event = new Event(
-        1,
-        'http://localhost:8000/api/events/1/',
+        "-K2ib4H77rj0LYewF7dP",
         'Christmas Race',
         new DateTime(2017, 2, 12),
         new DateTime(2017, 2, 13),
@@ -48,13 +46,13 @@ void main() {
         'http://localhost:8000/api/persons/1/',
         'http://localhost:8000/api/persons/2/',
         'http://localhost:8000/api/persons/3/');
-    final json = event.toJson();
+    final json = event.toMap();
     expect(json, dataJson);
   });
 
   test('deserialize and serialize roudtrip of event', () {
-    final event = new Event.fromJson(dataJson);
-    final json = event.toJson();
+    final event = new Event.fromMap("-K2ib4H77rj0LYewF7dP", dataJson);
+    final json = event.toMap();
     expect(json, dataJson);
   });
 }

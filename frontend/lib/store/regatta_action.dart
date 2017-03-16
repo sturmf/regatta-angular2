@@ -4,7 +4,7 @@ import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
-import 'package:frontend/services/event_service.dart';
+import 'package:frontend/services/firebase_service.dart';
 
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
@@ -36,10 +36,10 @@ abstract class RegattaAction<T> extends Action<ActionType> {
 
 /// Action to request the add of a new Event.
 class RequestCreateEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final EventService _eventService;
+  final FirebaseService _fbService;
 
   RequestCreateEventAction(String payload)
-      : _eventService = AppComponent.myinjector.get(EventService),
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
 
   @override
@@ -47,9 +47,7 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
 
   @override
   Future call(MiddlewareApi api) {
-    return _eventService.addEvent(payload).then((event) {
-      api.dispatch(addEvent(event));
-    });
+    return _fbService.addEvent(new Event(null, payload));
   }
 }
 
@@ -64,10 +62,10 @@ class AddEventAction extends RegattaAction<Event> {
 
 /// Action to add an Event.
 class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final EventService _eventService;
+  final FirebaseService _fbService;
 
   RequestUpdateEventAction(Event payload)
-      : _eventService = AppComponent.myinjector.get(EventService),
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
 
   @override
@@ -75,9 +73,7 @@ class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _eventService.updateEvent(payload).then((_) {
-      api.dispatch(updateEvent(payload));
-    });
+    return _fbService.updateEvent(payload);
   }
 }
 
@@ -91,10 +87,10 @@ class UpdateEventAction extends RegattaAction<Event> {
 
 /// Action to add an Event.
 class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final EventService _eventService;
+  final FirebaseService _fbService;
 
   RequestDeleteEventAction(Event payload)
-      : _eventService = AppComponent.myinjector.get(EventService),
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
 
   @override
@@ -102,13 +98,11 @@ class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _eventService.deleteEvent(payload).then((_) {
-      api.dispatch(deleteEvent(payload));
-    });
+    return _fbService.deleteEvent(payload);
   }
 }
 
-/// Action to add an Event.
+/// Action to delete an Event.
 class DeleteEventAction extends RegattaAction<Event> {
   ///
   DeleteEventAction(Event payload) : super(payload);

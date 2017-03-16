@@ -1,3 +1,0 @@
-django==1.10
-djangorestframework
-django-cors-middleware

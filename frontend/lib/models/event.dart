@@ -1,8 +1,7 @@
 import 'package:intl/intl.dart';
 
 class Event {
-  final int id;
-  final String url;
+  final String key;
   String name;
   DateTime startDate;
   DateTime endDate;
@@ -15,7 +14,7 @@ class Event {
   // entries
   // races
 
-  Event(this.id, this.url,
+  Event(this.key,
       [this.name,
       this.startDate,
       this.endDate,
@@ -29,18 +28,29 @@ class Event {
     endDate ??= new DateTime.now();
   }
 
-  factory Event.fromJson(Map<String, dynamic> event) => new Event(
-      _toInt(event['id']),
-      event['url'],
-      event['name'],
-      DateTime.parse(event['start_date']),
-      DateTime.parse(event['end_date']),
-      _toInt(event['race_count']),
+  factory Event.fromMap(key, Map<String, dynamic> event) => new Event(
+      key,
+      event['name'] ?? 'Unnamed',
+      event['start_date'] != null ? DateTime.parse(event['start_date']) : new DateTime.now(),
+      event['end_date'] != null ? DateTime.parse(event['end_date']) : new DateTime.now(),
+      event['race_count'] != null ? _toInt(event['race_count']) : 1,
       event['race_unrated_on'],
       event['organizer'],
       event['race_committee'],
       event['umpire'],
       event['assistants']);
+
+  Map toMap() => {
+        'name': name,
+        'start_date': startDateStr,
+        'end_date': endDateStr,
+        'race_count': raceCount,
+        'race_unrated_on': raceUnratedOn,
+        'organizer': organizer,
+        'race_committee': raceCommittee,
+        'umpire': umpire,
+        'assistants': assistants
+      };
 
   String get startDateStr {
     final DateFormat formatter = new DateFormat('yyyy-MM-dd');
@@ -72,8 +82,7 @@ class Event {
           String umpire,
           List<String> assistants}) =>
       new Event(
-          this.id,
-          this.url,
+          this.key,
           name ?? this.name,
           startDate ?? this.startDate,
           endDate ?? this.endDate,
@@ -83,20 +92,6 @@ class Event {
           raceCommittee ?? this.raceCommittee,
           umpire ?? this.umpire,
           assistants ?? this.assistants);
-
-  Map toJson() => {
-        'id': id,
-        'url': url,
-        'name': name,
-        'start_date': startDateStr,
-        'end_date': endDateStr,
-        'race_count': raceCount,
-        'race_unrated_on': raceUnratedOn,
-        'organizer': organizer,
-        'race_committee': raceCommittee,
-        'umpire': umpire,
-        'assistants': assistants
-      };
 
   @override
   String toString() => 'Event($name)';
