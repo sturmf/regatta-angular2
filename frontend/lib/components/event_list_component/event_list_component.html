@@ -1,8 +1,7 @@
 <h2>Events</h2>
 
 <div style="display:flex; flex-direction:row; align-items:baseline">
-    <!-- FIXME: (keyup.enter)="addnewEventHandler()" why button trigger instead of click -->
-    <material-input style="flex:1" label="New regatta event" [(ngModel)]="eventName" (keydown)="onKeyDown($event)"></material-input>
+    <material-input style="flex:1" label="New regatta event" [(ngModel)]="eventName" (keyup.enter)="addNewEventHandler()"></material-input>
     <material-button id="addButton" raised class="blue" [disabled]="eventName.length == 0" (trigger)="addNewEventHandler();">Add</material-button>
 </div>
 <p></p>

@@ -30,14 +30,14 @@ void main() {
   };
 
   test('serialize event without parameters', () {
-    final event = new Event("-K2ib4H77rj0LYewF7dP");
+    final event = new Event('-K2ib4H77rj0LYewF7dP');
     final json = event.toMap();
     expect(json, dataJsonDefault);
   });
 
   test('serialize event with given parameters', () {
     final event = new Event(
-        "-K2ib4H77rj0LYewF7dP",
+        '-K2ib4H77rj0LYewF7dP',
         'Christmas Race',
         new DateTime(2017, 2, 12),
         new DateTime(2017, 2, 13),
@@ -51,7 +51,7 @@ void main() {
   });
 
   test('deserialize and serialize roudtrip of event', () {
-    final event = new Event.fromMap("-K2ib4H77rj0LYewF7dP", dataJson);
+    final event = new Event.fromMap('-K2ib4H77rj0LYewF7dP', dataJson);
     final json = event.toMap();
     expect(json, dataJson);
   });

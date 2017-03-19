@@ -1,0 +1,17 @@
+<div *ngIf="boat != null" style="display:flex; flex-direction:column; width:100%">
+    <material-input style="flex:1" required floatingLabel label="Name" [(ngModel)]="boat.name"></material-input>
+</div>
+
+<material-tab-panel>
+    <material-tab label="Details">
+        <div *ngIf="boat != null" style="display:flex; flex-direction:column; width:100%">
+            <div style="display:flex">
+                <material-input style="flex:1" required floatingLabel label="Name" [ngModel]="boat.name" (change)="onNameChanged($event)"></material-input>
+            </div>
+            <div style="display:flex">
+                <material-input style="flex:1" floatingLabel label="Yardstick" [ngModel]="yardstick" (change)="onYardstickChanged($event)"></material-input>
+            </div>
+        </div>
+    </material-tab>
+
+</material-tab-panel>

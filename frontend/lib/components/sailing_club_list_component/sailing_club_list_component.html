@@ -1,0 +1,14 @@
+<h2>Sailing Clubs</h2>
+
+<div style="display:flex; flex-direction:row; align-items:baseline">
+    <material-input style="flex:1" label="New sailingclub" [(ngModel)]="sailingClubName" (keyup.enter)="addNewSailingClubHandler()"></material-input>
+    <material-button id="addButton" raised class="blue" [disabled]="sailingClubName.length == 0" (trigger)="addNewSailingClubHandler();">Add</material-button>
+</div>
+<p></p>
+
+<div id="sailingClubList" style="display:flex; flex-direction:column">
+    <div style="display:flex" *ngFor="let sailingClub of sailingClubs">
+        <material-button style="flex:1" class="sailing-club-item" raised (click)="gotoSailingClub(sailingClub)">{{sailingClub.name}}</material-button>
+        <material-button raised (click)="deleteSailingClubHandler(sailingClub)"><glyph icon="delete"></glyph></material-button>
+    </div>
+</div>

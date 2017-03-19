@@ -1,0 +1,20 @@
+<div *ngIf="sailingClub != null" style="display:flex; flex-direction:column; width:100%">
+    <material-input style="flex:1" required floatingLabel label="Name" [(ngModel)]="sailingClub.name"></material-input>
+</div>
+
+<material-tab-panel>
+    <material-tab label="Details">
+        <div *ngIf="sailingClub != null" style="display:flex; flex-direction:column; width:100%">
+            <div style="display:flex">
+                <material-input style="flex:1" required floatingLabel label="Name" [ngModel]="sailingClub.name" (change)="onNameChanged($event)"></material-input>
+            </div>
+            <div style="display:flex">
+                <material-input style="flex:1" floatingLabel label="Abbreviation" [ngModel]="sailingClub.abbreviation" (change)="onAbbreviationChanged($event)"></material-input>
+            </div>
+            <div style="display:flex">
+                <material-input style="flex:1" floatingLabel label="Registration" [ngModel]="sailingClub.registration" (change)="onRegistrationChanged($event)"></material-input>
+            </div>
+        </div>
+    </material-tab>
+
+</material-tab-panel>
