@@ -26,7 +26,6 @@ RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAc
 /// Utility function to trigger the deleteEvent action.
 RegattaAction<Event> deleteEvent(Event event) => new DeleteEventAction(event);
 
-
 /// Utility function to trigger the addSailingClub action.
 RegattaAction<String> requestCreateSailingClub(String name) => new RequestCreateSailingClubAction(name);
 
@@ -47,7 +46,6 @@ RegattaAction<SailingClub> requestDeleteSailingClub(SailingClub sailingClub) =>
 /// Utility function to trigger the deleteSailingClub action.
 RegattaAction<SailingClub> deleteSailingClub(SailingClub sailingClub) => new DeleteSailingClubAction(sailingClub);
 
-
 /// Utility function to trigger the addBoat action.
 RegattaAction<String> requestCreateBoat(String name) => new RequestCreateBoatAction(name);
 
@@ -55,19 +53,16 @@ RegattaAction<String> requestCreateBoat(String name) => new RequestCreateBoatAct
 RegattaAction<Boat> addBoat(Boat sailingClub) => new AddBoatAction(sailingClub);
 
 /// Utility function to request the updateBoat action.
-RegattaAction<Boat> requestUpdateBoat(Boat sailingClub) =>
-    new RequestUpdateBoatAction(sailingClub);
+RegattaAction<Boat> requestUpdateBoat(Boat sailingClub) => new RequestUpdateBoatAction(sailingClub);
 
 /// Utility function to trigger the updateBoat action.
 RegattaAction<Boat> updateBoat(Boat sailingClub) => new UpdateBoatAction(sailingClub);
 
 /// Utility function to request the deleteBoat action.
-RegattaAction<Boat> requestDeleteBoat(Boat sailingClub) =>
-    new RequestDeleteBoatAction(sailingClub);
+RegattaAction<Boat> requestDeleteBoat(Boat sailingClub) => new RequestDeleteBoatAction(sailingClub);
 
 /// Utility function to trigger the deleteBoat action.
 RegattaAction<Boat> deleteBoat(Boat sailingClub) => new DeleteBoatAction(sailingClub);
-
 
 /// Actions to be triggered to the app store.
 abstract class RegattaAction<T> extends Action<ActionType> {
@@ -156,7 +151,6 @@ class DeleteEventAction extends RegattaAction<Event> {
   ActionType get type => ActionType.deleteEvent;
 }
 
-
 /// Action to request the add of a new SailingClub.
 class RequestCreateSailingClubAction extends RegattaAction<String> implements AsyncAction<ActionType> {
   final FirebaseService _fbService;
@@ -233,7 +227,6 @@ class DeleteSailingClubAction extends RegattaAction<SailingClub> {
   @override
   ActionType get type => ActionType.deleteSailingClub;
 }
-
 
 /// Action to request the add of a new Boat.
 class RequestCreateBoatAction extends RegattaAction<String> implements AsyncAction<ActionType> {

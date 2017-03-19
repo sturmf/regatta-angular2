@@ -27,7 +27,7 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
       final events = new Map<String, Event>.from(currentState.events);
       events.remove(action.payload.key);
       return currentState.copy(events: events);
-      
+
     case ActionType.addSailingClub:
       final sailingClubs = new Map<String, SailingClub>.from(currentState.sailingClubs);
       sailingClubs[action.payload.key] = action.payload;
@@ -53,7 +53,7 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
       final boats = new Map<String, Boat>.from(currentState.boats);
       boats.remove(action.payload.key);
       return currentState.copy(boats: boats);
-      
+
     default:
       return currentState;
   }

@@ -37,7 +37,6 @@ class FirebaseService {
     _fbRefEvents = _fbDatabase.ref("events");
     _fbRefSailingClubs = _fbDatabase.ref("sailing_clubs");
     _fbRefBoats = _fbDatabase.ref("boats");
-    
   }
 
   void _authChanged(fb.AuthEvent event) {
@@ -189,5 +188,4 @@ class FirebaseService {
       print("$runtimeType::updateBoat() -- $error");
     }
   }
-
 }

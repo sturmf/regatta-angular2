@@ -18,7 +18,6 @@ enum ActionType {
   /// Indicates to delete an event from the store
   deleteEvent,
 
-
   /// Indicates the intention to create a new sailingclub by title
   requestCreateSailingClub,
 
@@ -36,7 +35,6 @@ enum ActionType {
 
   /// Indicates to delete a sailingclub from the store
   deleteSailingClub,
-
 
   /// Indicates the intention to create a new sailingclub by title
   requestCreateBoat,
