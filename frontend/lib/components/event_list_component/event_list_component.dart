@@ -23,22 +23,17 @@ class EventListComponent {
   String eventName = '';
   Iterable<Event> get events => _store.state.events.values;
 
-  void onKeyDown(KeyboardEvent key) {
-    if (key.keyCode == 13) {
-      addNewEventHandler();
-    }
-  }
-
   void addNewEventHandler() {
-    _store.dispatch(requestCreateEvent(eventName));
-    eventName = '';
+    if (eventName.length > 0) {
+      _store.dispatch(requestCreateEvent(eventName));
+      eventName = '';
+    }
   }
 
   void deleteEventHandler(Event event) {
     _store.dispatch(requestDeleteEvent(event));
   }
 
-  // FIXME: rewrite as redux change
   void gotoEvent(Event event) {
     final List<dynamic> link = [
       'EventDetail',

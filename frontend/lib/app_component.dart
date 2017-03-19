@@ -6,6 +6,7 @@ import 'package:frontend/components/app_header/app_header.dart';
 import 'package:frontend/components/event_list_component/event_list_component.dart';
 import 'package:frontend/components/event_detail_component/event_detail_component.dart';
 import 'package:frontend/components/navigation_bar_component/navigation_bar_component.dart';
+import 'package:frontend/components/sailing_club_list_component/sailing_club_list_component.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/services/firebase_service.dart';
 
@@ -25,6 +26,7 @@ import 'package:frontend/services/firebase_service.dart';
     ])
 @RouteConfig(const [
   const Route(path: '/events', name: 'Events', component: EventListComponent, useAsDefault: true),
+  const Route(path: '/sailingclubs', name: 'SailingClubs', component: SailingClubListComponent),
   const Route(path: '/event/:key', name: 'EventDetail', component: EventDetailComponent)
 ])
 class AppComponent {
