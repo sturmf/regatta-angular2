@@ -4,6 +4,7 @@ import 'package:angular2/core.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
+import 'package:frontend/models/boat.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart' as actions;
 
@@ -15,6 +16,7 @@ class FirebaseService {
   // fb.Storage _fbStorage;
   fb.DatabaseReference _fbRefEvents;
   fb.DatabaseReference _fbRefSailingClubs;
+  fb.DatabaseReference _fbRefBoats;
   fb.User user;
 
   final RegattaStore _store;
@@ -34,6 +36,8 @@ class FirebaseService {
     _fbDatabase = fb.database();
     _fbRefEvents = _fbDatabase.ref("events");
     _fbRefSailingClubs = _fbDatabase.ref("sailing_clubs");
+    _fbRefBoats = _fbDatabase.ref("boats");
+    
   }
 
   void _authChanged(fb.AuthEvent event) {
@@ -47,6 +51,10 @@ class FirebaseService {
       _fbRefSailingClubs.onChildAdded.listen(_newSailingClub);
       _fbRefSailingClubs.onChildChanged.listen(_changedSailingClub);
       _fbRefSailingClubs.onChildRemoved.listen(_removedSailingClub);
+
+      _fbRefBoats.onChildAdded.listen(_newBoat);
+      _fbRefBoats.onChildChanged.listen(_changedBoat);
+      _fbRefBoats.onChildRemoved.listen(_removedBoat);
     }
   }
 
@@ -141,4 +149,45 @@ class FirebaseService {
       print("$runtimeType::updateSailingClub() -- $error");
     }
   }
+
+  void _newBoat(fb.QueryEvent event) {
+    print("Boat loaded ${event.snapshot.val()} ${event.snapshot.key}");
+    final Boat sc = new Boat.fromMap(event.snapshot.key, event.snapshot.val());
+    _store.dispatch(actions.addBoat(sc));
+  }
+
+  Future addBoat(Boat sailingClub) async {
+    try {
+      await _fbRefBoats.push(sailingClub.toMap()).future;
+    } catch (error) {
+      print("$runtimeType::addBoat() -- $error");
+    }
+  }
+
+  void _changedBoat(fb.QueryEvent event) {
+    final Boat sc = new Boat.fromMap(event.snapshot.key, event.snapshot.val());
+    _store.dispatch(actions.updateBoat(sc));
+  }
+
+  Future updateBoat(Boat sailingClub) async {
+    try {
+      await _fbRefBoats.child(sailingClub.key).update(sailingClub.toMap());
+    } catch (error) {
+      print("$runtimeType::updateBoat() -- $error");
+    }
+  }
+
+  void _removedBoat(fb.QueryEvent event) {
+    final Boat sc = new Boat.fromMap(event.snapshot.key, event.snapshot.val());
+    _store.dispatch(actions.deleteBoat(sc));
+  }
+
+  Future deleteBoat(Boat sailingClub) async {
+    try {
+      await _fbRefBoats.child(sailingClub.key).remove();
+    } catch (error) {
+      print("$runtimeType::updateBoat() -- $error");
+    }
+  }
+
 }

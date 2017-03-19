@@ -1,0 +1,14 @@
+<h2>Boats</h2>
+
+<div style="display:flex; flex-direction:row; align-items:baseline">
+    <material-input style="flex:1" label="New boat" [(ngModel)]="boatName" (keyup.enter)="addNewBoatHandler()"></material-input>
+    <material-button id="addButton" raised class="blue" [disabled]="boatName.length == 0" (trigger)="addNewBoatHandler();">Add</material-button>
+</div>
+<p></p>
+
+<div id="boatList" style="display:flex; flex-direction:column">
+    <div style="display:flex" *ngFor="let boat of boats">
+        <material-button style="flex:1" class="boat-item" raised (click)="gotoBoat(boat)">{{boat.name}}</material-button>
+        <material-button raised (click)="deleteBoatHandler(boat)"><glyph icon="delete"></glyph></material-button>
+    </div>
+</div>
