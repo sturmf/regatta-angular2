@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 import 'package:frontend/models/sailing_club.dart';
 
