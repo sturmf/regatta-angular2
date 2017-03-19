@@ -16,5 +16,23 @@ enum ActionType {
   requestDeleteEvent,
 
   /// Indicates to delete an event from the store
-  deleteEvent
+  deleteEvent,
+
+  /// Indicates the intention to create a new sailingclub by title
+  requestCreateSailingClub,
+
+  /// Indicates to add a sailingclub to the store
+  addSailingClub,
+
+  /// Indicates the intention to update a sailingclub in the store
+  requestUpdateSailingClub,
+
+  /// Indicates an update a sailingclub in the store
+  updateSailingClub,
+
+  /// Indicates the intention to delete a sailingclub from the store
+  requestDeleteSailingClub,
+
+  /// Indicates to delete a sailingclub from the store
+  deleteSailingClub
 }
