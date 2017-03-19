@@ -24,7 +24,10 @@
             </div>
 
             <div style="display:flex">
-                <material-input style="flex:1" floatingLabel label="Organizer" [ngModel]="event.organizer"></material-input>
+                Organizer:
+                <select [ngModel]="organizer" (ngModelChange)="onOrganizerChanged($event)">
+                    <option *ngFor="let sailingClub of sailingClubs" [ngValue]="sailingClub">{{sailingClub.name}}</option>
+                </select>
             </div>
 
             <div style="display:flex">

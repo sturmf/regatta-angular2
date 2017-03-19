@@ -6,6 +6,7 @@ import 'package:frontend/components/event_assistants_list_component/event_assist
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
 import 'package:frontend/models/event.dart';
+import 'package:frontend/models/sailing_club.dart';
 
 @Component(
     selector: 'my-event-detail',
@@ -24,7 +25,11 @@ class EventDetailComponent {
 
   Event get event => _store.state.events[selectedEvent];
 
-  String get raceCount => _store.state.events[selectedEvent].raceCount.toString();
+  String get raceCount => event.raceCount.toString();
+
+  SailingClub get organizer => _store.state.sailingClubs[event.organizer];
+
+  Iterable<SailingClub> get sailingClubs =>_store.state.sailingClubs.values;
 
   void onNameChanged(String data) {
     _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(name: data)));
@@ -55,4 +60,9 @@ class EventDetailComponent {
       // FIXME: what to do then?
     }
   }
+
+  void onOrganizerChanged(SailingClub data) {
+    _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(organizer: data.key)));
+  }
+
 }
