@@ -29,7 +29,7 @@ class EventDetailComponent {
 
   SailingClub get organizer => _store.state.sailingClubs[event.organizer];
 
-  Iterable<SailingClub> get sailingClubs =>_store.state.sailingClubs.values;
+  Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
 
   void onNameChanged(String data) {
     _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(name: data)));
@@ -64,5 +64,4 @@ class EventDetailComponent {
   void onOrganizerChanged(SailingClub data) {
     _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(organizer: data.key)));
   }
-
 }
