@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'action_type.dart';
-import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
