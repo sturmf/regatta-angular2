@@ -37,5 +37,7 @@ import 'package:frontend/services/firebase_service.dart';
 ])
 class AppComponent {
   static Injector myinjector;
-  String hash = const String.fromEnvironment('hash', defaultValue: 'Unknown');
+  String hash = const String.fromEnvironment('branch', defaultValue: 'Unknown') +
+      ' ' +
+      const String.fromEnvironment('hash', defaultValue: '');
 }
