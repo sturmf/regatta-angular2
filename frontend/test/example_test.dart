@@ -11,7 +11,7 @@ import 'package:pageloader/objects.dart';
 @Component(selector: 'test-cmp', template: '<textarea>Hello World!\n</textarea>')
 class DummyComponent {}
 
-@EnsureTag('ng-test-bed')
+@EnsureTag('test-cmp')
 class TestComponentPO {
   @ByTagName('textarea')
   PageLoaderElement _textArea;
@@ -33,6 +33,6 @@ void main() {
       TestComponentPO,
     );
 
-    await expect(await pageObject.text, equals('Hello World!'));
+    expect(await pageObject.text, equals('Hello World!'));
   });
 }

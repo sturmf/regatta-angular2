@@ -1,7 +1,6 @@
 import 'action_type.dart';
 import 'regatta_action.dart';
 import 'regatta_state.dart';
-import 'package:angular2/core.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
