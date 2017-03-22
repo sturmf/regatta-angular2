@@ -6,7 +6,7 @@ import 'package:angular_test/angular_test.dart';
 import 'package:test/test.dart';
 
 import 'package:angular2/router.dart';
-import 'package:mockito/mockito_no_mirrors.dart';
+import 'package:mockito/mockito.dart';
 
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/components/event_list_component/event_list_component.dart';

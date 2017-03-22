@@ -11,7 +11,7 @@ environment:
 dependencies:
   angular2: 3.0.0-alpha+1
   angular2_components: 0.4.0-alpha
-  reflectable: 1.0.1
+  reflectable: 1.0.2
   sass_transformer: 0.1.2+1
   greencat: 0.0.2
   browser: 0.10.0+2
@@ -20,12 +20,12 @@ dependencies:
   firebase: 3.0.0
 
 dev_dependencies:
-  test: 0.12.19
+  test: 0.12.20+3
   dart_to_js_script_rewriter: 1.0.2
   dart_style: 0.2.16
   pageloader: 2.2.5
-  mockito: 1.0.1
-  angular_test: 1.0.0-alpha+5
+  mockito: 2.0.2
+  angular_test: 1.0.0-alpha+6
 
 transformers:
   - sass_transformer
