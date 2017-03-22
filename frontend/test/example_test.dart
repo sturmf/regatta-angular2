@@ -33,6 +33,6 @@ void main() {
       TestComponentPO,
     );
 
-    await expect(await pageObject.text, equals('Hello World!'));
+    expect(await pageObject.text, equals('Hello World!'));
   });
 }

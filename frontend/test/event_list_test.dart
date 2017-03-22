@@ -40,8 +40,8 @@ void main() {
     );
 
     final items = await pageObject.items;
-    await expect(items, hasLength(1));
-    await expect(await items[0].visibleText, equals('Dummy Event'));
+    expect(items, hasLength(1));
+    expect(await items[0].visibleText, equals('Dummy Event'));
 
     regattaStore.close();
   });
