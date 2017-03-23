@@ -9,7 +9,6 @@ before_install:
   - jdk_switcher use oraclejdk8
 
 install:
-  - git symbolic-ref --short -q HEAD
   # Travis specific install
   # Install Dartium
   - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
@@ -23,6 +22,7 @@ install:
   #- (cd e2e_tests  && make install)
 
 before_script:
+  - git symbolic-ref --short -q HEAD
   # Static analysis
   - (cd frontend && make lint)
   - (cd frontend && make style)
