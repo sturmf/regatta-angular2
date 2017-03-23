@@ -33,6 +33,7 @@ before_script:
   - (cd frontend  && timeout 600 grep -q 'Build completed' <(tail -f angular-server.log))
 
 script:
+  - (cd frontend  && make tests)
   - (cd frontend  && make dtests)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
