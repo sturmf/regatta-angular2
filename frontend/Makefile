@@ -6,7 +6,7 @@ install:
 	pub get --packages-dir
 
 build:
-	pub build --define hostname= --define branch=`git rev-parse --abbrev-ref HEAD` --define hash=`git rev-parse HEAD`
+	pub build --define hostname= --define branch=`git symbolic-ref --short -q HEAD` --define hash=`git rev-parse HEAD`
 
 lint:
 	dartanalyzer --fatal-warnings --fatal-lints --fatal-hints web lib test
