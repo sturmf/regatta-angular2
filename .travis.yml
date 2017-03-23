@@ -22,6 +22,7 @@ install:
   #- (cd e2e_tests  && make install)
 
 before_script:
+  - git log
   - git symbolic-ref --short -q HEAD
   # Static analysis
   - (cd frontend && make lint)
