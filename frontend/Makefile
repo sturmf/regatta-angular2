@@ -1,12 +1,15 @@
 SHELL = /bin/bash
 
+BRANCH := $(shell git for-each-ref --format='%(objectname) %(refname:short)' refs/heads | awk "/^$$(git rev-parse HEAD)/ {print \$$2}")
+HASH := $(shell git rev-parse HEAD)
+
 all: install run
 
 install:
 	pub get --packages-dir
 
 build:
-	pub build --define hostname= --define branch=`git rev-parse --abbrev-ref HEAD` --define hash=`git rev-parse HEAD`
+	pub build --define hostname= --define branch=$(BRANCH) --define hash=$(HASH)
 
 lint:
 	dartanalyzer --fatal-warnings --fatal-lints --fatal-hints web lib test
