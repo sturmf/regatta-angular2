@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:angular2/core.dart';
-import 'package:firebase/firebase.dart' as fb;
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';

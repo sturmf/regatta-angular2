@@ -1,7 +1,7 @@
 import 'package:angular2/angular2.dart';
 import 'package:angular2_components/angular2_components.dart';
 
-import 'package:frontend/services/firebase_service.dart';
+import 'package:frontend/services/persistency_service.dart';
 
 @Component(
     selector: 'app-header',
@@ -10,7 +10,7 @@ import 'package:frontend/services/firebase_service.dart';
     directives: const [materialDirectives],
     providers: const [materialProviders])
 class AppHeader {
-  final FirebaseService fbService;
+  final PersistencyService  fbService;
 
   AppHeader(this.fbService);
 }

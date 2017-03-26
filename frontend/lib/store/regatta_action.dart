@@ -6,7 +6,6 @@ import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
-import 'package:frontend/services/firebase_service.dart';
 
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
@@ -76,10 +75,10 @@ abstract class RegattaAction<T> extends Action<ActionType> {
 
 /// Action to request the add of a new Event.
 class RequestCreateEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final PersistencyService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestCreateEventAction(String payload)
-      : _fbService = AppComponent.myinjector.get(PersistencyService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -87,7 +86,7 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.addEvent(new Event(null, payload));
+    return _persistencyService.addEvent(new Event(null, payload));
   }
 }
 
@@ -102,10 +101,10 @@ class AddEventAction extends RegattaAction<Event> {
 
 /// Action to add an Event.
 class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestUpdateEventAction(Event payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -113,7 +112,7 @@ class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.updateEvent(payload);
+    return _persistencyService.updateEvent(payload);
   }
 }
 
@@ -127,10 +126,10 @@ class UpdateEventAction extends RegattaAction<Event> {
 
 /// Action to delete an Event.
 class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestDeleteEventAction(Event payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -138,7 +137,7 @@ class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.deleteEvent(payload);
+    return _persistencyService.deleteEvent(payload);
   }
 }
 
@@ -153,10 +152,10 @@ class DeleteEventAction extends RegattaAction<Event> {
 
 /// Action to request the add of a new SailingClub.
 class RequestCreateSailingClubAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestCreateSailingClubAction(String payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -164,7 +163,7 @@ class RequestCreateSailingClubAction extends RegattaAction<String> implements As
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.addSailingClub(new SailingClub(null, payload));
+    return _persistencyService.addSailingClub(new SailingClub(null, payload));
   }
 }
 
@@ -179,10 +178,10 @@ class AddSailingClubAction extends RegattaAction<SailingClub> {
 
 /// Action to add a SailingClub.
 class RequestUpdateSailingClubAction extends RegattaAction<SailingClub> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestUpdateSailingClubAction(SailingClub payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -190,7 +189,7 @@ class RequestUpdateSailingClubAction extends RegattaAction<SailingClub> implemen
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.updateSailingClub(payload);
+    return _persistencyService.updateSailingClub(payload);
   }
 }
 
@@ -204,10 +203,10 @@ class UpdateSailingClubAction extends RegattaAction<SailingClub> {
 
 /// Action to delete a SailingClub.
 class RequestDeleteSailingClubAction extends RegattaAction<SailingClub> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestDeleteSailingClubAction(SailingClub payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -215,7 +214,7 @@ class RequestDeleteSailingClubAction extends RegattaAction<SailingClub> implemen
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.deleteSailingClub(payload);
+    return _persistencyService.deleteSailingClub(payload);
   }
 }
 
@@ -230,10 +229,10 @@ class DeleteSailingClubAction extends RegattaAction<SailingClub> {
 
 /// Action to request the add of a new Boat.
 class RequestCreateBoatAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestCreateBoatAction(String payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -241,7 +240,7 @@ class RequestCreateBoatAction extends RegattaAction<String> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.addBoat(new Boat(null, payload));
+    return _persistencyService.addBoat(new Boat(null, payload));
   }
 }
 
@@ -256,10 +255,10 @@ class AddBoatAction extends RegattaAction<Boat> {
 
 /// Action to add a Boat.
 class RequestUpdateBoatAction extends RegattaAction<Boat> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestUpdateBoatAction(Boat payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -267,7 +266,7 @@ class RequestUpdateBoatAction extends RegattaAction<Boat> implements AsyncAction
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.updateBoat(payload);
+    return _persistencyService.updateBoat(payload);
   }
 }
 
@@ -281,10 +280,10 @@ class UpdateBoatAction extends RegattaAction<Boat> {
 
 /// Action to delete a Boat.
 class RequestDeleteBoatAction extends RegattaAction<Boat> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _persistencyService;
 
   RequestDeleteBoatAction(Boat payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _persistencyService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
@@ -292,7 +291,7 @@ class RequestDeleteBoatAction extends RegattaAction<Boat> implements AsyncAction
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.deleteBoat(payload);
+    return _persistencyService.deleteBoat(payload);
   }
 }
 
