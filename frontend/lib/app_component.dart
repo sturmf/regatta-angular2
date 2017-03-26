@@ -11,6 +11,7 @@ import 'package:frontend/components/sailing_club_detail_component/sailing_club_d
 import 'package:frontend/components/boat_list_component/boat_list_component.dart';
 import 'package:frontend/components/boat_detail_component/boat_detail_component.dart';
 import 'package:frontend/store/regatta_store.dart';
+import 'package:frontend/services/persistency_service.dart';
 import 'package:frontend/services/firebase_service.dart';
 
 @Component(selector: 'my-app', templateUrl: 'app_component.html', styleUrls: const [
@@ -25,7 +26,7 @@ import 'package:frontend/services/firebase_service.dart';
       ROUTER_PROVIDERS,
       const Provider(LocationStrategy, useClass: HashLocationStrategy),
       RegattaStore,
-      FirebaseService,
+      const Provider(PersistencyService, useClass: FirebaseService)
     ])
 @RouteConfig(const [
   const Route(path: '/events', name: 'Events', component: EventListComponent, useAsDefault: true),

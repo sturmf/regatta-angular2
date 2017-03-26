@@ -7,9 +7,10 @@ import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart' as actions;
+import 'package:frontend/services/persistency_service.dart';
 
 @Injectable()
-class FirebaseService {
+class FirebaseService implements PersistencyService {
   fb.Auth _fbAuth;
   fb.GoogleAuthProvider _fbGoogleAuthProvider;
   fb.Database _fbDatabase;

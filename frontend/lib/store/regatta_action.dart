@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'action_type.dart';
+import 'package:frontend/services/persistency_service.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
@@ -75,10 +76,10 @@ abstract class RegattaAction<T> extends Action<ActionType> {
 
 /// Action to request the add of a new Event.
 class RequestCreateEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final PersistencyService _fbService;
 
   RequestCreateEventAction(String payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _fbService = AppComponent.myinjector.get(PersistencyService),
         super(payload);
 
   @override
