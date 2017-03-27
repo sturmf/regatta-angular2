@@ -1,19 +1,12 @@
 import 'dart:async';
 
-import 'package:angular2/core.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
-import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart' as actions;
 
 // TODO: Should we have a percistency Interface that is segregated from the authentication interface?
-// OR: Does authentication mean for us: "authenticate to access percistency"?
 
-
-// can't be Injectable because it is abstract ... @Injectable()
 abstract class PersistencyService {
-
 //  final RegattaStore _store;
 
 //  PersistencyService(this._store);

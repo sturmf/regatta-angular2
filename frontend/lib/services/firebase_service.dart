@@ -58,6 +58,7 @@ class FirebaseService implements PersistencyService {
     }
   }
 
+  @override
   Future signIn() async {
     try {
       await _fbAuth.signInWithPopup(_fbGoogleAuthProvider);
@@ -66,6 +67,7 @@ class FirebaseService implements PersistencyService {
     }
   }
 
+  @override
   void signOut() {
     _fbAuth.signOut();
   }
@@ -76,6 +78,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.addEvent(ev));
   }
 
+  @override
   Future addEvent(Event event) async {
     try {
       await _fbRefEvents.push(event.toMap()).future;
@@ -89,6 +92,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.updateEvent(ev));
   }
 
+  @override
   Future updateEvent(Event event) async {
     try {
       await _fbRefEvents.child(event.key).update(event.toMap());
@@ -102,6 +106,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.deleteEvent(ev));
   }
 
+  @override
   Future deleteEvent(Event event) async {
     try {
       await _fbRefEvents.child(event.key).remove();
@@ -116,6 +121,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.addSailingClub(sc));
   }
 
+  @override
   Future addSailingClub(SailingClub sailingClub) async {
     try {
       await _fbRefSailingClubs.push(sailingClub.toMap()).future;
@@ -129,6 +135,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.updateSailingClub(sc));
   }
 
+  @override
   Future updateSailingClub(SailingClub sailingClub) async {
     try {
       await _fbRefSailingClubs.child(sailingClub.key).update(sailingClub.toMap());
@@ -142,6 +149,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.deleteSailingClub(sc));
   }
 
+  @override
   Future deleteSailingClub(SailingClub sailingClub) async {
     try {
       await _fbRefSailingClubs.child(sailingClub.key).remove();
@@ -156,6 +164,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.addBoat(sc));
   }
 
+  @override
   Future addBoat(Boat sailingClub) async {
     try {
       await _fbRefBoats.push(sailingClub.toMap()).future;
@@ -169,6 +178,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.updateBoat(sc));
   }
 
+  @override
   Future updateBoat(Boat sailingClub) async {
     try {
       await _fbRefBoats.child(sailingClub.key).update(sailingClub.toMap());
@@ -182,6 +192,7 @@ class FirebaseService implements PersistencyService {
     _store.dispatch(actions.deleteBoat(sc));
   }
 
+  @override
   Future deleteBoat(Boat sailingClub) async {
     try {
       await _fbRefBoats.child(sailingClub.key).remove();

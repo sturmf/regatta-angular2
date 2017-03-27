@@ -10,7 +10,7 @@ import 'package:frontend/services/persistency_service.dart';
     directives: const [materialDirectives],
     providers: const [materialProviders])
 class AppHeader {
-  final PersistencyService  fbService;
+  final PersistencyService fbService;
 
   AppHeader(this.fbService);
 }
