@@ -28,7 +28,7 @@ coveralls:
 		--token $REPO_TOKEN \
 		--retry 2 \
 		--exclude-test-files \
-		test/all.dart;\
+		test/*;\
 	fi
 
 tests:
