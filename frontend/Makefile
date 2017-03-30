@@ -28,7 +28,7 @@ coveralls:
 		--token $REPO_TOKEN \
 		--retry 2 \
 		--exclude-test-files \
-		test/*;\
+		test/event_list_test.dart;\
 	fi
 
 tests:
