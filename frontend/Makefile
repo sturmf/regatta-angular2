@@ -22,11 +22,14 @@ test:
 	pub run test lib
 
 coveralls:
-	pub global activate dart_coveralls && \
-	pub global run dart_coveralls report \
-	--retry 2 \
-	--exclude-test-files \
-	lib/models/event_test.dart 
+	if [ "$(REPO_TOKEN)" ]; then \
+		pub global activate dart_coveralls;\
+		pub global run dart_coveralls report \
+		--token $(REPO_TOKEN) \
+		--retry 2 \
+		--exclude-test-files \
+		test/event_list_test.dart;\
+	fi
 
 tests:
 	# These are the browser tests with firefox
