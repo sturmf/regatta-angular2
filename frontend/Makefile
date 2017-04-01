@@ -28,7 +28,9 @@ coveralls:
 		--exclude-test-files \
 		--token $$REPO_TOKEN \
 		--retry 2 \
-		lib/models/event_test.dart; \
+		lib/models/event_test.dart \
+		lib/models/boat_test.dart \
+		lib/models/sailing_club_test.dart; \
 	fi
 
 tests:
