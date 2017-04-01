@@ -3,6 +3,10 @@ dist: trusty
 
 language: dart
 
+env:
+  # The coveralls secure REPO_TOKEN
+  secure: "ZjuK9HErDv+RKgBtPubu4KrjmrzPhBM4/ukpFJfRH+mUvD4dquqZOjYBN5nI/TnyaSEeH/4xAEuh86dbXmkKjFL43eAZxqn62DOFLF8yjjU2ROjYART/92u0B8IRtt74Ibarbi1aG1hUK/KYR3IOuQyuq0lPNxpF+ViHAfXanV5UREMOZAn35fbvS1Sz/fy3PcKwW0yO9pu3kizu8ZFW0HKgHVd6pMKljGFXzi1vDPqMWrFJLZwORoxLm7s06G6+oZUZBbwV0AVGo6EEGd/2PtmB1sDKWy72JV6avTan2zOlYR20x0SAxnc3XwFnZ/t+LdEpzppfaPLxMVJBZxtbOyz31134Ej6YmB/NVUvk9shPNrANJH7n4oM+nyG//czOIfHatS+ycRgl1knxFTxk7KGb1SIFlBKCmL1ew7vlI4kinnNTFY1bYj95jxqzlYQbrOhJy7BlTJbwlFaUwg5Te1OQMx3pLMyB07FAEVbVhdgBCZpuJcHwSeCQrKVNboDpo1vpALYYOlnlxiN1OQJ4qhoLubuls8nARG8I3liI4TOvLsO9OAG8Lh8CQB7g8lsbWzn8F22sT7BuNwOoXumvvGUhlj0T/Km9LUY17iMHYoEhvO1Uss3pephN+pnpr7kfcf4VoBnLqsZdtgFxwuGr2rkVMXmUKdHtCUn/KpGwvKo="
+ 
 before_install:
   # 2 lines of workaround as proposed here: https://github.com/travis-ci/travis-ci/issues/6928#issuecomment-264227708
   - source /opt/jdk_switcher/jdk_switcher.sh
@@ -34,6 +38,7 @@ before_script:
 
 script:
   - (cd frontend  && make test)
+  - (cd frontend  && make coveralls)
   - (cd frontend  && make dtests)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
