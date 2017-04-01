@@ -3,6 +3,11 @@ dist: trusty
 
 language: dart
 
+env:
+  # The coveralls secure REPO_TOKEN
+  secure: "S4KqN1iEuEO2EruTJPnVshtVqFVaEbWcTpMGJ6h3ETAeIXdG9mD3AAwGOzlyAsOIhzmxP8Yf9BtgTlZyBBcQ5BbfjxarKei8sOna5+GnhXhMsmI2mDTYc8oWo4EoVkN9xuJHn3PfOD0eA/Tw+lCBUvXO+veZ6be79lyC31YG5C8oBsp3hQPpJWLIAvAjCf/3O0231iodC2vaHL6heieFNae22bPVSGVuIoyQ8EKlJ2Ul8laZQOqCsWjpGZiddeegS76+IvLO9BOb2Tr4Jzh86rOftsaGUKUNGS8fTVl3VcRO6Q1O4tk46ji3OTMSm0XtUPxxsgrUqns8qvwP8pDgNHNcuujXOKfhwzSGg06XxiKRMaRvtVufe8ZojsTY2U44MJnpTVh6mMhQ3+H0cpiJeom5NyppjR6Um0L6tg+h9YIKfcXnG0sl9H+hmhswI/5qS0shcWPAZiebL8taiPZ+IDM0O4aj001sivVb8or/irLXAnJQcoyX9pu5FFJZ8FPJEQI7mLYzj5nR6tYiDPqhOKUtq536g0qdPeJh+ZXpGFiI6U04xPkKdkugYucPshBWbNTDH40lA3ZFppwELCotER9MgsFVjnp//4BUlWeeEktysX8xWhw8HPHjfnHFAlh6K9UgRtmtZrCR6Uc/pg1/leKd32qhIc848UtETiU2YYc="
+
+
 before_install:
   # 2 lines of workaround as proposed here: https://github.com/travis-ci/travis-ci/issues/6928#issuecomment-264227708
   - source /opt/jdk_switcher/jdk_switcher.sh
