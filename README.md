@@ -4,7 +4,7 @@ regatta
 A simple sailing race scoring program.
 
 [![Build Status](https://travis-ci.org/sturmf/regatta-angular2.svg?branch=master)](https://travis-ci.org/sturmf/regatta-angular2)
-[![Coverage Status](https://coveralls.io/repos/sturmf/regatta-angular2/badge.svg?branch=master&service=github)](https://coveralls.io/github/sturmf/regatta-angular2?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/sturmf/regatta-angular2/badge.svg?branch=master)](https://coveralls.io/github/sturmf/regatta-angular2?branch=master)
 
 This program is just beginning its development, so don't expect a working version any time soon.
 
