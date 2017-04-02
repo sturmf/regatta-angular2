@@ -3,12 +3,11 @@ regatta
 
 A simple sailing race scoring program.
 
-The latest checkin is always automatically deployed [here](http://regatta-17147.firebaseapp.com/) on [Firebase](https://firebase.google.com/).
-
 [![Build Status](https://travis-ci.org/sturmf/regatta-angular2.svg?branch=master)](https://travis-ci.org/sturmf/regatta-angular2)
 [![Coverage Status](https://coveralls.io/repos/github/sturmf/regatta-angular2/badge.svg?branch=master)](https://coveralls.io/github/sturmf/regatta-angular2?branch=master)
 
 This program is just beginning its development, so don't expect a working version any time soon.
+The latest checkin is always automatically deployed [here](http://regatta-17147.firebaseapp.com/) on [Firebase](https://firebase.google.com/).
 
 The main goal of this project is to learn about the state of the art development tools and workflows while still producing something useful.
 
