@@ -19,7 +19,7 @@ style:
 
 test:
 	# These are the dart unit tests
-	pub run test lib
+	pub run test --reporter expanded lib
 
 coveralls:
 	if [ "$$REPO_TOKEN" ]; then \
@@ -34,14 +34,14 @@ coveralls:
 tests:
 	# These are the browser tests with firefox
 	# You must also have `pub serve` running somewhere
-	pub run test -p firefox --pub-serve=8081
+	pub run test --reporter expanded -p firefox --pub-serve=8081
 
 dtests:
 	# These are the browser tests with dartium
 	# You must also have `pub serve` running somewhere
-	pub run test -p dartium --pub-serve=8081
+	pub run test --reporter expanded -p dartium --pub-serve=8081
 
 run:
 	pub serve
 
-.PHONY: install build lint style test tests dtests run
+.PHONY: install build lint style test coveralls tests dtests run
