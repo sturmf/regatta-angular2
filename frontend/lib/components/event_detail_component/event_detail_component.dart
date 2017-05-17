@@ -1,6 +1,6 @@
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
-import 'package:angular2_components/angular2_components.dart';
+import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/components/event_assistants_list_component/event_assistants_list_component.dart';
 import 'package:frontend/store/regatta_store.dart';
