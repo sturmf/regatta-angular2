@@ -6,26 +6,25 @@ homepage: https://regatta.atlassian.net
 documentation:
 
 environment:
-  sdk: '>=1.19.0 <2.0.0'
+  sdk: '>=1.23.0 <2.0.0'
 
 dependencies:
-  angular2: 3.0.0-alpha+1
-  angular2_components: 0.4.0-alpha
-  reflectable: 1.0.2
+  angular2: 3.1.0
+  angular_components: 0.5.2
   sass_transformer: 0.1.2+1
-  greencat: 0.0.2
+  greencat: 0.0.4
   browser: 0.10.0+2
-  http: 0.11.3+9
+  http: 0.11.3+13
   stream_transformers: 0.3.0+3
-  firebase: 3.0.0
+  firebase: 3.1.0
 
 dev_dependencies:
-  test: 0.12.20+3
+  test: 0.12.20+13
   dart_to_js_script_rewriter: 1.0.2
-  dart_style: 0.2.16
-  pageloader: 2.2.5
+  dart_style: 1.0.6
+  pageloader: 2.2.6
   mockito: 2.0.2
-  angular_test: 1.0.0-alpha+6
+  angular_test: 1.0.0-beta+2
 
 transformers:
   - sass_transformer
@@ -42,10 +41,6 @@ transformers:
       $include:
         - test/**_test.dart
         - web/main.dart
-  #- reflectable:
-  #    entry_points:
-  #      - web/main.dart
-  #    formatted: true
   - test/pub_serve:
       $include: test/**_test.dart
   - dart_to_js_script_rewriter

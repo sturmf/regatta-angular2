@@ -1,5 +1,5 @@
 import 'package:angular2/angular2.dart';
-import 'package:angular2_components/angular2_components.dart';
+import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/services/firebase_service.dart';
 

@@ -15,10 +15,13 @@ class EventAssistantsListComponent implements OnInit {
   @Input()
   GetPersons getPersons;
 
+  final _deleteRequest = new StreamController<String>();
   @Output()
-  final EventEmitter<String> deleteRequest = new EventEmitter<String>();
+  Stream<String> get deleteRequest => _deleteRequest.stream;
+
+  final _addRequest = new StreamController<String>();
   @Output()
-  final EventEmitter<String> addRequest = new EventEmitter<String>();
+  Stream<String> get addRequest => _addRequest.stream;
 
   String selectedObj = ""; // The text in the assistant search field
   Person selectedItemObj; // The selected object from the assistant search
@@ -38,12 +41,12 @@ class EventAssistantsListComponent implements OnInit {
 
   void addAssistant(Person assistant) {
     print('Selected value: ${assistant.url}');
-    addRequest.emit(assistant.url);
+    _addRequest.add(assistant.url);
     assistants.add(assistant);
   }
 
   void removeAssistant(Person assistant) {
-    deleteRequest.emit(assistant.url);
+    _deleteRequest.add(assistant.url);
     assistants.remove(assistant);
   }
 }
