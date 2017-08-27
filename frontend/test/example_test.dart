@@ -2,7 +2,7 @@
 // browser. This means that it should be run with `-p dartium` or `-p chrome`.
 @TestOn('browser')
 import 'dart:async';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_test/angular_test.dart';
 import 'package:test/test.dart';
 import 'package:pageloader/html.dart';
