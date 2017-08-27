@@ -39,8 +39,7 @@ class FirebaseService {
     _fbRefBoats = _fbDatabase.ref("boats");
   }
 
-  void _authChanged(fb.AuthEvent event) {
-    user = event.user;
+  void _authChanged(fb.User user) {
     if (user != null) {
       // FIXME: maybe send a clear event since the user might have changed
       _fbRefEvents.onChildAdded.listen(_newEvent);
