@@ -1,5 +1,5 @@
-import 'package:angular2/core.dart';
-import 'package:angular2/router.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
@@ -10,7 +10,7 @@ import 'package:frontend/models/event.dart';
     selector: 'my-event-list',
     templateUrl: 'event_list_component.html',
     styleUrls: const ['event_list_component.css'],
-    directives: const [materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives],
     //changeDetection: ChangeDetectionStrategy.OnPush,
     providers: const [materialProviders])
 class EventListComponent {

@@ -1,11 +1,11 @@
 // Because Angular is using dart:html, we need these tests to run on an actual
 // browser. This means that it should be run with `-p dartium` or `-p chrome`.
 @TestOn('browser')
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_test/angular_test.dart';
 import 'package:test/test.dart';
 
-import 'package:angular2/router.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:mockito/mockito.dart';
 
 import 'package:frontend/store/regatta_store.dart';

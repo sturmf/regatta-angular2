@@ -1,5 +1,5 @@
-import 'package:angular2/core.dart';
-import 'package:angular2/router.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/components/event_assistants_list_component/event_assistants_list_component.dart';
@@ -12,7 +12,7 @@ import 'package:frontend/models/sailing_club.dart';
     selector: 'my-event-detail',
     templateUrl: 'event_detail_component.html',
     styleUrls: const ['event_detail_component.css'],
-    directives: const [materialDirectives, EventAssistantsListComponent],
+    directives: const [CORE_DIRECTIVES, materialDirectives, EventAssistantsListComponent],
     providers: const [materialProviders])
 class EventDetailComponent {
   final RegattaStore _store;

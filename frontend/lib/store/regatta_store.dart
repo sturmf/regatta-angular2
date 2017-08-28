@@ -1,5 +1,5 @@
 import 'package:logging/logging.dart';
-import 'package:angular2/core.dart';
+import 'package:angular/angular.dart';
 import 'package:greencat/greencat.dart';
 import 'regatta_action.dart';
 import 'regatta_state.dart';

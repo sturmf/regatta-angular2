@@ -1,7 +1,7 @@
 
 <material-tab-panel>
     <material-tab label="Details">
-        <div  style="display:flex; flex-direction:column; width:100%">
+        <div  *ngIf="event != null" style="display:flex; flex-direction:column; width:100%">
             <div style="display:flex">
                 <material-input style="flex:1" required floatingLabel label="Name" [ngModel]="event.name" (change)="onNameChanged($event)"></material-input>
             </div>
@@ -22,7 +22,7 @@
 
             <div style="display:flex">
                 <div class="floating-label">Organizer</div>
-                <material-dropdown-select [buttonText]="organizer.name">
+                <material-dropdown-select [buttonText]="organizer?.name">
                         <material-select-item *ngFor="let sailingClub of sailingClubs"
                                               [selected]="organizer == sailingClub"
                                               (trigger)="onOrganizerChanged(sailingClub)">

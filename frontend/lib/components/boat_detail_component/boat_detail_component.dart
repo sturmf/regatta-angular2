@@ -1,5 +1,5 @@
-import 'package:angular2/core.dart';
-import 'package:angular2/router.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/store/regatta_store.dart';
@@ -10,7 +10,7 @@ import 'package:frontend/models/boat.dart';
     selector: 'my-boat-detail',
     templateUrl: 'boat_detail_component.html',
     styleUrls: const ['boat_detail_component.css'],
-    directives: const [materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives],
     providers: const [materialProviders])
 class BoatDetailComponent {
   final RegattaStore _store;

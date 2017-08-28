@@ -9,7 +9,7 @@ install:
 	pub get --packages-dir
 
 build:
-	pub build --define hostname= --define branch=$(BRANCH) --define hash=$(HASH)
+	pub build --define branch=$(BRANCH) --define hash=$(HASH)
 
 lint:
 	dartanalyzer --fatal-warnings --fatal-lints --fatal-hints web lib test
