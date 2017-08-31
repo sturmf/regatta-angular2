@@ -12,7 +12,8 @@ import 'package:frontend/components/boat_detail_component/boat_detail_component.
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/services/firebase_service.dart';
 
-@Component(selector: 'my-app', templateUrl: 'app_component.html', styleUrls: const ['package:angular_components/src/components/app_layout/layout.scss.css',
+@Component(selector: 'my-app', templateUrl: 'app_component.html', styleUrls: const [
+  'package:angular_components/src/components/app_layout/layout.scss.css',
   'app_component.css'
 ], directives: const [
   CORE_DIRECTIVES,
