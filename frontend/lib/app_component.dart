@@ -1,7 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:angular_components/angular_components.dart';
 
-import 'package:frontend/components/app_header/app_header.dart';
 import 'package:frontend/components/event_list_component/event_list_component.dart';
 import 'package:frontend/components/event_detail_component/event_detail_component.dart';
 import 'package:frontend/components/navigation_bar_component/navigation_bar_component.dart';
@@ -12,16 +12,19 @@ import 'package:frontend/components/boat_detail_component/boat_detail_component.
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/services/firebase_service.dart';
 
-@Component(selector: 'my-app', templateUrl: 'app_component.html', styleUrls: const [
+@Component(selector: 'my-app', templateUrl: 'app_component.html', styleUrls: const ['package:angular_components/src/components/app_layout/layout.scss.css',
   'app_component.css'
 ], directives: const [
+  CORE_DIRECTIVES,
   ROUTER_DIRECTIVES,
-  AppHeader,
+  MaterialPersistentDrawerDirective,
+  materialDirectives,
   NavigationBarComponent
 ],
     //changeDetection: ChangeDetectionStrategy.OnPush,
     providers: const [
       ROUTER_PROVIDERS,
+      materialProviders,
       const Provider(LocationStrategy, useClass: HashLocationStrategy),
       RegattaStore,
       FirebaseService,
@@ -35,7 +38,11 @@ import 'package:frontend/services/firebase_service.dart';
   const Route(path: '/boat/:key', name: 'BoatDetail', component: BoatDetailComponent)
 ])
 class AppComponent {
+  final FirebaseService fbService;
+
   static Injector myinjector;
   String branch = const String.fromEnvironment('branch', defaultValue: 'Unknown');
   String hash = const String.fromEnvironment('hash', defaultValue: '');
+
+  AppComponent(this.fbService);
 }
