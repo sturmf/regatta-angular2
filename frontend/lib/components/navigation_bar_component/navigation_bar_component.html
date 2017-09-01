@@ -1,8 +1,15 @@
-
-<div style="display:flex; flex-direction:column; margin-top:50px">
-    <material-button raised (click)="gotoLink('Events')">Events</material-button>
-    <material-button raised (click)="gotoLink('Persons')">Persons</material-button>
-    <material-button raised (click)="gotoLink('Boats')">Boats</material-button>
-    <material-button raised (click)="gotoLink('SailingClubs')">SailingClubs</material-button>
-    <material-button raised (click)="gotoLink('Settings')">Settings</material-button>
-</div>
+<material-list-item (click)="gotoLink('Events')">
+    <material-icon icon="send"></material-icon>Events
+</material-list-item>
+<material-list-item (click)="gotoLink('Persons')">
+    <material-icon icon="send"></material-icon>Persons
+</material-list-item>
+<material-list-item (click)="gotoLink('Boats')">
+    <material-icon icon="send"></material-icon>Boats
+</material-list-item>
+<material-list-item (click)="gotoLink('SailingClubs')">
+    <material-icon icon="send"></material-icon>SailingClubs
+</material-list-item>
+<material-list-item (click)="gotoLink('Settings')">
+    <material-icon icon="send"></material-icon>Settings
+</material-list-item>
