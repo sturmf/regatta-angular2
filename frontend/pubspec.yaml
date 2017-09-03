@@ -9,9 +9,9 @@ environment:
   sdk: '>=1.23.0 <2.0.0'
 
 dependencies:
-  angular: 4.0.0-beta
-  angular_router: 1.0.1
-  angular_components: 0.6.0-beta
+  angular: 4.0.0
+  angular_router: 1.0.2
+  angular_components: 0.6.0
   sass_transformer: 0.1.2+1
   greencat: 0.0.4
   browser: 0.10.0+2
@@ -25,7 +25,7 @@ dev_dependencies:
   dart_style: 1.0.7
   pageloader: 2.2.6
   mockito: 2.2.0
-  angular_test: 1.0.0-beta+5
+  angular_test: 1.0.0
 
 transformers:
   - sass_transformer
