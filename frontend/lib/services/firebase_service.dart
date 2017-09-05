@@ -40,6 +40,7 @@ class FirebaseService {
   }
 
   void _authChanged(fb.User user) {
+    this.user = user;
     if (user != null) {
       // FIXME: maybe send a clear event since the user might have changed
       _fbRefEvents.onChildAdded.listen(_newEvent);
