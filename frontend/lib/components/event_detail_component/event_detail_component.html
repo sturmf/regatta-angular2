@@ -31,6 +31,21 @@
                 </material-dropdown-select>
             </div>
 
+
+            <div style="display:flex">
+                <material-dropdown-select [buttonText]="organizer?.name"
+                [options]="filteredSailingClubs"
+                [itemRenderer]="displayNameRenderer">
+                    <div header>
+                        <material-select-searchbox
+                                label="Search..."
+                                [filterable]="filteredSailingClubs">
+                        </material-select-searchbox>
+                    </div>
+                </material-dropdown-select>
+            </div>
+
+
             <div style="display:flex">
                 <material-input style="flex:1" floatingLabel label="Race committee" [ngModel]="event.raceCommittee"></material-input>
             </div>

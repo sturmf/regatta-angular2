@@ -18,6 +18,7 @@ class EventDetailComponent {
   final RegattaStore _store;
   final RouteParams _routeParams;
   String selectedEvent;
+  
 
   EventDetailComponent(this._store, this._routeParams) {
     selectedEvent = _routeParams.get('key');
@@ -30,6 +31,19 @@ class EventDetailComponent {
   SailingClub get organizer => _store.state.sailingClubs[event.organizer];
 
   Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
+
+  static var _list = [new SailingClub('SCW', 'SCW', 'BA003'), new SailingClub('BYC', 'BYC', 'BA004')];
+
+  static final ItemRenderer<SailingClub> _displayNameRenderer =
+      (SailingClub item) => item.name;
+
+  var filteredSailingClubs = new StringSelectionOptions(_list, toFilterableString: _displayNameRenderer);
+
+  ItemRenderer<SailingClub> get displayNameRenderer => _displayNameRenderer;
+
+  //StringSelectionOptions<SailingClub> get filteredSailingClubs => new StringSelectionOptions(_list, toFilterableString: displayNameRenderer);
+
+
 
   void onNameChanged(String data) {
     _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(name: data)));
