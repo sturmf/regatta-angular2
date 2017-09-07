@@ -21,7 +21,7 @@
             </div>
 
             <div style="display:flex">
-                <div class="floating-label">Organizer</div>
+                <div class="floating-label" style="margin-right: 10px;">Organizer</div>
                 <material-dropdown-select [buttonText]="organizer?.name">
                         <material-select-item *ngFor="let sailingClub of sailingClubs"
                                               [selected]="organizer == sailingClub"
@@ -44,9 +44,15 @@
     <material-tab label="Participants">
     </material-tab>
 
+    <material-tab label="Groups">
+    </material-tab>
+
     <material-tab label="Races">
     </material-tab>
 
     <material-tab label="Results">
+    </material-tab>
+
+    <material-tab label="Lists">
     </material-tab>
 </material-tab-panel>
