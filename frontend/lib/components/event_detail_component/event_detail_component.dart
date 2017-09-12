@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
@@ -14,14 +15,20 @@ import 'package:frontend/models/sailing_club.dart';
     styleUrls: const ['event_detail_component.css'],
     directives: const [CORE_DIRECTIVES, materialDirectives, EventAssistantsListComponent],
     providers: const [materialProviders])
-class EventDetailComponent {
+class EventDetailComponent implements DoCheck {
   final RegattaStore _store;
   final RouteParams _routeParams;
   String selectedEvent;
-  
+
+  StringSelectionOptions<SailingClub> filteredSailingClubs;
+  Map<String, SailingClub> oldSailingClubs;
+  SailingClub oldOrganizer;
 
   EventDetailComponent(this._store, this._routeParams) {
     selectedEvent = _routeParams.get('key');
+
+    filteredSailingClubs =
+        new StringSelectionOptions(_store.state.sailingClubs.values, toFilterableString: displayNameRenderer);
   }
 
   Event get event => _store.state.events[selectedEvent];
@@ -32,18 +39,39 @@ class EventDetailComponent {
 
   Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
 
-  static var _list = [new SailingClub('SCW', 'SCW', 'BA003'), new SailingClub('BYC', 'BYC', 'BA004')];
+  ItemRenderer<SailingClub> displayNameRenderer = (SailingClub item) => item.name;
 
-  static final ItemRenderer<SailingClub> _displayNameRenderer =
-      (SailingClub item) => item.name;
+  SelectionModel<SailingClub> singleSelectModel;
 
-  var filteredSailingClubs = new StringSelectionOptions(_list, toFilterableString: _displayNameRenderer);
+  void ngDoCheck() {
+    if (oldSailingClubs != _store.state.sailingClubs) {
+      oldSailingClubs = _store.state.sailingClubs;
+      filteredSailingClubs =
+          new StringSelectionOptions(_store.state.sailingClubs.values, toFilterableString: displayNameRenderer);
+    }
+    try {
+      if (oldOrganizer != organizer) {
+        oldOrganizer = organizer;
+        singleSelectModel = new SelectionModel<SailingClub>.withList(selectedValues: [organizer]);
+        singleSelectModel.selectionChanges.listen(update);
+      }
+    } catch (e) {}
+  }
 
-  ItemRenderer<SailingClub> get displayNameRenderer => _displayNameRenderer;
+  void update(List<SelectionChangeRecord> record) {
+    if (record.isNotEmpty && record.first.added.isNotEmpty) {
+      onOrganizerChanged(record.first.added.first);
+    }
+  }
 
-  //StringSelectionOptions<SailingClub> get filteredSailingClubs => new StringSelectionOptions(_list, toFilterableString: displayNameRenderer);
-
-
+  void onDropdownVisibleChange(MaterialSelectSearchboxComponent searchbox, bool visible) {
+    if (visible) {
+      // TODO(google): Avoid using Timer.run.
+      Timer.run(() {
+        searchbox.focus();
+      });
+    }
+  }
 
   void onNameChanged(String data) {
     _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(name: data)));

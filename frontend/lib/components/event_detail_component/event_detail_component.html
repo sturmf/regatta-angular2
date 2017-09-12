@@ -22,29 +22,19 @@
 
             <div style="display:flex">
                 <div class="floating-label" style="margin-right: 10px;">Organizer</div>
-                <material-dropdown-select [buttonText]="organizer?.name">
-                        <material-select-item *ngFor="let sailingClub of sailingClubs"
-                                              [selected]="organizer == sailingClub"
-                                              (trigger)="onOrganizerChanged(sailingClub)">
-                            {{sailingClub.name}}
-                        </material-select-item>
-                </material-dropdown-select>
-            </div>
-
-
-            <div style="display:flex">
                 <material-dropdown-select [buttonText]="organizer?.name"
-                [options]="filteredSailingClubs"
-                [itemRenderer]="displayNameRenderer">
+                                          [options]="filteredSailingClubs"
+                                          [itemRenderer]="displayNameRenderer"
+                                          [selection]="singleSelectModel"
+                                          (visibleChange)="onDropdownVisibleChange(organizerSearchBox, $event)">
                     <div header>
-                        <material-select-searchbox
+                        <material-select-searchbox #organizerSearchBox
                                 label="Search..."
                                 [filterable]="filteredSailingClubs">
                         </material-select-searchbox>
                     </div>
                 </material-dropdown-select>
             </div>
-
 
             <div style="display:flex">
                 <material-input style="flex:1" floatingLabel label="Race committee" [ngModel]="event.raceCommittee"></material-input>
