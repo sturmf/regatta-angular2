@@ -21,6 +21,7 @@ class EventDetailComponent implements DoCheck {
   String selectedEvent;
 
   StringSelectionOptions<SailingClub> filteredSailingClubs;
+  SelectionModel<SailingClub> singleSelectModel;
   Map<String, SailingClub> oldSailingClubs;
   SailingClub oldOrganizer;
 
@@ -35,13 +36,11 @@ class EventDetailComponent implements DoCheck {
 
   String get raceCount => event.raceCount.toString();
 
-  SailingClub get organizer => _store.state.sailingClubs[event.organizer];
+  SailingClub get organizer => (event != null ) ? _store.state.sailingClubs[event.organizer] : null;
 
   Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
 
   ItemRenderer<SailingClub> displayNameRenderer = (SailingClub item) => item.name;
-
-  SelectionModel<SailingClub> singleSelectModel;
 
   void ngDoCheck() {
     if (oldSailingClubs != _store.state.sailingClubs) {
@@ -49,13 +48,11 @@ class EventDetailComponent implements DoCheck {
       filteredSailingClubs =
           new StringSelectionOptions(_store.state.sailingClubs.values, toFilterableString: displayNameRenderer);
     }
-    try {
-      if (oldOrganizer != organizer) {
-        oldOrganizer = organizer;
-        singleSelectModel = new SelectionModel<SailingClub>.withList(selectedValues: [organizer]);
-        singleSelectModel.selectionChanges.listen(update);
-      }
-    } catch (e) {}
+    if (oldOrganizer != organizer) {
+      oldOrganizer = organizer;
+      singleSelectModel = new SelectionModel<SailingClub>.withList(selectedValues: [organizer]);
+      singleSelectModel.selectionChanges.listen(update); // FIXME: cancel subscription?
+    }
   }
 
   void update(List<SelectionChangeRecord> record) {
