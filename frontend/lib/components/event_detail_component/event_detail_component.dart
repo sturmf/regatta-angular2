@@ -35,7 +35,7 @@ class EventDetailComponent {
 
   String get raceCount => event.raceCount.toString();
 
-  SailingClub get organizer => (event != null) ? _store.state.sailingClubs[event.organizer] : null;
+  SailingClub get organizer => _store.state.sailingClubs[event.organizer];
 
   Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
 
@@ -53,7 +53,7 @@ class EventDetailComponent {
 
   SelectionModel<SailingClub> get singleSelectModel {
     // We have to update the selection model on organizer change
-    if (_oldOrganizer != organizer) {
+    if (_singleSelectModel == null || _oldOrganizer != organizer) {
       _oldOrganizer = organizer;
       _singleSelectModel = new SelectionModel<SailingClub>.withList(selectedValues: [organizer]);
       _selectionListener?.cancel();
