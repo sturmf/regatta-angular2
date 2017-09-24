@@ -1,47 +1,52 @@
 
 <material-tab-panel>
-    <material-tab label="Details">
-        <div  *ngIf="event != null" style="display:flex; flex-direction:column; width:100%">
-            <div style="display:flex">
-                <material-input style="flex:1" required floatingLabel label="Name" [ngModel]="event.name" (change)="onNameChanged($event)"></material-input>
-            </div>
+    <material-tab label="Details" style="background-color:#eceff1">
+        <div  *ngIf="event != null" style="display:flex; flex-direction:column; width:100%;">
+            <div style="margin:16px; padding:30px; background-color:#ffffff;">
+                <div style="display:flex">
+                    <material-input style="flex:1" required floatingLabel label="Name" [ngModel]="event.name" (change)="onNameChanged($event)"></material-input>
+                </div>
 
-            <div style="display:flex">
-                <material-input style="flex:1" floatingLabel required label="Start Date" [ngModel]="event.startDateStr" (change)="onStartDateChanged($event)"></material-input>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <material-input style="flex:1" floatingLabel required label="End Date" [ngModel]="event.endDateStr" (change)="onEndDateChanged($event)"></material-input>
-            </div>
+                <div style="display:flex">
+                    <material-input style="flex:1" floatingLabel required label="Start Date" [ngModel]="event.startDateStr" (change)="onStartDateChanged($event)"></material-input>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <material-input style="flex:1" floatingLabel required label="End Date" [ngModel]="event.endDateStr" (change)="onEndDateChanged($event)"></material-input>
+                </div>
 
-            <div style="display:flex">
-                <material-input type="number" style="flex:1" floatingLabel label="Race count" [ngModel]="raceCount" (change)="onRaceCountChanged($event)"></material-input>
-            </div>
+                <div style="display:flex">
+                    <material-input type="number" style="flex:1" floatingLabel label="Race count" [ngModel]="raceCount" (change)="onRaceCountChanged($event)"></material-input>
+                </div>
 
-            <div style="display:flex">
-                <material-input style="flex:1" floatingLabel label="Race unrated on" [ngModel]="event.raceUnratedOn"></material-input>
-            </div>
+                <div style="display:flex">
+                    <material-input style="flex:1" floatingLabel label="Race unrated on" [ngModel]="event.raceUnratedOn"></material-input>
+                </div>
 
-            <div style="display:flex">
-                <div class="floating-label" style="margin-right: 10px;">Organizer</div>
-                <material-dropdown-select [buttonText]="organizer?.name"
-                                          [options]="filteredSailingClubs"
-                                          [itemRenderer]="displayNameRenderer"
-                                          [selection]="singleSelectModel"
-                                          (visibleChange)="onDropdownVisibleChange(organizerSearchBox, $event)">
-                    <div header>
-                        <material-select-searchbox #organizerSearchBox
-                                label="Search..."
-                                [filterable]="filteredSailingClubs">
-                        </material-select-searchbox>
-                    </div>
-                </material-dropdown-select>
-            </div>
+                <div style="display:flex">
+                    <div class="floating-label" style="margin-right: 10px;">Organizer</div>
+                    <material-dropdown-select [buttonText]="organizer?.name"
+                                              [options]="filteredSailingClubs"
+                                              [itemRenderer]="displayNameRenderer"
+                                              [selection]="singleSelectModel"
+                                              (visibleChange)="onDropdownVisibleChange(organizerSearchBox, $event)">
+                        <div header>
+                            <material-select-searchbox #organizerSearchBox
+                                    label="Search..."
+                                    [filterable]="filteredSailingClubs">
+                            </material-select-searchbox>
+                        </div>
+                    </material-dropdown-select>
+                </div>
 
-            <div style="display:flex">
-                <material-input style="flex:1" floatingLabel label="Race committee" [ngModel]="event.raceCommittee"></material-input>
-            </div>
+                <div style="display:flex">
+                    <material-input style="flex:1" floatingLabel label="Race committee" [ngModel]="event.raceCommittee"></material-input>
+                </div>
 
-            <div style="display:flex">
-                <material-input style="flex:1" floatingLabel label="Umpire" [ngModel]="event.umpire"></material-input>
+                <div style="display:flex">
+                    <material-input style="flex:1" floatingLabel label="Umpire" [ngModel]="event.umpire"></material-input>
+                </div>
+            </div>
+            <div style="margin:16px; padding:30px; background-color:#ffffff;">
+                Test
             </div>
         </div>
     </material-tab>
