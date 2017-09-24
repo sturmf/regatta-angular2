@@ -34,7 +34,7 @@ class Event {
       event['start_date'] != null ? DateTime.parse(event['start_date']) : new DateTime.now(),
       event['end_date'] != null ? DateTime.parse(event['end_date']) : new DateTime.now(),
       event['race_count'] != null ? _toInt(event['race_count']) : 1,
-      event['race_unrated_on'],
+      event['race_unrated_on'] ?? '',
       event['organizer'],
       event['race_committee'],
       event['umpire'],
