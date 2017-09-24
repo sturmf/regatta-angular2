@@ -15,44 +15,51 @@ import 'package:frontend/models/sailing_club.dart';
     styleUrls: const ['event_detail_component.css'],
     directives: const [CORE_DIRECTIVES, materialDirectives, EventAssistantsListComponent],
     providers: const [materialProviders])
-class EventDetailComponent implements DoCheck {
+class EventDetailComponent {
   final RegattaStore _store;
   final RouteParams _routeParams;
   String selectedEvent;
 
-  StringSelectionOptions<SailingClub> filteredSailingClubs;
-  SelectionModel<SailingClub> singleSelectModel;
-  Map<String, SailingClub> oldSailingClubs;
-  SailingClub oldOrganizer;
+  // We need those to detect state changes in the store without deep equality check of the map
+  StringSelectionOptions<SailingClub> _filteredSailingClubs;
+  Map<String, SailingClub> _oldSailingClubs;
+  SelectionModel<SailingClub> _singleSelectModel;
+  SailingClub _oldOrganizer;
+  StreamSubscription _selectionListener;
 
   EventDetailComponent(this._store, this._routeParams) {
     selectedEvent = _routeParams.get('key');
-
-    filteredSailingClubs =
-        new StringSelectionOptions(_store.state.sailingClubs.values, toFilterableString: displayNameRenderer);
   }
 
   Event get event => _store.state.events[selectedEvent];
 
   String get raceCount => event.raceCount.toString();
 
-  SailingClub get organizer => (event != null ) ? _store.state.sailingClubs[event.organizer] : null;
+  SailingClub get organizer => (event != null) ? _store.state.sailingClubs[event.organizer] : null;
 
   Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
 
   ItemRenderer<SailingClub> displayNameRenderer = (SailingClub item) => item.name;
 
-  void ngDoCheck() {
-    if (oldSailingClubs != _store.state.sailingClubs) {
-      oldSailingClubs = _store.state.sailingClubs;
-      filteredSailingClubs =
+  StringSelectionOptions<SailingClub> get filteredSailingClubs {
+    // We have to save the old state since the Iterable itself is unstable and would change all the time
+    if (_oldSailingClubs != _store.state.sailingClubs) {
+      _oldSailingClubs = _store.state.sailingClubs;
+      _filteredSailingClubs =
           new StringSelectionOptions(_store.state.sailingClubs.values, toFilterableString: displayNameRenderer);
     }
-    if (oldOrganizer != organizer) {
-      oldOrganizer = organizer;
-      singleSelectModel = new SelectionModel<SailingClub>.withList(selectedValues: [organizer]);
-      singleSelectModel.selectionChanges.listen(update); // FIXME: cancel subscription?
+    return _filteredSailingClubs;
+  }
+
+  SelectionModel<SailingClub> get singleSelectModel {
+    // We have to update the selection model on organizer change
+    if (_oldOrganizer != organizer) {
+      _oldOrganizer = organizer;
+      _singleSelectModel = new SelectionModel<SailingClub>.withList(selectedValues: [organizer]);
+      _selectionListener?.cancel();
+      _selectionListener = _singleSelectModel.selectionChanges.listen(update);
     }
+    return _singleSelectModel;
   }
 
   void update(List<SelectionChangeRecord> record) {
@@ -61,11 +68,11 @@ class EventDetailComponent implements DoCheck {
     }
   }
 
-  void onDropdownVisibleChange(MaterialSelectSearchboxComponent searchbox, bool visible) {
+  void onDropdownVisibleChange(MaterialSelectSearchboxComponent searchBox, bool visible) {
     if (visible) {
       // TODO(google): Avoid using Timer.run.
       Timer.run(() {
-        searchbox.focus();
+        searchBox.focus();
       });
     }
   }
