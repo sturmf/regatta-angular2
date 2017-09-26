@@ -20,7 +20,9 @@
                 <div style="display:flex">
                     <material-input style="flex:1" floatingLabel label="Race unrated on" [ngModel]="event.raceUnratedOn"></material-input>
                 </div>
-
+            </div>
+            <div style="margin:16px; margin-bottom: 0px;">Organizers</div>
+            <div style="margin:16px; padding:30px; background-color:#ffffff;">
                 <div style="display:flex">
                     <div class="floating-label" style="margin-right: 10px;">Organizer</div>
                     <material-dropdown-select [buttonText]="organizer?.name"
@@ -30,8 +32,8 @@
                                               (visibleChange)="onDropdownVisibleChange(organizerSearchBox, $event)">
                         <div header>
                             <material-select-searchbox #organizerSearchBox
-                                    label="Search..."
-                                    [filterable]="filteredSailingClubs">
+                                                       label="Search..."
+                                                       [filterable]="filteredSailingClubs">
                             </material-select-searchbox>
                         </div>
                     </material-dropdown-select>
@@ -45,8 +47,10 @@
                     <material-input style="flex:1" floatingLabel label="Umpire" [ngModel]="event.umpire"></material-input>
                 </div>
             </div>
+            <div style="margin:16px; margin-bottom: 0px;">Fees</div>
             <div style="margin:16px; padding:30px; background-color:#ffffff;">
-                Test
+                <div style="display:flex">
+                </div>
             </div>
         </div>
     </material-tab>
