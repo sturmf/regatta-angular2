@@ -10,11 +10,11 @@ void main() {
     'start_date': formatter.format(new DateTime.now()),
     'end_date': formatter.format(new DateTime.now()),
     'race_count': null,
-    'race_unrated_on': null,
-    'organizer': null,
-    'race_committee': null,
-    'umpire': null,
-    'assistants': null
+    'race_unrated_on': '',
+    'organizer': '',
+    'race_committee': '',
+    'umpire': '',
+    'assistants': []
   };
 
   final dataJson = {
@@ -26,7 +26,7 @@ void main() {
     'organizer': 'http://localhost:8000/api/persons/1/',
     'race_committee': 'http://localhost:8000/api/persons/2/',
     'umpire': 'http://localhost:8000/api/persons/3/',
-    'assistants': null
+    'assistants': []
   };
 
   test('serialize event without parameters', () {

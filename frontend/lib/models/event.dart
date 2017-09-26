@@ -45,11 +45,11 @@ class Event {
         'start_date': startDateStr,
         'end_date': endDateStr,
         'race_count': raceCount,
-        'race_unrated_on': raceUnratedOn,
-        'organizer': organizer,
-        'race_committee': raceCommittee,
-        'umpire': umpire,
-        'assistants': assistants
+        'race_unrated_on': raceUnratedOn ?? '',
+        'organizer': organizer ?? '',
+        'race_committee': raceCommittee ?? '',
+        'umpire': umpire ?? '',
+        'assistants': assistants ?? []
       };
 
   String get startDateStr {

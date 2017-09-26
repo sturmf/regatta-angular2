@@ -21,16 +21,13 @@
                     <material-button (click)="fbService.signIn()" raised dense>Google Sign In</material-button>
                 </div>
                 <div id="sign-out" *ngIf="fbService.user!=null" style="display:flex">
-                    <img class="icon" width="30px" height="30px" style="margin-top: 2px; margin-right: 3px;" title="{{fbService.user?.displayName}}" [src]="fbService.user?.photoURL">
+                    <img class="icon" title="{{fbService.user?.displayName}}" [src]="fbService.user?.photoURL">
                     <material-button (click)="fbService.signOut()" raised dense>Sign Out</material-button>
                 </div>
             </nav>
         </div>
     </header>
-
-    <div style="padding: 10px">
-        <router-outlet></router-outlet>
-    </div>
+    <router-outlet></router-outlet>
 </material-content>
 
 <br>
