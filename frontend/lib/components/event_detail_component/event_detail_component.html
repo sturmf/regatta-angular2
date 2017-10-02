@@ -23,8 +23,8 @@
             </div>
             <div style="margin:16px; margin-bottom: 0px;">Organizers</div>
             <div style="margin:16px; padding:30px; background-color:#ffffff;">
-                <div style="display:flex">
-                    <div class="floating-label" style="margin-right: 10px;">Organizer</div>
+                <div class="dropdown_with_label">
+                    <span>Organizer</span>
                     <material-dropdown-select [buttonText]="organizer?.name"
                                               [options]="filteredSailingClubs"
                                               [itemRenderer]="displayNameRenderer"
