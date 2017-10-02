@@ -1,0 +1,13 @@
+.dropdown_with_label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.dropdown_with_label > span {
+  font-size: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgba(0, 0, 0, 0.54);
+  display: inline-block;
+  padding-bottom: 10px;
+}
