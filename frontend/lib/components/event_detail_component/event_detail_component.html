@@ -4,26 +4,31 @@
         <div  *ngIf="event != null" style="display:flex; flex-direction:column; width:100%;">
             <div style="margin:16px; padding:30px; background-color:#ffffff;">
                 <div style="display:flex">
-                    <material-input style="flex:1" required floatingLabel label="Name" [ngModel]="event.name" (change)="onNameChanged($event)"></material-input>
+                    <material-input *ngIf="canEdit" style="flex:1" required floatingLabel label="Name" [ngModel]="event.name" (change)="onNameChanged($event)"></material-input>
+                    <material-input *ngIf="!canEdit" style="flex:1" required floatingLabel label="Name" [ngModel]="event.name" disabled="true"></material-input>
                 </div>
 
                 <div style="display:flex">
-                    <material-input style="flex:1" floatingLabel required label="Start Date" [ngModel]="event.startDateStr" (change)="onStartDateChanged($event)"></material-input>
+                    <material-input *ngIf="canEdit" style="flex:1" floatingLabel required label="Start Date" [ngModel]="event.startDateStr" (change)="onStartDateChanged($event)"></material-input>
+                    <material-input *ngIf="!canEdit" style="flex:1" floatingLabel required label="Start Date" [ngModel]="event.startDateStr" disabled="true"></material-input>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <material-input style="flex:1" floatingLabel required label="End Date" [ngModel]="event.endDateStr" (change)="onEndDateChanged($event)"></material-input>
+                    <material-input *ngIf="canEdit" style="flex:1" floatingLabel required label="End Date" [ngModel]="event.endDateStr" (change)="onEndDateChanged($event)"></material-input>
+                    <material-input *ngIf="!canEdit" style="flex:1" floatingLabel required label="End Date" [ngModel]="event.endDateStr" disabled="true"></material-input>
                 </div>
 
                 <div style="display:flex">
-                    <material-input type="number" style="flex:1" floatingLabel label="Race count" [ngModel]="raceCount" (change)="onRaceCountChanged($event)"></material-input>
+                    <material-input *ngIf="canEdit" type="number" style="flex:1" floatingLabel label="Race count" [ngModel]="raceCount" (change)="onRaceCountChanged($event)"></material-input>
+                    <material-input *ngIf="!canEdit" type="number" style="flex:1" floatingLabel label="Race count" [ngModel]="raceCount" disabled="true"></material-input>
                 </div>
 
                 <div style="display:flex">
-                    <material-input style="flex:1" floatingLabel label="Race unrated on" [ngModel]="event.raceUnratedOn"></material-input>
+                    <material-input *ngIf="canEdit" style="flex:1" floatingLabel label="Race unrated on" [ngModel]="event.raceUnratedOn"></material-input>
+                    <material-input *ngIf="!canEdit" style="flex:1" floatingLabel label="Race unrated on" [ngModel]="event.raceUnratedOn" disabled="true"></material-input>
                 </div>
             </div>
             <div style="margin:16px; margin-bottom: 0px;">Organizers</div>
             <div style="margin:16px; padding:30px; background-color:#ffffff;">
-                <div class="dropdown_with_label">
+                <div class="dropdown_with_label" *ngIf="canEdit">
                     <span>Organizer</span>
                     <material-dropdown-select [buttonText]="organizer?.name"
                                               [options]="filteredSailingClubs"
@@ -38,13 +43,18 @@
                         </div>
                     </material-dropdown-select>
                 </div>
-
                 <div style="display:flex">
-                    <material-input style="flex:1" floatingLabel label="Race committee" [ngModel]="event.raceCommittee"></material-input>
+                    <material-input *ngIf="!canEdit" style="flex:1" floatingLabel label="Organizer" [ngModel]="organizer?.name" disabled="true"></material-input>
                 </div>
 
                 <div style="display:flex">
-                    <material-input style="flex:1" floatingLabel label="Umpire" [ngModel]="event.umpire"></material-input>
+                    <material-input *ngIf="canEdit" style="flex:1" floatingLabel label="Race committee" [ngModel]="event.raceCommittee"></material-input>
+                    <material-input *ngIf="!canEdit" style="flex:1" floatingLabel label="Race committee" [ngModel]="event.raceCommittee" disabled="true"></material-input>
+                </div>
+
+                <div style="display:flex">
+                    <material-input *ngIf="canEdit" style="flex:1" floatingLabel label="Umpire" [ngModel]="event.umpire"></material-input>
+                    <material-input *ngIf="!canEdit" style="flex:1" floatingLabel label="Umpire" [ngModel]="event.umpire" disabled="true"></material-input>
                 </div>
             </div>
             <div style="margin:16px; margin-bottom: 0px;">Fees</div>
