@@ -37,24 +37,27 @@ class FirebaseService {
     _fbRefEvents = _fbDatabase.ref("events");
     _fbRefSailingClubs = _fbDatabase.ref("sailing_clubs");
     _fbRefBoats = _fbDatabase.ref("boats");
+
+    subscribe();
+  }
+
+  void subscribe() {
+    _fbRefEvents.onChildAdded.listen(_newEvent);
+    _fbRefEvents.onChildChanged.listen(_changedEvent);
+    _fbRefEvents.onChildRemoved.listen(_removedEvent);
+
+    _fbRefSailingClubs.onChildAdded.listen(_newSailingClub);
+    _fbRefSailingClubs.onChildChanged.listen(_changedSailingClub);
+    _fbRefSailingClubs.onChildRemoved.listen(_removedSailingClub);
+
+    _fbRefBoats.onChildAdded.listen(_newBoat);
+    _fbRefBoats.onChildChanged.listen(_changedBoat);
+    _fbRefBoats.onChildRemoved.listen(_removedBoat);
   }
 
   void _authChanged(fb.User user) {
     this.user = user;
-    if (user != null) {
-      // FIXME: maybe send a clear event since the user might have changed
-      _fbRefEvents.onChildAdded.listen(_newEvent);
-      _fbRefEvents.onChildChanged.listen(_changedEvent);
-      _fbRefEvents.onChildRemoved.listen(_removedEvent);
-
-      _fbRefSailingClubs.onChildAdded.listen(_newSailingClub);
-      _fbRefSailingClubs.onChildChanged.listen(_changedSailingClub);
-      _fbRefSailingClubs.onChildRemoved.listen(_removedSailingClub);
-
-      _fbRefBoats.onChildAdded.listen(_newBoat);
-      _fbRefBoats.onChildChanged.listen(_changedBoat);
-      _fbRefBoats.onChildRemoved.listen(_removedBoat);
-    }
+    // FIXME: maybe send a clear event since the user might have changed
   }
 
   Future signIn() async {
