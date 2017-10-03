@@ -3,6 +3,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
+import 'package:frontend/services/firebase_service.dart';
 
 import 'package:frontend/models/event.dart';
 
@@ -16,11 +17,17 @@ import 'package:frontend/models/event.dart';
 class EventListComponent {
   final Router _router;
   final RegattaStore _store;
+  final FirebaseService _fbService;
 
-  EventListComponent(this._router, this._store);
+  EventListComponent(this._router, this._store, this._fbService);
 
   String eventName = '';
   Iterable<Event> get events => _store.state.events.values;
+
+  // FIXME: should come from store
+  bool get canAddEvents {
+    return _fbService.user != null;
+  }
 
   void addNewEventHandler() {
     if (eventName.length > 0) {

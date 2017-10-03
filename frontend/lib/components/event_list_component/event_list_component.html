@@ -2,14 +2,14 @@
     <div style="margin:16px; padding:30px; background-color:#ffffff;">
         <div style="display:flex; flex-direction:row; align-items:baseline">
             <material-input style="flex:1" label="New regatta event" [(ngModel)]="eventName" (keyup.enter)="addNewEventHandler()"></material-input>
-            <material-button id="addButton" raised class="blue" [disabled]="eventName.length == 0" (trigger)="addNewEventHandler();">Add</material-button>
+            <material-button *ngIf="canAddEvents" id="addButton" raised class="blue" [disabled]="eventName.length == 0" (trigger)="addNewEventHandler();">Add</material-button>
         </div>
         <p></p>
 
         <div id="eventList" style="display:flex; flex-direction:column">
             <div style="display:flex" *ngFor="let event of events">
                 <material-button style="flex:1" class="event-item" raised (click)="gotoEvent(event)">{{event.name}}</material-button>
-                <material-button raised (click)="deleteEventHandler(event)"><glyph icon="delete"></glyph></material-button>
+                <material-button *ngIf="canAddEvents" raised (click)="deleteEventHandler(event)"><glyph icon="delete"></glyph></material-button>
             </div>
         </div>
     </div>
