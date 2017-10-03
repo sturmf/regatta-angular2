@@ -1,10 +1,10 @@
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:frontend/services/firebase_service.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
-import 'package:frontend/services/firebase_service.dart';
-
 import 'package:frontend/models/event.dart';
 
 @Component(
@@ -27,6 +27,13 @@ class EventListComponent {
   // FIXME: should come from store
   bool get canAddEvents {
     return _fbService.user != null;
+  }
+
+  Future joinEventHandler(Event event) async {
+    if (_fbService.user == null) {
+      await _fbService.signIn();
+    }
+    print("FIXME: now emit a join event??");
   }
 
   void addNewEventHandler() {

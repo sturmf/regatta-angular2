@@ -18,6 +18,7 @@ class NavigationBarComponent implements OnInit {
 
   void gotoLink(String dest) {
     print(dest);
+    // FIXME: shouldn't these be events and the event itself does the routing?
     _router.navigate([dest]);
   }
 }

@@ -10,6 +10,7 @@
             <div style="display:flex" *ngFor="let event of events">
                 <material-button style="flex:1" class="event-item" raised (click)="gotoEvent(event)">{{event.name}}</material-button>
                 <material-button *ngIf="canAddEvents" raised (click)="deleteEventHandler(event)"><glyph icon="delete"></glyph></material-button>
+                <material-button raised (click)="joinEventHandler(event)">JOIN</material-button>
             </div>
         </div>
     </div>
