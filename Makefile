@@ -8,11 +8,14 @@ install:
 login:
 	firebase login
 
+rules:
+	firebase-bolt database.rules.bolt
+
 deploy:
 	firebase deploy
 
 deploy-db:
 	firebase deploy --only database
 
-.PHONY: install login deploy deploy-db
+.PHONY: install login rules deploy deploy-db
 
