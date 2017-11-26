@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'action_type.dart';
+import 'package:frontend/models/person.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
@@ -26,7 +27,7 @@ RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAc
 RegattaAction<Event> deleteEvent(Event event) => new DeleteEventAction(event);
 
 /// Utility function to trigger the addSailingClub action.
-RegattaAction<String> requestCreateSailingClub(String name) => new RequestCreateSailingClubAction(name);
+RegattaAction<Map<String, Object>> requestCreateSailingClub(String name, {Person initialAdmin}) => new RequestCreateSailingClubAction({'name': name, 'admin':initialAdmin});
 
 /// Utility function to trigger the addSailingClub action.
 RegattaAction<SailingClub> addSailingClub(SailingClub sailingClub) => new AddSailingClubAction(sailingClub);
@@ -151,10 +152,10 @@ class DeleteEventAction extends RegattaAction<Event> {
 }
 
 /// Action to request the add of a new SailingClub.
-class RequestCreateSailingClubAction extends RegattaAction<String> implements AsyncAction<ActionType> {
+class RequestCreateSailingClubAction extends RegattaAction<Map<String, Object>> implements AsyncAction<ActionType> {
   final FirebaseService _fbService;
 
-  RequestCreateSailingClubAction(String payload)
+  RequestCreateSailingClubAction(Map<String, Object> payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
 
