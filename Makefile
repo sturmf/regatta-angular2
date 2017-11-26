@@ -1,6 +1,6 @@
 SHELL = /bin/bash
 
-all: install run
+all: install login rules deploy
 
 install:
 	npm install -g firebase-tools
