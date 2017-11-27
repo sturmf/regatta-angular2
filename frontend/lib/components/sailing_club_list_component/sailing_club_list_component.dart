@@ -1,7 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:frontend/models/person.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
 
@@ -25,8 +24,7 @@ class SailingClubListComponent {
 
   void addNewSailingClubHandler() {
     if (sailingClubName.length > 0) {
-      Person currentUser = new Person(1234, 'my url');
-      _store.dispatch(requestCreateSailingClub(sailingClubName, initialAdmin: currentUser)); // FIXME: add id from store _store.currentUser
+      _store.dispatch(requestCreateSailingClub(sailingClubName, initialAdmin: _store.state.currentUser));
       sailingClubName = '';
     }
   }

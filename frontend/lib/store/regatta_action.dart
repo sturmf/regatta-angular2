@@ -8,6 +8,9 @@ import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/services/firebase_service.dart';
 
+/// Login changed
+RegattaAction<Person> loginChanged(Person user) => new LoginChangedAction(user);
+
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
 
@@ -27,7 +30,8 @@ RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAc
 RegattaAction<Event> deleteEvent(Event event) => new DeleteEventAction(event);
 
 /// Utility function to trigger the addSailingClub action.
-RegattaAction<Map<String, Object>> requestCreateSailingClub(String name, {Person initialAdmin}) => new RequestCreateSailingClubAction({'name': name, 'admin': initialAdmin});
+RegattaAction<Map<String, Object>> requestCreateSailingClub(String name, {Person initialAdmin}) =>
+    new RequestCreateSailingClubAction({'name': name, 'admin': initialAdmin});
 
 /// Utility function to trigger the addSailingClub action.
 RegattaAction<SailingClub> addSailingClub(SailingClub sailingClub) => new AddSailingClubAction(sailingClub);
@@ -72,6 +76,15 @@ abstract class RegattaAction<T> extends Action<ActionType> {
 
   /// Creates a new instance.
   RegattaAction(this.payload);
+}
+
+/// Action to update the current user
+class LoginChangedAction extends RegattaAction<Person> {
+  ///
+  LoginChangedAction(Person payload) : super(payload);
+
+  @override
+  ActionType get type => ActionType.loginChanged;
 }
 
 /// Action to request the add of a new Event.

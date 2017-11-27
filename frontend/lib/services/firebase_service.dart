@@ -59,6 +59,11 @@ class FirebaseService {
   void _authChanged(fb.User user) {
     this.user = user;
     // FIXME: maybe send a clear event since the user might have changed
+    if (user != null) {
+      _store.dispatch(actions.loginChanged(new Person(user.uid, "")));
+    } else {
+      _store.dispatch(actions.loginChanged(null));
+    }
   }
 
   Future signIn() async {
@@ -121,7 +126,7 @@ class FirebaseService {
 
   Future addSailingClub(SailingClub sailingClub, {Person initialAdmin}) async {
     try {
-      dynamic sc = sailingClub.toMap();
+      final sc = sailingClub.toMap();
       sc['admins'] = {initialAdmin.id: true};
       await _fbRefSailingClubs.push(sc).future;
     } catch (error) {
