@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:firebase/firebase.dart' as fb;
 import 'package:frontend/models/event.dart';
+import 'package:frontend/models/person.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/store/regatta_store.dart';
@@ -118,9 +119,11 @@ class FirebaseService {
     _store.dispatch(actions.addSailingClub(sc));
   }
 
-  Future addSailingClub(SailingClub sailingClub) async {
+  Future addSailingClub(SailingClub sailingClub, {Person initialAdmin}) async {
     try {
-      await _fbRefSailingClubs.push(sailingClub.toMap()).future;
+      dynamic sc = sailingClub.toMap();
+      sc['admins'] = {initialAdmin.id: true};
+      await _fbRefSailingClubs.push(sc).future;
     } catch (error) {
       print("$runtimeType::addSailingClub() -- $error");
     }
