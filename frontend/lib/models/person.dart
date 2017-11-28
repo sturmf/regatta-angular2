@@ -18,4 +18,7 @@ class Person {
   String get fullName => '$firstName $lastName';
 
   Map toJson() => {'id': id, 'url': url, 'first_name': firstName, 'last_name': lastName, 'sailing_club': sailingClub};
+
+  @override
+  String toString() => 'Person($fullName)';
 }
