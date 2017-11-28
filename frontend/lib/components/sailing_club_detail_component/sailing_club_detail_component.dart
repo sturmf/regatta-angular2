@@ -10,7 +10,7 @@ import 'package:frontend/models/sailing_club.dart';
     selector: 'my-sailing-club-detail',
     templateUrl: 'sailing_club_detail_component.html',
     styleUrls: const ['sailing_club_detail_component.css'],
-    directives: const [materialDirectives],
+    directives: const [CORE_DIRECTIVES, materialDirectives],
     providers: const [materialProviders])
 class SailingClubDetailComponent {
   final RegattaStore _store;

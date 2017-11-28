@@ -1,6 +1,6 @@
 <material-tab-panel>
     <material-tab label="Details">
-        <div style="display:flex; flex-direction:column; width:100%">
+        <div *ngIf="sailingClub != null" style="display:flex; flex-direction:column; width:100%">
             <div style="display:flex">
                 <material-input style="flex:1" required floatingLabel label="Name" [ngModel]="sailingClub.name" (change)="onNameChanged($event)"></material-input>
             </div>
