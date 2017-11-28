@@ -60,7 +60,8 @@ class FirebaseService {
     this.user = user;
     // FIXME: maybe send a clear event since the user might have changed
     if (user != null) {
-      _store.dispatch(actions.loginChanged(new Person(user.uid, "")));
+      // FIXME: we actually should load the persons profile here which contains e.g. first and lastnamme
+      _store.dispatch(actions.loginChanged(new Person(user.uid, "", user.displayName)));
     } else {
       _store.dispatch(actions.loginChanged(null));
     }
