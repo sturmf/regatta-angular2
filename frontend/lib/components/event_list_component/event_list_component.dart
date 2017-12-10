@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
-
 import 'package:frontend/models/event.dart';
 
 @Component(
@@ -21,6 +21,15 @@ class EventListComponent {
 
   String eventName = '';
   Iterable<Event> get events => _store.state.events.values;
+
+  // FIXME: should come from store
+  bool get canAddEvents {
+    return _store.state.currentUser != null;
+  }
+
+  Future joinEventHandler(Event event) async {
+    print("FIXME: now emit a join event??");
+  }
 
   void addNewEventHandler() {
     if (eventName.length > 0) {

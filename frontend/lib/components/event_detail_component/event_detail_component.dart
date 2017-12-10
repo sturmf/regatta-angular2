@@ -31,6 +31,8 @@ class EventDetailComponent {
     selectedEvent = _routeParams.get('key');
   }
 
+  bool get canEdit => true; // FIXME: needs to depend on permissions
+
   Event get event => _store.state.events[selectedEvent];
 
   String get raceCount => event.raceCount.toString();

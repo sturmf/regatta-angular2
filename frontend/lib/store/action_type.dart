@@ -1,5 +1,8 @@
 /// The type of actions on the TodoApp.
 enum ActionType {
+  /// Indicates that the login status changed
+  loginChanged,
+
   /// Indicates the intention to create a new event by title
   requestCreateEvent,
 
