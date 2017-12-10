@@ -5,12 +5,15 @@ import 'package:frontend/models/boat.dart';
 
 /// State of the regattaApp.
 class RegattaState {
+  /// The currently logged in person
   final Person currentUser;
 
-  /// All events available in the app.
+  /// All entities available in the app.
   final Map<String, Event> events;
   final Map<String, SailingClub> sailingClubs;
   final Map<String, Boat> boats;
+
+  static const _noValueGiven = const Object();
 
   /// Creates a new instance.
   RegattaState(
@@ -29,11 +32,11 @@ class RegattaState {
 
   /// Clones this instance
   RegattaState copy(
-          {Person currentUser,
+          {Person currentUser: _noValueGiven,
           Map<String, Event> events,
           Map<String, SailingClub> sailingClubs,
           Map<String, Boat> boats}) =>
-      new RegattaState(currentUser ?? this.currentUser, events ?? this.events, sailingClubs ?? this.sailingClubs,
+      new RegattaState(currentUser != _noValueGiven ? currentUser : this.currentUser, events ?? this.events, sailingClubs ?? this.sailingClubs,
           boats ?? this.boats);
 
   @override
