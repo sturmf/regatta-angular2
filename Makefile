@@ -1,6 +1,6 @@
 SHELL = /bin/bash
 
-all: install login rules deploy
+all: install login deploy
 
 install:
 	npm install -g firebase-tools
@@ -8,14 +8,11 @@ install:
 login:
 	firebase login
 
-rules:
-	firebase-bolt database.rules.bolt
-
 deploy:
 	firebase deploy
 
-deploy-db:
-	firebase deploy --only database
+deploy-firestore:
+	firebase deploy --only firestore:rules
 
-.PHONY: install login rules deploy deploy-db
+.PHONY: install login deploy deploy-firestore
 
