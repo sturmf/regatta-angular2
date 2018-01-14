@@ -79,7 +79,7 @@ class FirebaseService {
           _store.dispatch(actions.deleteEvent(ev));
           break;
         case "modified":
-            _store.dispatch(actions.updateEvent(ev));
+          _store.dispatch(actions.updateEvent(ev));
           break;
       }
     });
@@ -178,7 +178,6 @@ class FirebaseService {
       print("$runtimeType::updateSailingClub() -- $error");
     }
   }
-
 
   Future deleteSailingClub(SailingClub sailingClub) async {
     try {
