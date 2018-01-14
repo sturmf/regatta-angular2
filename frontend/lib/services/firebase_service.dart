@@ -36,17 +36,17 @@ class FirebaseService {
       projectId: "regatta-17147",
       storageBucket: "regatta-17147.appspot.com",
     );
-    _initalize_authentication();
-    _subscribe_to_firestore_collections();
+    _initalizeAuthentication();
+    _subscribeToFirestoreCollections();
   }
 
-  void _initalize_authentication() {
+  void _initalizeAuthentication() {
     _fbGoogleAuthProvider = new fb.GoogleAuthProvider();
     _fbAuth = fb.auth();
     _fbAuth.onAuthStateChanged.listen(_authChanged);
   }
 
-  void _subscribe_to_firestore_collections() {
+  void _subscribeToFirestoreCollections() {
     _fbStore = fb.firestore();
     _fsRefEvents = _fbStore.collection("events");
     _fsRefEvents.onSnapshot.listen(_eventChanges);
