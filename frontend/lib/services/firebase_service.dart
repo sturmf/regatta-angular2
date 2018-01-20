@@ -161,11 +161,11 @@ class FirebaseService {
     }
   }
 
-  Future addSailingClub(SailingClub sailingClub, {Person initialAdmin}) async {
+  Future addSailingClub(SailingClub sailingClub, {Person initialAdmin}) async { // FIXME: remove initialAdmin
     try {
-      final sc = sailingClub.toMap();
-      sc['roles'] = {initialAdmin.id: 'owner'};
-      await _fsRefSailingClubs.add(sc);
+      final _sailingClub = sailingClub.toMap();
+      _sailingClub['roles'] = {_store.state.currentUser.id: 'owner'};
+      await _fsRefSailingClubs.add(_sailingClub);
     } catch (error) {
       print("$runtimeType::addSailingClub() -- $error");
     }
@@ -189,7 +189,9 @@ class FirebaseService {
 
   Future addBoat(Boat boat) async {
     try {
-      await _fsRefBoats.add(boat.toMap());
+      final _boat = boat.toMap();
+      _boat['roles'] = {_store.state.currentUser.id: 'owner'};
+      await _fsRefBoats.add(_boat);
     } catch (error) {
       print("$runtimeType::addBoat() -- $error");
     }

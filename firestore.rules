@@ -4,12 +4,13 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     match /sailing_clubs/{sailingClub} {
+
       function isSignedIn() {
         return request.auth != null;
       }
 
       function getRole() {
-        return value(/databases/$(database)/documents/sailing_clubs/$(sailingClub)).roles[request.auth.uid];
+        return resource.data.roles[request.auth.uid];
       }
 
       function isOneOfRoles(array) {
@@ -17,7 +18,7 @@ service cloud.firestore {
       }
 
       function isValidNewSailingClub() {
-        // Valid if story does not exist and the story has the user as owner.
+        // Valid if sailing club does not exist and the sailing club has the user as owner.
         return !exists(/databases/$(database)/documents/sailing_clubs/$(sailingClub))
           && request.resource.data.roles[request.auth.uid] == 'owner';
        }
@@ -26,7 +27,33 @@ service cloud.firestore {
       allow read;
 
       // Everyone can create a new sailing club or edit if he is the owner
-      allow write: if true; //isValidNewSailingClub () || isOneOfRoles(['owner']);
+      allow write: if isValidNewSailingClub () || isOneOfRoles(['owner']);
+    }
+
+    match /boats/{boat} {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function getRole() {
+        return resource.data.roles[request.auth.uid];
+      }
+
+      function isOneOfRoles(array) {
+        return isSignedIn() && (getRole() in array);
+      }
+
+      function isValidNewBoat() {
+        // Valid if boat does not exist and the boat has the user as owner.
+        return !exists(/databases/$(database)/documents/boats/$(boat))
+          && request.resource.data.roles[request.auth.uid] == 'owner';
+       }
+
+      // Everyone can read the first level
+      allow read;
+
+      // Everyone can create a new sailing club or edit if he is the owner
+      allow write: if true; // isValidNewBoat () || isOneOfRoles(['owner']);
     }
 
   }
