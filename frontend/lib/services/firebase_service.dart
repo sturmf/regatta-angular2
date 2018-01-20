@@ -164,7 +164,7 @@ class FirebaseService {
   Future addSailingClub(SailingClub sailingClub, {Person initialAdmin}) async {
     try {
       final sc = sailingClub.toMap();
-      sc['admins'] = {initialAdmin.id: true};
+      sc['roles'] = {initialAdmin.id: 'owner'};
       await _fsRefSailingClubs.add(sc);
     } catch (error) {
       print("$runtimeType::addSailingClub() -- $error");
