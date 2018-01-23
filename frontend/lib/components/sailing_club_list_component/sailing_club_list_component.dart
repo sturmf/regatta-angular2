@@ -24,7 +24,7 @@ class SailingClubListComponent {
 
   void addNewSailingClubHandler() {
     if (sailingClubName.length > 0) {
-      _store.dispatch(requestCreateSailingClub(sailingClubName, initialAdmin: _store.state.currentUser));
+      _store.dispatch(requestCreateSailingClub(sailingClubName));
       sailingClubName = '';
     }
   }

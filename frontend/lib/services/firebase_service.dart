@@ -161,8 +161,7 @@ class FirebaseService {
     }
   }
 
-  Future addSailingClub(SailingClub sailingClub, {Person initialAdmin}) async {
-    // FIXME: remove initialAdmin
+  Future addSailingClub(SailingClub sailingClub) async {
     try {
       final _sailingClub = sailingClub.toMap();
       _sailingClub['roles'] = {_store.state.currentUser.id: 'owner'};
