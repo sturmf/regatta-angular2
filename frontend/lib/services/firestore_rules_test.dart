@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 Map<String, String> _config;
 
 // This is necessary to read the config values from a file,
-// since we are bwoser based we can't use dart:io
+// since we are browser based we can't use dart:io
 Future config() async {
   final client = new http.BrowserClient();
 
