@@ -1,8 +1,11 @@
 # Project own files
 *.rgs
 *.sqlite3
+attic
 pep8.txt
 misc
+frontend/lib/services/config.json
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
