@@ -45,7 +45,7 @@ void main() {
         projectId: _config['PROJECT_ID'],
         storageBucket: _config['STORAGE_BUCKET']);
 
-    user = await app.auth().signInWithEmailAndPassword(_config['USER_EMAIL'], _config['USER_PASSWORD']);
+    user = await app.auth().signInWithEmailAndPassword(_config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
   });
 
   tearDown(() async {
