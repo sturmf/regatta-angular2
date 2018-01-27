@@ -31,17 +31,17 @@ test:
 	# These are the dart unit tests
 	pub run test lib
 
-tests-firefox:
+test-firefox:
 	# These are the browser tests with firefox
 	# You must also have `pub serve` running somewhere
 	pub run test -p firefox --pub-serve=8081
 
-tests-dartium:
+test-dartium:
 	# These are the browser tests with dartium
 	# You must also have `pub serve` running somewhere
 	pub run test -p dartium --pub-serve=8081
 
-tests-firestore-rules:
+test-firestore-rules:
 	# These are browser tests with dartium that connect to firestore
 	# You need a configured config.json file in lib/services
 	pub run test -p dartium lib/services/firestore_rules_test.dart
