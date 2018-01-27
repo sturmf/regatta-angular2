@@ -29,9 +29,12 @@ Future config() async {
   }
 }
 
+Future<fb.User> signIn(fb.App app, String user, String password) async {
+  return await app.auth().signInWithEmailAndPassword(user, password);
+}
+
 void main() {
   fb.App app;
-  fb.User user;
 
   setUpAll(() async {
     await config();
@@ -40,12 +43,10 @@ void main() {
   setUp(() async {
     app = fb.initializeApp(
         apiKey: _config['API_KEY'],
-        authDomain: _config['AUTh_DOMAIN'],
+        authDomain: _config['AUTH_DOMAIN'],
         databaseURL: _config['DATABASE_URL'],
         projectId: _config['PROJECT_ID'],
         storageBucket: _config['STORAGE_BUCKET']);
-
-    user = await app.auth().signInWithEmailAndPassword(_config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
   });
 
   tearDown(() async {
@@ -55,12 +56,20 @@ void main() {
     }
   });
 
-  test('regular users can create sailing clubs', () async {
+  test('Alice and bob can sign in', () async {
+    final fb.User alice = await signIn(app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
+    expect(alice.uid, isNotNull);
+    final fb.User bob = await signIn(app, _config['USER_BOB_EMAIL'], _config['USER_BOB_PASSWORD']);
+    expect(bob.uid, isNotNull);
+  });
+
+  test('Regular users can create sailing clubs', () async {
+    final fb.User alice = await signIn(app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
     final fs.Firestore _fbStore = fb.firestore();
     final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
-    sailingClubMap['roles'] = {user.uid: 'owner'};
+    sailingClubMap['roles'] = {alice.uid: 'owner'};
     final sailingClub = await _fsRefSailingClubs.add(sailingClubMap);
-    assert(sailingClub.id != null);
+    expect(sailingClub.id, isNotNull);
   });
 }
