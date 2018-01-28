@@ -34,42 +34,61 @@ Future<fb.User> signIn(fb.App app, String user, String password) async {
 }
 
 void main() {
-  fb.App app;
+  fb.App _app;
+  fs.Firestore _fbStore;
 
   setUpAll(() async {
     await config();
   });
 
   setUp(() async {
-    app = fb.initializeApp(
+    _app = fb.initializeApp(
         apiKey: _config['API_KEY'],
         authDomain: _config['AUTH_DOMAIN'],
         databaseURL: _config['DATABASE_URL'],
         projectId: _config['PROJECT_ID'],
         storageBucket: _config['STORAGE_BUCKET']);
+    _fbStore = fb.firestore();
   });
 
   tearDown(() async {
-    if (app != null) {
-      await app.delete();
-      app = null;
+    if (_app != null) {
+      await _app.delete();
+      _app = null;
     }
   });
 
   test('Alice and bob can sign in', () async {
-    final fb.User alice = await signIn(app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
+    final fb.User alice = await signIn(_app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
     expect(alice.uid, isNotNull);
-    final fb.User bob = await signIn(app, _config['USER_BOB_EMAIL'], _config['USER_BOB_PASSWORD']);
+    final fb.User bob = await signIn(_app, _config['USER_BOB_EMAIL'], _config['USER_BOB_PASSWORD']);
     expect(bob.uid, isNotNull);
   });
 
-  test('Regular users can create sailing clubs', () async {
-    final fb.User alice = await signIn(app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
-    final fs.Firestore _fbStore = fb.firestore();
+  test('Alice can create and update a sailing club but not delete', () async {
+    final fb.User alice = await signIn(_app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
+    // Create
     final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
     sailingClubMap['roles'] = {alice.uid: 'owner'};
     final sailingClub = await _fsRefSailingClubs.add(sailingClubMap);
     expect(sailingClub.id, isNotNull);
+    var snapshot = await sailingClub.get();
+    expect(snapshot.exists, isTrue);
+    expect(snapshot.data()['name'], 'a test');
+    // Update
+    await sailingClub.set({"name": "a test updated"}, new fs.SetOptions(merge: true));
+    snapshot = await sailingClub.get();
+    expect(snapshot.exists, isTrue);
+    expect(snapshot.data()['name'], 'a test updated');
+    // Delete
+    // FIXME: so far delete is still allowed, so we check for that atm.
+    await sailingClub.delete();
+    snapshot = await sailingClub.get();
+    expect(snapshot.exists, isFalse);
   });
+
+  // Alice can create sailing club but bob can't update
+
+  // Alice can make Bob an admin of a sailing club she is admin of but Bob can't
 }
