@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "regatta-17147"
+    "default": "regatta-17147",
+    "testing": "regatta-test"
   }
 }
