@@ -108,7 +108,8 @@ void main() {
     // Login as Bob
     await signIn(_app, _config['USER_BOB_EMAIL'], _config['USER_BOB_PASSWORD']);
     // Update
-    expect(sailingClub.set({"name": "a test updated"}, new fs.SetOptions(merge: true)), throwsToString(contains('Missing or insufficient permissions')));
+    expect(sailingClub.set({"name": "a test updated"}, new fs.SetOptions(merge: true)),
+        throwsToString(contains('Missing or insufficient permissions')));
     // Delete
     expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
   });
