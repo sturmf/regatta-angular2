@@ -91,7 +91,6 @@ void main() {
     expect(snapshot.exists, isTrue);
     expect(snapshot.data()['name'], 'a test updated');
     // Delete
-    // FIXME: so far delete is still allowed, so we check for that atm.
     expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
   });
 
