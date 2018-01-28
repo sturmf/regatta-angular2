@@ -38,8 +38,8 @@ class _ToStringMatcher extends CustomMatcher {
   String featureValueOf(dynamic actual) => actual.toString();
 }
 
-Future<fb.User> signIn(fb.App app, String user, String password) async {
-  return await app.auth().signInWithEmailAndPassword(user, password);
+Future<fb.User> signIn(fb.App app, String user, String password) {
+  return app.auth().signInWithEmailAndPassword(user, password);
 }
 
 void main() {
@@ -94,7 +94,24 @@ void main() {
     expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
   });
 
-  // Alice can create sailing club but bob can't update
+  test('Alice can create sailing club but bob cant update', () async {
+    final fb.User alice = await signIn(_app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
+    final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
+    // Create
+    final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
+    sailingClubMap['roles'] = {alice.uid: 'owner'};
+    final sailingClub = await _fsRefSailingClubs.add(sailingClubMap);
+    expect(sailingClub.id, isNotNull);
+    final snapshot = await sailingClub.get();
+    expect(snapshot.exists, isTrue);
+    expect(snapshot.data()['name'], 'a test');
+    // Login as Bob
+    await signIn(_app, _config['USER_BOB_EMAIL'], _config['USER_BOB_PASSWORD']);
+    // Update
+    expect(sailingClub.set({"name": "a test updated"}, new fs.SetOptions(merge: true)), throwsToString(contains('Missing or insufficient permissions')));
+    // Delete
+    expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
+  });
 
-  // Alice can make Bob an admin of a sailing club she is admin of but Bob can't
+  // Alice can make Bob an admin of a sailing club she is admin of but Bob cant
 }
