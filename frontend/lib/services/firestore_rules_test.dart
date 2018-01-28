@@ -29,6 +29,15 @@ Future config() async {
   }
 }
 
+Matcher throwsToString(dynamic value) => throwsA(new _ToStringMatcher(value));
+
+class _ToStringMatcher extends CustomMatcher {
+  _ToStringMatcher(matcher) : super("Object toString value", "toString", matcher);
+
+  @override
+  String featureValueOf(dynamic actual) => actual.toString();
+}
+
 Future<fb.User> signIn(fb.App app, String user, String password) async {
   return await app.auth().signInWithEmailAndPassword(user, password);
 }
@@ -83,9 +92,7 @@ void main() {
     expect(snapshot.data()['name'], 'a test updated');
     // Delete
     // FIXME: so far delete is still allowed, so we check for that atm.
-    await sailingClub.delete();
-    snapshot = await sailingClub.get();
-    expect(snapshot.exists, isFalse);
+    expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
   });
 
   // Alice can create sailing club but bob can't update
