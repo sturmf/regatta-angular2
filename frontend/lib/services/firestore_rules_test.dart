@@ -94,7 +94,7 @@ void main() {
     expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
   });
 
-  test('Alice can create sailing club but bob cant update', () async {
+  test('Alice can create sailing club but bob cant update or delete', () async {
     final fb.User alice = await signIn(_app, _config['USER_ALICE_EMAIL'], _config['USER_ALICE_PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     // Create
