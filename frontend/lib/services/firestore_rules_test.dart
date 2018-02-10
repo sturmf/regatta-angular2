@@ -123,7 +123,7 @@ void main() {
     fb.User alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsAlice = _fbStore.collection("sailing_clubs");
     // Create
-    final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
+    final Map<String, dynamic> sailingClubMap = {'name': 'a test with second owner'};
     sailingClubMap['roles'] = {alice.uid: 'owner'};
     final sailingClubAlice = await _fsRefSailingClubsAlice.add(sailingClubMap);
     // Switch to Bob and try to make himself an owner
