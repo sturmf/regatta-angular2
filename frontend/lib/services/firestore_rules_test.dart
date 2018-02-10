@@ -113,7 +113,7 @@ void main() {
     // Login as Bob
     await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
     // Update
-    expect(sailingClub.set({"name": "a test updated"}, new fs.SetOptions(merge: true)),
+    await expectLater(sailingClub.set({"name": "a test updated"}, new fs.SetOptions(merge: true)),
         throwsToString(contains('Missing or insufficient permissions')));
     // Delete
     expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
@@ -130,16 +130,8 @@ void main() {
     final fb.User bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsBob = _fbStore.collection("sailing_clubs");
     final fs.DocumentReference sailingClubBob = _fsRefSailingClubsBob.doc(sailingClubAlice.id);
-    //expect(sailingClubBob.set({"roles": {bob.uid: 'owner'}}, new fs.SetOptions(merge: true)),
-    //    throwsToString(contains('Missing or insufficient permissions')));
-    try {
-      await sailingClubBob.set({
-        "roles": {bob.uid: 'owner'}
-      }, new fs.SetOptions(merge: true));
-      expect('Should not be reached', '');
-    } on fb.FirebaseError catch (e) {
-      expect(e.toString(), 'FirebaseError: [code=permission-denied]: Missing or insufficient permissions.');
-    }
+    await expectLater(sailingClubBob.set({"roles": {bob.uid: 'owner'}}, new fs.SetOptions(merge: true)),
+        throwsToString(contains('Missing or insufficient permissions')));
     // Switch to Alice and try to make Bob an owner
     alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsAlice2 = _fbStore.collection("sailing_clubs");
