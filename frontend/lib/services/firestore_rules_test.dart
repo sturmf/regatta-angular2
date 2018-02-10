@@ -119,7 +119,7 @@ void main() {
     expect(sailingClub.delete(), throwsToString(contains('Missing or insufficient permissions')));
   });
 
-  test('Alice can make Bob an owner of a sailing club she is owner of but Bob cant', () async {
+  test('Alice can make Bob an owner of a sailing club she is owner of but Bob cant himself', () async {
     fb.User alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsAlice = _fbStore.collection("sailing_clubs");
     // Create
