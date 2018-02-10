@@ -130,7 +130,10 @@ void main() {
     final fb.User bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsBob = _fbStore.collection("sailing_clubs");
     final fs.DocumentReference sailingClubBob = _fsRefSailingClubsBob.doc(sailingClubAlice.id);
-    await expectLater(sailingClubBob.set({"roles": {bob.uid: 'owner'}}, new fs.SetOptions(merge: true)),
+    await expectLater(
+        sailingClubBob.set({
+          "roles": {bob.uid: 'owner'}
+        }, new fs.SetOptions(merge: true)),
         throwsToString(contains('Missing or insufficient permissions')));
     // Switch to Alice and try to make Bob an owner
     alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
