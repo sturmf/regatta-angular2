@@ -16,7 +16,7 @@ class FirebaseService {
   fb.GoogleAuthProvider _fbGoogleAuthProvider;
   fb.User user;
 
-  // References to the different firebase functionallities
+  // References to the different firebase functionalities
   fs.Firestore _fbStore;
   // fb.Storage _fbStorage;
   // fb.Database _fbDatabase;
@@ -139,7 +139,9 @@ class FirebaseService {
 
   Future addEvent(Event event) async {
     try {
-      await _fsRefEvents.add(event.toMap());
+      final _event = event.toMap();
+      _event['roles'] = {_store.state.currentUser.id: 'owner'};
+      await _fsRefEvents.add(_event);
     } catch (error) {
       print("$runtimeType::addEvent() -- $error");
     }

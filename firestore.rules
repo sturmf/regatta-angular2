@@ -31,7 +31,7 @@ service cloud.firestore {
       allow read;
 
       // Everyone can create a new valid sailing club
-      allow create: if isNewSailingClub () && isValidSailingClub();
+      allow create: if isNewSailingClub() && isValidSailingClub();
 
       // Everyone can update a sailing club if he is the owner and is valid
       allow update: if isOneOfRoles(['owner']) && isValidSailingClub();
@@ -50,18 +50,59 @@ service cloud.firestore {
         return isSignedIn() && (getRole() in array);
       }
 
-      function isValidNewBoat() {
-        // Valid if boat does not exist and the boat has the user as owner.
-        return !exists(/databases/$(database)/documents/boats/$(boat))
-          && request.resource.data.roles[request.auth.uid] == 'owner';
+      function isNewBoat() {
+        // New if boat does not exist.
+        return !exists(/databases/$(database)/documents/boats/$(boat));
+       }
+
+      function isValidBoat() {
+        // Valid if boat has the user as owner.
+        return request.resource.data.roles[request.auth.uid] == 'owner';
        }
 
       // Everyone can read the first level
       allow read;
 
-      // Everyone can create a new sailing club or edit if he is the owner
-      allow write: if true; // isValidNewBoat () || isOneOfRoles(['owner']);
+      // Everyone can create a new valid boat
+      allow create: if isNewBoat() && isValidBoat();
+
+      // Everyone can update a boat if he is the owner and is valid
+      allow update: if isOneOfRoles(['owner']) && isValidBoat();
     }
+
+    match /events/{event} {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function getRole() {
+        return resource.data.roles[request.auth.uid];
+      }
+
+      function isOneOfRoles(array) {
+        return isSignedIn() && (getRole() in array);
+      }
+
+      function isNewEvent() {
+        // New if event does not exist.
+        return !exists(/databases/$(database)/documents/events/$(event));
+       }
+
+      function isValidEvent() {
+        // Valid if event has the user as owner.
+        return request.resource.data.roles[request.auth.uid] == 'owner';
+       }
+
+      // Everyone can read the first level
+      allow read;
+
+      // Everyone can create a new valid event
+      allow create: if isNewEvent() && isValidEvent();
+
+      // Everyone can update an event if he is the owner and is valid
+      allow update: if isOneOfRoles(['owner']) && isValidEvent();
+    }
+
 
   }
 }
