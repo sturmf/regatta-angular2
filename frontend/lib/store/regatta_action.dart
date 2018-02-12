@@ -113,7 +113,7 @@ class AddEventAction extends RegattaAction<Event> {
   ActionType get type => ActionType.addEvent;
 }
 
-/// Action to add an Event.
+/// Action to update an Event.
 class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
   final FirebaseService _fbService;
 
