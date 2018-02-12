@@ -1,0 +1,108 @@
+// We try to model security with role based access control https://cloud.google.com/firestore/docs/solutions/role-based-access
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /sailing_clubs/{sailingClub} {
+
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function getRole() {
+        return resource.data.roles[request.auth.uid];
+      }
+
+      function isOneOfRoles(array) {
+        return isSignedIn() && (getRole() in array);
+      }
+
+      function isNewSailingClub() {
+        // New if sailing club does not exist.
+        return !exists(/databases/$(database)/documents/sailing_clubs/$(sailingClub));
+       }
+
+      function isValidSailingClub() {
+        // Valid if sailing club has the user as owner.
+        return request.resource.data.roles[request.auth.uid] == 'owner';
+       }
+
+      // Everyone can read the first level
+      allow read;
+
+      // Everyone can create a new valid sailing club
+      allow create: if isNewSailingClub() && isValidSailingClub();
+
+      // Everyone can update a sailing club if he is the owner and is valid
+      allow update: if isOneOfRoles(['owner']) && isValidSailingClub();
+    }
+
+    match /boats/{boat} {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function getRole() {
+        return resource.data.roles[request.auth.uid];
+      }
+
+      function isOneOfRoles(array) {
+        return isSignedIn() && (getRole() in array);
+      }
+
+      function isNewBoat() {
+        // New if boat does not exist.
+        return !exists(/databases/$(database)/documents/boats/$(boat));
+       }
+
+      function isValidBoat() {
+        // Valid if boat has the user as owner.
+        return request.resource.data.roles[request.auth.uid] == 'owner';
+       }
+
+      // Everyone can read the first level
+      allow read;
+
+      // Everyone can create a new valid boat
+      allow create: if isNewBoat() && isValidBoat();
+
+      // Everyone can update a boat if he is the owner and is valid
+      allow update: if isOneOfRoles(['owner']) && isValidBoat();
+    }
+
+    match /events/{event} {
+      function isSignedIn() {
+        return request.auth != null;
+      }
+
+      function getRole() {
+        return resource.data.roles[request.auth.uid];
+      }
+
+      function isOneOfRoles(array) {
+        return isSignedIn() && (getRole() in array);
+      }
+
+      function isNewEvent() {
+        // New if event does not exist.
+        return !exists(/databases/$(database)/documents/events/$(event));
+       }
+
+      function isValidEvent() {
+        // Valid if event has the user as owner.
+        return request.resource.data.roles[request.auth.uid] == 'owner';
+       }
+
+      // Everyone can read the first level
+      allow read;
+
+      // Everyone can create a new valid event
+      allow create: if isNewEvent() && isValidEvent();
+
+      // Everyone can update an event if he is the owner and is valid
+      allow update: if isOneOfRoles(['owner']) && isValidEvent();
+    }
+
+
+  }
+}

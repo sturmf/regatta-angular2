@@ -1,0 +1,11 @@
+{
+  "API_KEY": "",
+  "AUTH_DOMAIN" : "",
+  "DATABASE_URL": "",
+  "PROJECT_ID": "",
+  "STORAGE_BUCKET": "",
+  "USER_ALICE_EMAIL": "",
+  "USER_ALICE_PASSWORD": "",
+  "USER_BOB_EMAIL": "",
+  "USER_BOB_PASSWORD": ""
+}

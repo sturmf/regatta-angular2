@@ -30,8 +30,8 @@ RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAc
 RegattaAction<Event> deleteEvent(Event event) => new DeleteEventAction(event);
 
 /// Utility function to trigger the addSailingClub action.
-RegattaAction<Map<String, Object>> requestCreateSailingClub(String name, {Person initialAdmin}) =>
-    new RequestCreateSailingClubAction({'name': name, 'admin': initialAdmin});
+RegattaAction<Map<String, Object>> requestCreateSailingClub(String name) =>
+    new RequestCreateSailingClubAction({'name': name});
 
 /// Utility function to trigger the addSailingClub action.
 RegattaAction<SailingClub> addSailingClub(SailingClub sailingClub) => new AddSailingClubAction(sailingClub);
@@ -113,7 +113,7 @@ class AddEventAction extends RegattaAction<Event> {
   ActionType get type => ActionType.addEvent;
 }
 
-/// Action to add an Event.
+/// Action to update an Event.
 class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
   final FirebaseService _fbService;
 
@@ -177,7 +177,7 @@ class RequestCreateSailingClubAction extends RegattaAction<Map<String, Object>> 
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.addSailingClub(new SailingClub(null, payload['name']), initialAdmin: payload['admin']);
+    return _fbService.addSailingClub(new SailingClub(null, payload['name']));
   }
 }
 

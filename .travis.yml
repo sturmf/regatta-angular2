@@ -39,7 +39,7 @@ before_script:
 script:
   - (cd frontend  && make test)
   - (cd frontend  && make coveralls)
-  - (cd frontend  && make dtests)
+  - (cd frontend  && make test-dartium)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   # - sleep 3 && echo sleep done
