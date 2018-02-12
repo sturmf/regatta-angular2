@@ -55,6 +55,7 @@ before_deploy:
 
 deploy:
   provider: firebase
+  project: "default"
   token:
     secure: "cxPUVZpp+6AqIw55ANPotUhM/QLEv0xYusxKr0fnCvkCdO1VqPXGhraUtP38LPQB8U3+9PkJCf0/ZBNlUF1TT1cZaDnaBMLkUugtFuuzmy6DavFL/2vJsbCjpC5YDEgKE05BFsrhY0OvyRSyMwHftw3TTJQu/HHSSw71oADh2gQJEqUO1xLH8kbEx9ojLrAdj4MUzFMxn5DcnjWe0Jiqsd+9//x4a5bg/rN/0hh0PHAEG/fb95uqavQmss154DmTFoqEv77RlqXx9sT3G56iv7D8Ya9V6Te/+bL2JhOGedWhzOctgT636NrZrtfGzVgx4Ra2cNh+HJbJHJfRlHlUE8T0Jyjavn3f/cAgJ8B7DlvCxnlpooZq7HssITSmciIHf+rZaVBTWZZudO3D/rVQKwTE7x6fr78MgVH1D+o7ctIsIDyGZdIIE6/jYZrmBcAi34b03rK/uoaYs4t+ccij/j35KanSPr65SU1DfIQQSSBKn5d5zUXlxE3eodmo05N7pGyolCrcnudtTYJSLywaicTRZX3Buj0KfaoXQWMQuWb84jAlDC3Nh+bXjJyl5P0WnTSNl78Gt1l/govx//KIdseDZcrTqkJPtyI+xYbyjzz3nXv4HmcLpDVgj1pOrLAU7Ar40faHDJutbnGsjO9KvApXPUWpeUA6uHiyvmVtRHI="
   skip_cleanup: true
