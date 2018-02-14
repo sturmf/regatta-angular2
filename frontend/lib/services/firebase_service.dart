@@ -159,7 +159,7 @@ class FirebaseService {
     try {
       await _fsRefEvents.doc(event.key).delete();
     } catch (error) {
-      print("$runtimeType::updateEvent() -- $error");
+      print("$runtimeType::deleteEvent() -- $error");
     }
   }
 
@@ -185,7 +185,7 @@ class FirebaseService {
     try {
       await _fsRefSailingClubs.doc(sailingClub.key).delete();
     } catch (error) {
-      print("$runtimeType::updateSailingClub() -- $error");
+      print("$runtimeType::deleteSailingClub() -- $error");
     }
   }
 
@@ -211,7 +211,7 @@ class FirebaseService {
     try {
       await _fsRefBoats.doc(boat.key).delete();
     } catch (error) {
-      print("$runtimeType::updateBoat() -- $error");
+      print("$runtimeType::deleteBoat() -- $error");
     }
   }
 }
