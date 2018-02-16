@@ -20,7 +20,9 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
     case ActionType.addEvent:
       final events = new Map<String, Event>.from(currentState.events);
       events[action.payload.key] = action.payload;
-      return currentState.copy(events: events);
+      final eventList = new List<String>.from(currentState.eventList);
+      eventList.add(action.payload.key);
+      return currentState.copy(events: events, eventList: eventList);
     case ActionType.updateEvent:
       final events = new Map<String, Event>.from(currentState.events);
       events[action.payload.key] = action.payload;
@@ -28,7 +30,9 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
     case ActionType.deleteEvent:
       final events = new Map<String, Event>.from(currentState.events);
       events.remove(action.payload.key);
-      return currentState.copy(events: events);
+      final eventList = new List<String>.from(currentState.eventList);
+      eventList.remove(action.payload.key);  // FIXME: does this match?
+      return currentState.copy(events: events, eventList: eventList);
 
     case ActionType.addSailingClub:
       final sailingClubs = new Map<String, SailingClub>.from(currentState.sailingClubs);

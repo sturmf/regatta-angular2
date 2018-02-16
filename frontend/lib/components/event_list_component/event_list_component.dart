@@ -20,7 +20,8 @@ class EventListComponent {
   EventListComponent(this._router, this._store);
 
   String eventName = '';
-  Iterable<Event> get events => _store.state.events.values;
+  Map<String, Event> get events => _store.state.events;
+  Iterable<String> get eventList => _store.state.eventList;
 
   // FIXME: should come from store
   bool get canAddEvents {

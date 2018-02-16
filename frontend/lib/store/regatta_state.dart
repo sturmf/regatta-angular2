@@ -10,6 +10,7 @@ class RegattaState {
 
   /// All entities available in the app.
   final Map<String, Event> events;
+  final List<String> eventList;
   final Map<String, SailingClub> sailingClubs;
   final Map<String, Boat> boats;
 
@@ -17,9 +18,10 @@ class RegattaState {
 
   /// Creates a new instance.
   RegattaState(
-      Person currentUser, Map<String, Event> events, Map<String, SailingClub> sailingClubs, Map<String, Boat> boats)
+      Person currentUser, Map<String, Event> events, List<String> eventList, Map<String, SailingClub> sailingClubs, Map<String, Boat> boats)
       : this.currentUser = currentUser,
         this.events = new Map.from(events),
+        this.eventList = new List.from(eventList),
         this.sailingClubs = new Map.from(sailingClubs),
         this.boats = new Map.from(boats);
 
@@ -27,6 +29,7 @@ class RegattaState {
   RegattaState.initial()
       : this.currentUser = null,
         this.events = <String, Event>{},
+        this.eventList = [],
         this.sailingClubs = <String, SailingClub>{},
         this.boats = <String, Boat>{};
 
@@ -34,10 +37,11 @@ class RegattaState {
   RegattaState copy(
           {Person currentUser: _noValueGiven,
           Map<String, Event> events,
+          List<String> eventList,
           Map<String, SailingClub> sailingClubs,
           Map<String, Boat> boats}) =>
       new RegattaState(currentUser != _noValueGiven ? currentUser : this.currentUser, events ?? this.events,
-          sailingClubs ?? this.sailingClubs, boats ?? this.boats);
+          eventList ?? this.eventList, sailingClubs ?? this.sailingClubs, boats ?? this.boats);
 
   @override
   String toString() {
