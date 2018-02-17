@@ -68,6 +68,7 @@ class FirebaseService {
 
   // The following methods all react to changes in firebase and emit actions
 
+  /*
   void _eventChanges(fs.QuerySnapshot querySnapshot) {
     querySnapshot.docChanges.forEach((change) {
       final Event ev = new Event.fromMap(change.doc.ref.id, change.doc.data());
@@ -84,6 +85,7 @@ class FirebaseService {
       }
     });
   }
+  */
 
   void _sailingClubChanges(fs.QuerySnapshot querySnapshot) {
     querySnapshot.docChanges.forEach((change) {
