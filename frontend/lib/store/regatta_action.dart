@@ -11,6 +11,15 @@ import 'package:frontend/services/firebase_service.dart';
 /// Login changed
 RegattaAction<Person> loginChanged(Person user) => new LoginChangedAction(user);
 
+/// Utility function to trigger the previousEvents action.
+RegattaAction<String> requestPreviousEvents(String firstEvent) => new RequestPreviousEventsAction(firstEvent);
+
+/// Utility function to trigger the nextEvents action.
+RegattaAction<String> requestNextEvents(String lastEvent) => new RequestNextEventsAction(lastEvent);
+
+/// Utility function to set the list of Events action.
+RegattaAction<List<String>> selectedEvents(List<String> selectedEvents) => new SelectedEventsAction(selectedEvents);
+
 /// Utility function to trigger the addEvent action.
 RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
 
@@ -85,6 +94,49 @@ class LoginChangedAction extends RegattaAction<Person> {
 
   @override
   ActionType get type => ActionType.loginChanged;
+}
+
+/// Action to load the previous page of Events.
+class RequestPreviousEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
+  final FirebaseService _fbService;
+
+  RequestPreviousEventsAction(String payload)
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
+        super(payload);
+
+  @override
+  ActionType get type => ActionType.requestPreviousEvents;
+
+  @override
+  Future call(MiddlewareApi api) {
+    return _fbService.previousEvents(payload);
+  }
+}
+
+/// Action to load the next page of Events.
+class RequestNextEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
+  final FirebaseService _fbService;
+
+  RequestNextEventsAction(String payload)
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
+        super(payload);
+
+  @override
+  ActionType get type => ActionType.requestNextEvents;
+
+  @override
+  Future call(MiddlewareApi api) {
+    return _fbService.nextEvents(payload);
+  }
+}
+
+/// Action to set the list of selected Events.
+class SelectedEventsAction extends RegattaAction<List<String>> {
+  ///
+  SelectedEventsAction(List<String> payload) : super(payload);
+
+  @override
+  ActionType get type => ActionType.selectedEvents;
 }
 
 /// Action to request the add of a new Event.

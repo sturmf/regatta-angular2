@@ -17,12 +17,12 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
     case ActionType.loginChanged:
       return currentState.copy(currentUser: action.payload);
 
+    case ActionType.selectedEvents:
+      return currentState.copy(eventList: action.payload);
     case ActionType.addEvent:
       final events = new Map<String, Event>.from(currentState.events);
       events[action.payload.key] = action.payload;
-      final eventList = new List<String>.from(currentState.eventList);
-      eventList.add(action.payload.key);
-      return currentState.copy(events: events, eventList: eventList);
+      return currentState.copy(events: events);
     case ActionType.updateEvent:
       final events = new Map<String, Event>.from(currentState.events);
       events[action.payload.key] = action.payload;

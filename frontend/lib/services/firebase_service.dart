@@ -26,6 +26,7 @@ class FirebaseService {
   fs.CollectionReference _fsRefSailingClubs;
   fs.CollectionReference _fsRefBoats;
 
+  final int _pageSize = 3;
   final RegattaStore _store;
 
   FirebaseService(this._store) {
@@ -49,7 +50,6 @@ class FirebaseService {
   void _subscribeToFirestoreCollections() {
     _fbStore = fb.firestore();
     _fsRefEvents = _fbStore.collection("events");
-    _fsRefEvents.onSnapshot.listen(_eventChanges);
     _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     _fsRefSailingClubs.onSnapshot.listen(_sailingClubChanges);
     _fsRefBoats = _fbStore.collection("boats");
@@ -66,7 +66,7 @@ class FirebaseService {
     }
   }
 
-  // The following methods all react to changes in firebase and emits actions
+  // The following methods all react to changes in firebase and emit actions
 
   void _eventChanges(fs.QuerySnapshot querySnapshot) {
     querySnapshot.docChanges.forEach((change) {
@@ -135,6 +135,52 @@ class FirebaseService {
     } catch (error) {
       print("$runtimeType::signOut() -- $error");
     }
+  }
+
+  // FIXME: previous and next Events can be refactored into one
+
+  Future previousEvents(String firstEvent) async {
+    fs.QuerySnapshot events;
+    final List<String> eventList = new List();
+
+    // if we have a starting event, load it
+    if (firstEvent != null) {
+      final le = await _fsRefEvents.doc(firstEvent).get();
+      // load previous batch of events
+      events = await _fsRefEvents.orderBy('name', 'desc').startAfter(snapshot: le).limit(_pageSize).get();
+    } else {
+      events = await _fsRefEvents.orderBy('name', 'desc').limit(_pageSize).get();
+    }
+    // send all events
+    for (var snapshot in events.docs) {
+      final Event ev = new Event.fromMap(snapshot.ref.id, snapshot.data());
+      eventList.add(ev.key);
+      _store.dispatch(actions.addEvent(ev));
+    }
+    // send list of events, but reversed
+    _store.dispatch(actions.selectedEvents(eventList.reversed));
+  }
+
+  Future nextEvents(String lastEvent) async {
+    fs.QuerySnapshot events;
+    final List<String> eventList = new List();
+
+    // if we have a starting event, load it
+    if (lastEvent != null) {
+      final le = await _fsRefEvents.doc(lastEvent).get();
+      // load next batch of events
+      events = await _fsRefEvents.orderBy('name').startAfter(snapshot: le).limit(_pageSize).get();
+    } else {
+      events = await _fsRefEvents.orderBy('name').limit(_pageSize).get();
+    }
+    // send all events
+    for (var snapshot in events.docs) {
+      final Event ev = new Event.fromMap(snapshot.ref.id, snapshot.data());
+      eventList.add(ev.key);
+      _store.dispatch(actions.addEvent(ev));
+    }
+    // send list of events
+    _store.dispatch(actions.selectedEvents(eventList));
   }
 
   Future addEvent(Event event) async {

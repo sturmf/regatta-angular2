@@ -29,6 +29,7 @@ class EventDetailComponent {
 
   EventDetailComponent(this._store, this._routeParams) {
     selectedEvent = _routeParams.get('key');
+    // FIXME: subscribe to updates
   }
 
   bool get canEdit => true; // FIXME: needs to depend on permissions

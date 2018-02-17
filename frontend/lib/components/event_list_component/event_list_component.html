@@ -13,5 +13,9 @@
                 <material-button raised (click)="joinEventHandler(events[key])">JOIN</material-button>
             </div>
         </div>
+        <div style="display:flex; flex-direction:row; justify-content: flex-end">
+            <material-button (trigger)="previous();"><</material-button>
+            <material-button (trigger)="next();">></material-button>
+        </div>
     </div>
 </div>

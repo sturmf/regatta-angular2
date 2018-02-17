@@ -3,6 +3,15 @@ enum ActionType {
   /// Indicates that the login status changed
   loginChanged,
 
+  /// Loads the previous page of events
+  requestPreviousEvents,
+
+  /// Loads the next page of events
+  requestNextEvents,
+
+  /// Set list of selected events
+  selectedEvents,
+
   /// Indicates the intention to create a new event by title
   requestCreateEvent,
 

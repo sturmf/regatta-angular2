@@ -11,13 +11,16 @@ import 'package:frontend/models/event.dart';
     templateUrl: 'event_list_component.html',
     styleUrls: const ['event_list_component.css'],
     directives: const [CORE_DIRECTIVES, materialDirectives],
-    //changeDetection: ChangeDetectionStrategy.OnPush,
     providers: const [materialProviders])
 class EventListComponent {
   final Router _router;
   final RegattaStore _store;
 
-  EventListComponent(this._router, this._store);
+  EventListComponent(this._router, this._store) {
+    // On creation load the load the list of Events
+    // FIXME: don't start at the beginning but e.g. current day
+    _store.dispatch(requestNextEvents(null));
+  }
 
   String eventName = '';
   Map<String, Event> get events => _store.state.events;
@@ -49,5 +52,13 @@ class EventListComponent {
       {'key': event.key}
     ];
     _router.navigate(link);
+  }
+
+  void previous() {
+    _store.dispatch(requestPreviousEvents(_store.state.eventList.first));
+  }
+
+  void next() {
+    _store.dispatch(requestNextEvents(_store.state.eventList.last));
   }
 }
