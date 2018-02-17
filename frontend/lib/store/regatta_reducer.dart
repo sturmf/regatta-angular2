@@ -31,7 +31,7 @@ Reducer<RegattaState, RegattaAction<dynamic>> regattaApp =
       final events = new Map<String, Event>.from(currentState.events);
       events.remove(action.payload.key);
       final eventList = new List<String>.from(currentState.eventList);
-      eventList.remove(action.payload.key);  // FIXME: does this match?
+      eventList.remove(action.payload.key); // FIXME: does this match?
       return currentState.copy(events: events, eventList: eventList);
 
     case ActionType.addSailingClub:

@@ -17,8 +17,8 @@ class RegattaState {
   static const _noValueGiven = const Object();
 
   /// Creates a new instance.
-  RegattaState(
-      Person currentUser, Map<String, Event> events, List<String> eventList, Map<String, SailingClub> sailingClubs, Map<String, Boat> boats)
+  RegattaState(Person currentUser, Map<String, Event> events, List<String> eventList,
+      Map<String, SailingClub> sailingClubs, Map<String, Boat> boats)
       : this.currentUser = currentUser,
         this.events = new Map.from(events),
         this.eventList = new List.from(eventList),
