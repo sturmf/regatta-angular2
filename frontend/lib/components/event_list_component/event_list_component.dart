@@ -17,8 +17,8 @@ class EventListComponent {
   final RegattaStore _store;
 
   EventListComponent(this._router, this._store) {
-    // On creation load the load the list of Events
-    // FIXME: don't start at the beginning but e.g. current day
+    // On creation load the list of Events
+    // FIXME: don't start at the beginning but e.g. at current date
     _store.dispatch(requestNextEvents(null));
   }
 
