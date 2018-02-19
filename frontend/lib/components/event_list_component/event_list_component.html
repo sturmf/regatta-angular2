@@ -13,9 +13,13 @@
                 <material-button raised (click)="joinEventHandler(events[key])">JOIN</material-button>
             </div>
         </div>
-        <div style="display:flex; flex-direction:row; justify-content: flex-end">
-            <material-button (trigger)="previous();"><</material-button>
-            <material-button (trigger)="next();">></material-button>
+        <div style="display:flex; flex-direction:row; justify-content: flex-end; margin-top: 10px">
+            <material-fab mini (trigger)="previous();" style="position:relative;left:20px;">
+                <material-icon icon="keyboard_arrow_left"></material-icon>
+            </material-fab>
+            <material-fab mini (trigger)="next();">
+                <material-icon icon="keyboard_arrow_right"></material-icon>
+            </material-fab>
         </div>
     </div>
 </div>
