@@ -8,7 +8,6 @@ import 'package:frontend/models/person.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart' as actions;
 
 @Injectable()
 class FirebaseService {
@@ -60,9 +59,9 @@ class FirebaseService {
     this.user = user;
     if (user != null) {
       // FIXME: we actually should load the persons profile here which contains e.g. first and lastnamme
-      _store.dispatch(actions.loginChanged(new Person(user.uid, "", user.displayName)));
+      _store.dispatch(_store.action.loginChanged(new Person(user.uid, "", user.displayName)));
     } else {
-      _store.dispatch(actions.loginChanged(null));
+      _store.dispatch(_store.action.loginChanged(null));
     }
   }
 
@@ -74,13 +73,13 @@ class FirebaseService {
       final Event ev = new Event.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
-          _store.dispatch(actions.addEvent(ev));
+          _store.dispatch(_store.action.addEvent(ev));
           break;
         case "removed":
-          _store.dispatch(actions.deleteEvent(ev));
+          _store.dispatch(_store.action.deleteEvent(ev));
           break;
         case "modified":
-          _store.dispatch(actions.updateEvent(ev));
+          _store.dispatch(_store.action.updateEvent(ev));
           break;
       }
     });
@@ -92,13 +91,13 @@ class FirebaseService {
       final SailingClub sc = new SailingClub.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
-          _store.dispatch(actions.addSailingClub(sc));
+          _store.dispatch(_store.action.addSailingClub(sc));
           break;
         case "removed":
-          _store.dispatch(actions.deleteSailingClub(sc));
+          _store.dispatch(_store.action.deleteSailingClub(sc));
           break;
         case "modified":
-          _store.dispatch(actions.updateSailingClub(sc));
+          _store.dispatch(_store.action.updateSailingClub(sc));
           break;
       }
     });
@@ -109,13 +108,13 @@ class FirebaseService {
       final Boat boat = new Boat.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
-          _store.dispatch(actions.addBoat(boat));
+          _store.dispatch(_store.action.addBoat(boat));
           break;
         case "removed":
-          _store.dispatch(actions.deleteBoat(boat));
+          _store.dispatch(_store.action.deleteBoat(boat));
           break;
         case "modified":
-          _store.dispatch(actions.updateBoat(boat));
+          _store.dispatch(_store.action.updateBoat(boat));
           break;
       }
     });
@@ -157,10 +156,10 @@ class FirebaseService {
     for (var snapshot in events.docs) {
       final Event ev = new Event.fromMap(snapshot.ref.id, snapshot.data());
       eventList.add(ev.key);
-      _store.dispatch(actions.addEvent(ev));
+      _store.dispatch(_store.action.addEvent(ev));
     }
     // send list of events, but reversed
-    _store.dispatch(actions.selectedEvents(eventList.reversed));
+    _store.dispatch(_store.action.selectedEvents(eventList.reversed));
   }
 
   Future nextEvents(String lastEvent) async {
@@ -179,10 +178,10 @@ class FirebaseService {
     for (var snapshot in events.docs) {
       final Event ev = new Event.fromMap(snapshot.ref.id, snapshot.data());
       eventList.add(ev.key);
-      _store.dispatch(actions.addEvent(ev));
+      _store.dispatch(_store.action.addEvent(ev));
     }
     // send list of events
-    _store.dispatch(actions.selectedEvents(eventList));
+    _store.dispatch(_store.action.selectedEvents(eventList));
   }
 
   Future addEvent(Event event) async {

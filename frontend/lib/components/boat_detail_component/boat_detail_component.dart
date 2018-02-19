@@ -3,7 +3,6 @@ import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart';
 import 'package:frontend/models/boat.dart';
 
 @Component(
@@ -26,10 +25,10 @@ class BoatDetailComponent {
   String get yardstick => _store.state.boats[selectedBoat].yardstick.toString();
 
   void onNameChanged(String data) {
-    _store.dispatch(requestUpdateBoat(_store.state.boats[selectedBoat].copy(name: data)));
+    _store.dispatch(_store.action.requestUpdateBoat(_store.state.boats[selectedBoat].copy(name: data)));
   }
 
   void onYardstickChanged(String data) {
-    _store.dispatch(requestUpdateBoat(_store.state.boats[selectedBoat].copy(yardstick: int.parse(data))));
+    _store.dispatch(_store.action.requestUpdateBoat(_store.state.boats[selectedBoat].copy(yardstick: int.parse(data))));
   }
 }

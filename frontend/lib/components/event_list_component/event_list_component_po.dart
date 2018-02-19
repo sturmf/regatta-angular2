@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:pageloader/objects.dart';
 import 'package:frontend/store/regatta_state.dart';
 import 'package:frontend/store/regatta_store.dart';
+import 'package:frontend/store/regatta_action.dart';
 
 class MockRouter extends Mock implements Router {}
 
@@ -13,6 +14,8 @@ class MockRegattaStore extends Mock implements RegattaStore {
   @override
   RegattaState state = new MockRegattaState();
 }
+
+class MockRegattaActionHelper extends Mock implements RegattaActionHelper {}
 
 @EnsureTag('my-event-list')
 class EventListPO {

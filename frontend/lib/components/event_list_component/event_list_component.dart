@@ -3,7 +3,6 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart';
 import 'package:frontend/models/event.dart';
 
 @Component(
@@ -19,7 +18,7 @@ class EventListComponent {
   EventListComponent(this._router, this._store) {
     // On creation load the list of Events
     // FIXME: don't start at the beginning but e.g. at current date
-    _store.dispatch(requestNextEvents(null));
+    _store.dispatch(_store.action.requestNextEvents(null));
   }
 
   String eventName = '';
@@ -37,13 +36,13 @@ class EventListComponent {
 
   void addNewEventHandler() {
     if (eventName.length > 0) {
-      _store.dispatch(requestCreateEvent(eventName));
+      _store.dispatch(_store.action.requestCreateEvent(eventName));
       eventName = '';
     }
   }
 
   void deleteEventHandler(Event event) {
-    _store.dispatch(requestDeleteEvent(event));
+    _store.dispatch(_store.action.requestDeleteEvent(event));
   }
 
   void gotoEvent(Event event) {
@@ -55,10 +54,10 @@ class EventListComponent {
   }
 
   void previous() {
-    _store.dispatch(requestPreviousEvents(_store.state.eventList.first));
+    _store.dispatch(_store.action.requestPreviousEvents(_store.state.eventList.first));
   }
 
   void next() {
-    _store.dispatch(requestNextEvents(_store.state.eventList.last));
+    _store.dispatch(_store.action.requestNextEvents(_store.state.eventList.last));
   }
 }

@@ -8,74 +8,76 @@ import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/services/firebase_service.dart';
 
-/// Login changed
-RegattaAction<Person> loginChanged(Person user) => new LoginChangedAction(user);
+class RegattaActionHelper {
+  /// Login changed
+  RegattaAction<Person> loginChanged(Person user) => new LoginChangedAction(user);
 
-/// Utility function to trigger the previousEvents action.
-RegattaAction<String> requestPreviousEvents(String firstEvent) => new RequestPreviousEventsAction(firstEvent);
+  /// Utility function to trigger the previousEvents action.
+  RegattaAction<String> requestPreviousEvents(String firstEvent) => new RequestPreviousEventsAction(firstEvent);
 
-/// Utility function to trigger the nextEvents action.
-RegattaAction<String> requestNextEvents(String lastEvent) => new RequestNextEventsAction(lastEvent);
+  /// Utility function to trigger the nextEvents action.
+  RegattaAction<String> requestNextEvents(String lastEvent) => new RequestNextEventsAction(lastEvent);
 
-/// Utility function to set the list of Events action.
-RegattaAction<List<String>> selectedEvents(List<String> selectedEvents) => new SelectedEventsAction(selectedEvents);
+  /// Utility function to set the list of Events action.
+  RegattaAction<List<String>> selectedEvents(List<String> selectedEvents) => new SelectedEventsAction(selectedEvents);
 
-/// Utility function to trigger the addEvent action.
-RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
+  /// Utility function to trigger the addEvent action.
+  RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
 
-/// Utility function to trigger the addEvent action.
-RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
+  /// Utility function to trigger the addEvent action.
+  RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
 
-/// Utility function to request the updateEvent action.
-RegattaAction<Event> requestUpdateEvent(Event event) => new RequestUpdateEventAction(event);
+  /// Utility function to request the updateEvent action.
+  RegattaAction<Event> requestUpdateEvent(Event event) => new RequestUpdateEventAction(event);
 
-/// Utility function to trigger the updateEvent action.
-RegattaAction<Event> updateEvent(Event event) => new UpdateEventAction(event);
+  /// Utility function to trigger the updateEvent action.
+  RegattaAction<Event> updateEvent(Event event) => new UpdateEventAction(event);
 
-/// Utility function to request the deleteEvent action.
-RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAction(event);
+  /// Utility function to request the deleteEvent action.
+  RegattaAction<Event> requestDeleteEvent(Event event) => new RequestDeleteEventAction(event);
 
-/// Utility function to trigger the deleteEvent action.
-RegattaAction<Event> deleteEvent(Event event) => new DeleteEventAction(event);
+  /// Utility function to trigger the deleteEvent action.
+  RegattaAction<Event> deleteEvent(Event event) => new DeleteEventAction(event);
 
-/// Utility function to trigger the addSailingClub action.
-RegattaAction<Map<String, Object>> requestCreateSailingClub(String name) =>
-    new RequestCreateSailingClubAction({'name': name});
+  /// Utility function to trigger the addSailingClub action.
+  RegattaAction<Map<String, Object>> requestCreateSailingClub(String name) =>
+      new RequestCreateSailingClubAction({'name': name});
 
-/// Utility function to trigger the addSailingClub action.
-RegattaAction<SailingClub> addSailingClub(SailingClub sailingClub) => new AddSailingClubAction(sailingClub);
+  /// Utility function to trigger the addSailingClub action.
+  RegattaAction<SailingClub> addSailingClub(SailingClub sailingClub) => new AddSailingClubAction(sailingClub);
 
-/// Utility function to request the updateSailingClub action.
-RegattaAction<SailingClub> requestUpdateSailingClub(SailingClub sailingClub) =>
-    new RequestUpdateSailingClubAction(sailingClub);
+  /// Utility function to request the updateSailingClub action.
+  RegattaAction<SailingClub> requestUpdateSailingClub(SailingClub sailingClub) =>
+      new RequestUpdateSailingClubAction(sailingClub);
 
-/// Utility function to trigger the updateSailingClub action.
-RegattaAction<SailingClub> updateSailingClub(SailingClub sailingClub) => new UpdateSailingClubAction(sailingClub);
+  /// Utility function to trigger the updateSailingClub action.
+  RegattaAction<SailingClub> updateSailingClub(SailingClub sailingClub) => new UpdateSailingClubAction(sailingClub);
 
-/// Utility function to request the deleteSailingClub action.
-RegattaAction<SailingClub> requestDeleteSailingClub(SailingClub sailingClub) =>
-    new RequestDeleteSailingClubAction(sailingClub);
+  /// Utility function to request the deleteSailingClub action.
+  RegattaAction<SailingClub> requestDeleteSailingClub(SailingClub sailingClub) =>
+      new RequestDeleteSailingClubAction(sailingClub);
 
-/// Utility function to trigger the deleteSailingClub action.
-RegattaAction<SailingClub> deleteSailingClub(SailingClub sailingClub) => new DeleteSailingClubAction(sailingClub);
+  /// Utility function to trigger the deleteSailingClub action.
+  RegattaAction<SailingClub> deleteSailingClub(SailingClub sailingClub) => new DeleteSailingClubAction(sailingClub);
 
-/// Utility function to trigger the addBoat action.
-RegattaAction<String> requestCreateBoat(String name) => new RequestCreateBoatAction(name);
+  /// Utility function to trigger the addBoat action.
+  RegattaAction<String> requestCreateBoat(String name) => new RequestCreateBoatAction(name);
 
-/// Utility function to trigger the addBoat action.
-RegattaAction<Boat> addBoat(Boat sailingClub) => new AddBoatAction(sailingClub);
+  /// Utility function to trigger the addBoat action.
+  RegattaAction<Boat> addBoat(Boat sailingClub) => new AddBoatAction(sailingClub);
 
-/// Utility function to request the updateBoat action.
-RegattaAction<Boat> requestUpdateBoat(Boat sailingClub) => new RequestUpdateBoatAction(sailingClub);
+  /// Utility function to request the updateBoat action.
+  RegattaAction<Boat> requestUpdateBoat(Boat sailingClub) => new RequestUpdateBoatAction(sailingClub);
 
-/// Utility function to trigger the updateBoat action.
-RegattaAction<Boat> updateBoat(Boat sailingClub) => new UpdateBoatAction(sailingClub);
+  /// Utility function to trigger the updateBoat action.
+  RegattaAction<Boat> updateBoat(Boat sailingClub) => new UpdateBoatAction(sailingClub);
 
-/// Utility function to request the deleteBoat action.
-RegattaAction<Boat> requestDeleteBoat(Boat sailingClub) => new RequestDeleteBoatAction(sailingClub);
+  /// Utility function to request the deleteBoat action.
+  RegattaAction<Boat> requestDeleteBoat(Boat sailingClub) => new RequestDeleteBoatAction(sailingClub);
 
-/// Utility function to trigger the deleteBoat action.
-RegattaAction<Boat> deleteBoat(Boat sailingClub) => new DeleteBoatAction(sailingClub);
+  /// Utility function to trigger the deleteBoat action.
+  RegattaAction<Boat> deleteBoat(Boat sailingClub) => new DeleteBoatAction(sailingClub);
+}
 
 /// Actions to be triggered to the app store.
 abstract class RegattaAction<T> extends Action<ActionType> {
