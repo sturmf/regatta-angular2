@@ -6,12 +6,13 @@ import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/event.dart';
 
 @Component(
-    selector: 'my-event-list',
-    templateUrl: 'event_list_component.html',
-    styleUrls: const ['event_list_component.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives],
-    providers: const [materialProviders],
-    pipes: const [COMMON_PIPES],)
+  selector: 'my-event-list',
+  templateUrl: 'event_list_component.html',
+  styleUrls: const ['event_list_component.css'],
+  directives: const [CORE_DIRECTIVES, materialDirectives],
+  providers: const [materialProviders],
+  pipes: const [COMMON_PIPES],
+)
 class EventListComponent {
   final Router _router;
   final RegattaStore _store;
