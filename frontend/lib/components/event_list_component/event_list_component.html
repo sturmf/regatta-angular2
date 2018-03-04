@@ -13,16 +13,16 @@
                     <div>{{events[key].name}}</div>
                     <div style="color: #989898">SCW, {{ events[key].startDate | date:"dd.MM.y" }}-{{ events[key].endDate | date:"dd.MM.y" }}, 12 participants</div>
                 </div>
-                <material-icon baseline light icon="star_border" style="margin: 10px"></material-icon>
-                <material-button raised style="background-color: #dfdfdf" (click)="joinEventHandler(events[key])">JOIN</material-button>
+                <material-icon  light icon="star_border" style="align-self: center; margin: 10px"></material-icon>
+                <material-button raised style="align-self: center; background-color: #dfdfdf" (click)="joinEventHandler(events[key])">JOIN</material-button>
             </div>
         </div>
         <div style="display:flex; flex-direction:row; justify-content: flex-end; margin-top: 10px">
             <material-fab mini (trigger)="previous();" style="position:relative;left:20px;">
-                <material-icon icon="keyboard_arrow_left"></material-icon>
+                <material-icon light icon="keyboard_arrow_left"></material-icon>
             </material-fab>
             <material-fab mini (trigger)="next();">
-                <material-icon icon="keyboard_arrow_right"></material-icon>
+                <material-icon light icon="keyboard_arrow_right"></material-icon>
             </material-fab>
         </div>
     </div>
