@@ -1,16 +1,20 @@
 <div style="padding:16px; background-color:#eceff1">
-    <div style="margin:16px; padding:30px; background-color:#ffffff;">
+    <div style="margin:16px; padding:30px; background-color:#f5f5f5;">
         <div style="display:flex; flex-direction:row; align-items:baseline">
             <material-input style="flex:1" label="New regatta event" [(ngModel)]="eventName" (keyup.enter)="addNewEventHandler()"></material-input>
             <material-button *ngIf="canAddEvents" id="addButton" raised class="blue" [disabled]="eventName.length == 0" (trigger)="addNewEventHandler();">Add</material-button>
         </div>
         <p></p>
 
-        <div id="eventList" style="display:flex; flex-direction:column">
-            <div style="display:flex" *ngFor="let key of eventList">
-                <material-button style="flex:1" class="event-item" raised (click)="gotoEvent(events[key])">{{events[key].name}}</material-button>
-                <material-button *ngIf="canAddEvents" raised (click)="deleteEventHandler(events[key])"><glyph icon="delete"></glyph></material-button>
-                <material-button raised (click)="joinEventHandler(events[key])">JOIN</material-button>
+        <div id="eventList" style="display:flex; flex-direction:column;">
+            <div style="display:flex; background-color:#ffffff; margin-top: 1px; margin-bottom: 1px; padding: 15px;" *ngFor="let key of eventList" (click)="gotoEvent(events[key])">
+                <material-icon baseline light icon="web" style="margin: 10px"></material-icon>
+                <div style="flex: 1; flex-direction: column">
+                    <div>{{events[key].name}}</div>
+                    <div style="color: #989898">SCW, {{ events[key].startDate | date:"dd.MM.y" }}-{{ events[key].endDate | date:"dd.MM.y" }}, 12 participants</div>
+                </div>
+                <material-icon baseline light icon="star_border" style="margin: 10px"></material-icon>
+                <material-button raised style="background-color: #dfdfdf" (click)="joinEventHandler(events[key])">JOIN</material-button>
             </div>
         </div>
         <div style="display:flex; flex-direction:row; justify-content: flex-end; margin-top: 10px">
