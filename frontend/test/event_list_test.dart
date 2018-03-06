@@ -45,7 +45,8 @@ void main() {
 
     final items = await pageObject.items;
     expect(items, hasLength(1));
-    expect(await items[0].visibleText, equals('Dummy Event'));
+    //expect(items[0].attributes['name'], equals('xy'));
+    expect(await items[0].visibleText, contains('Dummy Event'));
 
     regattaStore.close();
   });
