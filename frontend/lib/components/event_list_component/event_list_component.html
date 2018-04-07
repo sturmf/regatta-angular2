@@ -10,7 +10,7 @@
             <div class="event-item" style="display:flex; background-color:#ffffff; margin-top: 1px; margin-bottom: 1px; padding: 15px;" *ngFor="let key of eventList" (click)="gotoEvent(events[key])">
                 <material-icon baseline light icon="web" style="margin: 10px"></material-icon>
                 <div style="flex: 1; flex-direction: column">
-                    <div>{{events[key].name}}</div>
+                    <div class="event-item-name">{{events[key].name}}</div>
                     <div style="color: #989898">SCW, {{ events[key].startDate | date:"dd.MM.y" }}-{{ events[key].endDate | date:"dd.MM.y" }}, 12 participants</div>
                 </div>
                 <material-icon  light icon="star_border" style="align-self: center; margin: 10px"></material-icon>
