@@ -40,7 +40,7 @@ class EventListComponent {
 
   void dismissNewEventDialog() {
     newEventName = '';
-    showAddDialog=false;
+    showAddDialog = false;
   }
 
   void addNewEventHandler() {
