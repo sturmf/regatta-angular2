@@ -3,3 +3,9 @@
   background: #ff5e2a;
   color: white;
 }
+
+.dialogButton {
+  font-size: 14px;  /* does not work */
+  font-weight: 500; /* does not work */
+  color: #4285f4;
+}

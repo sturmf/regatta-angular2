@@ -16,6 +16,7 @@ import 'package:frontend/models/event.dart';
 class EventListComponent {
   final Router _router;
   final RegattaStore _store;
+  bool showAddDialog = false;
 
   EventListComponent(this._router, this._store) {
     // On creation load the list of Events
@@ -24,6 +25,7 @@ class EventListComponent {
   }
 
   String eventName = '';
+  String newEventName = '';
   Map<String, Event> get events => _store.state.events;
   Iterable<String> get eventList => _store.state.eventList;
 
@@ -36,11 +38,16 @@ class EventListComponent {
     print("FIXME: now emit a join event??");
   }
 
+  void dismissNewEventDialog() {
+    newEventName = '';
+    showAddDialog=false;
+  }
+
   void addNewEventHandler() {
-    if (eventName.length > 0) {
-      _store.dispatch(_store.action.requestCreateEvent(eventName));
-      eventName = '';
+    if (newEventName.length > 0) {
+      _store.dispatch(_store.action.requestCreateEvent(newEventName));
     }
+    dismissNewEventDialog();
   }
 
   void deleteEventHandler(Event event) {
