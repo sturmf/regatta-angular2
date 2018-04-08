@@ -5,7 +5,6 @@ import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/components/event_assistants_list_component/event_assistants_list_component.dart';
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
 
@@ -29,6 +28,7 @@ class EventDetailComponent {
 
   EventDetailComponent(this._store, this._routeParams) {
     selectedEvent = _routeParams.get('key');
+    // FIXME: subscribe to updates, since we no longer subscribe to every document
   }
 
   bool get canEdit => true; // FIXME: needs to depend on permissions
@@ -80,13 +80,14 @@ class EventDetailComponent {
   }
 
   void onNameChanged(String data) {
-    _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(name: data)));
+    _store.dispatch(_store.action.requestUpdateEvent(_store.state.events[selectedEvent].copy(name: data)));
   }
 
   // FIXME: workaround for a missing date picker
   void onStartDateChanged(String data) {
     try {
-      _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(startDate: DateTime.parse(data))));
+      _store.dispatch(
+          _store.action.requestUpdateEvent(_store.state.events[selectedEvent].copy(startDate: DateTime.parse(data))));
     } on FormatException {
       // FIXME: what to do then?
     }
@@ -95,7 +96,8 @@ class EventDetailComponent {
   // FIXME: workaround for a missing date picker
   void onEndDateChanged(String data) {
     try {
-      _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(endDate: DateTime.parse(data))));
+      _store.dispatch(
+          _store.action.requestUpdateEvent(_store.state.events[selectedEvent].copy(endDate: DateTime.parse(data))));
     } on FormatException {
       // FIXME: what to do then?
     }
@@ -103,13 +105,14 @@ class EventDetailComponent {
 
   void onRaceCountChanged(String data) {
     try {
-      _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(raceCount: int.parse(data))));
+      _store.dispatch(
+          _store.action.requestUpdateEvent(_store.state.events[selectedEvent].copy(raceCount: int.parse(data))));
     } on FormatException {
       // FIXME: what to do then?
     }
   }
 
   void onOrganizerChanged(SailingClub data) {
-    _store.dispatch(requestUpdateEvent(_store.state.events[selectedEvent].copy(organizer: data.key)));
+    _store.dispatch(_store.action.requestUpdateEvent(_store.state.events[selectedEvent].copy(organizer: data.key)));
   }
 }

@@ -2,7 +2,6 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart';
 
 import 'package:frontend/models/boat.dart';
 
@@ -24,13 +23,13 @@ class BoatListComponent {
 
   void addNewBoatHandler() {
     if (boatName.length > 0) {
-      _store.dispatch(requestCreateBoat(boatName));
+      _store.dispatch(_store.action.requestCreateBoat(boatName));
       boatName = '';
     }
   }
 
   void deleteBoatHandler(Boat boat) {
-    _store.dispatch(requestDeleteBoat(boat));
+    _store.dispatch(_store.action.requestDeleteBoat(boat));
   }
 
   void gotoBoat(Boat boat) {

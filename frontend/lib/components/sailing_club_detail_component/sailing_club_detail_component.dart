@@ -3,7 +3,6 @@ import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart';
 import 'package:frontend/models/sailing_club.dart';
 
 @Component(
@@ -24,14 +23,17 @@ class SailingClubDetailComponent {
   SailingClub get sailingClub => _store.state.sailingClubs[selectedSailingClub];
 
   void onNameChanged(String data) {
-    _store.dispatch(requestUpdateSailingClub(_store.state.sailingClubs[selectedSailingClub].copy(name: data)));
+    _store.dispatch(
+        _store.action.requestUpdateSailingClub(_store.state.sailingClubs[selectedSailingClub].copy(name: data)));
   }
 
   void onAbbreviationChanged(String data) {
-    _store.dispatch(requestUpdateSailingClub(_store.state.sailingClubs[selectedSailingClub].copy(abbreviation: data)));
+    _store.dispatch(_store.action
+        .requestUpdateSailingClub(_store.state.sailingClubs[selectedSailingClub].copy(abbreviation: data)));
   }
 
   void onRegistrationChanged(String data) {
-    _store.dispatch(requestUpdateSailingClub(_store.state.sailingClubs[selectedSailingClub].copy(registration: data)));
+    _store.dispatch(_store.action
+        .requestUpdateSailingClub(_store.state.sailingClubs[selectedSailingClub].copy(registration: data)));
   }
 }

@@ -8,7 +8,6 @@ import 'package:frontend/models/person.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/store/regatta_store.dart';
-import 'package:frontend/store/regatta_action.dart' as actions;
 
 @Injectable()
 class FirebaseService {
@@ -26,6 +25,7 @@ class FirebaseService {
   fs.CollectionReference _fsRefSailingClubs;
   fs.CollectionReference _fsRefBoats;
 
+  final int _pageSize = 3;
   final RegattaStore _store;
 
   FirebaseService(this._store) {
@@ -49,7 +49,6 @@ class FirebaseService {
   void _subscribeToFirestoreCollections() {
     _fbStore = fb.firestore();
     _fsRefEvents = _fbStore.collection("events");
-    _fsRefEvents.onSnapshot.listen(_eventChanges);
     _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     _fsRefSailingClubs.onSnapshot.listen(_sailingClubChanges);
     _fsRefBoats = _fbStore.collection("boats");
@@ -60,43 +59,45 @@ class FirebaseService {
     this.user = user;
     if (user != null) {
       // FIXME: we actually should load the persons profile here which contains e.g. first and lastnamme
-      _store.dispatch(actions.loginChanged(new Person(user.uid, "", user.displayName)));
+      _store.dispatch(_store.action.loginChanged(new Person(user.uid, "", user.displayName)));
     } else {
-      _store.dispatch(actions.loginChanged(null));
+      _store.dispatch(_store.action.loginChanged(null));
     }
   }
 
-  // The following methods all react to changes in firebase and emits actions
+  // The following methods all react to changes in firebase and emit actions
 
+  /*
   void _eventChanges(fs.QuerySnapshot querySnapshot) {
     querySnapshot.docChanges.forEach((change) {
       final Event ev = new Event.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
-          _store.dispatch(actions.addEvent(ev));
+          _store.dispatch(_store.action.addEvent(ev));
           break;
         case "removed":
-          _store.dispatch(actions.deleteEvent(ev));
+          _store.dispatch(_store.action.deleteEvent(ev));
           break;
         case "modified":
-          _store.dispatch(actions.updateEvent(ev));
+          _store.dispatch(_store.action.updateEvent(ev));
           break;
       }
     });
   }
+  */
 
   void _sailingClubChanges(fs.QuerySnapshot querySnapshot) {
     querySnapshot.docChanges.forEach((change) {
       final SailingClub sc = new SailingClub.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
-          _store.dispatch(actions.addSailingClub(sc));
+          _store.dispatch(_store.action.addSailingClub(sc));
           break;
         case "removed":
-          _store.dispatch(actions.deleteSailingClub(sc));
+          _store.dispatch(_store.action.deleteSailingClub(sc));
           break;
         case "modified":
-          _store.dispatch(actions.updateSailingClub(sc));
+          _store.dispatch(_store.action.updateSailingClub(sc));
           break;
       }
     });
@@ -107,13 +108,13 @@ class FirebaseService {
       final Boat boat = new Boat.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
-          _store.dispatch(actions.addBoat(boat));
+          _store.dispatch(_store.action.addBoat(boat));
           break;
         case "removed":
-          _store.dispatch(actions.deleteBoat(boat));
+          _store.dispatch(_store.action.deleteBoat(boat));
           break;
         case "modified":
-          _store.dispatch(actions.updateBoat(boat));
+          _store.dispatch(_store.action.updateBoat(boat));
           break;
       }
     });
@@ -135,6 +136,38 @@ class FirebaseService {
     } catch (error) {
       print("$runtimeType::signOut() -- $error");
     }
+  }
+
+  Future _loadEvents(String startingEvent, String direction) async {
+    fs.QuerySnapshot events;
+    final List<String> eventList = new List();
+
+    // if we have a starting event, load it
+    if (startingEvent != null) {
+      final le = await _fsRefEvents.doc(startingEvent).get();
+      // load previous batch of events
+      events = await _fsRefEvents.orderBy('name', direction).startAfter(snapshot: le).limit(_pageSize).get();
+    } else {
+      events = await _fsRefEvents.orderBy('name', direction).limit(_pageSize).get();
+    }
+    // send all received events
+    for (var snapshot in events.docs) {
+      final Event ev = new Event.fromMap(snapshot.ref.id, snapshot.data());
+      eventList.add(ev.key);
+      _store.dispatch(_store.action.addEvent(ev));
+    }
+    // only update list of selected events if it is not empty, reversed if descending
+    if (eventList.isNotEmpty) {
+      _store.dispatch(_store.action.selectedEvents(direction == 'asc' ? eventList : eventList.reversed));
+    }
+  }
+
+  Future previousEvents(String firstEvent) async {
+    await _loadEvents(firstEvent, 'desc');
+  }
+
+  Future nextEvents(String lastEvent) async {
+    await _loadEvents(lastEvent, 'asc');
   }
 
   Future addEvent(Event event) async {
@@ -159,7 +192,7 @@ class FirebaseService {
     try {
       await _fsRefEvents.doc(event.key).delete();
     } catch (error) {
-      print("$runtimeType::updateEvent() -- $error");
+      print("$runtimeType::deleteEvent() -- $error");
     }
   }
 
@@ -185,7 +218,7 @@ class FirebaseService {
     try {
       await _fsRefSailingClubs.doc(sailingClub.key).delete();
     } catch (error) {
-      print("$runtimeType::updateSailingClub() -- $error");
+      print("$runtimeType::deleteSailingClub() -- $error");
     }
   }
 
@@ -211,7 +244,7 @@ class FirebaseService {
     try {
       await _fsRefBoats.doc(boat.key).delete();
     } catch (error) {
-      print("$runtimeType::updateBoat() -- $error");
+      print("$runtimeType::deleteBoat() -- $error");
     }
   }
 }

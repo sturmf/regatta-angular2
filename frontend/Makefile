@@ -49,4 +49,4 @@ test-firestore-rules:
 run:
 	pub serve
 
-.PHONY: install build lint style test tests dtests run
+.PHONY: install build lint style coveralls test test-firefox test-dartium test-firestore-rules run
