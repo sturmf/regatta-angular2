@@ -1,11 +1,11 @@
 <div style="padding:16px; background-color:#eceff1">
-    <div style="margin:16px; padding:30px; background-color:#f5f5f5;">
-        <div style="display:flex; flex-direction:row; align-items:baseline">
-            <material-input style="flex:1" label="New regatta event" [(ngModel)]="eventName" (keyup.enter)="addNewEventHandler()"></material-input>
-            <material-button *ngIf="canAddEvents" id="addButton" raised class="blue" [disabled]="eventName.length == 0" (trigger)="addNewEventHandler();">Add</material-button>
+    <div style="margin:16px; background-color:#f5f5f5;">
+        <div style="display:flex; flex-direction:row; padding-left: 15px; padding-right: 15px; padding-top: 15px; justify-content: flex-start; align-items:baseline">
+            <material-input leadingGlyph="search" style="flex:1" label="Search for name, club or date" [(ngModel)]="eventName" (keyup.enter)="addNewEventHandler()"></material-input>
+            <material-fab *ngIf="canAddEvents" id="addButton" raised mini style="position:relative;top:10px;" aria-label="add" (trigger)="addNewEventHandler();">
+                <material-icon icon="add"></material-icon>
+            </material-fab>
         </div>
-        <p></p>
-
         <div id="eventList" style="display:flex; flex-direction:column;">
             <div class="event-item" style="display:flex; background-color:#ffffff; margin-top: 1px; margin-bottom: 1px; padding: 15px;" *ngFor="let key of eventList" (click)="gotoEvent(events[key])">
                 <material-icon baseline light icon="web" style="margin: 10px"></material-icon>
