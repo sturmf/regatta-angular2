@@ -170,11 +170,15 @@ class FirebaseService {
     await _loadEvents(lastEvent, 'asc');
   }
 
-  Future addEvent(Event event) async {
+  Future createEvent(Event event) async {
     try {
       final _event = event.toMap();
       _event['roles'] = {_store.state.currentUser.id: 'owner'};
-      await _fsRefEvents.add(_event);
+      final newEventRef = await _fsRefEvents.add(_event);
+      final snapshot = await newEventRef.get();
+      final Event newEvent = new Event.fromMap(snapshot.id, snapshot.data());
+      _store.dispatch(_store.action.addEvent(newEvent));
+      _store.dispatch(_store.action.eventCreated(newEvent));
     } catch (error) {
       print("$runtimeType::addEvent() -- $error");
     }

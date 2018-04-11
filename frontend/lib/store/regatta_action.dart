@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'action_type.dart';
+import 'package:angular_router/angular_router.dart';
 import 'package:frontend/models/person.dart';
 import 'package:greencat/greencat.dart';
 import 'package:frontend/app_component.dart';
@@ -23,6 +24,9 @@ class RegattaActionHelper {
 
   /// Utility function to trigger the addEvent action.
   RegattaAction<String> requestCreateEvent(String name) => new RequestCreateEventAction(name);
+
+  /// Utility function to trigger the eventCreated action.
+  RegattaAction<Event> eventCreated(Event event) => new EventCreatedAction(event);
 
   /// Utility function to trigger the addEvent action.
   RegattaAction<Event> addEvent(Event event) => new AddEventAction(event);
@@ -154,7 +158,28 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.addEvent(new Event(null, payload));
+    return _fbService.createEvent(new Event(null, payload));
+  }
+}
+
+/// Action for a created Event.
+class EventCreatedAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
+  final Router _router;
+
+  EventCreatedAction(Event payload)
+      : _router = AppComponent.myinjector.get(Router),
+        super(payload);
+
+  @override
+  ActionType get type => ActionType.eventCreated;
+
+  @override
+  Future call(MiddlewareApi api) {
+    final List<dynamic> link = [
+      'EventDetail',
+      {'key': payload.key}
+    ];
+    return _router.navigate(link);
   }
 }
 

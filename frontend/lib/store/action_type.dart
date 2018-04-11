@@ -15,6 +15,9 @@ enum ActionType {
   /// Indicates the intention to create a new event by title
   requestCreateEvent,
 
+  /// Indicates the successfull creation of a new event
+  eventCreated,
+
   /// Indicates to add an event to the store
   addEvent,
 
