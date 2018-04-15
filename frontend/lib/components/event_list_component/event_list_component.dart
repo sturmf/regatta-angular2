@@ -26,10 +26,7 @@ class EventListComponent {
     // FIXME: don't start at the beginning but e.g. at current date
     _store.dispatch(_store.action.requestNextEvents(null));
 
-    _searchTerms.stream
-        .transform(debounce(new Duration(milliseconds: 300)))
-        .distinct()
-        .listen(_search);
+    _searchTerms.stream.transform(debounce(new Duration(milliseconds: 300))).distinct().listen(_search);
   }
 
   String newEventName = '';

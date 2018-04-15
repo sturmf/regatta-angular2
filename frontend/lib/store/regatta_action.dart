@@ -122,8 +122,6 @@ class RequestFilterEventsAction extends RegattaAction<String> implements AsyncAc
   }
 }
 
-
-
 /// Action to load the previous page of Events.
 class RequestPreviousEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
   final FirebaseService _fbService;
