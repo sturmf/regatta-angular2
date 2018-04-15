@@ -13,10 +13,13 @@ class RegattaActionHelper {
   /// Login changed
   RegattaAction<Person> loginChanged(Person user) => new LoginChangedAction(user);
 
-  /// Utility function to trigger the previousEvents action.
+  /// Utility function to trigger the requestFilterEvents action.
+  RegattaAction<String> requestFilterEvents(String filter) => new RequestFilterEventsAction(filter);
+
+  /// Utility function to trigger the requestPreviousEvents action.
   RegattaAction<String> requestPreviousEvents(String firstEvent) => new RequestPreviousEventsAction(firstEvent);
 
-  /// Utility function to trigger the nextEvents action.
+  /// Utility function to trigger the requestNextEvents action.
   RegattaAction<String> requestNextEvents(String lastEvent) => new RequestNextEventsAction(lastEvent);
 
   /// Utility function to set the list of Events action.
@@ -101,6 +104,25 @@ class LoginChangedAction extends RegattaAction<Person> {
   @override
   ActionType get type => ActionType.loginChanged;
 }
+
+/// Action to load filtered Events.
+class RequestFilterEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
+  final FirebaseService _fbService;
+
+  RequestFilterEventsAction(String payload)
+      : _fbService = AppComponent.myinjector.get(FirebaseService),
+        super(payload);
+
+  @override
+  ActionType get type => ActionType.requestFilterEvents;
+
+  @override
+  Future call(MiddlewareApi api) {
+    return _fbService.filterEvents(payload);
+  }
+}
+
+
 
 /// Action to load the previous page of Events.
 class RequestPreviousEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {

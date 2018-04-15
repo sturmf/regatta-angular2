@@ -162,6 +162,11 @@ class FirebaseService {
     }
   }
 
+  Future filterEvents(String filter) async {
+    print("Filtering $filter");
+    // Parse filter string
+  }
+
   Future previousEvents(String firstEvent) async {
     await _loadEvents(firstEvent, 'desc');
   }

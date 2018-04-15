@@ -3,6 +3,9 @@ enum ActionType {
   /// Indicates that the login status changed
   loginChanged,
 
+  /// Filter the page of events
+  requestFilterEvents,
+
   /// Loads the previous page of events
   requestPreviousEvents,
 
