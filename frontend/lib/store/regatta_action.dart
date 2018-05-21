@@ -8,6 +8,7 @@ import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/services/firebase_service.dart';
+import 'package:frontend/services/algolia_service.dart';
 
 class RegattaActionHelper {
   /// Login changed
@@ -141,10 +142,10 @@ class RequestPreviousEventsAction extends RegattaAction<String> implements Async
 
 /// Action to load the next page of Events.
 class RequestNextEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final AlgoliaService _algoliaService;
 
   RequestNextEventsAction(String payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _algoliaService = AppComponent.myinjector.get(AlgoliaService),
         super(payload);
 
   @override
@@ -152,7 +153,7 @@ class RequestNextEventsAction extends RegattaAction<String> implements AsyncActi
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.nextEvents(payload);
+    return _algoliaService.nextEvents();
   }
 }
 

@@ -76,6 +76,6 @@ class EventListComponent {
   }
 
   void next() {
-    _store.dispatch(_store.action.requestNextEvents(_store.state.eventList.last));
+    _store.dispatch(_store.action.requestNextEvents(''));
   }
 }
