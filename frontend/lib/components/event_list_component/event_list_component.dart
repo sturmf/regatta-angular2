@@ -22,11 +22,10 @@ class EventListComponent {
   bool showAddDialog = false;
 
   EventListComponent(this._router, this._store) {
+    _searchTerms.stream.transform(debounce(new Duration(milliseconds: 300))).distinct().listen(_search);
     // On creation load the list of Events
     // FIXME: don't start at the beginning but e.g. at current date
-    _store.dispatch(_store.action.requestNextEvents(null));
-
-    _searchTerms.stream.transform(debounce(new Duration(milliseconds: 300))).distinct().listen(_search);
+    // FIXME: disabled for now: _store.dispatch(_store.action.requestNextEvents(null));
   }
 
   String newEventName = '';

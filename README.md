@@ -7,7 +7,7 @@ A simple sailing race scoring program.
 [![Coverage Status](https://coveralls.io/repos/github/sturmf/regatta-angular2/badge.svg?branch=master)](https://coveralls.io/github/sturmf/regatta-angular2?branch=master)
 
 This program is just beginning its development, so don't expect a working version any time soon.
-The latest checkin is always automatically deployed [here](https://regatta-17147.firebaseapp.com/) on [Firebase](https://firebase.google.com/).
+The latest checkin is always automatically deployed [here](https://regatta-204708.firebaseapp.com/) on [Firebase](https://firebase.google.com/).
 
 The main goal of this project is to learn about the state of the art development tools and workflows while still producing something useful.
 
@@ -22,7 +22,7 @@ This means especially using the following:
 * Documentation ([JIRA Confluence](https://www.atlassian.com/software/confluence)) [https://regatta.atlassian.net/wiki](https://regatta.atlassian.net/wiki)
 
 
-A live version of the latest build can be seen at: https://regatta-17147.firebaseapp.com
+A live version of the latest build can be seen at: https://regatta-204708.firebaseapp.com
 
 # Running the Angular2 Dart frontend program
 
