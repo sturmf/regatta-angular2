@@ -25,16 +25,17 @@ class FirebaseService {
   fs.CollectionReference _fsRefSailingClubs;
   fs.CollectionReference _fsRefBoats;
 
-  final int _pageSize = 3;
+  List _filterList = [];
+  final int _pageSize = 10;
   final RegattaStore _store;
 
   FirebaseService(this._store) {
     fb.initializeApp(
-      apiKey: "AIzaSyCJbyKGrg-eCBsycizN_wkRcpkbD9DXSbo",
-      authDomain: "regatta-17147.firebaseapp.com",
-      databaseURL: "https://regatta-17147.firebaseio.com",
-      projectId: "regatta-17147",
-      storageBucket: "regatta-17147.appspot.com",
+      apiKey: "AIzaSyCa1wbhvXQwemdEVCxeXxQfYe9SUM4SJWk",
+      authDomain: "regatta-204708.firebaseapp.com",
+      databaseURL: "https://regatta-204708.firebaseio.com",
+      projectId: "regatta-204708",
+      storageBucket: "regatta-204708.appspot.com",
     );
     _initalizeAuthentication();
     _subscribeToFirestoreCollections();
@@ -140,17 +141,26 @@ class FirebaseService {
 
   Future _loadEvents(String startingEvent, String direction) async {
     fs.QuerySnapshot events;
+    fs.Query eventsRef;
     final List<String> eventList = new List();
 
-    // if we have a starting event, load it
+    // Create the query depending on input
+    eventsRef = _fsRefEvents.orderBy('start_date', direction).orderBy('name', direction);
+    eventsRef = eventsRef.limit(_pageSize);
+    // If we have a starting event, load it and start query with it
     if (startingEvent != null) {
       final le = await _fsRefEvents.doc(startingEvent).get();
-      // load previous batch of events
-      events = await _fsRefEvents.orderBy('name', direction).startAfter(snapshot: le).limit(_pageSize).get();
-    } else {
-      events = await _fsRefEvents.orderBy('name', direction).limit(_pageSize).get();
+      eventsRef = eventsRef.startAfter(snapshot: le);
     }
-    // send all received events
+    // Add filter terms
+    for (var term in _filterList) {
+      eventsRef = eventsRef.where('name', '==', term);
+    }
+
+    // Now execute query
+    events = await eventsRef.get();
+
+    // Send all received events
     for (var snapshot in events.docs) {
       final Event ev = new Event.fromMap(snapshot.ref.id, snapshot.data());
       eventList.add(ev.key);
@@ -163,8 +173,8 @@ class FirebaseService {
   }
 
   Future filterEvents(String filter) async {
-    print("Filtering $filter");
-    // Parse filter string
+    _filterList = filter.trim().split(new RegExp(r"\s+"));
+    return nextEvents(null);
   }
 
   Future previousEvents(String firstEvent) async {
