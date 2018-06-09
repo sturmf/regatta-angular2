@@ -6,6 +6,9 @@ enum ActionType {
   /// Filter the page of events
   requestFilterEvents,
 
+  /// Loads the initial page of events
+  requestInitialEvents,
+
   /// Loads the previous page of events
   requestPreviousEvents,
 

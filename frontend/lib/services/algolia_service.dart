@@ -4,8 +4,6 @@ import 'dart:convert';
 import 'package:angular/angular.dart';
 import 'package:http/browser_client.dart' as http;
 //import 'package:http/http.dart' as http;
-import 'package:frontend/models/event.dart';
-import 'package:frontend/store/regatta_store.dart';
 
 
 @Injectable()
@@ -19,38 +17,26 @@ class AlgoliaService {
   //http.BaseClient _client;
   http.BrowserClient _client;
 
-  final RegattaStore _store;
 
-  AlgoliaService(this._store) {
+  AlgoliaService() {
     _client = new http.BrowserClient();
   }
 
 
-  Future<Map<String, dynamic>> search() async {
-    final response = await _client.post(_event_url, headers: _headers, body: '{"params": "query=&hitsPerPage=2"}');
+  Future<Map<String, dynamic>> search(String searchTerm, int page, int pageSize) async {
+    //_filterList = filter.trim().split(new RegExp(r"\s+"));
+    if (page < 0 || pageSize < 0) {
+      return {};
+    }
+
+    final query = Uri.encodeQueryComponent(searchTerm);
+    final body = '{"params": "query=$query&hitsPerPage=$pageSize&page=$page"}';
+
+    final response = await _client.post(_event_url, headers: _headers, body: body);
     if (response.statusCode == 200) {
       return JSON.decode(response.body) as Map<String, dynamic>;
     }
     return {};
-  }
-
-  Future nextEvents() async {
-    final List<String> eventList = new List();
-    final response = await _client.post(_event_url, headers: _headers, body: '{"params": "query=&hitsPerPage=2"}');
-    if (response.statusCode == 200) {
-      final body = JSON.decode(response.body) as Map<String, dynamic>;
-
-      // Send all received events
-      for (var snapshot in body['hits']) {
-        final Event ev = new Event.fromMap(snapshot['objectID'], snapshot);
-        eventList.add(ev.key);
-        _store.dispatch(_store.action.addEvent(ev));
-      }
-      // only update list of selected events if it is not empty, reversed if descending
-      if (eventList.isNotEmpty) {
-        _store.dispatch(_store.action.selectedEvents(eventList));
-      }
-    }
   }
 
 }

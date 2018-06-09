@@ -7,8 +7,8 @@ import 'package:frontend/app_component.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
+import 'package:frontend/services/database_service.dart';
 import 'package:frontend/services/firebase_service.dart';
-import 'package:frontend/services/algolia_service.dart';
 
 class RegattaActionHelper {
   /// Login changed
@@ -17,11 +17,14 @@ class RegattaActionHelper {
   /// Utility function to trigger the requestFilterEvents action.
   RegattaAction<String> requestFilterEvents(String filter) => new RequestFilterEventsAction(filter);
 
+  /// Utility function to trigger the requestInitialEvents action.
+  RegattaAction<String> requestInitialEvents() => new RequestInitialEventsAction();
+
   /// Utility function to trigger the requestPreviousEvents action.
-  RegattaAction<String> requestPreviousEvents(String firstEvent) => new RequestPreviousEventsAction(firstEvent);
+  RegattaAction<String> requestPreviousEvents() => new RequestPreviousEventsAction();
 
   /// Utility function to trigger the requestNextEvents action.
-  RegattaAction<String> requestNextEvents(String lastEvent) => new RequestNextEventsAction(lastEvent);
+  RegattaAction<String> requestNextEvents() => new RequestNextEventsAction();
 
   /// Utility function to set the list of Events action.
   RegattaAction<List<String>> selectedEvents(List<String> selectedEvents) => new SelectedEventsAction(selectedEvents);
@@ -108,10 +111,10 @@ class LoginChangedAction extends RegattaAction<Person> {
 
 /// Action to load filtered Events.
 class RequestFilterEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+  final DatabaseService _databaseService;
 
   RequestFilterEventsAction(String payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
+      : _databaseService = AppComponent.myinjector.get(DatabaseService),
         super(payload);
 
   @override
@@ -119,41 +122,58 @@ class RequestFilterEventsAction extends RegattaAction<String> implements AsyncAc
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.filterEvents(payload);
+    return _databaseService.filterEvents(payload);
+  }
+}
+
+/// Action to load the inital page of Events.
+class RequestInitialEventsAction extends RegattaAction<Null> implements AsyncAction<ActionType> {
+  final DatabaseService _databaseService;
+
+  RequestInitialEventsAction()
+      : _databaseService = AppComponent.myinjector.get(DatabaseService),
+        super(Null);
+
+  @override
+  ActionType get type => ActionType.requestInitialEvents;
+
+  @override
+  Future call(MiddlewareApi api) {
+    return _databaseService.initialEvents();
   }
 }
 
 /// Action to load the previous page of Events.
-class RequestPreviousEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
+class RequestPreviousEventsAction extends RegattaAction<Null> implements AsyncAction<ActionType> {
+  final DatabaseService _databaseService;
 
-  RequestPreviousEventsAction(String payload)
-      : _fbService = AppComponent.myinjector.get(FirebaseService),
-        super(payload);
+  RequestPreviousEventsAction()
+      : _databaseService = AppComponent.myinjector.get(DatabaseService),
+        super(Null);
 
   @override
   ActionType get type => ActionType.requestPreviousEvents;
 
   @override
   Future call(MiddlewareApi api) {
-    return _fbService.previousEvents(payload);
+    return _databaseService.previousEvents();
   }
 }
 
 /// Action to load the next page of Events.
-class RequestNextEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final AlgoliaService _algoliaService;
+class RequestNextEventsAction extends RegattaAction<Null> implements AsyncAction<ActionType> {
+  final DatabaseService _databaseService;
 
-  RequestNextEventsAction(String payload)
-      : _algoliaService = AppComponent.myinjector.get(AlgoliaService),
-        super(payload);
+  RequestNextEventsAction()
+      : _databaseService = AppComponent.myinjector.get(DatabaseService),
+        super(Null);
 
   @override
   ActionType get type => ActionType.requestNextEvents;
 
   @override
   Future call(MiddlewareApi api) {
-    return _algoliaService.nextEvents();
+    return _databaseService.nextEvents();
   }
 }
 

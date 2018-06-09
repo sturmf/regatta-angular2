@@ -11,7 +11,7 @@ import 'package:frontend/components/boat_list_component/boat_list_component.dart
 import 'package:frontend/components/boat_detail_component/boat_detail_component.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/services/firebase_service.dart';
-import 'package:frontend/services/algolia_service.dart';
+import 'package:frontend/services/database_service.dart';
 
 @Component(selector: 'my-app', templateUrl: 'app_component.html', styleUrls: const [
   'package:angular_components/src/components/app_layout/layout.scss.css',
@@ -30,7 +30,7 @@ import 'package:frontend/services/algolia_service.dart';
       const Provider(LocationStrategy, useClass: HashLocationStrategy),
       RegattaStore,
       FirebaseService,
-      AlgoliaService
+      DatabaseService
     ])
 @RouteConfig(const [
   const Route(path: '/events', name: 'Events', component: EventListComponent, useAsDefault: true),
@@ -42,11 +42,11 @@ import 'package:frontend/services/algolia_service.dart';
 ])
 class AppComponent {
   final FirebaseService fbService;
-  final AlgoliaService algoliaService;
+  final DatabaseService databaseService;
 
   static Injector myinjector;
   String branch = const String.fromEnvironment('branch', defaultValue: 'Unknown');
   String hash = const String.fromEnvironment('hash', defaultValue: '');
 
-  AppComponent(this.fbService, this.algoliaService);
+  AppComponent(this.fbService, this.databaseService);
 }

@@ -25,7 +25,7 @@ class EventListComponent {
     _searchTerms.stream.transform(debounce(new Duration(milliseconds: 300))).distinct().listen(_search);
     // On creation load the list of Events
     // FIXME: don't start at the beginning but e.g. at current date
-    // FIXME: disabled for now: _store.dispatch(_store.action.requestNextEvents(null));
+    _store.dispatch(_store.action.requestInitialEvents());
   }
 
   String newEventName = '';
@@ -72,10 +72,10 @@ class EventListComponent {
   }
 
   void previous() {
-    _store.dispatch(_store.action.requestPreviousEvents(_store.state.eventList.first));
+    _store.dispatch(_store.action.requestPreviousEvents());
   }
 
   void next() {
-    _store.dispatch(_store.action.requestNextEvents(''));
+    _store.dispatch(_store.action.requestNextEvents());
   }
 }
