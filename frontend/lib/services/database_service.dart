@@ -5,9 +5,7 @@ import 'package:frontend/models/event.dart';
 import 'package:frontend/services/algolia_service.dart';
 import 'package:frontend/store/regatta_store.dart';
 
-enum SearchDirection {
-  initial, previous, next
-}
+enum SearchDirection { initial, previous, next }
 
 @Injectable()
 class DatabaseService {
@@ -52,7 +50,7 @@ class DatabaseService {
         page = _page - 1;
         break;
     }
-    final data  = await _algoliaService.search(_searchTerm, page, _pageSize);
+    final data = await _algoliaService.search(_searchTerm, page, _pageSize);
     final eventList = _parseEvents(data);
     if (eventList.isNotEmpty || direction == SearchDirection.initial) {
       _updateEvents(eventList);
@@ -82,5 +80,4 @@ class DatabaseService {
     final List<String> eventKeys = eventList.map((ev) => ev.key);
     _store.dispatch(_store.action.selectedEvents(eventKeys));
   }
-
 }

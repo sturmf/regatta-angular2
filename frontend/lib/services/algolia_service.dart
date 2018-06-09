@@ -5,23 +5,17 @@ import 'package:angular/angular.dart';
 import 'package:http/browser_client.dart' as http;
 //import 'package:http/http.dart' as http;
 
-
 @Injectable()
 class AlgoliaService {
   final _event_url = "https://DXJQDY655R-dsn.algolia.net/1/indexes/events/query";
-  final _headers = {
-    'X-Algolia-Application-Id': 'DXJQDY655R',
-    'X-Algolia-API-Key': 'd25d9cff0c3595b2a39d68592ea31197'
-  };
+  final _headers = {'X-Algolia-Application-Id': 'DXJQDY655R', 'X-Algolia-API-Key': 'd25d9cff0c3595b2a39d68592ea31197'};
 
   //http.BaseClient _client;
   http.BrowserClient _client;
 
-
   AlgoliaService() {
     _client = new http.BrowserClient();
   }
-
 
   Future<Map<String, dynamic>> search(String searchTerm, int page, int pageSize) async {
     //_filterList = filter.trim().split(new RegExp(r"\s+"));
@@ -38,6 +32,4 @@ class AlgoliaService {
     }
     return {};
   }
-
 }
-
