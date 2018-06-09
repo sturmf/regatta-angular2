@@ -7,7 +7,7 @@ import 'package:http/browser_client.dart' as http;
 
 @Injectable()
 class AlgoliaService {
-  final _event_url = "https://DXJQDY655R-dsn.algolia.net/1/indexes/events/query";
+  final _eventUrl = "https://DXJQDY655R-dsn.algolia.net/1/indexes/events/query";
   final _headers = {'X-Algolia-Application-Id': 'DXJQDY655R', 'X-Algolia-API-Key': 'd25d9cff0c3595b2a39d68592ea31197'};
 
   //http.BaseClient _client;
@@ -26,7 +26,7 @@ class AlgoliaService {
     final query = Uri.encodeQueryComponent(searchTerm);
     final body = '{"params": "query=$query&hitsPerPage=$pageSize&page=$page"}';
 
-    final response = await _client.post(_event_url, headers: _headers, body: body);
+    final response = await _client.post(_eventUrl, headers: _headers, body: body);
     if (response.statusCode == 200) {
       return JSON.decode(response.body) as Map<String, dynamic>;
     }
