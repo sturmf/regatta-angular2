@@ -39,7 +39,7 @@ class RegattaStore extends Store<RegattaState, RegattaAction> {
 
     // The ThunkMiddleware adds async call capability to actions
     addMiddleware(new ThunkMiddleware<RegattaState, RegattaAction<dynamic>>());
-    addMiddleware(new LoggingMiddleware2(Logger.root, Level.INFO));
+    addMiddleware(new LoggingMiddleware2<RegattaState, RegattaAction<dynamic>>(Logger.root, Level.INFO));
 
     action = new RegattaActionHelper();
   }

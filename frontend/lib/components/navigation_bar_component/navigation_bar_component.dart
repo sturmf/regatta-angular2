@@ -2,6 +2,8 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 
+import 'package:frontend/routes.dart';
+
 @Component(
     selector: 'my-navigation-bar',
     templateUrl: 'navigation_bar_component.html',
@@ -17,8 +19,21 @@ class NavigationBarComponent implements OnInit {
   void ngOnInit() {}
 
   void gotoLink(String dest) {
-    print(dest);
     // FIXME: shouldn't these be events and the event itself does the routing?
-    _router.navigate([dest]);
+    switch (dest) {
+      case 'events':
+        _router.navigate(RoutePaths.events.toUrl());
+        break;
+      case 'boats':
+        _router.navigate(RoutePaths.boats.toUrl());
+        break;
+      case 'sailingclubs':
+        _router.navigate(RoutePaths.sailingClubs.toUrl());
+        break;
+      case 'settings':
+        print("Settings URL not implemented");
+        // FIXME: _router.navigate(RoutePaths.settings.toUrl());
+        break;
+    }
   }
 }

@@ -38,9 +38,9 @@ class Event {
       event['organizer'],
       event['race_committee'],
       event['umpire'],
-      event['assistants']);
+      event['assistants'] == null ? null : new List<String>.from(event['assistants']));
 
-  Map toMap() => {
+  Map<String, dynamic> toMap() => {
         'name': name,
         'start_date': startDateStr,
         'end_date': endDateStr,

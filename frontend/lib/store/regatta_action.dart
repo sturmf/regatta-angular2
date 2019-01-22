@@ -9,6 +9,7 @@ import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/models/boat.dart';
 import 'package:frontend/services/database_service.dart';
 import 'package:frontend/services/firebase_service.dart';
+import 'package:frontend/routes.dart';
 
 class RegattaActionHelper {
   /// Login changed
@@ -126,13 +127,13 @@ class RequestFilterEventsAction extends RegattaAction<String> implements AsyncAc
   }
 }
 
-/// Action to load the inital page of Events.
+/// Action to load the initial page of Events.
 class RequestInitialEventsAction extends RegattaAction<Null> implements AsyncAction<ActionType> {
   final DatabaseService _databaseService;
 
   RequestInitialEventsAction()
       : _databaseService = AppComponent.myinjector.get(DatabaseService),
-        super(Null);
+        super(null);
 
   @override
   ActionType get type => ActionType.requestInitialEvents;
@@ -149,7 +150,7 @@ class RequestPreviousEventsAction extends RegattaAction<Null> implements AsyncAc
 
   RequestPreviousEventsAction()
       : _databaseService = AppComponent.myinjector.get(DatabaseService),
-        super(Null);
+        super(null);
 
   @override
   ActionType get type => ActionType.requestPreviousEvents;
@@ -166,7 +167,7 @@ class RequestNextEventsAction extends RegattaAction<Null> implements AsyncAction
 
   RequestNextEventsAction()
       : _databaseService = AppComponent.myinjector.get(DatabaseService),
-        super(Null);
+        super(null);
 
   @override
   ActionType get type => ActionType.requestNextEvents;
@@ -216,11 +217,8 @@ class EventCreatedAction extends RegattaAction<Event> implements AsyncAction<Act
 
   @override
   Future call(MiddlewareApi api) {
-    final List<dynamic> link = [
-      'EventDetail',
-      {'key': payload.key}
-    ];
-    return _router.navigate(link);
+    return _router.navigate(
+        RoutePaths.event.toUrl(parameters: {'key': payload.key}));
   }
 }
 

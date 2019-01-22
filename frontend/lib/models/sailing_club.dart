@@ -10,7 +10,7 @@ class SailingClub {
   factory SailingClub.fromMap(key, Map<String, dynamic> sailingClub) =>
       new SailingClub(key, sailingClub['name'], sailingClub['abbreviation'], sailingClub['registration']);
 
-  Map toMap() => {'name': name, 'abbreviation': abbreviation, 'registration': registration};
+  Map<String, dynamic> toMap() => {'name': name, 'abbreviation': abbreviation, 'registration': registration};
 
   /// Clones this instance
   SailingClub copy({String name, String abbreviation, String registration}) => new SailingClub(

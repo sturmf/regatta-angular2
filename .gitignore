@@ -61,6 +61,7 @@ coverage.xml
 
 # Dart stuff
 packages
+.dart_tool
 .packages
 .pub
 *.lock

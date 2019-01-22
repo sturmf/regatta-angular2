@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:frontend/routes.dart';
 import 'package:frontend/store/regatta_store.dart';
 
 import 'package:frontend/models/sailing_club.dart';
@@ -9,7 +10,7 @@ import 'package:frontend/models/sailing_club.dart';
     selector: 'my-sailing-club-list',
     templateUrl: 'sailing_club_list_component.html',
     styleUrls: const ['sailing_club_list_component.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [coreDirectives, materialDirectives],
     //changeDetection: ChangeDetectionStrategy.OnPush,
     providers: const [materialProviders])
 class SailingClubListComponent {
@@ -33,10 +34,6 @@ class SailingClubListComponent {
   }
 
   void gotoSailingClub(SailingClub sailingClub) {
-    final List<dynamic> link = [
-      'SailingClubDetail',
-      {'key': sailingClub.key}
-    ];
-    _router.navigate(link);
+    _router.navigate(RoutePaths.sailingClub.toUrl(parameters: {'key': sailingClub.key}));
   }
 }

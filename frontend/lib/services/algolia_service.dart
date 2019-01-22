@@ -28,7 +28,7 @@ class AlgoliaService {
 
     final response = await _client.post(_eventUrl, headers: _headers, body: body);
     if (response.statusCode == 200) {
-      return JSON.decode(response.body) as Map<String, dynamic>;
+      return jsonDecode(response.body) as Map<String, dynamic>;
     }
     return {};
   }

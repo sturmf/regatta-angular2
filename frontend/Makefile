@@ -6,10 +6,10 @@ HASH := $(shell git rev-parse HEAD)
 all: install run
 
 install:
-	pub get --packages-dir
+	pub get
 
 build:
-	pub build --define branch=$(BRANCH) --define hash=$(HASH)
+	pub run build_runner build --release --output build # FIXME: --define branch=$(BRANCH) --define hash=$(HASH)
 
 lint:
 	dartanalyzer --fatal-warnings --fatal-lints --fatal-hints web lib test
@@ -47,6 +47,6 @@ test-firestore-rules:
 	pub run test -p dartium lib/services/firestore_rules_test.dart
 
 run:
-	pub serve
+	webdev serve
 
 .PHONY: install build lint style coveralls test test-firefox test-dartium test-firestore-rules run

@@ -4,20 +4,23 @@ import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/boat.dart';
+import 'package:frontend/routes.dart';
 
 @Component(
     selector: 'my-boat-detail',
     templateUrl: 'boat_detail_component.html',
     styleUrls: const ['boat_detail_component.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [coreDirectives, materialDirectives],
     providers: const [materialProviders])
-class BoatDetailComponent {
+class BoatDetailComponent implements OnActivate {
   final RegattaStore _store;
-  final RouteParams _routeParams;
   String selectedBoat;
 
-  BoatDetailComponent(this._store, this._routeParams) {
-    selectedBoat = _routeParams.get('key');
+  BoatDetailComponent(this._store);
+
+  @override
+  void onActivate(_, RouterState current) async {
+    selectedBoat = current.parameters[keyParam];
   }
 
   Boat get boat => _store.state.boats[selectedBoat];

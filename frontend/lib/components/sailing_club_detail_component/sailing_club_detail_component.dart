@@ -4,20 +4,23 @@ import 'package:angular_components/angular_components.dart';
 
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/sailing_club.dart';
+import 'package:frontend/routes.dart';
 
 @Component(
     selector: 'my-sailing-club-detail',
     templateUrl: 'sailing_club_detail_component.html',
     styleUrls: const ['sailing_club_detail_component.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [coreDirectives, materialDirectives],
     providers: const [materialProviders])
-class SailingClubDetailComponent {
+class SailingClubDetailComponent implements OnActivate {
   final RegattaStore _store;
-  final RouteParams _routeParams;
   String selectedSailingClub;
 
-  SailingClubDetailComponent(this._store, this._routeParams) {
-    selectedSailingClub = _routeParams.get('key');
+  SailingClubDetailComponent(this._store);
+
+  @override
+  void onActivate(_, RouterState current) async {
+    selectedSailingClub = current.parameters[keyParam];
   }
 
   SailingClub get sailingClub => _store.state.sailingClubs[selectedSailingClub];

@@ -7,16 +7,16 @@ import 'package:frontend/components/event_assistants_list_component/event_assist
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
+import 'package:frontend/routes.dart';
 
 @Component(
     selector: 'my-event-detail',
     templateUrl: 'event_detail_component.html',
     styleUrls: const ['event_detail_component.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives, EventAssistantsListComponent],
+    directives: const [coreDirectives, materialDirectives, EventAssistantsListComponent],
     providers: const [materialProviders])
-class EventDetailComponent {
+class EventDetailComponent implements OnActivate {
   final RegattaStore _store;
-  final RouteParams _routeParams;
   String selectedEvent;
 
   // We need those to detect state changes in the store without deep equality check of the map
@@ -26,29 +26,33 @@ class EventDetailComponent {
   SailingClub _oldOrganizer;
   StreamSubscription _selectionListener;
 
-  EventDetailComponent(this._store, this._routeParams) {
-    selectedEvent = _routeParams.get('key');
+  EventDetailComponent(this._store) {
     // FIXME: subscribe to updates, since we no longer subscribe to every document
+  }
+
+  @override
+  void onActivate(_, RouterState current) async {
+    selectedEvent = current.parameters[keyParam];
   }
 
   bool get canEdit => true; // FIXME: needs to depend on permissions
 
   Event get event => _store.state.events[selectedEvent];
 
-  String get raceCount => event.raceCount.toString();
+  int get raceCount => event.raceCount;
 
   SailingClub get organizer => _store.state.sailingClubs[event.organizer];
 
   Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
 
-  ItemRenderer<SailingClub> displayNameRenderer = (SailingClub item) => item.name;
+  ItemRenderer<dynamic> displayNameRenderer = (dynamic item) => item.name;
 
   StringSelectionOptions<SailingClub> get filteredSailingClubs {
     // We have to save the old state since the Iterable itself is unstable and would change all the time
     if (_oldSailingClubs != _store.state.sailingClubs) {
       _oldSailingClubs = _store.state.sailingClubs;
       _filteredSailingClubs =
-          new StringSelectionOptions(_store.state.sailingClubs.values, toFilterableString: displayNameRenderer);
+          new StringSelectionOptions(_store.state.sailingClubs.values.toList(), toFilterableString: displayNameRenderer);
     }
     return _filteredSailingClubs;
   }

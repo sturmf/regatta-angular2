@@ -77,7 +77,7 @@ class DatabaseService {
   }
 
   void _setVisibleEvents(List<Event> eventList) {
-    final List<String> eventKeys = eventList.map((ev) => ev.key);
+    final List<String> eventKeys = eventList.map((ev) => ev.key).toList();
     _store.dispatch(_store.action.selectedEvents(eventKeys));
   }
 }

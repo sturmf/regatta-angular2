@@ -9,7 +9,7 @@ typedef Future<Iterable<Person>> GetPersons();
   selector: 'my-event-assistants-list',
   templateUrl: 'event_assistants_list_component.html',
   styleUrls: const ['event_assistants_list_component.css'],
-  directives: const [CORE_DIRECTIVES],
+  directives: const [coreDirectives]
 )
 class EventAssistantsListComponent implements OnInit {
   @Input()

@@ -14,7 +14,7 @@ class RegattaState {
   final Map<String, SailingClub> sailingClubs;
   final Map<String, Boat> boats;
 
-  static const _noValueGiven = const Object();
+  //static const _noValueGiven = const Object();
 
   /// Creates a new instance.
   RegattaState(Person currentUser, Map<String, Event> events, List<String> eventList,
@@ -35,12 +35,12 @@ class RegattaState {
 
   /// Clones this instance
   RegattaState copy(
-          {Person currentUser: _noValueGiven,
+          {Person currentUser, // FIXME: this way reset must pass a Person with id == "" to reset
           Map<String, Event> events,
           List<String> eventList,
           Map<String, SailingClub> sailingClubs,
           Map<String, Boat> boats}) =>
-      new RegattaState(currentUser != _noValueGiven ? currentUser : this.currentUser, events ?? this.events,
+      new RegattaState(currentUser != null ? (currentUser.id == "" ? null : currentUser) : this.currentUser, events ?? this.events,
           eventList ?? this.eventList, sailingClubs ?? this.sailingClubs, boats ?? this.boats);
 
   @override

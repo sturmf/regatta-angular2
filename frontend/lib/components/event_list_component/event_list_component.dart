@@ -3,6 +3,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:stream_transform/stream_transform.dart';
+import 'package:frontend/routes.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/event.dart';
 
@@ -10,9 +11,9 @@ import 'package:frontend/models/event.dart';
   selector: 'my-event-list',
   templateUrl: 'event_list_component.html',
   styleUrls: const ['event_list_component.css'],
-  directives: const [CORE_DIRECTIVES, materialDirectives],
+  directives: const [coreDirectives, materialDirectives],
   providers: const [materialProviders],
-  pipes: const [COMMON_PIPES],
+  pipes: const [commonPipes]
 )
 class EventListComponent {
   final Router _router;
@@ -64,11 +65,7 @@ class EventListComponent {
   }
 
   void gotoEvent(Event event) {
-    final List<dynamic> link = [
-      'EventDetail',
-      {'key': event.key}
-    ];
-    _router.navigate(link);
+    _router.navigate(RoutePaths.event.toUrl(parameters: {'key': event.key}));
   }
 
   void previous() {

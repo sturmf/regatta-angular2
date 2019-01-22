@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:frontend/routes.dart';
 import 'package:frontend/store/regatta_store.dart';
 
 import 'package:frontend/models/boat.dart';
@@ -9,7 +10,7 @@ import 'package:frontend/models/boat.dart';
     selector: 'my-boat-list',
     templateUrl: 'boat_list_component.html',
     styleUrls: const ['boat_list_component.css'],
-    directives: const [CORE_DIRECTIVES, materialDirectives],
+    directives: const [coreDirectives, materialDirectives],
     //changeDetection: ChangeDetectionStrategy.OnPush,
     providers: const [materialProviders])
 class BoatListComponent {
@@ -33,10 +34,6 @@ class BoatListComponent {
   }
 
   void gotoBoat(Boat boat) {
-    final List<dynamic> link = [
-      'BoatDetail',
-      {'key': boat.key}
-    ];
-    _router.navigate(link);
+    _router.navigate(RoutePaths.boat.toUrl(parameters: {'key': boat.key}));
   }
 }

@@ -20,7 +20,7 @@ Future config() async {
     }
 
     final jsonString = response.body;
-    _config = JSON.decode(jsonString) as Map<String, dynamic>;
+    _config = jsonDecode(jsonString) as Map<String, dynamic>;
   } catch (e) {
     print("Error getting `config.json`. Make sure it exists.");
     rethrow;
@@ -38,7 +38,7 @@ class _ToStringMatcher extends CustomMatcher {
   String featureValueOf(dynamic actual) => actual.toString();
 }
 
-Future<fb.User> signIn(fb.App app, String user, String password) async {
+Future<fb.UserCredential> signIn(fb.App app, String user, String password) async {
   if (app.auth().currentUser != null) {
     await app.auth().signOut();
   }
@@ -71,20 +71,20 @@ void main() {
   });
 
   test('Alice and bob can sign in', () async {
-    final fb.User alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    final fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     expect(_app.auth().currentUser, isNotNull);
-    expect(alice.uid, isNotNull);
-    final fb.User bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
+    expect(alice.user.uid, isNotNull);
+    final fb.UserCredential bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
     expect(_app.auth().currentUser, isNotNull);
-    expect(bob.uid, isNotNull);
+    expect(bob.user.uid, isNotNull);
   });
 
   test('Alice can create and update a sailing club but not delete', () async {
-    final fb.User alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    final fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     // Create
     final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
-    sailingClubMap['roles'] = {alice.uid: 'owner'};
+    sailingClubMap['roles'] = {alice.user.uid: 'owner'};
     final sailingClub = await _fsRefSailingClubs.add(sailingClubMap);
     expect(sailingClub.id, isNotNull);
     var snapshot = await sailingClub.get();
@@ -100,11 +100,11 @@ void main() {
   });
 
   test('Alice can create sailing club but Bob cant update or delete', () async {
-    final fb.User alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    final fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     // Create
     final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
-    sailingClubMap['roles'] = {alice.uid: 'owner'};
+    sailingClubMap['roles'] = {alice.user.uid: 'owner'};
     final sailingClub = await _fsRefSailingClubs.add(sailingClubMap);
     expect(sailingClub.id, isNotNull);
     final snapshot = await sailingClub.get();
@@ -120,19 +120,19 @@ void main() {
   });
 
   test('Alice can make Bob an owner of a sailing club she is owner of but Bob cant himself', () async {
-    fb.User alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsAlice = _fbStore.collection("sailing_clubs");
     // Create
     final Map<String, dynamic> sailingClubMap = {'name': 'a test with second owner'};
-    sailingClubMap['roles'] = {alice.uid: 'owner'};
+    sailingClubMap['roles'] = {alice.user.uid: 'owner'};
     final sailingClubAlice = await _fsRefSailingClubsAlice.add(sailingClubMap);
     // Switch to Bob and try to make himself an owner
-    final fb.User bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
+    final fb.UserCredential bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsBob = _fbStore.collection("sailing_clubs");
     final fs.DocumentReference sailingClubBob = _fsRefSailingClubsBob.doc(sailingClubAlice.id);
     await expectLater(
         sailingClubBob.set({
-          "roles": {bob.uid: 'owner'}
+          "roles": {bob.user.uid: 'owner'}
         }, new fs.SetOptions(merge: true)),
         throwsToString(contains('Missing or insufficient permissions')));
     // Switch to Alice and try to make Bob an owner
@@ -140,10 +140,10 @@ void main() {
     final fs.CollectionReference _fsRefSailingClubsAlice2 = _fbStore.collection("sailing_clubs");
     final fs.DocumentReference sailingClubAlice2 = _fsRefSailingClubsAlice2.doc(sailingClubAlice.id);
     await sailingClubAlice2.set({
-      "roles": {bob.uid: 'owner'}
+      "roles": {bob.user.uid: 'owner'}
     }, new fs.SetOptions(merge: true));
     final snapshot = await sailingClubAlice2.get();
-    expect(snapshot.data()['roles'][alice.uid], 'owner');
-    expect(snapshot.data()['roles'][bob.uid], 'owner');
+    expect(snapshot.data()['roles'][alice.user.uid], 'owner');
+    expect(snapshot.data()['roles'][bob.user.uid], 'owner');
   });
 }

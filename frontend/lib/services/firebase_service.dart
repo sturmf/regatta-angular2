@@ -35,7 +35,7 @@ class FirebaseService {
       authDomain: "regatta-204708.firebaseapp.com",
       databaseURL: "https://regatta-204708.firebaseio.com",
       projectId: "regatta-204708",
-      storageBucket: "regatta-204708.appspot.com",
+      storageBucket: "regatta-204708.appspot.com"
     );
     _initalizeAuthentication();
     _subscribeToFirestoreCollections();
@@ -62,7 +62,7 @@ class FirebaseService {
       // FIXME: we actually should load the persons profile here which contains e.g. first and lastnamme
       _store.dispatch(_store.action.loginChanged(new Person(user.uid, "", user.displayName)));
     } else {
-      _store.dispatch(_store.action.loginChanged(null));
+      _store.dispatch(_store.action.loginChanged(null)); // FIXME: maybe new Person("", "")
     }
   }
 
@@ -88,7 +88,7 @@ class FirebaseService {
   */
 
   void _sailingClubChanges(fs.QuerySnapshot querySnapshot) {
-    querySnapshot.docChanges.forEach((change) {
+    querySnapshot.docChanges().forEach((change) {
       final SailingClub sc = new SailingClub.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
@@ -105,7 +105,7 @@ class FirebaseService {
   }
 
   void _boatChanges(fs.QuerySnapshot querySnapshot) {
-    querySnapshot.docChanges.forEach((change) {
+    querySnapshot.docChanges().forEach((change) {
       final Boat boat = new Boat.fromMap(change.doc.ref.id, change.doc.data());
       switch (change.type) {
         case "added":
