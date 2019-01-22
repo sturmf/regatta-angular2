@@ -3,7 +3,6 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_components/angular_components.dart';
 
-import 'package:frontend/components/event_assistants_list_component/event_assistants_list_component.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
@@ -13,7 +12,7 @@ import 'package:frontend/routes.dart';
     selector: 'my-event-detail',
     templateUrl: 'event_detail_component.html',
     styleUrls: const ['event_detail_component.css'],
-    directives: const [coreDirectives, materialDirectives, EventAssistantsListComponent],
+    directives: const [coreDirectives, materialDirectives],
     providers: const [materialProviders])
 class EventDetailComponent implements OnActivate {
   final RegattaStore _store;
