@@ -17,7 +17,6 @@ import 'package:frontend/models/event.dart';
 @Component(selector: 'test', directives: const [EventListComponent], template: '<my-event-list></my-event-list>')
 class EventListTestComponent {}
 
-@AngularEntrypoint()
 void main() {
   tearDown(disposeAnyRunningTest);
 
@@ -40,7 +39,7 @@ void main() {
 
     // Get a handle to the list.
     final pageObject = await fixture.resolvePageObject/*<EventListPO>*/(
-      EventListPO,
+      EventListPO
     );
 
     final items = await pageObject.items;

@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:angular_router/angular_router.dart';
 import 'package:mockito/mockito.dart';
-import 'package:pageloader/objects.dart';
+import 'package:pageloader/pageloader.dart';
 import 'package:frontend/store/regatta_state.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/store/regatta_action.dart';
+
+part 'event_list_component.g.dart';
 
 class MockRouter extends Mock implements Router {}
 
@@ -20,8 +22,8 @@ class MockRegattaActionHelper extends Mock implements RegattaActionHelper {}
 @EnsureTag('my-event-list')
 class EventListPO {
   @ByCss('.event-item')
-  Lazy<List<PageLoaderElement>> _items;
+  List<PageLoaderElement> _items;
 
   /// Items in the list.
-  Future<List<PageLoaderElement>> get items => _items();
+  List<PageLoaderElement> get items => _items; // FIXME: remove and make public?
 }
