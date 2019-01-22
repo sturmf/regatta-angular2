@@ -31,12 +31,11 @@ class FirebaseService {
 
   FirebaseService(this._store) {
     fb.initializeApp(
-      apiKey: "AIzaSyCa1wbhvXQwemdEVCxeXxQfYe9SUM4SJWk",
-      authDomain: "regatta-204708.firebaseapp.com",
-      databaseURL: "https://regatta-204708.firebaseio.com",
-      projectId: "regatta-204708",
-      storageBucket: "regatta-204708.appspot.com"
-    );
+        apiKey: "AIzaSyCa1wbhvXQwemdEVCxeXxQfYe9SUM4SJWk",
+        authDomain: "regatta-204708.firebaseapp.com",
+        databaseURL: "https://regatta-204708.firebaseio.com",
+        projectId: "regatta-204708",
+        storageBucket: "regatta-204708.appspot.com");
     _initalizeAuthentication();
     _subscribeToFirestoreCollections();
   }

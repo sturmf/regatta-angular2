@@ -217,8 +217,7 @@ class EventCreatedAction extends RegattaAction<Event> implements AsyncAction<Act
 
   @override
   Future call(MiddlewareApi api) {
-    return _router.navigate(
-        RoutePaths.event.toUrl(parameters: {'key': payload.key}));
+    return _router.navigate(RoutePaths.event.toUrl(parameters: {'key': payload.key}));
   }
 }
 

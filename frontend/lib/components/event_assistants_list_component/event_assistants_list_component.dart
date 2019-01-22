@@ -6,11 +6,10 @@ import 'package:frontend/models/person.dart';
 typedef Future<Iterable<Person>> GetPersons();
 
 @Component(
-  selector: 'my-event-assistants-list',
-  templateUrl: 'event_assistants_list_component.html',
-  styleUrls: const ['event_assistants_list_component.css'],
-  directives: const [coreDirectives]
-)
+    selector: 'my-event-assistants-list',
+    templateUrl: 'event_assistants_list_component.html',
+    styleUrls: const ['event_assistants_list_component.css'],
+    directives: const [coreDirectives])
 class EventAssistantsListComponent implements OnInit {
   @Input()
   List<String> selectedAssistants; // List of Person.urls

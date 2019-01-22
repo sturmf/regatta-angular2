@@ -71,16 +71,19 @@ void main() {
   });
 
   test('Alice and bob can sign in', () async {
-    final fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    final fb.UserCredential alice =
+        await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     expect(_app.auth().currentUser, isNotNull);
     expect(alice.user.uid, isNotNull);
-    final fb.UserCredential bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
+    final fb.UserCredential bob =
+        await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
     expect(_app.auth().currentUser, isNotNull);
     expect(bob.user.uid, isNotNull);
   });
 
   test('Alice can create and update a sailing club but not delete', () async {
-    final fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    final fb.UserCredential alice =
+        await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     // Create
     final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
@@ -100,7 +103,8 @@ void main() {
   });
 
   test('Alice can create sailing club but Bob cant update or delete', () async {
-    final fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    final fb.UserCredential alice =
+        await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubs = _fbStore.collection("sailing_clubs");
     // Create
     final Map<String, dynamic> sailingClubMap = {'name': 'a test'};
@@ -120,14 +124,16 @@ void main() {
   });
 
   test('Alice can make Bob an owner of a sailing club she is owner of but Bob cant himself', () async {
-    fb.UserCredential alice = await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
+    fb.UserCredential alice =
+        await signIn(_app, _config['USER']['ALICE']['EMAIL'], _config['USER']['ALICE']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsAlice = _fbStore.collection("sailing_clubs");
     // Create
     final Map<String, dynamic> sailingClubMap = {'name': 'a test with second owner'};
     sailingClubMap['roles'] = {alice.user.uid: 'owner'};
     final sailingClubAlice = await _fsRefSailingClubsAlice.add(sailingClubMap);
     // Switch to Bob and try to make himself an owner
-    final fb.UserCredential bob = await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
+    final fb.UserCredential bob =
+        await signIn(_app, _config['USER']['BOB']['EMAIL'], _config['USER']['BOB']['PASSWORD']);
     final fs.CollectionReference _fsRefSailingClubsBob = _fbStore.collection("sailing_clubs");
     final fs.DocumentReference sailingClubBob = _fsRefSailingClubsBob.doc(sailingClubAlice.id);
     await expectLater(

@@ -6,9 +6,7 @@ import 'package:frontend/app_component.template.dart' as ng;
 import 'main.template.dart' as self;
 
 const useHashLS = false;
-@GenerateInjector(
-    routerProvidersHash
-)
+@GenerateInjector(routerProvidersHash)
 final InjectorFactory injectorFactory = self.injectorFactory$Injector;
 
 void main() {

@@ -51,8 +51,8 @@ class EventDetailComponent implements OnActivate {
     // We have to save the old state since the Iterable itself is unstable and would change all the time
     if (_oldSailingClubs != _store.state.sailingClubs) {
       _oldSailingClubs = _store.state.sailingClubs;
-      _filteredSailingClubs =
-          new StringSelectionOptions(_store.state.sailingClubs.values.toList(), toFilterableString: displayNameRenderer);
+      _filteredSailingClubs = new StringSelectionOptions(_store.state.sailingClubs.values.toList(),
+          toFilterableString: displayNameRenderer);
     }
     return _filteredSailingClubs;
   }

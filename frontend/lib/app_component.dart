@@ -8,11 +8,10 @@ import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/services/firebase_service.dart';
 import 'package:frontend/services/database_service.dart';
 
-@Component(selector: 'my-app', templateUrl: 'app_component.html',
-    styleUrls: const [
-    'app_component.css',
-    'package:angular_components/app_layout/layout.scss.css'
-  ], directives: [
+@Component(selector: 'my-app', templateUrl: 'app_component.html', styleUrls: const [
+  'app_component.css',
+  'package:angular_components/app_layout/layout.scss.css'
+], directives: [
   coreDirectives,
   routerDirectives,
   DeferredContentDirective,
@@ -20,16 +19,16 @@ import 'package:frontend/services/database_service.dart';
   MaterialIconComponent,
   MaterialPersistentDrawerDirective,
   NavigationBarComponent
-],
-    providers: [
-      materialProviders,
-      ClassProvider(LocationStrategy, useClass: HashLocationStrategy),
-      RegattaStore,
-      FirebaseService,
-      DatabaseService,
-    ],
-    exports: [RoutePaths, Routes]
-)
+], providers: [
+  materialProviders,
+  ClassProvider(LocationStrategy, useClass: HashLocationStrategy),
+  RegattaStore,
+  FirebaseService,
+  DatabaseService,
+], exports: [
+  RoutePaths,
+  Routes
+])
 class AppComponent {
   final FirebaseService fbService;
   final DatabaseService databaseService;

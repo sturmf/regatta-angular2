@@ -40,8 +40,8 @@ class RegattaState {
           List<String> eventList,
           Map<String, SailingClub> sailingClubs,
           Map<String, Boat> boats}) =>
-      new RegattaState(currentUser != null ? (currentUser.id == "" ? null : currentUser) : this.currentUser, events ?? this.events,
-          eventList ?? this.eventList, sailingClubs ?? this.sailingClubs, boats ?? this.boats);
+      new RegattaState(currentUser != null ? (currentUser.id == "" ? null : currentUser) : this.currentUser,
+          events ?? this.events, eventList ?? this.eventList, sailingClubs ?? this.sailingClubs, boats ?? this.boats);
 
   @override
   String toString() {
