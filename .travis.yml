@@ -14,12 +14,6 @@ before_install:
 
 install:
   # Travis specific install
-  # Install Dartium
-  - wget https://storage.googleapis.com/dart-archive/channels/stable/release/latest/dartium/dartium-linux-x64-release.zip
-  - unzip dartium-linux-x64-release.zip
-  - rm dartium-linux-x64-release.zip
-  - mv `echo dartium-*-stable-*`/{chrome,dartium}
-  - export PATH="${PWD%/}/$(echo dartium-*-stable-*):$PATH"
   # General install
   - (cd frontend && make install)
   # Prepare e2e test tools
@@ -39,7 +33,7 @@ before_script:
 script:
   - (cd frontend  && make test)
   - (cd frontend  && make coveralls)
-  - (cd frontend  && make test-dartium)
+  - (cd frontend  && make browsertest)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   # - sleep 3 && echo sleep done
