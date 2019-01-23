@@ -8,26 +8,33 @@ import 'package:frontend/models/event.dart';
 import 'package:frontend/models/sailing_club.dart';
 import 'package:frontend/routes.dart';
 
-@Component(
-    selector: 'my-event-detail',
-    templateUrl: 'event_detail_component.html',
-    styleUrls: const ['event_detail_component.css'],
-    directives: const [coreDirectives, materialDirectives],
-    providers: const [materialProviders])
+@Component(selector: 'my-event-detail', templateUrl: 'event_detail_component.html', styleUrls: const [
+  'event_detail_component.css'
+], directives: const [
+  coreDirectives,
+  MaterialTabPanelComponent,
+  MaterialTabComponent,
+  materialInputDirectives,
+  materialNumberInputDirectives,
+  MaterialDropdownSelectComponent,
+  MaterialSelectSearchboxComponent
+], providers: const [
+  materialProviders
+])
 class EventDetailComponent implements OnActivate {
-  final RegattaStore _store;
+  EventDetailComponent(this._store) {
+    // FIXME: subscribe to updates, since we no longer subscribe to every document
+  }
+
   String selectedEvent;
 
+  final RegattaStore _store;
   // We need those to detect state changes in the store without deep equality check of the map
   StringSelectionOptions<SailingClub> _filteredSailingClubs;
   Map<String, SailingClub> _oldSailingClubs;
   SelectionModel<SailingClub> _singleSelectModel;
   SailingClub _oldOrganizer;
   StreamSubscription _selectionListener;
-
-  EventDetailComponent(this._store) {
-    // FIXME: subscribe to updates, since we no longer subscribe to every document
-  }
 
   @override
   void onActivate(_, RouterState current) async {
@@ -60,7 +67,7 @@ class EventDetailComponent implements OnActivate {
     // We have to update the selection model on organizer change
     if (_singleSelectModel == null || _oldOrganizer != organizer) {
       _oldOrganizer = organizer;
-      _singleSelectModel = new SelectionModel<SailingClub>.withList(selectedValues: [organizer]);
+      _singleSelectModel = new SelectionModel<SailingClub>.single(selected: organizer);
       _selectionListener?.cancel();
       _selectionListener = _singleSelectModel.selectionChanges.listen(update);
     }

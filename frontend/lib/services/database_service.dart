@@ -9,16 +9,16 @@ enum SearchDirection { initial, previous, next }
 
 @Injectable()
 class DatabaseService {
+  DatabaseService(this._store) {
+    _algoliaService = new AlgoliaService();
+  }
+
   final RegattaStore _store;
   AlgoliaService _algoliaService;
 
   String _searchTerm = '';
   int _page = 0;
   int _pageSize = 2;
-
-  DatabaseService(this._store) {
-    _algoliaService = new AlgoliaService();
-  }
 
   Future initialEvents() async {
     return _searchEntries(SearchDirection.initial);

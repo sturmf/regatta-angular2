@@ -10,16 +10,16 @@ import 'package:frontend/models/boat.dart';
     selector: 'my-boat-list',
     templateUrl: 'boat_list_component.html',
     styleUrls: const ['boat_list_component.css'],
-    directives: const [coreDirectives, materialDirectives],
-    //changeDetection: ChangeDetectionStrategy.OnPush,
+    directives: const [coreDirectives, materialInputDirectives, MaterialButtonComponent, MaterialIconComponent],
     providers: const [materialProviders])
 class BoatListComponent {
-  final Router _router;
-  final RegattaStore _store;
-
   BoatListComponent(this._router, this._store);
 
   String boatName = '';
+
+  final Router _router;
+  final RegattaStore _store;
+
   Iterable<Boat> get boats => _store.state.boats.values;
 
   void addNewBoatHandler() {

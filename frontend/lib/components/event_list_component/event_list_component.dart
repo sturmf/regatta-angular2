@@ -7,20 +7,22 @@ import 'package:frontend/routes.dart';
 import 'package:frontend/store/regatta_store.dart';
 import 'package:frontend/models/event.dart';
 
-@Component(
-    selector: 'my-event-list',
-    templateUrl: 'event_list_component.html',
-    styleUrls: const ['event_list_component.css'],
-    directives: const [coreDirectives, materialDirectives],
-    providers: const [materialProviders],
-    pipes: const [commonPipes])
+@Component(selector: 'my-event-list', templateUrl: 'event_list_component.html', styleUrls: const [
+  'event_list_component.css'
+], directives: const [
+  coreDirectives,
+  materialInputDirectives,
+  MaterialFabComponent,
+  MaterialButtonComponent,
+  MaterialIconComponent,
+  MaterialDialogComponent,
+  ModalComponent
+], providers: const [
+  materialProviders
+], pipes: const [
+  commonPipes
+])
 class EventListComponent {
-  final Router _router;
-  final RegattaStore _store;
-  StreamController<String> _searchTerms = new StreamController<String>.broadcast();
-
-  bool showAddDialog = false;
-
   EventListComponent(this._router, this._store) {
     _searchTerms.stream.transform(debounce(new Duration(milliseconds: 300))).distinct().listen(_search);
     // On creation load the list of Events
@@ -28,7 +30,13 @@ class EventListComponent {
     _store.dispatch(_store.action.requestInitialEvents());
   }
 
+  bool showAddDialog = false;
   String newEventName = '';
+
+  final Router _router;
+  final RegattaStore _store;
+  StreamController<String> _searchTerms = new StreamController<String>.broadcast();
+
   Map<String, Event> get events => _store.state.events;
   Iterable<String> get eventList => _store.state.eventList;
 

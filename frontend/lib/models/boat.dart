@@ -1,12 +1,12 @@
 class Boat {
-  final String key;
-  String name;
-  int yardstick;
-
   Boat(this.key, [this.name, this.yardstick]);
 
   factory Boat.fromMap(key, Map<String, dynamic> boat) =>
       new Boat(key, boat['name'], boat['yardstick'] != null ? _toInt(boat['yardstick']) : 100);
+
+  final String key;
+  String name;
+  int yardstick;
 
   Map<String, dynamic> toMap() => {'name': name, 'yardstick': yardstick};
 

@@ -30,6 +30,8 @@ import 'package:frontend/services/database_service.dart';
   Routes
 ])
 class AppComponent {
+  AppComponent(this.fbService, this.databaseService);
+
   final FirebaseService fbService;
   final DatabaseService databaseService;
 
@@ -37,6 +39,4 @@ class AppComponent {
 
   String branch = const String.fromEnvironment('branch', defaultValue: 'Unknown');
   String hash = const String.fromEnvironment('hash', defaultValue: '');
-
-  AppComponent(this.fbService, this.databaseService);
 }

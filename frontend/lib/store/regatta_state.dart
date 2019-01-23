@@ -5,17 +5,6 @@ import 'package:frontend/models/boat.dart';
 
 /// State of the regattaApp.
 class RegattaState {
-  /// The currently logged in person
-  final Person currentUser;
-
-  /// All entities available in the app.
-  final Map<String, Event> events;
-  final List<String> eventList;
-  final Map<String, SailingClub> sailingClubs;
-  final Map<String, Boat> boats;
-
-  //static const _noValueGiven = const Object();
-
   /// Creates a new instance.
   RegattaState(Person currentUser, Map<String, Event> events, List<String> eventList,
       Map<String, SailingClub> sailingClubs, Map<String, Boat> boats)
@@ -42,6 +31,17 @@ class RegattaState {
           Map<String, Boat> boats}) =>
       new RegattaState(currentUser != null ? (currentUser.id == "" ? null : currentUser) : this.currentUser,
           events ?? this.events, eventList ?? this.eventList, sailingClubs ?? this.sailingClubs, boats ?? this.boats);
+
+  /// The currently logged in person
+  final Person currentUser;
+
+  /// All entities available in the app.
+  final Map<String, Event> events;
+  final List<String> eventList;
+  final Map<String, SailingClub> sailingClubs;
+  final Map<String, Boat> boats;
+
+  //static const _noValueGiven = const Object();
 
   @override
   String toString() {

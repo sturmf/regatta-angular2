@@ -1,19 +1,6 @@
 import 'package:intl/intl.dart';
 
 class Event {
-  final String key;
-  String name;
-  DateTime startDate;
-  DateTime endDate;
-  int raceCount;
-  String raceUnratedOn;
-  String organizer;
-  String raceCommittee;
-  String umpire;
-  List<String> assistants;
-  // entries
-  // races
-
   Event(this.key,
       [this.name,
       this.startDate,
@@ -39,6 +26,19 @@ class Event {
       event['race_committee'],
       event['umpire'],
       event['assistants'] == null ? null : new List<String>.from(event['assistants']));
+
+  final String key;
+  String name;
+  DateTime startDate;
+  DateTime endDate;
+  int raceCount;
+  String raceUnratedOn;
+  String organizer;
+  String raceCommittee;
+  String umpire;
+  List<String> assistants;
+  // entries
+  // races
 
   Map<String, dynamic> toMap() => {
         'name': name,

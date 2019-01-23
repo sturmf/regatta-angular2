@@ -14,25 +14,25 @@ import 'package:frontend/components/boat_list_component/boat_list_component.temp
 export 'route_paths.dart';
 
 class Routes {
-  static final event =
+  static final RouteDefinition event =
       RouteDefinition(routePath: RoutePaths.event, component: event_detail_template.EventDetailComponentNgFactory);
 
-  static final events =
+  static final RouteDefinition events =
       RouteDefinition(routePath: RoutePaths.events, component: event_list_template.EventListComponentNgFactory);
 
-  static final sailingClub = RouteDefinition(
+  static final RouteDefinition sailingClub = RouteDefinition(
       routePath: RoutePaths.sailingClub, component: sailing_club_detail_template.SailingClubDetailComponentNgFactory);
 
-  static final sailingClubs = RouteDefinition(
+  static final RouteDefinition sailingClubs = RouteDefinition(
       routePath: RoutePaths.sailingClubs, component: sailing_club_list_template.SailingClubListComponentNgFactory);
 
-  static final boat =
+  static final RouteDefinition boat =
       RouteDefinition(routePath: RoutePaths.boat, component: boat_detail_template.BoatDetailComponentNgFactory);
 
-  static final boats =
+  static final RouteDefinition boats =
       RouteDefinition(routePath: RoutePaths.boats, component: boat_list_template.BoatListComponentNgFactory);
 
-  static final all = <RouteDefinition>[
+  static final List<RouteDefinition> all = <RouteDefinition>[
     event,
     events,
     sailingClub,

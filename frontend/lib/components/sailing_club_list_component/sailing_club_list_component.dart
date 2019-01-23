@@ -10,16 +10,16 @@ import 'package:frontend/models/sailing_club.dart';
     selector: 'my-sailing-club-list',
     templateUrl: 'sailing_club_list_component.html',
     styleUrls: const ['sailing_club_list_component.css'],
-    directives: const [coreDirectives, materialDirectives],
-    //changeDetection: ChangeDetectionStrategy.OnPush,
+    directives: const [coreDirectives, materialInputDirectives, MaterialButtonComponent, MaterialIconComponent],
     providers: const [materialProviders])
 class SailingClubListComponent {
-  final Router _router;
-  final RegattaStore _store;
-
   SailingClubListComponent(this._router, this._store);
 
   String sailingClubName = '';
+
+  final Router _router;
+  final RegattaStore _store;
+
   Iterable<SailingClub> get sailingClubs => _store.state.sailingClubs.values;
 
   void addNewSailingClubHandler() {

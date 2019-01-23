@@ -8,12 +8,12 @@ import 'package:frontend/routes.dart';
     selector: 'my-navigation-bar',
     templateUrl: 'navigation_bar_component.html',
     styleUrls: const ['navigation_bar_component.css'],
-    directives: const [materialDirectives],
+    directives: const [MaterialListItemComponent, MaterialIconComponent],
     providers: const [materialProviders])
 class NavigationBarComponent implements OnInit {
-  final Router _router;
-
   NavigationBarComponent(this._router);
+
+  final Router _router;
 
   @override
   void ngOnInit() {}

@@ -93,12 +93,12 @@ class RegattaActionHelper {
 
 /// Actions to be triggered to the app store.
 abstract class RegattaAction<T> extends Action<ActionType> {
+  /// Creates a new instance.
+  RegattaAction(this.payload);
+
   /// The payload to include.
   @override
   final T payload;
-
-  /// Creates a new instance.
-  RegattaAction(this.payload);
 }
 
 /// Action to update the current user
@@ -112,11 +112,11 @@ class LoginChangedAction extends RegattaAction<Person> {
 
 /// Action to load filtered Events.
 class RequestFilterEventsAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final DatabaseService _databaseService;
-
   RequestFilterEventsAction(String payload)
       : _databaseService = AppComponent.myinjector.get(DatabaseService),
         super(payload);
+
+  final DatabaseService _databaseService;
 
   @override
   ActionType get type => ActionType.requestFilterEvents;
@@ -129,11 +129,11 @@ class RequestFilterEventsAction extends RegattaAction<String> implements AsyncAc
 
 /// Action to load the initial page of Events.
 class RequestInitialEventsAction extends RegattaAction<Null> implements AsyncAction<ActionType> {
-  final DatabaseService _databaseService;
-
   RequestInitialEventsAction()
       : _databaseService = AppComponent.myinjector.get(DatabaseService),
         super(null);
+
+  final DatabaseService _databaseService;
 
   @override
   ActionType get type => ActionType.requestInitialEvents;
@@ -146,11 +146,11 @@ class RequestInitialEventsAction extends RegattaAction<Null> implements AsyncAct
 
 /// Action to load the previous page of Events.
 class RequestPreviousEventsAction extends RegattaAction<Null> implements AsyncAction<ActionType> {
-  final DatabaseService _databaseService;
-
   RequestPreviousEventsAction()
       : _databaseService = AppComponent.myinjector.get(DatabaseService),
         super(null);
+
+  final DatabaseService _databaseService;
 
   @override
   ActionType get type => ActionType.requestPreviousEvents;
@@ -163,11 +163,11 @@ class RequestPreviousEventsAction extends RegattaAction<Null> implements AsyncAc
 
 /// Action to load the next page of Events.
 class RequestNextEventsAction extends RegattaAction<Null> implements AsyncAction<ActionType> {
-  final DatabaseService _databaseService;
-
   RequestNextEventsAction()
       : _databaseService = AppComponent.myinjector.get(DatabaseService),
         super(null);
+
+  final DatabaseService _databaseService;
 
   @override
   ActionType get type => ActionType.requestNextEvents;
@@ -189,11 +189,11 @@ class SelectedEventsAction extends RegattaAction<List<String>> {
 
 /// Action to request the add of a new Event.
 class RequestCreateEventAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestCreateEventAction(String payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestCreateEvent;
@@ -206,11 +206,11 @@ class RequestCreateEventAction extends RegattaAction<String> implements AsyncAct
 
 /// Action for a created Event.
 class EventCreatedAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final Router _router;
-
   EventCreatedAction(Event payload)
       : _router = AppComponent.myinjector.get(Router),
         super(payload);
+
+  final Router _router;
 
   @override
   ActionType get type => ActionType.eventCreated;
@@ -232,11 +232,11 @@ class AddEventAction extends RegattaAction<Event> {
 
 /// Action to update an Event.
 class RequestUpdateEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestUpdateEventAction(Event payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestUpdateEvent;
@@ -257,11 +257,11 @@ class UpdateEventAction extends RegattaAction<Event> {
 
 /// Action to delete an Event.
 class RequestDeleteEventAction extends RegattaAction<Event> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestDeleteEventAction(Event payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestDeleteEvent;
@@ -283,11 +283,11 @@ class DeleteEventAction extends RegattaAction<Event> {
 
 /// Action to request the add of a new SailingClub.
 class RequestCreateSailingClubAction extends RegattaAction<Map<String, Object>> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestCreateSailingClubAction(Map<String, Object> payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestCreateSailingClub;
@@ -309,11 +309,11 @@ class AddSailingClubAction extends RegattaAction<SailingClub> {
 
 /// Action to add a SailingClub.
 class RequestUpdateSailingClubAction extends RegattaAction<SailingClub> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestUpdateSailingClubAction(SailingClub payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestUpdateSailingClub;
@@ -334,11 +334,11 @@ class UpdateSailingClubAction extends RegattaAction<SailingClub> {
 
 /// Action to delete a SailingClub.
 class RequestDeleteSailingClubAction extends RegattaAction<SailingClub> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestDeleteSailingClubAction(SailingClub payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestDeleteSailingClub;
@@ -360,11 +360,11 @@ class DeleteSailingClubAction extends RegattaAction<SailingClub> {
 
 /// Action to request the add of a new Boat.
 class RequestCreateBoatAction extends RegattaAction<String> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestCreateBoatAction(String payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestCreateBoat;
@@ -386,11 +386,11 @@ class AddBoatAction extends RegattaAction<Boat> {
 
 /// Action to add a Boat.
 class RequestUpdateBoatAction extends RegattaAction<Boat> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestUpdateBoatAction(Boat payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestUpdateBoat;
@@ -411,11 +411,11 @@ class UpdateBoatAction extends RegattaAction<Boat> {
 
 /// Action to delete a Boat.
 class RequestDeleteBoatAction extends RegattaAction<Boat> implements AsyncAction<ActionType> {
-  final FirebaseService _fbService;
-
   RequestDeleteBoatAction(Boat payload)
       : _fbService = AppComponent.myinjector.get(FirebaseService),
         super(payload);
+
+  final FirebaseService _fbService;
 
   @override
   ActionType get type => ActionType.requestDeleteBoat;

@@ -10,13 +10,14 @@ import 'package:frontend/routes.dart';
     selector: 'my-sailing-club-detail',
     templateUrl: 'sailing_club_detail_component.html',
     styleUrls: const ['sailing_club_detail_component.css'],
-    directives: const [coreDirectives, materialDirectives],
+    directives: const [coreDirectives, MaterialTabPanelComponent, MaterialTabComponent, materialInputDirectives],
     providers: const [materialProviders])
 class SailingClubDetailComponent implements OnActivate {
-  final RegattaStore _store;
+  SailingClubDetailComponent(this._store);
+
   String selectedSailingClub;
 
-  SailingClubDetailComponent(this._store);
+  final RegattaStore _store;
 
   @override
   void onActivate(_, RouterState current) async {

@@ -10,13 +10,14 @@ import 'package:frontend/routes.dart';
     selector: 'my-boat-detail',
     templateUrl: 'boat_detail_component.html',
     styleUrls: const ['boat_detail_component.css'],
-    directives: const [coreDirectives, materialDirectives],
+    directives: const [coreDirectives, MaterialTabPanelComponent, MaterialTabComponent, materialInputDirectives],
     providers: const [materialProviders])
 class BoatDetailComponent implements OnActivate {
-  final RegattaStore _store;
+  BoatDetailComponent(this._store);
+
   String selectedBoat;
 
-  BoatDetailComponent(this._store);
+  final RegattaStore _store;
 
   @override
   void onActivate(_, RouterState current) async {

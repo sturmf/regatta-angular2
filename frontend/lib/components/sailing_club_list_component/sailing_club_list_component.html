@@ -9,6 +9,6 @@
 <div id="sailingClubList" style="display:flex; flex-direction:column">
     <div style="display:flex" *ngFor="let sailingClub of sailingClubs">
         <material-button style="flex:1" class="sailing-club-item" raised (click)="gotoSailingClub(sailingClub)">{{sailingClub.name}}</material-button>
-        <material-button raised (click)="deleteSailingClubHandler(sailingClub)"><glyph icon="delete"></glyph></material-button>
+        <material-button raised (click)="deleteSailingClubHandler(sailingClub)"><material-icon icon="delete"></material-icon></material-button>
     </div>
 </div>

@@ -9,6 +9,6 @@
 <div id="boatList" style="display:flex; flex-direction:column">
     <div style="display:flex" *ngFor="let boat of boats">
         <material-button style="flex:1" class="boat-item" raised (click)="gotoBoat(boat)">{{boat.name}}</material-button>
-        <material-button raised (click)="deleteBoatHandler(boat)"><glyph icon="delete"></glyph></material-button>
+        <material-button raised (click)="deleteBoatHandler(boat)"><material-icon icon="delete"></material-icon></material-button>
     </div>
 </div>

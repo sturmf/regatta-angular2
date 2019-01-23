@@ -5,11 +5,11 @@ import 'package:frontend/app_component.template.dart' as ng;
 
 import 'main.template.dart' as self;
 
-const useHashLS = false;
+const bool useHashLS = false;
 @GenerateInjector(routerProvidersHash)
 final InjectorFactory injectorFactory = self.injectorFactory$Injector;
 
 void main() {
-  ComponentRef ref = runApp(ng.AppComponentNgFactory, createInjector: injectorFactory);
+  final ComponentRef ref = runApp(ng.AppComponentNgFactory, createInjector: injectorFactory);
   AppComponent.myinjector = ref.injector;
 }
