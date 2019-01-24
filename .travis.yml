@@ -27,7 +27,6 @@ before_script:
   # e2e test preparation
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - (cd frontend  && make run )
   - (cd frontend  && make run > angular-server.log 2>&1 &)
   # necessary for pub server to become available
   - (cd frontend  && timeout 600 grep -q 'build completed' <(tail -f angular-server.log))
