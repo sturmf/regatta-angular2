@@ -28,7 +28,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
   - (cd frontend  && make run > angular-server.log 2>&1 &)
   # necessary for pub server to become available
-  - (cd frontend  && timeout 600 grep -q 'Build completed' <(tail -f angular-server.log))
+  - (cd frontend  && timeout 600 grep -q 'build completed' <(tail -f angular-server.log))
 
 script:
   - (cd frontend  && make test)
