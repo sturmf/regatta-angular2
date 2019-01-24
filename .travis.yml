@@ -11,6 +11,7 @@ before_install:
   # 2 lines of workaround as proposed here: https://github.com/travis-ci/travis-ci/issues/6928#issuecomment-264227708
   - source /opt/jdk_switcher/jdk_switcher.sh
   - jdk_switcher use oraclejdk8
+  - pub global activate webdev
 
 install:
   # Travis specific install
