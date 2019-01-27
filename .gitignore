@@ -65,6 +65,7 @@ packages
 .packages
 .pub
 *.lock
+*.g.dart
 
 # 
 # Sphinx documentation
