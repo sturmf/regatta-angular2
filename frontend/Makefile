@@ -33,20 +33,18 @@ test:
 
 test-firefox:
 	# These are the browser tests with firefox
-	# You must also have `pub serve` running somewhere
-	pub run test -p firefox --pub-serve=8081
+	pub run build_runner test --fail-on-severe -- -p firefox
 
-test-dartium:
-	# These are the browser tests with dartium
-	# You must also have `pub serve` running somewhere
-	pub run test -p dartium --pub-serve=8081
+test-chrome:
+	# These are the browser tests with chrome
+	pub run build_runner test --fail-on-severe -- -p chrome
 
 test-firestore-rules:
-	# These are browser tests with dartium that connect to firestore
+	# These are browser tests with chrome that connect to firestore
 	# You need a configured config.json file in lib/services
-	pub run test -p dartium lib/services/firestore_rules_test.dart
+	pub run build_runner test --fail-on-severe -- -p chrome lib/services/firestore_rules_test.dart
 
 run:
 	webdev serve
 
-.PHONY: install build lint style coveralls test test-firefox test-dartium test-firestore-rules run
+.PHONY: install build lint style coveralls test test-firefox test-chrome test-firestore-rules run

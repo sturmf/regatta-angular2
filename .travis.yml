@@ -27,14 +27,14 @@ before_script:
   # e2e test preparation
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - (cd frontend  && make run > angular-server.log 2>&1 &)
+  - (cd frontend && make run > angular-server.log 2>&1 &)
   # necessary for pub server to become available
-  - (cd frontend  && timeout 600 grep -q 'build completed' <(tail -f angular-server.log))
+  - (cd frontend && timeout 600 grep -q 'build completed' <(tail -f angular-server.log))
 
 script:
-  - (cd frontend  && make test)
-  - (cd frontend  && make coveralls)
-  - (cd frontend  && make browsertest)
+  - (cd frontend && make test)
+  - (cd frontend && make coveralls)
+  - (cd frontend && make test-chrome)
   #- (cd e2e_tests && make run > webdriver.log 2>&1 &)
   # necessary for webdriver to become available
   # - sleep 3 && echo sleep done
