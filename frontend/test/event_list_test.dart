@@ -14,11 +14,23 @@ import 'package:frontend/components/event_list_component/event_list_component.da
 import 'package:frontend/components/event_list_component/event_list_component.template.dart' as ng;
 import 'package:frontend/models/event.dart';
 import 'package:frontend/store/regatta_store.dart';
+import 'package:frontend/store/regatta_action.dart';
 import 'page_objects/event_list_component_po.dart';
 
-void main() {
+import 'event_list_test.template.dart' as self;
+import 'utils.dart';
 
-  final testBed = NgTestBed.forComponent<EventListComponent>(ng.EventListComponentNgFactory);
+@GenerateInjector([
+  ClassProvider(Router, useClass: MockRouter),
+  ClassProvider(RegattaStore, useClass: MockRegattaStore),
+  ClassProvider(RegattaActionHelper, useClass: MockRegattaActionHelper),
+])
+final InjectorFactory rootInjector = self.rootInjector$Injector;
+
+
+void main() {
+  final injector = InjectorProbe(rootInjector);
+  final testBed = NgTestBed.forComponent<EventListComponent>(ng.EventListComponentNgFactory, rootInjector: injector.factory);
   NgTestFixture<EventListComponent> fixture;
   EventListComponentPO testPO;
 
@@ -33,19 +45,13 @@ void main() {
   tearDown(disposeAnyRunningTest);
 
   test('EventListComponent list contains dummy event', () async {
-    final router = new MockRouter();
-    final regattaStore = new MockRegattaStore();
-    final regattaActionHelper = new MockRegattaActionHelper();
+    final mockRegattaStore = injector.get<MockRegattaStore>(RegattaStore);
+    final mockRegattaActionHelper = injector.get<MockRegattaActionHelper>(RegattaActionHelper);
 
-    when(regattaStore.state.events)
+    when(mockRegattaStore.state.events)
         .thenReturn({'-K2ib4H77rj0LYewF7dP': new Event('-K2ib4H77rj0LYewF7dP', 'Dummy Event')});
-    when(regattaStore.state.eventList).thenReturn(['-K2ib4H77rj0LYewF7dP']);
-    when(regattaStore.action).thenReturn(regattaActionHelper);
-
-    testBed.addProviders([
-      provide(Router, useValue: router),
-      provide(RegattaStore, useValue: regattaStore),
-    ]);
+    when(mockRegattaStore.state.eventList).thenReturn(['-K2ib4H77rj0LYewF7dP']);
+    when(mockRegattaStore.action).thenReturn(mockRegattaActionHelper);
 
     fixture = await testBed.create();
     final context = HtmlPageLoaderElement.createFromElement(fixture.rootElement);
@@ -57,6 +63,6 @@ void main() {
     final element = items[0].getElementsByCss('.event-item-name').first;
     expect(element.visibleText, equals('Dummy Event'));
 
-    regattaStore.close();
+    //regattaStore.close();
   });
 }
